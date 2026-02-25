@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novia Del Cordero- App Oficial</title>
+    <title>La Novia del Cordero - App Oficial</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* IMPORTAMOS UNA FUENTE SIMILAR A ELEPHANT (SERIF ROBUSTA) */
+        /* FUENTE ROBUSTA TIPO ELEPHANT */
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap');
 
         :root { 
@@ -34,15 +34,15 @@
             border-bottom: 5px solid var(--oro-puro);
         }
 
-        /* ESTILO DE FUENTE "ELEPHANT" (Playfair Display 900 es lo más cercano en web) */
         .titulo-elefante { 
             font-family: 'Playfair Display', serif; 
             font-weight: 900;
-            font-size: 48px; 
+            font-size: 42px; 
             color: var(--oro-brillante);
             text-shadow: 3px 3px 0px #000;
             margin: 0;
             text-transform: uppercase;
+            line-height: 1.1;
         }
 
         .container { padding: 20px; max-width: 500px; margin: auto; }
@@ -60,7 +60,7 @@
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-        /* BOTÓN DE SOLICITAR ORACIÓN */
+        /* BOTÓN DE ORACIÓN */
         .btn-oracion {
             background: white;
             border: 3px double var(--oro-puro);
@@ -75,11 +75,10 @@
             font-size: 18px;
             margin-bottom: 30px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: 0.3s;
         }
         .btn-oracion i { color: var(--rojo-sacro); margin-right: 15px; font-size: 24px; }
 
-        /* BOTONES DE DÍAS */
+        /* BOTONES DE ACTIVIDADES */
         .dia-btn { 
             width: 100%; 
             background: linear-gradient(135deg, #1a1a1a, #444); 
@@ -100,7 +99,7 @@
         .contenido { max-height: 0; overflow: hidden; transition: 0.5s ease-in-out; background: white; margin-top: -15px; margin-bottom: 15px; border-radius: 0 0 15px 15px; padding: 0 25px; border: 1px solid var(--oro-puro); border-top: none; }
         .detalle-txt { padding: 20px 0; color: #333; font-size: 17px; }
 
-        /* WHATSAPP FLOTANTE */
+        /* WHATSAPP */
         .btn-ws { 
             position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp); 
             color: white; width: 70px; height: 70px; border-radius: 50%; 
@@ -112,8 +111,8 @@
 <body>
 
 <div class="header">
-    <h1 class="titulo-elefante">Vida Nueva</h1>
-    <p style="margin-top: 15px; letter-spacing: 2px; font-weight: bold; color: white; text-transform: uppercase;">Sector Cofradía</p>
+    <h1 class="titulo-elefante">La Novia del Cordero</h1>
+    <p style="margin-top: 15px; letter-spacing: 1px; font-weight: bold; color: white; text-transform: uppercase;">Vida Nueva, Sector Cofradía</p>
 </div>
 
 <div class="container">
@@ -123,23 +122,23 @@
         </div>
     </div>
 
-    <a href="https://wa.me/50400000000?text=¡Bendiciones!%20Necesito%20que%20me%20ayuden%20en%20oración%20por%20el%20siguiente%20motivo:" class="btn-oracion">
+    <a href="https://wa.me/50400000000?text=¡Bendiciones!%20Necesito%20que%20me%20ayuden%20en%20oración%20por:" class="btn-oracion">
         <i class="fas fa-hands-praying"></i> ¿Necesitas Oración? ¡Escríbenos!
     </a>
 
     <h2 style="color: #1a1a1a; text-align: center; font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 20px;">Nuestras Actividades</h2>
 
     <button class="dia-btn" onclick="t('ma')">Martes <i class="fas fa-music"></i></button>
-    <div id="ma" class="contenido"><div class="detalle-txt"><strong>Culto de Adoración</strong><br>Ven a exaltar el nombre del Señor.</div></div>
+    <div id="ma" class="contenido"><div class="detalle-txt"><strong>Culto de Adoración</strong></div></div>
 
     <button class="dia-btn" onclick="t('j')">Jueves <i class="fas fa-venus"></i></button>
-    <div id="j" class="contenido"><div class="detalle-txt"><strong>Culto de Damas</strong><br>Un tiempo especial para la mujer de fe.</div></div>
+    <div id="j" class="contenido"><div class="detalle-txt"><strong>Culto de Damas</strong></div></div>
 
     <button class="dia-btn" onclick="t('s')">Sábado <i class="fas fa-users"></i></button>
-    <div id="s" class="contenido"><div class="detalle-txt"><strong>Culto de Jóvenes</strong><br>¡Generación de impacto!</div></div>
+    <div id="s" class="contenido"><div class="detalle-txt"><strong>Culto de Jóvenes</strong></div></div>
 
     <button class="dia-btn" onclick="t('d')" style="background: var(--oro-puro); color: black;">Domingo <i class="fas fa-church"></i></button>
-    <div id="d" class="contenido"><div class="detalle-txt"><strong>Culto General</strong><br>Toda la familia reunida en la casa de Dios.</div></div>
+    <div id="d" class="contenido"><div class="detalle-txt"><strong>Culto General</strong></div></div>
 </div>
 
 <a href="https://wa.me/50400000000?text=¡Hola!%20Deseo%20visitar%20la%20iglesia." class="btn-ws" target="_blank">

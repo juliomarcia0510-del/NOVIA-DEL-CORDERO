@@ -3,64 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novia del Cordero - App</title>
+    <title>Novia del Cordero - App Oficial</title>
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --principal: #1a2a6c; --acento: #b21f1f; --fondo: #fdbb2d; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; padding-bottom: 30px; }
-        .header { background: linear-gradient(to right, #1a2a6c, #b21f1f); color: white; text-align: center; padding: 40px 20px; border-radius: 0 0 20px 20px; }
-        .container { padding: 15px; max-width: 500px; margin: auto; }
-        .video-box { background: white; border-radius: 15px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        :root { 
+            --oro-puro: #D4AF37; 
+            --oro-brillante: #FFD700;
+            --negro-elegante: #0a0a0a;
+            --blanco-crema: #fdfaf1;
+            --whatsapp: #25d366;
+            --rojo-sacro: #b21f1f;
+        }
+
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--blanco-crema); padding-bottom: 100px; }
+        
+        /* ENCABEZADO */
+        .header { 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1350&q=80'); 
+            background-size: cover;
+            background-position: center;
+            color: white; 
+            text-align: center; 
+            padding: 80px 20px; 
+            border-radius: 0 0 50px 50px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-bottom: 5px solid var(--oro-puro);
+        }
+
+        .titulo-gotico { 
+            font-family: 'UnifrakturMaguntia', cursive; 
+            font-size: 50px; 
+            color: var(--oro-brillante);
+            text-shadow: 3px 3px 0px #000, 0 0 20px rgba(255, 215, 0, 0.6);
+            margin: 0;
+        }
+
+        .container { padding: 20px; max-width: 500px; margin: auto; }
+
+        /* VIDEO */
+        .card-video { 
+            background: var(--negro-elegante); 
+            border-radius: 25px; 
+            overflow: hidden; 
+            margin-top: -40px; 
+            margin-bottom: 25px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4); 
+            border: 3px solid var(--oro-puro); 
+        }
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        .dia-btn { width: 100%; background: white; border: none; padding: 15px; margin-bottom: 10px; border-radius: 10px; text-align: left; font-size: 18px; font-weight: bold; color: #333; display: flex; justify-content: space-between; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .detalle { max-height: 0; overflow: hidden; transition: 0.3s; background: white; margin-top: -10px; margin-bottom: 10px; border-radius: 0 0 10px 10px; padding: 0 15px; }
-        .info { padding: 15px 0; border-top: 1px solid #eee; color: #555; }
-        .tag { background: #27ae60; color: white; padding: 3px 8px; border-radius: 5px; font-size: 12px; }
+
+        /* NUEVO: BOTÓN DE SOLICITAR ORACIÓN */
+        .btn-oracion {
+            background: white;
+            border: 3px double var(--oro-puro);
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--negro-elegante);
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+        .btn-oracion i { color: var(--rojo-sacro); margin-right: 15px; font-size: 24px; }
+        .btn-oracion:active { transform: scale(0.95); background: var(--oro-brillante); }
+
+        /* BOTONES DE DÍAS */
+        .dia-btn { 
+            width: 100%; 
+            background: linear-gradient(135deg, #1a1a1a, #444); 
+            border: 1px solid var(--oro-puro); 
+            padding: 20px; 
+            margin-bottom: 12px; 
+            border-radius: 15px; 
+            text-align: left; 
+            font-size: 19px; 
+            font-weight: bold; 
+            color: var(--oro-puro); 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            cursor: pointer; 
+        }
+        
+        .contenido { max-height: 0; overflow: hidden; transition: 0.5s ease-in-out; background: white; margin-top: -15px; margin-bottom: 15px; border-radius: 0 0 15px 15px; padding: 0 25px; border: 1px solid var(--oro-puro); border-top: none; }
+        .detalle-txt { padding: 20px 0; color: #333; }
+
+        /* WHATSAPP FLOTANTE */
+        .btn-ws { 
+            position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp); 
+            color: white; width: 70px; height: 70px; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; font-size: 40px; 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5); text-decoration: none; z-index: 100; border: 3px solid white; 
+        }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1>NOVIA DEL CORDERO</h1>
-    <p>Bienvenidos a nuestra casa</p>
+    <h1 class="titulo-gotico">Novia del Cordero</h1>
+    <p style="margin-top: 15px; letter-spacing: 4px; font-weight: bold; color: white;">MARCALA, LA PAZ</p>
 </div>
 
 <div class="container">
-    <div class="video-box">
-        <div style="padding: 10px; font-weight: bold; text-align: center;">MIRA NUESTRA INVITACIÓN</div>
+    <div class="card-video">
         <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
+            <iframe src="https://www.youtube.com/embed/k6Q3uF7V5Hs" allowfullscreen></iframe>
         </div>
     </div>
 
-    <button class="dia-btn" onclick="tgl('l')">Lunes <i class="fas fa-chevron-down"></i></button>
-    <div id="l" class="detalle"><div class="info"><strong>Culto de Oración:</strong> 7:00 PM <br> <span class="tag">Presencial</span></div></div>
+    <a href="https://wa.me/50400000000?text=¡Bendiciones!%20Necesito%20que%20me%20ayuden%20en%20oración%20por%20el%20siguiente%20motivo:" class="btn-oracion">
+        <i class="fas fa-hands-praying"></i> ¿Necesitas Oración? ¡Escríbenos!
+    </a>
 
-    <button class="dia-btn" onclick="tgl('ma')">Martes <i class="fas fa-chevron-down"></i></button>
-    <div id="ma" class="detalle"><div class="info"><strong>Estudio Bíblico:</strong> 6:30 PM</div></div>
+    <h2 style="color: #1a1a1a; text-align: center; font-family: 'UnifrakturMaguntia', cursive; font-size: 32px; margin-bottom: 20px;">Orden del Culto</h2>
 
-    <button class="dia-btn" onclick="tgl('mi')">Miércoles <i class="fas fa-chevron-down"></i></button>
-    <div id="mi" class="detalle"><div class="info"><strong>Sociedad de Damas:</strong> 4:00 PM</div></div>
+    <button class="dia-btn" onclick="t('l')">Lunes <i class="fas fa-dove"></i></button>
+    <div id="l" class="contenido"><div class="detalle-txt"><strong>Culto de Oración:</strong> 7:00 PM</div></div>
 
-    <button class="dia-btn" onclick="tgl('j')">Jueves <i class="fas fa-chevron-down"></i></button>
-    <div id="j" class="detalle"><div class="info"><strong>Células Familiares:</strong> (En los hogares)</div></div>
+    <button class="dia-btn" onclick="t('ma')">Martes <i class="fas fa-dove"></i></button>
+    <div id="ma" class="contenido"><div class="detalle-txt"><strong>Estudio Bíblico:</strong> 6:30 PM</div></div>
 
-    <button class="dia-btn" onclick="tgl('v')">Viernes <i class="fas fa-chevron-down"></i></button>
-    <div id="v" class="detalle"><div class="info"><strong>Culto de Jóvenes:</strong> 7:30 PM</div></div>
+    <button class="dia-btn" onclick="t('mi')">Miércoles <i class="fas fa-dove"></i></button>
+    <div id="mi" class="contenido"><div class="detalle-txt"><strong>Sociedades:</strong> 5:00 PM</div></div>
 
-    <button class="dia-btn" onclick="tgl('s')">Sábado <i class="fas fa-chevron-down"></i></button>
-    <div id="s" class="detalle"><div class="info"><strong>Ensayo de Coro:</strong> 3:00 PM</div></div>
+    <button class="dia-btn" onclick="t('v')">Viernes <i class="fas fa-dove"></i></button>
+    <div id="v" class="contenido"><div class="detalle-txt"><strong>Culto de Jóvenes:</strong> 7:00 PM</div></div>
 
-    <button class="dia-btn" onclick="tgl('d')" style="color: #b21f1f;">Domingo <i class="fas fa-cross"></i></button>
-    <div id="d" class="detalle"><div class="info"><strong>ESCUELA DOMINICAL:</strong> 9:00 AM <br> <strong>CULTO GENERAL:</strong> 11:00 AM</div></div>
+    <button class="dia-btn" onclick="t('d')" style="background: var(--oro-puro); color: black;">Domingo <i class="fas fa-crown"></i></button>
+    <div id="d" class="contenido"><div class="detalle-txt"><strong>Escuela Dominical:</strong> 9:00 AM <br> <strong>Culto General:</strong> 11:00 AM</div></div>
 </div>
 
+<a href="https://wa.me/50400000000?text=¡Hola!%20Deseo%20visitar%20la%20iglesia." class="btn-ws" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
 <script>
-    function tgl(id) {
+    function t(id) {
         var e = document.getElementById(id);
         if (e.style.maxHeight) { e.style.maxHeight = null; } 
-        else { document.querySelectorAll('.detalle').forEach(x => x.style.maxHeight = null); e.style.maxHeight = e.scrollHeight + "px"; }
+        else { document.querySelectorAll('.contenido').forEach(x => x.style.maxHeight = null); e.style.maxHeight = e.scrollHeight + "px"; }
     }
 </script>
 

@@ -7,25 +7,60 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap');
-        :root { --oro: #D4AF37; --oro-brillante: #FFD700; --oscuro: #0a0a0a; --crema: #fdfaf1; --whatsapp: #25d366; }
+        :root { 
+            --oro: #D4AF37; 
+            --oro-brillante: #FFD700; 
+            --oscuro: #0a0a0a; 
+            --crema: #fdfaf1; 
+            --whatsapp: #25d366; 
+            --rojo-sacro: #b21f1f;
+        }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--crema); padding-bottom: 100px; }
         
         .header { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1350&q=80'); background-size: cover; text-align: center; padding: 60px 20px; border-radius: 0 0 50px 50px; border-bottom: 5px solid var(--oro); }
         .titulo-elefante { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 38px; color: var(--oro-brillante); text-shadow: 3px 3px 0px #000; text-transform: uppercase; }
 
         .container { padding: 20px; max-width: 500px; margin: auto; }
-        .card-video { background: var(--oscuro); border-radius: 25px; overflow: hidden; margin-top: -40px; margin-bottom: 25px; border: 3px solid var(--oro); }
+
+        /* PESTAÑA BÍBLICA */
+        .biblia-section { margin-top: -30px; margin-bottom: 25px; text-align: center; }
+        .biblia-btn { 
+            background: #fff; 
+            border: 2px solid var(--oro); 
+            border-radius: 50px; 
+            padding: 10px 25px; 
+            display: inline-block; 
+            font-weight: bold; 
+            color: var(--oscuro); 
+            cursor: pointer; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            font-family: 'Playfair Display', serif;
+        }
+        .biblia-content { 
+            max-height: 0; 
+            overflow: hidden; 
+            transition: 0.5s ease-in-out; 
+            background: #fff8e1; 
+            border-radius: 15px; 
+            margin: 10px auto; 
+            width: 90%; 
+            border-left: 5px solid var(--oro);
+        }
+        .biblia-texto { padding: 15px; font-style: italic; color: #5d4037; font-size: 15px; line-height: 1.5; }
+
+        .card-video { background: var(--oscuro); border-radius: 25px; overflow: hidden; margin-bottom: 25px; border: 3px solid var(--oro); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
+        .btn-oracion { background: white; border: 3px double var(--oro); padding: 18px; border-radius: 15px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--oscuro); font-weight: bold; font-size: 17px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .btn-oracion i { color: var(--rojo-sacro); margin-right: 12px; font-size: 22px; }
+
         .dia-btn { width: 100%; background: linear-gradient(135deg, #1a1a1a, #444); border: 1px solid var(--oro); padding: 20px; margin-bottom: 12px; border-radius: 15px; text-align: left; font-size: 19px; font-weight: bold; color: var(--oro); display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
-        
         .contenido { max-height: 0; overflow: hidden; transition: 0.5s ease-in-out; background: white; margin-top: -15px; margin-bottom: 15px; border-radius: 0 0 15px 15px; padding: 0 25px; border: 1px solid var(--oro); border-top: none; }
         .detalle-txt { padding: 20px 0; color: #333; font-size: 16px; line-height: 1.8; }
         
         .btn-edit { background: #f0f0f0; border: 1px dashed #999; padding: 5px 10px; font-size: 12px; border-radius: 5px; cursor: pointer; margin-top: 10px; display: inline-block; color: #666; text-decoration: none; }
-
-        .btn-ws { position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp); color: white; width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; border: 3px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .btn-ws { position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp); color: white; width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; border: 3px solid white; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
     </style>
 </head>
 <body>
@@ -36,11 +71,26 @@
 </div>
 
 <div class="container">
+    <div class="biblia-section">
+        <div class="biblia-btn" onclick="t('cita')">
+            <i class="fas fa-book-open"></i> Apocalipsis 19:7-9
+        </div>
+        <div id="cita" class="biblia-content">
+            <div class="biblia-texto">
+                "Gocémonos y alegrémonos y démosle gloria; porque han llegado las bodas del Cordero, y su esposa se ha preparado... Bienaventurados los que son llamados a la cena de las bodas del Cordero."
+            </div>
+        </div>
+    </div>
+
     <div class="card-video">
         <div class="video-container">
             <iframe src="https://www.youtube.com/embed/k6Q3uF7V5Hs" allowfullscreen></iframe>
         </div>
     </div>
+
+    <a href="https://wa.me/50400000000?text=¡Bendiciones!%20Deseo%20solicitar%20el%20apoyo%20de%20la%20iglesia%20en%20oración%20por:" class="btn-oracion">
+        <i class="fas fa-hands-praying"></i> ¿Necesitas Oración? ¡Escríbenos!
+    </a>
 
     <h2 style="color: #1a1a1a; text-align: center; font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 20px;">Orden del Culto</h2>
 
@@ -58,30 +108,17 @@
 
     <button class="dia-btn" onclick="t('j')">Jueves (Damas) <i class="fas fa-venus"></i></button>
     <div id="j" class="contenido">
-        <div class="detalle-txt">
-            Información del culto de damas.
-            <br>
-            <a href="javascript:void(0)" class="btn-edit" onclick="admin('Jueves')">📝 Solicitar Cambio de Agenda</a>
-        </div>
+        <div class="detalle-txt"><b>Actividad:</b> Culto especial de Damas. <br> <a href="javascript:void(0)" class="btn-edit" onclick="admin('Jueves')">📝 Solicitar Cambio de Agenda</a></div>
     </div>
 
     <button class="dia-btn" onclick="t('s')">Sábado (Jóvenes) <i class="fas fa-users"></i></button>
     <div id="s" class="contenido">
-        <div class="detalle-txt">
-            Culto especial de jóvenes.
-            <br>
-            <a href="javascript:void(0)" class="btn-edit" onclick="admin('Sábado')">📝 Solicitar Cambio de Agenda</a>
-        </div>
+        <div class="detalle-txt"><b>Actividad:</b> Reunión de Jóvenes. <br> <a href="javascript:void(0)" class="btn-edit" onclick="admin('Sábado')">📝 Solicitar Cambio de Agenda</a></div>
     </div>
 
     <button class="dia-btn" onclick="t('d')" style="background: var(--oro); color: black;">Domingo (General) <i class="fas fa-church"></i></button>
     <div id="d" class="contenido">
-        <div class="detalle-txt">
-            <b>Escuela Dominical:</b> 9:00 AM <br>
-            <b>Culto General:</b> 11:00 AM
-            <br>
-            <a href="javascript:void(0)" class="btn-edit" onclick="admin('Domingo')">📝 Solicitar Cambio de Agenda</a>
-        </div>
+        <div class="detalle-txt"><b>Escuela Dominical:</b> 9:00 AM <br> <b>Culto General:</b> 11:00 AM <br> <a href="javascript:void(0)" class="btn-edit" onclick="admin('Domingo')">📝 Solicitar Cambio de Agenda</a></div>
     </div>
 </div>
 
@@ -91,18 +128,15 @@
     function t(id) {
         var e = document.getElementById(id);
         if (e.style.maxHeight) { e.style.maxHeight = null; } 
-        else { document.querySelectorAll('.contenido').forEach(x => x.style.maxHeight = null); e.style.maxHeight = e.scrollHeight + "px"; }
+        else { e.style.maxHeight = e.scrollHeight + "px"; }
     }
 
     function admin(dia) {
-        let clave = prompt("Ingrese la clave de encargado para solicitar cambio:");
+        let clave = prompt("Ingrese la clave de encargado:");
         if (clave === "1234") { 
-            let msj = `*SOLICITUD DE CAMBIO DE AGENDA - ${dia.toUpperCase()}*%0A%0A- Dirección: %0A- Coros: %0A- Adoración: %0A- Predica: `;
-            // AQUÍ PONES EL NÚMERO DE QUIEN EDITA LA PÁGINA
+            let msj = `*CAMBIO AGENDA ${dia.toUpperCase()}*`;
             window.open(`https://wa.me/50400000000?text=${msj}`); 
-        } else {
-            alert("Clave incorrecta.");
-        }
+        } else { alert("Clave incorrecta."); }
     }
 </script>
 

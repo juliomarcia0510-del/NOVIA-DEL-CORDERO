@@ -21,7 +21,7 @@
 
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--crema); padding-bottom: 100px; overflow-x: hidden; }
         
-        /* HEADER CON BOTÓN DE VISIÓN */
+        /* HEADER */
         .header { 
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1350&q=80'); 
             background-size: cover; text-align: center; padding: 60px 20px; border-radius: 0 0 50px 50px; border-bottom: 5px solid var(--oro); position: relative; 
@@ -29,14 +29,14 @@
         
         .btn-vision-trigger {
             position: absolute; top: 20px; right: 20px; background: var(--oro); color: #000;
-            padding: 8px 15px; border-radius: 20px; font-weight: bold; font-size: 12px;
+            padding: 8px 15px; border-radius: 20px; font-weight: bold; font-size: 11px;
             cursor: pointer; border: 2px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            display: flex; align-items: center; gap: 5px;
+            display: flex; align-items: center; gap: 5px; z-index: 10;
         }
 
         .titulo-elefante { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 38px; color: var(--oro-brillante); text-shadow: 3px 3px 0px #000; text-transform: uppercase; margin: 0; }
 
-        /* PANEL LATERAL (VISIÓN) */
+        /* PANEL LATERAL VISIÓN */
         .side-panel {
             position: fixed; top: 0; right: -100%; width: 85%; height: 100%;
             background: var(--oscuro); color: white; z-index: 2000;
@@ -48,24 +48,16 @@
         
         .vision-text h2 { font-family: 'Playfair Display', serif; color: var(--oro); border-bottom: 1px solid var(--oro); padding-bottom: 10px; }
         .vision-text p { line-height: 1.8; font-size: 16px; text-align: justify; color: #ddd; }
-        .vision-tag { background: var(--rojo-sacro); color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px; font-weight: bold; }
 
-        /* CONTENIDO PRINCIPAL */
+        /* CONTENEDORES */
         .container { padding: 20px; max-width: 500px; margin: auto; }
-        .biblia-section { margin-top: -30px; margin-bottom: 25px; text-align: center; }
-        .biblia-btn { background: #fff; border: 2px solid var(--oro); border-radius: 50px; padding: 10px 25px; display: inline-block; font-weight: bold; color: var(--oscuro); cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-family: 'Playfair Display', serif; }
-        .biblia-content { max-height: 0; overflow: hidden; transition: 0.5s ease-in-out; background: #fff8e1; border-radius: 15px; margin: 10px auto; width: 90%; border-left: 5px solid var(--oro); }
-        .biblia-texto { padding: 15px; font-style: italic; color: #5d4037; font-size: 15px; }
-
-        .card-video { background: var(--oscuro); border-radius: 25px; overflow: hidden; margin-bottom: 25px; border: 3px solid var(--oro); }
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
         .btn-oracion { background: white; border: 3px double var(--oro); padding: 18px; border-radius: 15px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--oscuro); font-weight: bold; font-size: 17px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .btn-oracion i { color: var(--rojo-sacro); margin-right: 12px; font-size: 22px; }
 
-        .seccion-titulo { color: var(--oscuro); text-align: center; font-family: 'Playfair Display', serif; font-size: 24px; margin: 35px 0 15px; border-bottom: 2px solid var(--oro); display: block; }
+        .seccion-titulo { color: var(--oscuro); text-align: center; font-family: 'Playfair Display', serif; font-size: 24px; margin: 35px 0 15px; border-bottom: 2px solid var(--oro); display: block; padding-bottom: 5px; }
         
+        /* BOTONES */
         .dia-btn { width: 100%; background: linear-gradient(135deg, #1a1a1a, #444); border: 1px solid var(--oro); padding: 18px; margin-bottom: 12px; border-radius: 15px; text-align: left; font-size: 17px; font-weight: bold; color: var(--oro); display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
         .evento-btn { width: 100%; background: var(--purpura-eventos); border: 1px solid var(--oro); padding: 18px; margin-bottom: 12px; border-radius: 15px; text-align: left; font-size: 17px; font-weight: bold; color: white; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
         .actividad-btn { width: 100%; background: white; border: 1px solid var(--azul-proyectos); padding: 18px; margin-bottom: 12px; border-radius: 15px; text-align: left; font-size: 17px; font-weight: bold; color: var(--azul-proyectos); display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
@@ -73,8 +65,8 @@
         .contenido { max-height: 0; overflow: hidden; transition: 0.5s ease-in-out; background: white; margin-top: -15px; margin-bottom: 15px; border-radius: 0 0 15px 15px; padding: 0 25px; border: 1px solid var(--oro); border-top: none; }
         .detalle-txt { padding: 20px 0; color: #333; font-size: 15px; }
         
-        .btn-compra { background: var(--azul-proyectos); color: white; text-decoration: none; padding: 10px 15px; border-radius: 10px; display: inline-block; margin-top: 10px; font-weight: bold; font-size: 13px; }
         .btn-edit { background: #f0f0f0; border: 1px dashed #999; padding: 5px 10px; font-size: 11px; border-radius: 5px; display: inline-block; color: #666; text-decoration: none; margin-top: 10px;}
+        .btn-compra { background: var(--azul-proyectos); color: white; text-decoration: none; padding: 10px 15px; border-radius: 10px; display: inline-block; margin-top: 10px; font-weight: bold; font-size: 13px; }
         .btn-ws { position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp); color: white; width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; border: 3px solid white; box-shadow: 0 8px 20px rgba(0,0,0,0.3); z-index: 1000; }
     </style>
 </head>
@@ -91,36 +83,14 @@
 <div id="sideVision" class="side-panel">
     <i class="fas fa-times close-panel" onclick="toggleVision()"></i>
     <div class="vision-text">
-        <span class="vision-tag">Asambleas de Dios</span>
-        <h2>Nuestra Visión</h2>
-        <p>
-            Ser una iglesia <b>viva, pentecostal y misionera</b>, que bajo la unción del Espíritu Santo, alcance a las almas perdidas en Cofradía y el mundo entero. 
-        </p>
-        <p>
-            Creemos en la restauración de la familia, el poder del Evangelio para transformar vidas y la esperanza gloriosa de la venida de nuestro Señor Jesucristo.
-        </p>
-        <p style="color: var(--oro-brillante); font-weight: bold;">
-            ¡Aquí hay un lugar para ti! Ven y experimenta el fuego de Dios.
-        </p>
-        <hr style="border-color: #333; margin: 30px 0;">
-        <div style="text-align: center;">
-            <i class="fas fa-dove" style="font-size: 40px; color: var(--oro);"></i>
-        </div>
+        <h2 style="font-size: 24px;">Nuestra Visión</h2>
+        <p><b>Asambleas de Dios</b></p>
+        <p>Ser una iglesia viva, pentecostal y misionera, que bajo la unción del Espíritu Santo, alcance a las almas perdidas en Cofradía y el mundo entero.</p>
+        <p>¡Aquí hay un lugar para ti!</p>
     </div>
 </div>
 
 <div class="container">
-    <div class="biblia-section">
-        <div class="biblia-btn" onclick="t('cita')"><i class="fas fa-book-open"></i> Apocalipsis 19:7-9</div>
-        <div id="cita" class="biblia-content"><div class="biblia-texto">"Gocémonos y alegrémonos... porque han llegado las bodas del Cordero..."</div></div>
-    </div>
-
-    <div class="card-video">
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/k6Q3uF7V5Hs" allowfullscreen></iframe>
-        </div>
-    </div>
-
     <a href="https://wa.me/50400000000?text=Pedido%20de%20Oración" class="btn-oracion">
         <i class="fas fa-hands-praying"></i> ¿Necesitas Oración? ¡Escríbenos!
     </a>
@@ -145,21 +115,37 @@
     <button class="evento-btn" onclick="t('campaña')">Campañas <i class="fas fa-bullhorn"></i></button>
     <div id="campaña" class="contenido"><div class="detalle-txt">Pendiente de agendar.<br> <a href="javascript:void(0)" class="btn-edit" onclick="admin('Campaña')">📝 Agendar</a></div></div>
 
+    <button class="evento-btn" onclick="t('semana')">Semana de Oración <i class="fas fa-pray"></i></button>
+    <div id="semana" class="contenido"><div class="detalle-txt">Pendiente de agendar.<br> <a href="javascript:void(0)" class="btn-edit" onclick="admin('Semana de Oración')">📝 Agendar</a></div></div>
+
     <button class="evento-btn" onclick="t('unido')">Cultos Unidos <i class="fas fa-handshake"></i></button>
     <div id="unido" class="contenido"><div class="detalle-txt">Pendiente de agendar.<br> <a href="javascript:void(0)" class="btn-edit" onclick="admin('Culto Unido')">📝 Agendar</a></div></div>
 
-    <span class="seccion-titulo">Proyectos y Ventas</span>
+    <span class="seccion-titulo">Proyectos y Actividades</span>
+    
     <button class="actividad-btn" onclick="t('venta')">Venta de Comida <i class="fas fa-utensils"></i></button>
-    <div id="venta" class="contenido"><div class="detalle-txt"><b>Actividad:</b> Venta de Pollos.<br> <a href="https://wa.me/50400000000" class="btn-compra">Hacer pedido</a></div></div>
+    <div id="venta" class="contenido">
+        <div class="detalle-txt">
+            <b>Menú:</b> Pendiente de actualizar.<br>
+            <a href="https://wa.me/50400000000?text=Hola,%20deseo%20información%20sobre%20la%20Venta%20de%20Comida" class="btn-compra">Hacer pedido</a>
+            <br><a href="javascript:void(0)" class="btn-edit" onclick="admin('Venta de Comida')">📝 Editar</a>
+        </div>
+    </div>
+
+    <button class="actividad-btn" onclick="t('sorteo')">Sorteos y Venta de Boletos <i class="fas fa-ticket-alt"></i></button>
+    <div id="sorteo" class="contenido">
+        <div class="detalle-txt">
+            <b>Actividad:</b> Sorteo pro-fondos iglesia.<br>
+            <a href="https://wa.me/50400000000?text=Hola,%20deseo%20comprar%20boletos%20para%20el%20Sorteo" class="btn-compra">Comprar mis Boletos</a>
+            <br><a href="javascript:void(0)" class="btn-edit" onclick="admin('Sorteos')">📝 Editar</a>
+        </div>
+    </div>
 </div>
 
 <a href="https://wa.me/50400000000" class="btn-ws" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
 <script>
-    function toggleVision() {
-        document.getElementById('sideVision').classList.toggle('active');
-    }
-
+    function toggleVision() { document.getElementById('sideVision').classList.toggle('active'); }
     function t(id) {
         var e = document.getElementById(id);
         if (e.style.maxHeight) { e.style.maxHeight = null; } 
@@ -168,10 +154,9 @@
             e.style.maxHeight = e.scrollHeight + "px"; 
         }
     }
-
     function admin(ev) {
         let clave = prompt("Clave:");
-        if (clave === "1234") { window.open(`https://wa.me/50400000000?text=CAMBIO%20${ev}`); }
+        if (clave === "1234") { window.open(`https://wa.me/50400000000?text=AGENDAR:%20${ev}`); }
     }
 </script>
 

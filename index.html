@@ -14,9 +14,11 @@
             --crema: #fdfaf1; 
             --whatsapp: #25d366; 
             --rojo-sacro: #b21f1f;
+            --azul-proyectos: #1a3a5a;
         }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--crema); padding-bottom: 100px; }
         
+        /* ENCABEZADO */
         .header { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1350&q=80'); background-size: cover; text-align: center; padding: 60px 20px; border-radius: 0 0 50px 50px; border-bottom: 5px solid var(--oro); }
         .titulo-elefante { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 38px; color: var(--oro-brillante); text-shadow: 3px 3px 0px #000; text-transform: uppercase; }
 
@@ -24,41 +26,39 @@
 
         /* PESTAÑA BÍBLICA */
         .biblia-section { margin-top: -30px; margin-bottom: 25px; text-align: center; }
-        .biblia-btn { 
-            background: #fff; 
-            border: 2px solid var(--oro); 
-            border-radius: 50px; 
-            padding: 10px 25px; 
-            display: inline-block; 
-            font-weight: bold; 
-            color: var(--oscuro); 
-            cursor: pointer; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            font-family: 'Playfair Display', serif;
-        }
-        .biblia-content { 
-            max-height: 0; 
-            overflow: hidden; 
-            transition: 0.5s ease-in-out; 
-            background: #fff8e1; 
-            border-radius: 15px; 
-            margin: 10px auto; 
-            width: 90%; 
-            border-left: 5px solid var(--oro);
-        }
+        .biblia-btn { background: #fff; border: 2px solid var(--oro); border-radius: 50px; padding: 10px 25px; display: inline-block; font-weight: bold; color: var(--oscuro); cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-family: 'Playfair Display', serif; }
+        .biblia-content { max-height: 0; overflow: hidden; transition: 0.5s ease-in-out; background: #fff8e1; border-radius: 15px; margin: 10px auto; width: 90%; border-left: 5px solid var(--oro); }
         .biblia-texto { padding: 15px; font-style: italic; color: #5d4037; font-size: 15px; line-height: 1.5; }
 
-        .card-video { background: var(--oscuro); border-radius: 25px; overflow: hidden; margin-bottom: 25px; border: 3px solid var(--oro); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .card-video { background: var(--oscuro); border-radius: 25px; overflow: hidden; margin-bottom: 25px; border: 3px solid var(--oro); }
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
         .btn-oracion { background: white; border: 3px double var(--oro); padding: 18px; border-radius: 15px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--oscuro); font-weight: bold; font-size: 17px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .btn-oracion i { color: var(--rojo-sacro); margin-right: 12px; font-size: 22px; }
 
-        .dia-btn { width: 100%; background: linear-gradient(135deg, #1a1a1a, #444); border: 1px solid var(--oro); padding: 20px; margin-bottom: 12px; border-radius: 15px; text-align: left; font-size: 19px; font-weight: bold; color: var(--oro); display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .seccion-titulo { color: var(--oscuro); text-align: center; font-family: 'Playfair Display', serif; font-size: 26px; margin: 30px 0 15px; border-bottom: 2px solid var(--oro); display: block; }
+        
+        .dia-btn { width: 100%; background: linear-gradient(135deg, #1a1a1a, #444); border: 1px solid var(--oro); padding: 20px; margin-bottom: 12px; border-radius: 15px; text-align: left; font-size: 18px; font-weight: bold; color: var(--oro); display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .actividad-btn { width: 100%; background: white; border: 1px solid var(--azul-proyectos); padding: 20px; margin-bottom: 12px; border-radius: 15px; text-align: left; font-size: 18px; font-weight: bold; color: var(--azul-proyectos); display: flex; justify-content: space-between; align-items: center; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+
         .contenido { max-height: 0; overflow: hidden; transition: 0.5s ease-in-out; background: white; margin-top: -15px; margin-bottom: 15px; border-radius: 0 0 15px 15px; padding: 0 25px; border: 1px solid var(--oro); border-top: none; }
         .detalle-txt { padding: 20px 0; color: #333; font-size: 16px; line-height: 1.8; }
         
+        /* BOTÓN DE COMPRA/PEDIDO */
+        .btn-compra {
+            background: var(--azul-proyectos);
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .btn-compra i { margin-right: 8px; }
+
         .btn-edit { background: #f0f0f0; border: 1px dashed #999; padding: 5px 10px; font-size: 12px; border-radius: 5px; cursor: pointer; margin-top: 10px; display: inline-block; color: #666; text-decoration: none; }
         .btn-ws { position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp); color: white; width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; border: 3px solid white; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
     </style>
@@ -72,14 +72,8 @@
 
 <div class="container">
     <div class="biblia-section">
-        <div class="biblia-btn" onclick="t('cita')">
-            <i class="fas fa-book-open"></i> Apocalipsis 19:7-9
-        </div>
-        <div id="cita" class="biblia-content">
-            <div class="biblia-texto">
-                "Gocémonos y alegrémonos y démosle gloria; porque han llegado las bodas del Cordero, y su esposa se ha preparado... Bienaventurados los que son llamados a la cena de las bodas del Cordero."
-            </div>
-        </div>
+        <div class="biblia-btn" onclick="t('cita')"><i class="fas fa-book-open"></i> Apocalipsis 19:7-9</div>
+        <div id="cita" class="biblia-content"><div class="biblia-texto">"Gocémonos y alegrémonos y démosle gloria; porque han llegado las bodas del Cordero..."</div></div>
     </div>
 
     <div class="card-video">
@@ -88,38 +82,50 @@
         </div>
     </div>
 
-    <a href="https://wa.me/50400000000?text=¡Bendiciones!%20Deseo%20solicitar%20el%20apoyo%20de%20la%20iglesia%20en%20oración%20por:" class="btn-oracion">
+    <a href="https://wa.me/50400000000?text=Pedido%20de%20Oración" class="btn-oracion">
         <i class="fas fa-hands-praying"></i> ¿Necesitas Oración? ¡Escríbenos!
     </a>
 
-    <h2 style="color: #1a1a1a; text-align: center; font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 20px;">Orden del Culto</h2>
-
+    <span class="seccion-titulo">Orden del Culto</span>
+    
     <button class="dia-btn" onclick="t('ma')">Martes (Adoración) <i class="fas fa-music"></i></button>
     <div id="ma" class="contenido">
         <div class="detalle-txt">
-            <i class="fas fa-user-tie"></i> <b>Dirección:</b> Hermana Marta <br>
-            <i class="fas fa-microphone"></i> <b>Coros Alegres:</b> Hermano Pedro <br>
-            <i class="fas fa-heart"></i> <b>Adoración:</b> Hermana Juana <br>
-            <i class="fas fa-bible"></i> <b>Predicación:</b> Hermano Christopher
-            <br>
-            <a href="javascript:void(0)" class="btn-edit" onclick="admin('Martes')">📝 Solicitar Cambio de Agenda</a>
+            <b>Dirección:</b> Hermana Marta <br>
+            <b>Coros:</b> Hermano Pedro <br>
+            <a href="javascript:void(0)" class="btn-edit" onclick="admin('Martes')">📝 Solicitar Cambio</a>
         </div>
-    </div>
-
-    <button class="dia-btn" onclick="t('j')">Jueves (Damas) <i class="fas fa-venus"></i></button>
-    <div id="j" class="contenido">
-        <div class="detalle-txt"><b>Actividad:</b> Culto especial de Damas. <br> <a href="javascript:void(0)" class="btn-edit" onclick="admin('Jueves')">📝 Solicitar Cambio de Agenda</a></div>
-    </div>
-
-    <button class="dia-btn" onclick="t('s')">Sábado (Jóvenes) <i class="fas fa-users"></i></button>
-    <div id="s" class="contenido">
-        <div class="detalle-txt"><b>Actividad:</b> Reunión de Jóvenes. <br> <a href="javascript:void(0)" class="btn-edit" onclick="admin('Sábado')">📝 Solicitar Cambio de Agenda</a></div>
     </div>
 
     <button class="dia-btn" onclick="t('d')" style="background: var(--oro); color: black;">Domingo (General) <i class="fas fa-church"></i></button>
     <div id="d" class="contenido">
-        <div class="detalle-txt"><b>Escuela Dominical:</b> 9:00 AM <br> <b>Culto General:</b> 11:00 AM <br> <a href="javascript:void(0)" class="btn-edit" onclick="admin('Domingo')">📝 Solicitar Cambio de Agenda</a></div>
+        <div class="detalle-txt"><b>Escuela Dominical:</b> 9:00 AM <br> <b>Culto General:</b> 11:00 AM</div>
     </div>
+
+    <span class="seccion-titulo">Proyectos y Actividades</span>
+
+    <button class="actividad-btn" onclick="t('venta')">Venta de Comida <i class="fas fa-utensils"></i></button>
+    <div id="venta" class="contenido">
+        <div class="detalle-txt">
+            <b>Actividad:</b> Pollos asados pro-construcción. <br>
+            <b>Valor:</b> L. 150.00 <br>
+            <a href="https://wa.me/50400000000?text=¡Bendiciones!%20Deseo%20hacer%20un%20pedido%20para%20la%20venta%20de%20comida." class="btn-compra">
+                <i class="fas fa-shopping-cart"></i> Hacer mi pedido ahora
+            </a>
+        </div>
+    </div>
+
+    <button class="actividad-btn" onclick="t('rifa')">Gran Rifa Especial <i class="fas fa-ticket-alt"></i></button>
+    <div id="rifa" class="contenido">
+        <div class="detalle-txt">
+            <b>Premio:</b> Canasta familiar. <br>
+            <b>Valor boleto:</b> L. 50.00 <br>
+            <a href="https://wa.me/50400000000?text=¡Bendiciones!%20Deseo%20comprar%20boletos%20para%20la%20rifa." class="btn-compra">
+                <i class="fas fa-ticket"></i> Comprar mis boletos
+            </a>
+        </div>
+    </div>
+
 </div>
 
 <a href="https://wa.me/50400000000" class="btn-ws" target="_blank"><i class="fab fa-whatsapp"></i></a>
@@ -128,15 +134,17 @@
     function t(id) {
         var e = document.getElementById(id);
         if (e.style.maxHeight) { e.style.maxHeight = null; } 
-        else { e.style.maxHeight = e.scrollHeight + "px"; }
+        else { 
+            document.querySelectorAll('.contenido').forEach(x => x.style.maxHeight = null);
+            e.style.maxHeight = e.scrollHeight + "px"; 
+        }
     }
 
     function admin(dia) {
-        let clave = prompt("Ingrese la clave de encargado:");
+        let clave = prompt("Clave:");
         if (clave === "1234") { 
-            let msj = `*CAMBIO AGENDA ${dia.toUpperCase()}*`;
-            window.open(`https://wa.me/50400000000?text=${msj}`); 
-        } else { alert("Clave incorrecta."); }
+            window.open(`https://wa.me/50400000000?text=Cambio%20Agenda%20${dia}`); 
+        } else { alert("Incorrecta"); }
     }
 </script>
 

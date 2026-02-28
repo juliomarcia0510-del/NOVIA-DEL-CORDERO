@@ -14,12 +14,12 @@
             --oro-brillante: #FFD700; 
             --oscuro-puro: #0a0a0a;
             --bg-page: #fdfaf1;
-            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-bg: rgba(255, 255, 255, 0.98);
         }
 
         body.dark-mode {
             --bg-page: #000000;
-            --card-bg: rgba(30, 30, 30, 0.98);
+            --card-bg: rgba(35, 35, 35, 0.98);
         }
 
         html, body {
@@ -30,6 +30,7 @@
             font-family: 'Segoe UI', sans-serif;
         }
 
+        /* CONTENEDOR PRINCIPAL */
         .app-wrapper {
             display: flex;
             width: 200vw;
@@ -45,7 +46,7 @@
             box-sizing: border-box;
         }
 
-        /* PORTADA AJUSTADA AL ANCHO TOTAL */
+        /* PORTADAS */
         .header { 
             width: 100%;
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1350&q=80'); 
@@ -55,68 +56,70 @@
 
         .titulo-elefante { font-family: 'Playfair Display', serif; color: var(--oro-brillante); text-transform: uppercase; margin: 0; font-size: 28px; }
 
-        .main-content { padding: 0 20px 100px; }
+        .main-content { padding: 0 20px 120px; }
 
-        /* SEPARACIÓN DE TÍTULOS (SOLICITADO) */
+        /* TÍTULOS CON SEPARACIÓN */
         .seccion-titulo { 
-            text-align: center; 
-            color: var(--oro); 
-            font-family: 'Playfair Display', serif; 
-            font-size: 22px; 
-            margin: 45px 0 20px; /* Espacio extra para que no pegue */
-            border-bottom: 2.5px solid var(--oro);
-            padding-bottom: 10px;
-            display: block;
+            text-align: center; color: var(--oro); font-family: 'Playfair Display', serif; 
+            font-size: 22px; margin: 45px 0 20px; border-bottom: 2.5px solid var(--oro);
+            padding-bottom: 10px; display: block;
         }
 
-        /* BOTONES ELEGANTES */
+        /* BOTONES */
         .btn-item {
             width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 12px;
             display: flex; justify-content: space-between; align-items: center;
             font-weight: bold; border: 1.5px solid var(--oro-oscuro); cursor: pointer;
             background: #2c2c2c; color: var(--oro); box-sizing: border-box;
-            transition: 0.3s;
         }
 
-        .btn-domingo { background: var(--oro); color: black; border-color: black; }
-        .btn-evento { background: #4a148c; color: white; border-color: var(--oro); }
+        .btn-domingo { background: var(--oro); color: black; border-color: #000; }
+        .btn-evento { background: #4a148c; color: white; }
         .btn-actividad { background: white; color: #1a3a5a; border-color: #1a3a5a; }
 
-        /* MENÚS DESPLEGABLES COMPLETOS */
+        /* DESPLEGABLES CON ICONOS */
         .contenido-desplegable { 
             max-height: 0; overflow: hidden; transition: 0.4s ease-in-out; 
             background: var(--card-bg); border-radius: 0 0 12px 12px; 
             margin-top: -12px; margin-bottom: 15px; border: 1.5px solid var(--oro); border-top: none;
         }
         
-        .detalle-agendar { padding: 18px; font-size: 14px; color: #333; line-height: 1.6; }
-        .dark-mode .detalle-agendar { color: #eee; }
+        .info-grid { padding: 15px; color: #333; }
+        .dark-mode .info-grid { color: #eee; }
+        
+        .info-item { display: flex; align-items: center; margin-bottom: 8px; font-size: 14px; }
+        .info-item i { color: var(--oro-oscuro); width: 25px; margin-right: 10px; text-align: center; }
 
         .btn-accion {
-            display: block; margin-top: 10px; padding: 8px;
+            display: block; margin-top: 10px; padding: 10px;
             background: var(--oscuro-puro); color: var(--oro); text-align: center;
             border-radius: 8px; text-decoration: none; font-weight: bold; border: 1px solid var(--oro);
         }
 
-        /* NAVEGACIÓN */
-        .nav-button {
-            position: fixed; bottom: 25px; right: 25px;
+        /* BOTÓN DE NAVEGACIÓN FIJO (No desaparece) */
+        .nav-trigger-global {
+            position: fixed; bottom: 30px; right: 25px;
             background: var(--oscuro-puro); color: var(--oro);
-            width: 55px; height: 55px; border-radius: 50%;
+            width: 60px; height: 60px; border-radius: 50%;
             border: 2px solid var(--oro); display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6); z-index: 9999; cursor: pointer;
+            transition: transform 0.3s;
         }
 
-        .btn-back {
+        .btn-back-manual {
             position: absolute; top: 20px; left: 20px;
-            background: rgba(0,0,0,0.6); color: var(--oro);
-            width: 35px; height: 35px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; border: 1px solid var(--oro);
+            background: rgba(0,0,0,0.7); color: var(--oro);
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; border: 1.5px solid var(--oro);
             z-index: 10;
         }
     </style>
 </head>
 <body>
+
+<div class="nav-trigger-global" id="mainNavBtn" onclick="togglePages()">
+    <i class="fas fa-arrow-right" id="navIcon"></i>
+</div>
 
 <div class="app-wrapper" id="mainWrapper">
     
@@ -135,48 +138,77 @@
             <span class="seccion-titulo">Cultos de la Semana</span>
             
             <div class="btn-item" onclick="toggleAcc('m')">Martes (Adoración) <i class="fas fa-music"></i></div>
-            <div id="m" class="contenido-desplegable"><div class="detalle-agendar">🎤 <b>Dir:</b> Pendiente <br> 📖 <b>Pre:</b> Pendiente <br> 🎵 <b>Coros:</b> Pendiente <a href="#" class="btn-accion">Agendar</a></div></div>
+            <div id="m" class="contenido-desplegable">
+                <div class="info-grid">
+                    <div class="info-item"><i class="fas fa-microphone-alt"></i> <b>Dirección:</b> Pendiente</div>
+                    <div class="info-item"><i class="fas fa-guitar"></i> <b>Coros:</b> Pendiente</div>
+                    <div class="info-item"><i class="fas fa-book-open"></i> <b>Predicación:</b> Pendiente</div>
+                    <a href="#" class="btn-accion">Agendar Culto</a>
+                </div>
+            </div>
 
             <div class="btn-item" onclick="toggleAcc('j')">Jueves (Damas) <i class="fas fa-venus"></i></div>
-            <div id="j" class="contenido-desplegable"><div class="detalle-agendar">🎤 <b>Dir:</b> Pendiente <br> 📖 <b>Pre:</b> Pendiente <a href="#" class="btn-accion">Agendar</a></div></div>
+            <div id="j" class="contenido-desplegable">
+                <div class="info-grid">
+                    <div class="info-item"><i class="fas fa-microphone-alt"></i> <b>Dirección:</b> Pendiente</div>
+                    <div class="info-item"><i class="fas fa-book-open"></i> <b>Predicación:</b> Pendiente</div>
+                    <a href="#" class="btn-accion">Agendar Culto</a>
+                </div>
+            </div>
 
             <div class="btn-item" onclick="toggleAcc('v')">Viernes (Crecimiento) <i class="fas fa-seedling"></i></div>
-            <div id="v" class="contenido-desplegable"><div class="detalle-agendar">📖 <b>Estudio:</b> Pendiente <br> 🎤 <b>Dir:</b> Pendiente <a href="#" class="btn-accion">Agendar</a></div></div>
+            <div id="v" class="contenido-desplegable">
+                <div class="info-grid">
+                    <div class="info-item"><i class="fas fa-chalkboard-teacher"></i> <b>Estudio:</b> Pendiente</div>
+                    <div class="info-item"><i class="fas fa-microphone-alt"></i> <b>Dirección:</b> Pendiente</div>
+                    <a href="#" class="btn-accion">Agendar Culto</a>
+                </div>
+            </div>
 
             <div class="btn-item" onclick="toggleAcc('s')">Sábado (Jóvenes) <i class="fas fa-users"></i></div>
-            <div id="s" class="contenido-desplegable"><div class="detalle-agendar">🎤 <b>Dir:</b> Pendiente <br> 📖 <b>Pre:</b> Pendiente <a href="#" class="btn-accion">Agendar</a></div></div>
+            <div id="s" class="contenido-desplegable">
+                <div class="info-grid">
+                    <div class="info-item"><i class="fas fa-microphone-alt"></i> <b>Dirección:</b> Pendiente</div>
+                    <div class="info-item"><i class="fas fa-guitar"></i> <b>Coros:</b> Pendiente</div>
+                    <div class="info-item"><i class="fas fa-book-open"></i> <b>Predicación:</b> Pendiente</div>
+                    <a href="#" class="btn-accion">Agendar Culto</a>
+                </div>
+            </div>
 
             <div class="btn-item btn-domingo" onclick="toggleAcc('d')">Domingo (Escuela / General) <i class="fas fa-church"></i></div>
-            <div id="d" class="contenido-desplegable"><div class="detalle-agendar">🕘 <b>9:00 AM:</b> Escuela Dominical <br> 🕚 <b>11:00 AM:</b> Culto General <a href="#" class="btn-accion">Agendar</a></div></div>
+            <div id="d" class="contenido-desplegable">
+                <div class="info-grid">
+                    <div class="info-item"><i class="fas fa-sun"></i> <b>9:00 AM:</b> Escuela Dominical</div>
+                    <div class="info-item"><i class="fas fa-star"></i> <b>11:00 AM:</b> Culto General</div>
+                    <a href="#" class="btn-accion">Agendar Todo</a>
+                </div>
+            </div>
 
             <span class="seccion-titulo">Eventos Especiales</span>
             <div class="btn-item btn-evento" onclick="toggleAcc('vig')">Vigilia <i class="fas fa-moon"></i></div>
-            <div id="vig" class="contenido-desplegable"><div class="detalle-agendar">⏰ <b>Hora:</b> Pendiente <br> 🔥 <b>Predicador:</b> Pendiente <a href="#" class="btn-accion">Agendar</a></div></div>
-
-            <div class="btn-item btn-evento" onclick="toggleAcc('camp')">Campaña <i class="fas fa-bullhorn"></i></div>
-            <div id="camp" class="contenido-desplegable"><div class="detalle-agendar">🚩 <b>Lugar:</b> Pendiente <br> 🎤 <b>Evangelista:</b> Pendiente <a href="#" class="btn-accion">Agendar</a></div></div>
-
-            <div class="btn-item btn-evento" onclick="toggleAcc('uni')">Culto Unido <i class="fas fa-handshake"></i></div>
-            <div id="uni" class="contenido-desplegable"><div class="detalle-agendar">🤝 <b>Iglesias:</b> Pendiente <br> 📖 <b>Pre:</b> Pendiente <a href="#" class="btn-accion">Agendar</a></div></div>
+            <div id="vig" class="contenido-desplegable">
+                <div class="info-grid">
+                    <div class="info-item"><i class="fas fa-clock"></i> <b>Hora:</b> 9:00 PM</div>
+                    <div class="info-item"><i class="fas fa-fire"></i> <b>Predicador:</b> Pendiente</div>
+                    <a href="#" class="btn-accion">Agendar Evento</a>
+                </div>
+            </div>
 
             <span class="seccion-titulo">Actividades</span>
             <div class="btn-item btn-actividad" onclick="toggleAcc('comida')">Venta de Comida <i class="fas fa-utensils"></i></div>
             <div id="comida" class="contenido-desplegable">
-                <div class="detalle-agendar">
-                    <b>Menú:</b> 🍗 Pollo | 🍔 Hamburguesas | 🍰 Postres
-                    <a href="#" class="btn-accion">Hacer Pedido</a>
+                <div class="info-grid">
+                    <b>Selecciona tu pedido:</b>
+                    <div class="info-item"><i class="fas fa-check-circle"></i> Pollo Frito / Hamburguesas</div>
+                    <div class="info-item"><i class="fas fa-ice-cream"></i> Postres Variados</div>
+                    <a href="#" class="btn-accion">Pedir por WhatsApp</a>
                 </div>
             </div>
-
-            <div class="btn-item btn-actividad" onclick="toggleAcc('sorteo')">Sorteo y Boletos <i class="fas fa-ticket-alt"></i></div>
-            <div id="sorteo" class="contenido-desplegable"><div class="detalle-agendar">🎟️ Adquiere tus boletos para apoyar los proyectos. <a href="#" class="btn-accion">Comprar Boletos</a></div></div>
         </div>
-
-        <div class="nav-button" onclick="changePage(2)"><i class="fas fa-arrow-right"></i></div>
     </div>
 
     <div class="page">
-        <div class="btn-back" onclick="changePage(1)"><i class="fas fa-chevron-left"></i></div>
+        <div class="btn-back-manual" onclick="togglePages()"><i class="fas fa-chevron-left"></i></div>
         <div class="header" style="background-image: url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1000&q=80');">
             <h1 class="titulo-elefante">Fortalecimiento</h1>
         </div>
@@ -184,24 +216,50 @@
             <span class="seccion-titulo">Recursos Espirituales</span>
             
             <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('ay2')">Ayuno de Jóvenes <i class="fas fa-fire"></i></div>
-            <div id="ay2" class="contenido-desplegable"><div class="detalle-agendar">🔥 Búsqueda especial de jóvenes. <a href="#" class="btn-accion">Agendar</a></div></div>
+            <div id="ay2" class="contenido-desplegable">
+                <div class="info-grid">
+                    <div class="info-item"><i class="fas fa-calendar-alt"></i> <b>Fecha:</b> Sábado AM</div>
+                    <a href="#" class="btn-accion">Agendar Ayuno</a>
+                </div>
+            </div>
 
             <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('dev')">Devocionales <i class="fas fa-sun"></i></div>
-            <div id="dev" class="contenido-desplegable"><div class="detalle-agendar">📖 Alimento diario para el alma. <a href="#" class="btn-accion">Ver Devocional</a></div></div>
-
-            <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('estb')">Estudios Bíblicos <i class="fas fa-book-reader"></i></div>
-            <div id="estb" class="contenido-desplegable"><div class="detalle-agendar">✍️ Profundizando en la Palabra. <a href="#" class="btn-accion">Agendar</a></div></div>
+            <div id="dev" class="contenido-desplegable">
+                <div class="info-grid">
+                    <div class="info-item"><i class="fas fa-book-reader"></i> Lectura diaria para hoy.</div>
+                    <a href="#" class="btn-accion">Ver hoy</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
-    function changePage(n) { document.getElementById('mainWrapper').style.transform = (n===2) ? 'translateX(-100vw)' : 'translateX(0)'; }
+    let currentPage = 1;
+
+    // Función de Navegación Global (Fija)
+    function togglePages() {
+        const wrapper = document.getElementById('mainWrapper');
+        const icon = document.getElementById('navIcon');
+        
+        if(currentPage === 1) {
+            wrapper.style.transform = 'translateX(-100vw)';
+            icon.className = 'fas fa-arrow-left'; // Cambia flecha al ir a pág 2
+            currentPage = 2;
+        } else {
+            wrapper.style.transform = 'translateX(0)';
+            icon.className = 'fas fa-arrow-right'; // Cambia flecha al volver a pág 1
+            currentPage = 1;
+        }
+    }
+
     function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
+
     function toggleAcc(id) {
         let e = document.getElementById(id);
-        if (e.style.maxHeight) { e.style.maxHeight = null; } 
-        else { 
+        if (e.style.maxHeight) { 
+            e.style.maxHeight = null; 
+        } else { 
             document.querySelectorAll('.contenido-desplegable').forEach(x => x.style.maxHeight = null);
             e.style.maxHeight = e.scrollHeight + "px"; 
         }

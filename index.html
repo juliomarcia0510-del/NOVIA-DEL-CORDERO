@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>La Novia del Cordero - App Oficial</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -14,179 +14,174 @@
             --oro-brillante: #FFD700; 
             --oscuro-puro: #0a0a0a;
             --whatsapp: #25d366; 
-            --rojo-sacro: #b21f1f;
-            --azul-proyectos: #1a3a5a;
-            --purpura-eventos: #4a148c;
             --bg-page: linear-gradient(135deg, #fdfaf1, #f5eedc, #fdfaf1);
             --texto-principal: #0a0a0a;
             --card-bg: rgba(255, 255, 255, 0.9);
-            --display-bokeh: none;
-            --display-glitter: none;
+        }
+
+        /* FIX: Bloquear desplazamiento horizontal manual */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden; /* Evita que puedas arrastrar a la derecha manualmente */
+            background: var(--bg-page);
+            font-family: 'Segoe UI', sans-serif;
         }
 
         body.dark-mode {
             --bg-page: #000000;
             --texto-principal: #ffffff;
             --card-bg: rgba(20, 20, 20, 0.95);
-            --display-bokeh: block;
-            --display-glitter: block;
         }
 
-        body { 
-            font-family: 'Segoe UI', sans-serif; 
-            margin: 0; padding: 0; 
-            background: var(--bg-page); color: var(--texto-principal); 
-            transition: 0.5s; overflow-x: hidden;
+        /* CONTENEDOR TIPO APP (Deslizamiento) */
+        .app-container {
+            display: flex;
+            width: 200vw; /* Dos páginas de ancho */
+            height: 100vh;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* CAPAS MODO OSCURO */
-        .bokeh-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.1) 0%, rgba(0,0,0,0) 20%), radial-gradient(circle at 70% 60%, rgba(255, 215, 0, 0.08) 0%, rgba(0,0,0,0) 25%); display: var(--display-bokeh); z-index: -2; pointer-events: none; }
-        .glitter-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Ccircle fill='%3Cd4af37' fill-opacity='0.15' cx='1' cy='1' r='1'/%3E%3C/svg%3E"); display: var(--display-glitter); z-index: -1; pointer-events: none; opacity: 0.5; }
+        .page {
+            width: 100vw;
+            height: 100vh;
+            overflow-y: auto; /* Permite scroll vertical normal en cada página */
+            position: relative;
+            box-sizing: border-box;
+            padding-bottom: 80px;
+        }
 
-        /* NAVEGACIÓN */
-        .app-wrapper { display: flex; width: 200vw; transition: transform 0.6s cubic-bezier(0.7, 0, 0.3, 1); }
-        .page { width: 100vw; min-height: 100vh; position: relative; padding-bottom: 100px; }
-
-        /* PORTADA */
+        /* DISEÑO DE INTERFAZ (Basado en tus imágenes) */
         .header { 
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1350&q=80'); 
-            background-size: cover; background-position: center; text-align: center; padding: 60px 20px 40px; border-radius: 0 0 50px 50px; border-bottom: 5px solid var(--oro); position: relative; 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1350&q=80'); 
+            background-size: cover; background-position: center; text-align: center; 
+            padding: 50px 20px 30px; border-radius: 0 0 40px 40px; border-bottom: 4px solid var(--oro);
         }
 
-        /* BOTONES CONTROL OSCUROS */
-        .btn-control-dark { background: var(--oscuro-puro); color: var(--oro); border: 2px solid var(--oro-oscuro); font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; transition: 0.3s; text-decoration: none; }
-        .btn-vision-top { position: absolute; top: 20px; right: 20px; padding: 8px 15px; border-radius: 12px; font-size: 11px; z-index: 10; }
-        .controles-mini { display: flex; justify-content: space-between; padding: 0 30px; margin-top: 12px; margin-bottom: 10px; }
-        .btn-mini-round { width: 48px; height: 48px; border-radius: 50%; font-size: 20px; }
+        .titulo-elefante { font-family: 'Playfair Display', serif; color: var(--oro-brillante); text-transform: uppercase; margin: 0; font-size: 28px; }
 
-        .titulo-elefante { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 32px; color: var(--oro-brillante); text-shadow: 2px 2px 0px #000; text-transform: uppercase; margin: 0; }
+        .btn-control-dark {
+            background: var(--oscuro-puro); color: var(--oro); 
+            border: 2px solid var(--oro-oscuro); width: 45px; height: 45px; 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3); cursor: pointer;
+        }
 
-        .container { padding: 0 20px; max-width: 500px; margin: auto; }
+        .controles-mini { display: flex; justify-content: space-between; padding: 15px 25px; }
 
-        /* BIBLIA */
-        .biblia-section { margin-top: 5px; text-align: center; margin-bottom: 20px; }
-        .biblia-btn { background: #fff; border: 2px solid var(--oro-oscuro); border-radius: 50px; padding: 10px 20px; display: inline-block; font-weight: bold; color: #000; cursor: pointer; font-family: 'Playfair Display', serif; font-size: 14px; }
+        .container { padding: 0 20px; }
+        .seccion-titulo { text-align: center; color: var(--oro); font-family: 'Playfair Display'; margin: 20px 0 10px; border-bottom: 1px solid var(--oro); padding-bottom: 5px; }
 
-        /* TITULOS Y BOTONES */
-        .seccion-titulo { text-align: center; font-family: 'Playfair Display', serif; font-size: 20px; margin: 25px 0 12px; border-bottom: 2px solid var(--oro); display: block; padding-bottom: 5px; color: var(--oro); }
-        .dia-btn, .evento-btn, .actividad-btn { width: 100%; border-radius: 15px; padding: 16px; margin-bottom: 10px; text-align: left; font-size: 16px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border: 1.5px solid var(--oro-oscuro); }
-        
-        .dia-btn { background: linear-gradient(135deg, #1a1a1a, #444); color: var(--oro); }
-        .evento-btn { background: var(--purpura-eventos); color: white; }
-        .actividad-btn { background: var(--card-bg); color: var(--azul-proyectos); border-color: var(--azul-proyectos); }
+        /* BOTONES ESTILO TUS CAPTURAS */
+        .btn-item {
+            width: 100%; padding: 14px; margin-bottom: 10px; border-radius: 12px;
+            display: flex; justify-content: space-between; align-items: center;
+            font-weight: bold; border: 1.5px solid var(--oro-oscuro); cursor: pointer;
+            background: #2c2c2c; color: var(--oro);
+        }
 
-        .contenido { max-height: 0; overflow: hidden; transition: 0.5s ease-in-out; background: var(--card-bg); margin-top: -12px; margin-bottom: 15px; border-radius: 0 0 15px 15px; padding: 0 25px; border: 1px solid var(--oro); border-top: none; backdrop-filter: blur(5px); color: var(--texto-principal); }
-        .detalle-txt { padding: 15px 0; font-size: 14px; line-height: 1.6; }
+        .btn-evento { background: #4a148c; color: white; border-color: var(--oro-oscuro); }
+        .btn-actividad { background: white; color: #1a3a5a; border-color: #1a3a5a; }
 
-        .agenda-info { background: rgba(212, 175, 55, 0.1); border-radius: 10px; padding: 10px; margin-top: 5px; border-left: 3px solid var(--oro); }
-        .btn-admin { font-size: 11px; color: var(--oro-oscuro); text-decoration: none; font-weight: bold; display: block; margin-top: 8px; }
+        /* BOTONES FLOTANTES DE NAVEGACIÓN */
+        .nav-trigger {
+            position: fixed; bottom: 25px; right: 25px;
+            background: var(--oscuro-puro); color: var(--oro);
+            width: 50px; height: 50px; border-radius: 50%;
+            border: 2px solid var(--oro); display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 1000;
+        }
 
-        .nav-next { position: fixed; bottom: 20px; right: 20px; background: var(--oscuro-puro); color: var(--oro); width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--oro); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 900; animation: bounceH 2s infinite; }
-        @keyframes bounceH { 0%, 100% {transform: translateX(0);} 50% {transform: translateX(8px);} }
+        .btn-back {
+            position: absolute; top: 20px; left: 20px;
+            background: rgba(0,0,0,0.5); color: var(--oro);
+            width: 35px; height: 35px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; border: 1px solid var(--oro);
+        }
 
-        /* PAGINA 2 */
-        .semi-portada { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1000&q=80'); height: 220px; background-size: cover; background-position: center; display: flex; flex-direction: column; align-items: center; justify-content: center; border-bottom: 4px solid var(--oro); text-align: center; color: white; }
-        .btn-back { position: absolute; top: 20px; left: 20px; background: rgba(0,0,0,0.6); color: var(--oro); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000; border: 1px solid var(--oro); }
-
-        .btn-ws { position: fixed; bottom: 20px; left: 20px; background: var(--whatsapp); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; border: 2px solid var(--oro-oscuro); z-index: 1000; }
+        /* SEMI PORTADA PÁGINA 2 */
+        .semi-portada {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1000&q=80');
+            height: 200px; background-size: cover; background-position: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            border-bottom: 3px solid var(--oro); color: white; text-align: center;
+        }
     </style>
 </head>
 <body>
 
-<div class="bokeh-overlay"></div>
-<div class="glitter-overlay"></div>
-
-<div class="app-wrapper" id="appWrapper">
-    <div class="page" id="page1">
+<div class="app-container" id="mainWrapper">
+    
+    <div class="page">
         <div class="header">
-            <div class="btn-control-dark btn-vision-top" onclick="toggleVision()">
-                <i class="fas fa-eye"></i> VISIÓN
-            </div>
             <h1 class="titulo-elefante">La Novia del Cordero</h1>
-            <p style="color: white; font-size: 11px; margin-top: 8px; font-weight: bold;">VIDA NUEVA, SECTOR COFRADÍA</p>
+            <p style="color:white; font-size:10px; font-weight:bold; margin-top:5px;">VIDA NUEVA, SECTOR COFRADÍA</p>
         </div>
 
         <div class="controles-mini">
-            <div class="btn-control-dark btn-mini-round" onclick="toggleDarkMode()" id="darkBtn"><i class="fas fa-moon"></i></div>
-            <a href="https://maps.google.com" target="_blank" class="btn-control-dark btn-mini-round"><i class="fas fa-map-marker-alt"></i></a>
+            <div class="btn-control-dark" onclick="toggleDarkMode()"><i class="fas fa-moon"></i></div>
+            <div class="btn-control-dark"><i class="fas fa-map-marker-alt"></i></div>
         </div>
 
         <div class="container">
-            <div class="biblia-section">
-                <div class="biblia-btn" onclick="t('cita')"><i class="fas fa-book-open"></i> Apocalipsis 19:7-9</div>
-                <div id="cita" class="contenido"><div class="detalle-txt">"Gocémonos y alegrémonos... porque han llegado las bodas del Cordero..."</div></div>
-            </div>
-
             <span class="seccion-titulo">Cultos de la Semana</span>
-            <button class="dia-btn" onclick="t('m')">Martes (Oración) <i class="fas fa-pray"></i></button>
-            <div id="m" class="contenido"><div class="detalle-txt"><div class="agenda-info"><b>🎤 Dir:</b> <span id="dir-m">Pendiente</span> | <b>📖 Pre:</b> <span id="pre-m">Pendiente</span></div><a href="javascript:void(0)" class="btn-admin" onclick="admin('m')">📝 Agendar</a></div></div>
-            <button class="dia-btn" onclick="t('j')">Jueves (Damas) <i class="fas fa-venus"></i></button>
-            <div id="j" class="contenido"><div class="detalle-txt"><div class="agenda-info"><b>🎤 Dir:</b> <span id="dir-j">Pendiente</span> | <b>📖 Pre:</b> <span id="pre-j">Pendiente</span></div><a href="javascript:void(0)" class="btn-admin" onclick="admin('j')">📝 Agendar</a></div></div>
-            <button class="dia-btn" onclick="t('v')">Viernes (Crecimiento) <i class="fas fa-seedling"></i></button>
-            <div id="v" class="contenido"><div class="detalle-txt">Culto en hogares / Células.</div></div>
-            <button class="dia-btn" onclick="t('s')">Sábado (Jóvenes) <i class="fas fa-users"></i></button>
-            <div id="s" class="contenido"><div class="detalle-txt"><div class="agenda-info"><b>🎤 Dir:</b> <span id="dir-s">Pendiente</span> | <b>📖 Pre:</b> <span id="pre-s">Pendiente</span></div><a href="javascript:void(0)" class="btn-admin" onclick="admin('s')">📝 Agendar</a></div></div>
-            <button class="dia-btn" onclick="t('d')" style="background: var(--oro); color: #000;">Domingo (General) <i class="fas fa-church"></i></button>
-            <div id="d" class="contenido"><div class="detalle-txt">9:00 AM Escuela Dominical | 11:00 AM Culto General.</div></div>
+            <div class="btn-item">Martes (Oración) <i class="fas fa-pray"></i></div>
+            <div class="btn-item">Jueves (Damas) <i class="fas fa-venus"></i></div>
+            <div class="btn-item">Viernes (Crecimiento) <i class="fas fa-seedling"></i></div>
+            <div class="btn-item">Sábado (Jóvenes) <i class="fas fa-users"></i></div>
+            <div class="btn-item" style="background:var(--oro); color:black;">Domingo (General) <i class="fas fa-church"></i></div>
 
             <span class="seccion-titulo">Eventos Especiales</span>
-            <button class="evento-btn" onclick="t('camp')">Campañas <i class="fas fa-bullhorn"></i></button>
-            <div id="camp" class="contenido"><div class="detalle-txt">Próximamente campaña evangelística.</div></div>
-            <button class="evento-btn" onclick="t('vigi')">Vigilia <i class="fas fa-moon"></i></button>
-            <div id="vigi" class="contenido"><div class="detalle-txt">Noche de poder.</div></div>
-            <button class="evento-btn" onclick="t('unid')">Culto Unido <i class="fas fa-handshake"></i></button>
-            <div id="unid" class="contenido"><div class="detalle-txt">Confraternidad sectorial.</div></div>
+            <div class="btn-item btn-evento">Campañas <i class="fas fa-bullhorn"></i></div>
+            <div class="btn-item btn-evento">Vigilia <i class="fas fa-moon"></i></div>
+            <div class="btn-item btn-evento">Culto Unido <i class="fas fa-handshake"></i></div>
 
             <span class="seccion-titulo">Actividades</span>
-            <button class="actividad-btn" onclick="t('vta')">Venta de Comida <i class="fas fa-utensils"></i></button>
-            <div id="vta" class="contenido"><div class="detalle-txt"><b>Menú:</b> Pollo, Tajadas, Refrescos.<br><a href="https://wa.me/50400000000?text=Menu" class="btn-admin">🛍️ Ver Menú / Agendar</a></div></div>
-            <button class="actividad-btn" onclick="t('tkt')">Sorteos y Boletos <i class="fas fa-ticket-alt"></i></button>
-            <div id="tkt" class="contenido"><div class="detalle-txt">Apoya los proyectos comprando tus boletos.<br><a href="https://wa.me/50400000000?text=Boletos" class="btn-admin">🎟️ Comprar Boletos</a></div></div>
+            <div class="btn-item btn-actividad">Venta de Comida <i class="fas fa-utensils"></i></div>
+            <div class="btn-item btn-actividad">Sorteos y Boletos <i class="fas fa-ticket-alt"></i></div>
         </div>
-        <div class="nav-next" onclick="goToPage(2)"><i class="fas fa-arrow-right"></i></div>
+
+        <div class="nav-trigger" onclick="changePage(2)">
+            <i class="fas fa-arrow-right"></i>
+        </div>
     </div>
 
-    <div class="page" id="page2">
-        <div class="btn-back" onclick="goToPage(1)"><i class="fas fa-chevron-left"></i></div>
-        <div class="semi-portada">
-            <h2 style="font-family:'Playfair Display'; color:var(--oro-brillante); margin:0;">Fortalecimiento Espiritual</h2>
-            <p style="font-size:13px; font-style:italic;">"Buscad al Señor..."</p>
+    <div class="page">
+        <div class="btn-back" onclick="changePage(1)">
+            <i class="fas fa-chevron-left"></i>
         </div>
+        
+        <div class="semi-portada">
+            <h2 style="font-family: 'Playfair Display'; color: var(--oro-brillante); margin:0;">Fortalecimiento Espiritual</h2>
+            <p style="font-size: 12px; font-style: italic;">"Buscad al Señor..."</p>
+        </div>
+
         <div class="container" style="margin-top:20px;">
-            <button class="actividad-btn" onclick="t('sa')">Semana de Ayuno <i class="fas fa-fire"></i></button>
-            <div id="sa" class="contenido"><div class="detalle-txt">Próximas fechas de ayuno congregacional.</div></div>
-            <button class="actividad-btn" onclick="t('aj')">Ayuno de Jóvenes <i class="fas fa-users"></i></button>
-            <div id="aj" class="contenido"><div class="detalle-txt">Sábados de búsqueda juvenil.</div></div>
-            <button class="actividad-btn" onclick="t('dv')">Devocionales <i class="fas fa-sun"></i></button>
-            <div id="dv" class="contenido"><div class="detalle-txt">Pan de vida para cada día.</div></div>
-            <button class="actividad-btn" onclick="t('eb')">Estudios Bíblicos <i class="fas fa-book-reader"></i></button>
-            <div id="eb" class="contenido"><div class="detalle-txt">Profundizando en la Palabra.</div></div>
+            <div class="btn-item" style="background:white; color:black;">Semana de Ayuno <i class="fas fa-fire"></i></div>
+            <div class="btn-item" style="background:white; color:black;">Ayuno de Jóvenes <i class="fas fa-users"></i></div>
+            <div class="btn-item" style="background:white; color:black;">Devocionales <i class="fas fa-sun"></i></div>
+            <div class="btn-item" style="background:white; color:black;">Estudios Bíblicos <i class="fas fa-book-reader"></i></div>
         </div>
     </div>
+
 </div>
 
-<a href="https://wa.me/50400000000" class="btn-ws"><i class="fab fa-whatsapp"></i></a>
-
 <script>
-    function toggleDarkMode() {
-        document.body.classList.toggle('dark-mode');
-        document.querySelector('#darkBtn i').className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon';
-    }
-    function goToPage(n) { document.getElementById('appWrapper').style.transform = (n===2) ? 'translateX(-100vw)' : 'translateX(0)'; }
-    function t(id) {
-        var e = document.getElementById(id);
-        if (e.style.maxHeight) { e.style.maxHeight = null; } 
-        else { document.querySelectorAll('.contenido').forEach(x => x.style.maxHeight = null); e.style.maxHeight = e.scrollHeight + "px"; }
-    }
-    function toggleVision() { alert("Visión: Ser una iglesia viva, pentecostal y misionera."); }
-    function admin(id) {
-        let c = prompt("Clave:");
-        if (c === "1234") {
-            let d = prompt("Director:"), p = prompt("Predicador:");
-            if(d) document.getElementById('dir-'+id).innerText = d;
-            if(p) document.getElementById('pre-'+id).innerText = p;
+    function changePage(pageNum) {
+        const wrapper = document.getElementById('mainWrapper');
+        if(pageNum === 2) {
+            wrapper.style.transform = 'translateX(-100vw)';
+        } else {
+            wrapper.style.transform = 'translateX(0)';
         }
     }
+
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+    }
 </script>
+
 </body>
 </html>

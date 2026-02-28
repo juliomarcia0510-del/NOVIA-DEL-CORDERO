@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>La Novia del Cordero - App</title>
+    <title>La Novia del Cordero - Oficial</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Roboto:wght@400;700&display=swap');
@@ -30,7 +30,7 @@
             font-family: 'Segoe UI', sans-serif;
         }
 
-        /* CONTENEDOR PRINCIPAL */
+        /* NAVEGACIÓN ENTRE PÁGINAS */
         .app-wrapper {
             display: flex;
             width: 200vw;
@@ -46,7 +46,7 @@
             box-sizing: border-box;
         }
 
-        /* PORTADAS */
+        /* CABECERAS */
         .header { 
             width: 100%;
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1350&q=80'); 
@@ -58,14 +58,14 @@
 
         .main-content { padding: 0 20px 120px; }
 
-        /* TÍTULOS CON SEPARACIÓN */
+        /* TÍTULOS CON MÁRGENES AMPLIOS */
         .seccion-titulo { 
             text-align: center; color: var(--oro); font-family: 'Playfair Display', serif; 
-            font-size: 22px; margin: 45px 0 20px; border-bottom: 2.5px solid var(--oro);
+            font-size: 22px; margin: 50px 0 25px; border-bottom: 2.5px solid var(--oro);
             padding-bottom: 10px; display: block;
         }
 
-        /* BOTONES */
+        /* BOTONES PRINCIPALES */
         .btn-item {
             width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 12px;
             display: flex; justify-content: space-between; align-items: center;
@@ -74,10 +74,10 @@
         }
 
         .btn-domingo { background: var(--oro); color: black; border-color: #000; }
-        .btn-evento { background: #4a148c; color: white; }
+        .btn-evento { background: #4a148c; color: white; border-color: var(--oro); }
         .btn-actividad { background: white; color: #1a3a5a; border-color: #1a3a5a; }
 
-        /* DESPLEGABLES CON ICONOS */
+        /* DESPLEGABLES E ICONOS A COLOR */
         .contenido-desplegable { 
             max-height: 0; overflow: hidden; transition: 0.4s ease-in-out; 
             background: var(--card-bg); border-radius: 0 0 12px 12px; 
@@ -87,38 +87,44 @@
         .info-grid { padding: 15px; color: #333; }
         .dark-mode .info-grid { color: #eee; }
         
-        .info-item { display: flex; align-items: center; margin-bottom: 8px; font-size: 14px; }
-        .info-item i { color: var(--oro-oscuro); width: 25px; margin-right: 10px; text-align: center; }
+        .info-item { display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; font-weight: 500; }
+        .info-item i { width: 30px; margin-right: 12px; text-align: center; font-size: 18px; }
+
+        /* Colores específicos para iconos */
+        .icon-dir { color: #3498db; } /* Azul */
+        .icon-mus { color: #e74c3c; } /* Rojo */
+        .icon-bib { color: #f1c40f; } /* Dorado */
+        .icon-food { color: #e67e22; } /* Naranja */
+        .icon-check { color: #2ecc71; } /* Verde */
 
         .btn-accion {
-            display: block; margin-top: 10px; padding: 10px;
+            display: block; margin-top: 10px; padding: 12px;
             background: var(--oscuro-puro); color: var(--oro); text-align: center;
-            border-radius: 8px; text-decoration: none; font-weight: bold; border: 1px solid var(--oro);
+            border-radius: 8px; text-decoration: none; font-weight: bold; border: 1.5px solid var(--oro);
         }
 
-        /* BOTÓN DE NAVEGACIÓN FIJO (No desaparece) */
-        .nav-trigger-global {
+        /* BOTÓN DE NAVEGACIÓN MAESTRO (Siempre visible) */
+        .nav-master {
             position: fixed; bottom: 30px; right: 25px;
             background: var(--oscuro-puro); color: var(--oro);
-            width: 60px; height: 60px; border-radius: 50%;
-            border: 2px solid var(--oro); display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6); z-index: 9999; cursor: pointer;
-            transition: transform 0.3s;
+            width: 65px; height: 65px; border-radius: 50%;
+            border: 3px solid var(--oro); display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.7); z-index: 9999; cursor: pointer;
         }
 
-        .btn-back-manual {
+        .btn-back-style {
             position: absolute; top: 20px; left: 20px;
-            background: rgba(0,0,0,0.7); color: var(--oro);
-            width: 40px; height: 40px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; border: 1.5px solid var(--oro);
-            z-index: 10;
+            background: rgba(0,0,0,0.8); color: var(--oro);
+            width: 45px; height: 45px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; border: 2px solid var(--oro);
+            z-index: 100;
         }
     </style>
 </head>
 <body>
 
-<div class="nav-trigger-global" id="mainNavBtn" onclick="togglePages()">
-    <i class="fas fa-arrow-right" id="navIcon"></i>
+<div class="nav-master" onclick="movePage()">
+    <i class="fas fa-exchange-alt" id="masterIcon"></i>
 </div>
 
 <div class="app-wrapper" id="mainWrapper">
@@ -131,8 +137,8 @@
 
         <div class="main-content">
             <div style="display: flex; justify-content: space-between; padding: 25px 0 10px;">
-                <div class="btn-item" onclick="toggleDarkMode()" style="width: 50px; height: 50px; border-radius: 50%; margin: 0; justify-content: center;"><i class="fas fa-moon"></i></div>
-                <div class="btn-item" style="width: 50px; height: 50px; border-radius: 50%; margin: 0; justify-content: center;"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="btn-item" onclick="toggleDarkMode()" style="width: 55px; height: 55px; border-radius: 50%; margin: 0; justify-content: center;"><i class="fas fa-moon"></i></div>
+                <div class="btn-item" style="width: 55px; height: 55px; border-radius: 50%; margin: 0; justify-content: center;"><i class="fas fa-map-marker-alt" style="color:#e74c3c;"></i></div>
             </div>
 
             <span class="seccion-titulo">Cultos de la Semana</span>
@@ -140,9 +146,9 @@
             <div class="btn-item" onclick="toggleAcc('m')">Martes (Adoración) <i class="fas fa-music"></i></div>
             <div id="m" class="contenido-desplegable">
                 <div class="info-grid">
-                    <div class="info-item"><i class="fas fa-microphone-alt"></i> <b>Dirección:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-guitar"></i> <b>Coros:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-book-open"></i> <b>Predicación:</b> Pendiente</div>
+                    <div class="info-item"><i class="fas fa-user-tie icon-dir"></i> <b>Dirección:</b> Pendiente</div>
+                    <div class="info-item"><i class="fas fa-guitar icon-mus"></i> <b>Coros:</b> Pendiente</div>
+                    <div class="info-item"><i class="fas fa-bible icon-bib"></i> <b>Predicación:</b> Pendiente</div>
                     <a href="#" class="btn-accion">Agendar Culto</a>
                 </div>
             </div>
@@ -150,8 +156,8 @@
             <div class="btn-item" onclick="toggleAcc('j')">Jueves (Damas) <i class="fas fa-venus"></i></div>
             <div id="j" class="contenido-desplegable">
                 <div class="info-grid">
-                    <div class="info-item"><i class="fas fa-microphone-alt"></i> <b>Dirección:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-book-open"></i> <b>Predicación:</b> Pendiente</div>
+                    <div class="info-item"><i class="fas fa-user-tie icon-dir"></i> <b>Dirección:</b> Pendiente</div>
+                    <div class="info-item"><i class="fas fa-bible icon-bib"></i> <b>Predicación:</b> Pendiente</div>
                     <a href="#" class="btn-accion">Agendar Culto</a>
                 </div>
             </div>
@@ -159,8 +165,8 @@
             <div class="btn-item" onclick="toggleAcc('v')">Viernes (Crecimiento) <i class="fas fa-seedling"></i></div>
             <div id="v" class="contenido-desplegable">
                 <div class="info-grid">
-                    <div class="info-item"><i class="fas fa-chalkboard-teacher"></i> <b>Estudio:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-microphone-alt"></i> <b>Dirección:</b> Pendiente</div>
+                    <div class="info-item"><i class="fas fa-chalkboard-teacher icon-dir"></i> <b>Maestro:</b> Pendiente</div>
+                    <div class="info-item"><i class="fas fa-bible icon-bib"></i> <b>Estudio:</b> Pendiente</div>
                     <a href="#" class="btn-accion">Agendar Culto</a>
                 </div>
             </div>
@@ -168,9 +174,8 @@
             <div class="btn-item" onclick="toggleAcc('s')">Sábado (Jóvenes) <i class="fas fa-users"></i></div>
             <div id="s" class="contenido-desplegable">
                 <div class="info-grid">
-                    <div class="info-item"><i class="fas fa-microphone-alt"></i> <b>Dirección:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-guitar"></i> <b>Coros:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-book-open"></i> <b>Predicación:</b> Pendiente</div>
+                    <div class="info-item"><i class="fas fa-user-tie icon-dir"></i> <b>Dirección:</b> Pendiente</div>
+                    <div class="info-item"><i class="fas fa-guitar icon-mus"></i> <b>Coros:</b> Pendiente</div>
                     <a href="#" class="btn-accion">Agendar Culto</a>
                 </div>
             </div>
@@ -178,88 +183,69 @@
             <div class="btn-item btn-domingo" onclick="toggleAcc('d')">Domingo (Escuela / General) <i class="fas fa-church"></i></div>
             <div id="d" class="contenido-desplegable">
                 <div class="info-grid">
-                    <div class="info-item"><i class="fas fa-sun"></i> <b>9:00 AM:</b> Escuela Dominical</div>
-                    <div class="info-item"><i class="fas fa-star"></i> <b>11:00 AM:</b> Culto General</div>
-                    <a href="#" class="btn-accion">Agendar Todo</a>
+                    <div class="info-item"><i class="fas fa-sun" style="color:#f39c12;"></i> <b>9:00 AM:</b> Escuela Dominical</div>
+                    <div class="info-item"><i class="fas fa-star" style="color:#f1c40f;"></i> <b>11:00 AM:</b> Culto General</div>
+                    <a href="#" class="btn-accion">Agendar Domingo</a>
                 </div>
             </div>
 
             <span class="seccion-titulo">Eventos Especiales</span>
             <div class="btn-item btn-evento" onclick="toggleAcc('vig')">Vigilia <i class="fas fa-moon"></i></div>
-            <div id="vig" class="contenido-desplegable">
-                <div class="info-grid">
-                    <div class="info-item"><i class="fas fa-clock"></i> <b>Hora:</b> 9:00 PM</div>
-                    <div class="info-item"><i class="fas fa-fire"></i> <b>Predicador:</b> Pendiente</div>
-                    <a href="#" class="btn-accion">Agendar Evento</a>
-                </div>
-            </div>
+            <div id="vig" class="contenido-desplegable"><div class="info-grid"><div class="info-item"><i class="fas fa-fire icon-mus"></i> <b>Detalles:</b> Pendiente</div><a href="#" class="btn-accion">Agendar</a></div></div>
+
+            <div class="btn-item btn-evento" onclick="toggleAcc('camp')">Campañas <i class="fas fa-bullhorn"></i></div>
+            <div id="camp" class="contenido-desplegable"><div class="info-grid"><div class="info-item"><i class="fas fa-map-marked-alt icon-dir"></i> <b>Lugar:</b> Pendiente</div><a href="#" class="btn-accion">Agendar</a></div></div>
+
+            <div class="btn-item btn-evento" onclick="toggleAcc('uni')">Culto Unido <i class="fas fa-handshake"></i></div>
+            <div id="uni" class="contenido-desplegable"><div class="info-grid"><div class="info-item"><i class="fas fa-users icon-check"></i> <b>Iglesias:</b> Pendiente</div><a href="#" class="btn-accion">Agendar</a></div></div>
 
             <span class="seccion-titulo">Actividades</span>
-            <div class="btn-item btn-actividad" onclick="toggleAcc('comida')">Venta de Comida <i class="fas fa-utensils"></i></div>
-            <div id="comida" class="contenido-desplegable">
+            <div class="btn-item btn-actividad" onclick="toggleAcc('food')">Venta de Comida <i class="fas fa-utensils"></i></div>
+            <div id="food" class="contenido-desplegable">
                 <div class="info-grid">
-                    <b>Selecciona tu pedido:</b>
-                    <div class="info-item"><i class="fas fa-check-circle"></i> Pollo Frito / Hamburguesas</div>
-                    <div class="info-item"><i class="fas fa-ice-cream"></i> Postres Variados</div>
-                    <a href="#" class="btn-accion">Pedir por WhatsApp</a>
+                    <b>Menú Disponible:</b>
+                    <div class="info-item"><i class="fas fa-drumstick-bite icon-food"></i> Pollo Frito</div>
+                    <div class="info-item"><i class="fas fa-hamburger icon-food"></i> Hamburguesas</div>
+                    <div class="info-item"><i class="fas fa-cookie icon-food"></i> Golosinas y Postres</div>
+                    <div class="info-item"><i class="fas fa-pepper-hot icon-food"></i> Tacos</div>
+                    <a href="#" class="btn-accion">Realizar Pedido</a>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="page">
-        <div class="btn-back-manual" onclick="togglePages()"><i class="fas fa-chevron-left"></i></div>
+        <div class="btn-back-style" onclick="movePage()"><i class="fas fa-chevron-left"></i></div>
         <div class="header" style="background-image: url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1000&q=80');">
             <h1 class="titulo-elefante">Fortalecimiento</h1>
         </div>
         <div class="main-content">
             <span class="seccion-titulo">Recursos Espirituales</span>
             
-            <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('ay2')">Ayuno de Jóvenes <i class="fas fa-fire"></i></div>
-            <div id="ay2" class="contenido-desplegable">
-                <div class="info-grid">
-                    <div class="info-item"><i class="fas fa-calendar-alt"></i> <b>Fecha:</b> Sábado AM</div>
-                    <a href="#" class="btn-accion">Agendar Ayuno</a>
-                </div>
-            </div>
+            <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('sem_ay')">Semana de Ayuno <i class="fas fa-calendar-check" style="color:#e67e22;"></i></div>
+            <div id="sem_ay" class="contenido-desplegable"><div class="info-grid"><div class="info-item"><i class="fas fa-clock icon-dir"></i> <b>Horarios:</b> Mañana y Tarde</div><a href="#" class="btn-accion">Agendar</a></div></div>
 
-            <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('dev')">Devocionales <i class="fas fa-sun"></i></div>
-            <div id="dev" class="contenido-desplegable">
-                <div class="info-grid">
-                    <div class="info-item"><i class="fas fa-book-reader"></i> Lectura diaria para hoy.</div>
-                    <a href="#" class="btn-accion">Ver hoy</a>
-                </div>
-            </div>
+            <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('ayj')">Ayuno de Jóvenes <i class="fas fa-fire" style="color:#e74c3c;"></i></div>
+            <div id="ayj" class="contenido-desplegable"><div class="info-grid"><div class="info-item"><i class="fas fa-users icon-check"></i> <b>Lugar:</b> Templo</div><a href="#" class="btn-accion">Agendar</a></div></div>
+
+            <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('devoc')">Devocionales <i class="fas fa-sun" style="color:#f1c40f;"></i></div>
+            <div id="devoc" class="contenido-desplegable"><div class="info-grid"><div class="info-item"><i class="fas fa-book-open icon-bib"></i> <b>Lectura:</b> Ver Hoy</div><a href="#" class="btn-accion">Ver Devocional</a></div></div>
         </div>
     </div>
 </div>
 
 <script>
-    let currentPage = 1;
-
-    // Función de Navegación Global (Fija)
-    function togglePages() {
-        const wrapper = document.getElementById('mainWrapper');
-        const icon = document.getElementById('navIcon');
-        
-        if(currentPage === 1) {
-            wrapper.style.transform = 'translateX(-100vw)';
-            icon.className = 'fas fa-arrow-left'; // Cambia flecha al ir a pág 2
-            currentPage = 2;
-        } else {
-            wrapper.style.transform = 'translateX(0)';
-            icon.className = 'fas fa-arrow-right'; // Cambia flecha al volver a pág 1
-            currentPage = 1;
-        }
+    let pos = 1;
+    function movePage() {
+        const w = document.getElementById('mainWrapper');
+        if(pos === 1) { w.style.transform = 'translateX(-100vw)'; pos = 2; }
+        else { w.style.transform = 'translateX(0)'; pos = 1; }
     }
-
     function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
-
     function toggleAcc(id) {
         let e = document.getElementById(id);
-        if (e.style.maxHeight) { 
-            e.style.maxHeight = null; 
-        } else { 
+        if (e.style.maxHeight) { e.style.maxHeight = null; } 
+        else { 
             document.querySelectorAll('.contenido-desplegable').forEach(x => x.style.maxHeight = null);
             e.style.maxHeight = e.scrollHeight + "px"; 
         }

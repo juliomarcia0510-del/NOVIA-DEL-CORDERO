@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>La Novia del Cordero</title>
+    <title>La Novia del Cordero - App</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Roboto:wght@400;700&display=swap');
@@ -14,25 +14,22 @@
             --oro-brillante: #FFD700; 
             --oscuro-puro: #0a0a0a;
             --bg-page: #fdfaf1;
-            --card-bg: rgba(255, 255, 255, 0.9);
+            --card-bg: rgba(255, 255, 255, 0.95);
         }
 
-        /* Fondo estilo imagen 1000084996 para modo oscuro */
         body.dark-mode {
             --bg-page: #000000;
-            --card-bg: rgba(20, 20, 20, 0.95);
-            background-image: radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 40%);
+            --card-bg: rgba(30, 30, 30, 0.98);
         }
 
         html, body {
             margin: 0; padding: 0;
             width: 100%; height: 100%;
-            overflow: hidden; /* Bloquea el scroll horizontal manual */
+            overflow: hidden; 
             background: var(--bg-page);
             font-family: 'Segoe UI', sans-serif;
         }
 
-        /* Ajuste de Contenedor para eliminar espacios blancos laterales */
         .app-wrapper {
             display: flex;
             width: 200vw;
@@ -41,14 +38,14 @@
         }
 
         .page {
-            width: 100vw; /* Exactamente el ancho del teléfono */
+            width: 100vw;
             height: 100vh;
             overflow-y: auto;
             position: relative;
             box-sizing: border-box;
         }
 
-        /* Portadas ajustadas al ancho total */
+        /* PORTADA AJUSTADA AL ANCHO TOTAL */
         .header { 
             width: 100%;
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1350&q=80'); 
@@ -56,55 +53,60 @@
             padding: 50px 0 40px; border-radius: 0 0 40px 40px; border-bottom: 4px solid var(--oro);
         }
 
-        .titulo-elefante { font-family: 'Playfair Display', serif; color: var(--oro-brillante); text-transform: uppercase; margin: 0; font-size: 28px; padding: 0 20px; }
+        .titulo-elefante { font-family: 'Playfair Display', serif; color: var(--oro-brillante); text-transform: uppercase; margin: 0; font-size: 28px; }
 
-        /* Contenedor con márgenes laterales para que los botones respiren */
-        .main-content {
-            padding: 0 25px 100px; /* 25px de margen a los lados */
-        }
+        .main-content { padding: 0 20px 100px; }
 
+        /* SEPARACIÓN DE TÍTULOS (SOLICITADO) */
         .seccion-titulo { 
-            text-align: center; color: var(--oro); font-family: 'Playfair Display', serif; 
-            font-size: 20px; margin: 35px 0 15px; border-bottom: 2px solid var(--oro);
-            padding-bottom: 8px; width: 100%;
+            text-align: center; 
+            color: var(--oro); 
+            font-family: 'Playfair Display', serif; 
+            font-size: 22px; 
+            margin: 45px 0 20px; /* Espacio extra para que no pegue */
+            border-bottom: 2.5px solid var(--oro);
+            padding-bottom: 10px;
+            display: block;
         }
 
-        /* Estilo de Botones según imágenes 1000085193 y 1000085196 */
+        /* BOTONES ELEGANTES */
         .btn-item {
             width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 12px;
             display: flex; justify-content: space-between; align-items: center;
             font-weight: bold; border: 1.5px solid var(--oro-oscuro); cursor: pointer;
             background: #2c2c2c; color: var(--oro); box-sizing: border-box;
+            transition: 0.3s;
         }
 
-        .btn-evento { background: #4a148c; color: white; }
+        .btn-domingo { background: var(--oro); color: black; border-color: black; }
+        .btn-evento { background: #4a148c; color: white; border-color: var(--oro); }
         .btn-actividad { background: white; color: #1a3a5a; border-color: #1a3a5a; }
 
-        /* Menú desplegable de Agendar */
+        /* MENÚS DESPLEGABLES COMPLETOS */
         .contenido-desplegable { 
-            max-height: 0; overflow: hidden; transition: 0.4s ease-out; 
+            max-height: 0; overflow: hidden; transition: 0.4s ease-in-out; 
             background: var(--card-bg); border-radius: 0 0 12px 12px; 
-            margin-top: -12px; margin-bottom: 12px; border: 1px solid var(--oro); border-top: none;
+            margin-top: -12px; margin-bottom: 15px; border: 1.5px solid var(--oro); border-top: none;
         }
-        .detalle-agendar { padding: 15px; text-align: center; font-size: 14px; color: var(--oscuro-puro); }
-        .dark-mode .detalle-agendar { color: white; }
         
-        .btn-agendar {
-            display: inline-block; margin-top: 8px; padding: 5px 15px;
-            background: var(--oscuro-puro); color: var(--oro); border: 1px solid var(--oro);
-            border-radius: 20px; text-decoration: none; font-size: 12px;
+        .detalle-agendar { padding: 18px; font-size: 14px; color: #333; line-height: 1.6; }
+        .dark-mode .detalle-agendar { color: #eee; }
+
+        .btn-accion {
+            display: block; margin-top: 10px; padding: 8px;
+            background: var(--oscuro-puro); color: var(--oro); text-align: center;
+            border-radius: 8px; text-decoration: none; font-weight: bold; border: 1px solid var(--oro);
         }
 
-        /* Botón de navegación (Círculo negro con flecha) */
+        /* NAVEGACIÓN */
         .nav-button {
             position: fixed; bottom: 25px; right: 25px;
             background: var(--oscuro-puro); color: var(--oro);
-            width: 50px; height: 50px; border-radius: 50%;
+            width: 55px; height: 55px; border-radius: 50%;
             border: 2px solid var(--oro); display: flex; align-items: center; justify-content: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 1000;
         }
 
-        /* Botón atrás en Pag 2 */
         .btn-back {
             position: absolute; top: 20px; left: 20px;
             background: rgba(0,0,0,0.6); color: var(--oro);
@@ -125,77 +127,85 @@
         </div>
 
         <div class="main-content">
-            <div style="display: flex; justify-content: space-between; padding: 20px 0;">
-                <div class="btn-item" onclick="toggleDarkMode()" style="width: 45px; height: 45px; border-radius: 50%; margin: 0; padding: 0; justify-content: center;"><i class="fas fa-moon"></i></div>
-                <div class="btn-item" style="width: 45px; height: 45px; border-radius: 50%; margin: 0; padding: 0; justify-content: center;"><i class="fas fa-map-marker-alt"></i></div>
+            <div style="display: flex; justify-content: space-between; padding: 25px 0 10px;">
+                <div class="btn-item" onclick="toggleDarkMode()" style="width: 50px; height: 50px; border-radius: 50%; margin: 0; justify-content: center;"><i class="fas fa-moon"></i></div>
+                <div class="btn-item" style="width: 50px; height: 50px; border-radius: 50%; margin: 0; justify-content: center;"><i class="fas fa-map-marker-alt"></i></div>
             </div>
 
             <span class="seccion-titulo">Cultos de la Semana</span>
-            <div class="btn-item" onclick="toggleAcc('m1')">Martes (Oración) <i class="fas fa-pray"></i></div>
-            <div id="m1" class="contenido-desplegable"><div class="detalle-agendar">🎤 Dir: Pendiente | 📖 Pre: Pendiente<br><a href="#" class="btn-agendar">Agendar</a></div></div>
+            
+            <div class="btn-item" onclick="toggleAcc('m')">Martes (Adoración) <i class="fas fa-music"></i></div>
+            <div id="m" class="contenido-desplegable"><div class="detalle-agendar">🎤 <b>Dir:</b> Pendiente <br> 📖 <b>Pre:</b> Pendiente <br> 🎵 <b>Coros:</b> Pendiente <a href="#" class="btn-accion">Agendar</a></div></div>
 
-            <div class="btn-item" onclick="toggleAcc('j1')">Jueves (Damas) <i class="fas fa-venus"></i></div>
-            <div id="j1" class="contenido-desplegable"><div class="detalle-agendar">🎤 Dir: Pendiente | 📖 Pre: Pendiente<br><a href="#" class="btn-agendar">Agendar</a></div></div>
+            <div class="btn-item" onclick="toggleAcc('j')">Jueves (Damas) <i class="fas fa-venus"></i></div>
+            <div id="j" class="contenido-desplegable"><div class="detalle-agendar">🎤 <b>Dir:</b> Pendiente <br> 📖 <b>Pre:</b> Pendiente <a href="#" class="btn-accion">Agendar</a></div></div>
 
-            <div class="btn-item" style="background:var(--oro); color:black;">Domingo (General) <i class="fas fa-church"></i></div>
+            <div class="btn-item" onclick="toggleAcc('v')">Viernes (Crecimiento) <i class="fas fa-seedling"></i></div>
+            <div id="v" class="contenido-desplegable"><div class="detalle-agendar">📖 <b>Estudio:</b> Pendiente <br> 🎤 <b>Dir:</b> Pendiente <a href="#" class="btn-accion">Agendar</a></div></div>
+
+            <div class="btn-item" onclick="toggleAcc('s')">Sábado (Jóvenes) <i class="fas fa-users"></i></div>
+            <div id="s" class="contenido-desplegable"><div class="detalle-agendar">🎤 <b>Dir:</b> Pendiente <br> 📖 <b>Pre:</b> Pendiente <a href="#" class="btn-accion">Agendar</a></div></div>
+
+            <div class="btn-item btn-domingo" onclick="toggleAcc('d')">Domingo (Escuela / General) <i class="fas fa-church"></i></div>
+            <div id="d" class="contenido-desplegable"><div class="detalle-agendar">🕘 <b>9:00 AM:</b> Escuela Dominical <br> 🕚 <b>11:00 AM:</b> Culto General <a href="#" class="btn-accion">Agendar</a></div></div>
 
             <span class="seccion-titulo">Eventos Especiales</span>
-            <div class="btn-item btn-evento">Vigilia <i class="fas fa-moon"></i></div>
+            <div class="btn-item btn-evento" onclick="toggleAcc('vig')">Vigilia <i class="fas fa-moon"></i></div>
+            <div id="vig" class="contenido-desplegable"><div class="detalle-agendar">⏰ <b>Hora:</b> Pendiente <br> 🔥 <b>Predicador:</b> Pendiente <a href="#" class="btn-accion">Agendar</a></div></div>
+
+            <div class="btn-item btn-evento" onclick="toggleAcc('camp')">Campaña <i class="fas fa-bullhorn"></i></div>
+            <div id="camp" class="contenido-desplegable"><div class="detalle-agendar">🚩 <b>Lugar:</b> Pendiente <br> 🎤 <b>Evangelista:</b> Pendiente <a href="#" class="btn-accion">Agendar</a></div></div>
+
+            <div class="btn-item btn-evento" onclick="toggleAcc('uni')">Culto Unido <i class="fas fa-handshake"></i></div>
+            <div id="uni" class="contenido-desplegable"><div class="detalle-agendar">🤝 <b>Iglesias:</b> Pendiente <br> 📖 <b>Pre:</b> Pendiente <a href="#" class="btn-accion">Agendar</a></div></div>
 
             <span class="seccion-titulo">Actividades</span>
-            <div class="btn-item btn-actividad">Venta de Comida <i class="fas fa-utensils"></i></div>
+            <div class="btn-item btn-actividad" onclick="toggleAcc('comida')">Venta de Comida <i class="fas fa-utensils"></i></div>
+            <div id="comida" class="contenido-desplegable">
+                <div class="detalle-agendar">
+                    <b>Menú:</b> 🍗 Pollo | 🍔 Hamburguesas | 🍰 Postres
+                    <a href="#" class="btn-accion">Hacer Pedido</a>
+                </div>
+            </div>
+
+            <div class="btn-item btn-actividad" onclick="toggleAcc('sorteo')">Sorteo y Boletos <i class="fas fa-ticket-alt"></i></div>
+            <div id="sorteo" class="contenido-desplegable"><div class="detalle-agendar">🎟️ Adquiere tus boletos para apoyar los proyectos. <a href="#" class="btn-accion">Comprar Boletos</a></div></div>
         </div>
 
-        <div class="nav-button" onclick="changePage(2)">
-            <i class="fas fa-arrow-right"></i>
-        </div>
+        <div class="nav-button" onclick="changePage(2)"><i class="fas fa-arrow-right"></i></div>
     </div>
 
     <div class="page">
-        <div class="btn-back" onclick="changePage(1)">
-            <i class="fas fa-chevron-left"></i>
-        </div>
-        
+        <div class="btn-back" onclick="changePage(1)"><i class="fas fa-chevron-left"></i></div>
         <div class="header" style="background-image: url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1000&q=80');">
-            <h1 class="titulo-elefante">Fortalecimiento Espiritual</h1>
-            <p style="color:#ddd; font-style: italic; font-size: 12px; margin-top: 5px;">"Buscad al Señor..."</p>
+            <h1 class="titulo-elefante">Fortalecimiento</h1>
         </div>
-
         <div class="main-content">
             <span class="seccion-titulo">Recursos Espirituales</span>
             
-            <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('ay1')">Semana de Ayuno <i class="fas fa-fire"></i></div>
-            <div id="ay1" class="contenido-desplegable"><div class="detalle-agendar">📅 Fecha: Pendiente | 🙏 Propósito: Pendiente<br><a href="#" class="btn-agendar">Agendar</a></div></div>
+            <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('ay2')">Ayuno de Jóvenes <i class="fas fa-fire"></i></div>
+            <div id="ay2" class="contenido-desplegable"><div class="detalle-agendar">🔥 Búsqueda especial de jóvenes. <a href="#" class="btn-accion">Agendar</a></div></div>
 
-            <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('aj1')">Ayuno de Jóvenes <i class="fas fa-users"></i></div>
-            <div id="aj1" class="contenido-desplegable"><div class="detalle-agendar">👥 Jóvenes en oración<br><a href="#" class="btn-agendar">Agendar</a></div></div>
+            <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('dev')">Devocionales <i class="fas fa-sun"></i></div>
+            <div id="dev" class="contenido-desplegable"><div class="detalle-agendar">📖 Alimento diario para el alma. <a href="#" class="btn-accion">Ver Devocional</a></div></div>
 
-            <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('dv1')">Devocionales <i class="fas fa-sun"></i></div>
-            <div id="dv1" class="contenido-desplegable"><div class="detalle-agendar">📖 Lectura diaria<br><a href="#" class="btn-agendar">Ver Devocional</a></div></div>
+            <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('estb')">Estudios Bíblicos <i class="fas fa-book-reader"></i></div>
+            <div id="estb" class="contenido-desplegable"><div class="detalle-agendar">✍️ Profundizando en la Palabra. <a href="#" class="btn-accion">Agendar</a></div></div>
         </div>
     </div>
 </div>
 
 <script>
-    function changePage(num) {
-        const wrapper = document.getElementById('mainWrapper');
-        wrapper.style.transform = (num === 2) ? 'translateX(-100vw)' : 'translateX(0)';
-    }
-
-    function toggleDarkMode() {
-        document.body.classList.toggle('dark-mode');
-    }
-
+    function changePage(n) { document.getElementById('mainWrapper').style.transform = (n===2) ? 'translateX(-100vw)' : 'translateX(0)'; }
+    function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
     function toggleAcc(id) {
-        const e = document.getElementById(id);
-        if (e.style.maxHeight) {
-            e.style.maxHeight = null;
-        } else {
+        let e = document.getElementById(id);
+        if (e.style.maxHeight) { e.style.maxHeight = null; } 
+        else { 
             document.querySelectorAll('.contenido-desplegable').forEach(x => x.style.maxHeight = null);
-            e.style.maxHeight = e.scrollHeight + "px";
+            e.style.maxHeight = e.scrollHeight + "px"; 
         }
     }
 </script>
-
 </body>
 </html>

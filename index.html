@@ -9,41 +9,74 @@
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Roboto:wght@400;700&display=swap');
         
         :root { 
+            /* Colores Base */
             --oro: #D4AF37; 
             --oro-brillante: #FFD700; 
             --oscuro-puro: #0a0a0a;
-            --crema-claro: #fdfaf1;
-            --crema-oscuro: #f5eedc;
             --whatsapp: #25d366; 
             --rojo-sacro: #b21f1f;
             --azul-proyectos: #1a3a5a;
             --purpura-eventos: #4a148c;
-            /* Variables dinámicas */
-            --bg-body: linear-gradient(135deg, #fdfaf1, #f5eedc, #fdfaf1);
+
+            /* --- MODO CLARO (Configuración por defecto) --- */
+            /* Fondo: Gradiente crema animado con textura sutil */
+            --bg-page: linear-gradient(135deg, #fdfaf1, #f5eedc, #fdfaf1);
+            --bg-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%3C3D919191' fill-opacity='0.05' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+            
+            /* Colores de elementos en Modo Claro */
             --texto-principal: #0a0a0a;
+            --texto-detalle: #333333;
             --card-bg: rgba(255, 255, 255, 0.9);
             --seccion-titulo-color: #0a0a0a;
+            --btn-actividad-bg: rgba(255, 255, 255, 0.9);
+            --btn-actividad-texto: #1a3a5a;
+            --border-biblia: #D4AF37;
+            
+            /* Capas de efecto Modo Oscuro (ocultas en claro) */
+            --display-bokeh: none;
+            --display-glitter: none;
         }
 
-        /* --- MODO OSCURO --- */
+        /* --- MODO OSCURO (Inspirado en la imagen de referencia) --- */
         body.dark-mode {
-            --bg-body: linear-gradient(135deg, #121212, #1a1a1a, #121212);
-            --texto-principal: #fdfaf1;
-            --card-bg: rgba(30, 30, 30, 0.9);
-            --seccion-titulo-color: #FFD700;
+            /* Fondo: Negro profundo */
+            --bg-page: #000000;
+            --bg-texture: none;
+
+            /* Capas de efecto Modo Oscuro (visibles) */
+            --display-bokeh: block; /* Luces bokeh doradas */
+            --display-glitter: block; /* Textura micro-puntos dorados */
+
+            /* Colores de elementos en Modo Oscuro (para legibilidad) */
+            --texto-principal: #ffffff; /* Letras blancas */
+            --texto-detalle: #eeeeee; /* Detalles en gris muy claro */
+            --card-bg: rgba(20, 20, 20, 0.95); /* Contenedores negros sutiles */
+            --seccion-titulo-color: #FFD700; /* Títulos dorados brillantes */
+            
+            /* Ajuste de botones específicos */
+            --btn-actividad-bg: rgba(26, 58, 90, 0.2); /* Fondo azul oscuro sutil */
+            --btn-actividad-texto: #FFD700; /* Texto dorado */
+            --border-biblia: #FFD700; /* Borde dorado brillante */
         }
 
+        /* --- ESTILOS GENERALES --- */
         body { 
             font-family: 'Segoe UI', sans-serif; 
             margin: 0; 
             padding-bottom: 100px; 
             overflow-x: hidden;
-            background: var(--bg-body);
+            background: var(--bg-page);
             background-size: 400% 400%;
-            animation: gradientBg 15s ease infinite;
+            animation: gradientBg 15s ease infinite; /* Animación solo para modo claro */
+            background-image: var(--bg-texture);
             color: var(--texto-principal);
-            transition: background 0.3s, color 0.3s;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%3C3D919191' fill-opacity='0.05' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+            transition: background 0.5s, color 0.3s;
+            position: relative;
+        }
+
+        /* Desactivar animación de fondo en modo oscuro para elegancia */
+        body.dark-mode {
+            animation: none;
         }
 
         @keyframes gradientBg {
@@ -51,26 +84,79 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+
+        /* --- CAPAS DE EFECTO MODO OSCURO (INSPIRADO EN IMAGEN) --- */
+        /* 1. Luces Bokeh Doradas */
+        .bokeh-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.1) 0%, rgba(0,0,0,0) 20%),
+                radial-gradient(circle at 70% 60%, rgba(255, 215, 0, 0.08) 0%, rgba(0,0,0,0) 25%),
+                radial-gradient(circle at 40% 80%, rgba(212, 175, 55, 0.12) 0%, rgba(0,0,0,0) 15%);
+            display: var(--display-bokeh);
+            z-index: -2; /* Detrás de todo */
+            pointer-events: none;
+        }
+
+        /* 2. Textura Micro-puntos Dorados (Glitter) */
+        .glitter-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Ccircle fill='%3Cd4af37' fill-opacity='0.15' cx='1' cy='1' r='1'/%3E%3Ccircle fill='%3Cffd700' fill-opacity='0.1' cx='5' cy='5' r='0.8'/%3E%3C/svg%3E");
+            display: var(--display-glitter);
+            z-index: -1; /* Detrás del contenido, delante del bokeh */
+            pointer-events: none;
+            opacity: 0.5;
+        }
         
-        /* HEADER */
+        /* HEADER LIMPIO CON SOMBRA ELEGANTE EN MODO OSCURO */
         .header { 
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1350&q=80'); 
-            background-size: cover; text-align: center; padding: 60px 20px; border-radius: 0 0 50px 50px; border-bottom: 5px solid var(--oro); position: relative; 
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1350&q=80'); 
+            background-size: cover; background-position: center; text-align: center; padding: 80px 20px; border-radius: 0 0 50px 50px; border-bottom: 5px solid var(--oro); position: relative; 
+            transition: border-color 0.3s;
         }
-        
-        /* BOTONES DE PORTADA */
-        .header-controls { position: absolute; top: 20px; width: 90%; display: flex; justify-content: space-between; left: 5%; z-index: 100; }
-        
-        .btn-circle { background: var(--oro); color: #000; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 18px; }
-
-        .btn-vision-trigger {
-            background: var(--oro); color: #000; padding: 8px 15px; border-radius: 20px; font-weight: bold; font-size: 11px;
-            cursor: pointer; border: 2px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 5px;
+        body.dark-mode .header {
+            border-bottom-color: var(--oro-brillante);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
         }
 
-        .titulo-wrapper { display: flex; align-items: center; justify-content: center; gap: 15px; margin-top: 10px; }
-        .titulo-elefante { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 32px; color: var(--oro-brillante); text-shadow: 3px 3px 0px #000; text-transform: uppercase; margin: 0; }
-        .btn-mapa { color: var(--oro-brillante); font-size: 28px; cursor: pointer; filter: drop-shadow(2px 2px 2px #000); }
+        .titulo-elefante { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 36px; color: var(--oro-brillante); text-shadow: 3px 3px 0px #000; text-transform: uppercase; margin: 0; }
+
+        /* BARRA DE HERRAMIENTAS ABAJO */
+        .toolbar-inicio {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: -30px; 
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .btn-tool {
+            background: var(--oro);
+            color: #000;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-tool i { font-size: 20px; }
+        .btn-tool span { font-size: 9px; font-weight: bold; text-transform: uppercase; margin-top: 2px; }
+        .btn-tool:active { transform: scale(0.9); }
+        
+        /* Ajuste de botones de herramienta en modo oscuro */
+        body.dark-mode .btn-tool {
+            background: var(--oro-brillante);
+            border-color: #000;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
 
         /* PANEL LATERAL VISIÓN */
         .side-panel {
@@ -81,68 +167,92 @@
         }
         .side-panel.active { right: 0; }
         .close-panel { position: absolute; top: 20px; left: 20px; font-size: 25px; color: var(--oro); cursor: pointer; }
+        .vision-text p { color: #eeeeee; }
 
-        /* CONTENEDORES */
-        .container { padding: 20px; max-width: 500px; margin: auto; }
+        /* CONTENEDORES PRINCIPALES */
+        .container { padding: 10px 20px; max-width: 500px; margin: auto; position: relative; z-index: 1; }
 
-        .biblia-section { margin-top: -30px; margin-bottom: 25px; text-align: center; }
-        .biblia-btn { background: #fff; border: 2px solid var(--oro); border-radius: 50px; padding: 10px 25px; display: inline-block; font-weight: bold; color: #000; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-family: 'Playfair Display', serif; }
+        /* BOTÓN APOCALIPSIS INTEGRADO */
+        .biblia-section { text-align: center; margin-bottom: 25px; }
+        .biblia-btn { background: #fff; border: 2px solid var(--border-biblia); border-radius: 50px; padding: 12px 25px; display: inline-block; font-weight: bold; color: #000; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-family: 'Playfair Display', serif; width: 80%; transition: border-color 0.3s; }
         
-        .card-video { background: #000; border-radius: 25px; overflow: hidden; margin-bottom: 25px; border: 3px solid var(--oro); }
+        .card-video { background: #000; border-radius: 25px; overflow: hidden; margin-bottom: 25px; border: 3px solid var(--oro); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-        .btn-oracion { background: var(--card-bg); border: 3px double var(--oro); padding: 18px; border-radius: 15px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--texto-principal); font-weight: bold; font-size: 17px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); backdrop-filter: blur(5px); }
+        .btn-oracion { background: var(--card-bg); border: 3px double var(--oro); padding: 18px; border-radius: 15px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--texto-principal); font-weight: bold; font-size: 17px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); backdrop-filter: blur(5px); transition: background 0.3s, color 0.3s; }
         .btn-oracion i { color: var(--rojo-sacro); margin-right: 12px; font-size: 22px; }
 
-        .seccion-titulo { color: var(--seccion-titulo-color); text-align: center; font-family: 'Playfair Display', serif; font-size: 24px; margin: 35px 0 15px; border-bottom: 2px solid var(--oro); display: block; padding-bottom: 5px; }
+        .seccion-titulo { color: var(--seccion-titulo-color); text-align: center; font-family: 'Playfair Display', serif; font-size: 24px; margin: 35px 0 15px; border-bottom: 2px solid var(--oro); display: block; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(255,255,255,0.3); transition: color 0.3s; }
+        body.dark-mode .seccion-titulo { text-shadow: none; }
         
-        .dia-btn { width: 100%; background: linear-gradient(135deg, #1a1a1a, #444); border: 1px solid var(--oro); padding: 18px; margin-bottom: 12px; border-radius: 15px; text-align: left; font-size: 17px; font-weight: bold; color: var(--oro); display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
-        .evento-btn { width: 100%; background: var(--purpura-eventos); border: 1px solid var(--oro); padding: 18px; margin-bottom: 12px; border-radius: 15px; text-align: left; font-size: 17px; font-weight: bold; color: white; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
-        .actividad-btn { width: 100%; background: var(--card-bg); border: 1px solid var(--azul-proyectos); padding: 18px; margin-bottom: 12px; border-radius: 15px; text-align: left; font-size: 17px; font-weight: bold; color: var(--azul-proyectos); display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        /* BOTONES DE CULTOS Y EVENTOS (ESTILOS OSCUROS/PÚRPURAS) */
+        .dia-btn { width: 100%; background: linear-gradient(135deg, #1a1a1a, #444); border: 1px solid var(--oro); padding: 18px; margin-bottom: 12px; border-radius: 15px; text-align: left; font-size: 17px; font-weight: bold; color: var(--oro); display: flex; justify-content: space-between; align-items: center; cursor: pointer; border-color: var(--oro); }
+        body.dark-mode .dia-btn { border-color: var(--oro-brillante); color: var(--oro-brillante); }
 
-        .contenido { max-height: 0; overflow: hidden; transition: 0.5s ease-in-out; background: var(--card-bg); margin-top: -15px; margin-bottom: 15px; border-radius: 0 0 15px 15px; padding: 0 25px; border: 1px solid var(--oro); border-top: none; backdrop-filter: blur(5px); color: var(--texto-principal); }
-        .detalle-txt { padding: 20px 0; font-size: 15px; }
+        .evento-btn { width: 100%; background: var(--purpura-eventos); border: 1px solid var(--oro); padding: 18px; margin-bottom: 12px; border-radius: 15px; text-align: left; font-size: 17px; font-weight: bold; color: white; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        
+        /* BOTONES DE ACTIVIDADES (ADAPTATIVOS) */
+        .actividad-btn { width: 100%; background: var(--btn-actividad-bg); border: 1px solid var(--azul-proyectos); padding: 18px; margin-bottom: 12px; border-radius: 15px; text-align: left; font-size: 17px; font-weight: bold; color: var(--btn-actividad-texto); display: flex; justify-content: space-between; align-items: center; cursor: pointer; backdrop-filter: blur(5px); transition: background 0.3s, color 0.3s; }
+
+        /* CONTENIDO DESPLEGABLE (ADAPTATIVO) */
+        .contenido { max-height: 0; overflow: hidden; transition: 0.5s ease-in-out; background: var(--card-bg); margin-top: -15px; margin-bottom: 15px; border-radius: 0 0 15px 15px; padding: 0 25px; border: 1px solid var(--oro); border-top: none; backdrop-filter: blur(5px); color: var(--texto-detalle); transition: background 0.3s, color 0.3s; }
+        .detalle-txt { padding: 20px 0; font-size: 15px; line-height: 1.6; }
         
         .btn-compra { background: var(--azul-proyectos); color: white; text-decoration: none; padding: 10px 15px; border-radius: 10px; display: inline-block; margin-top: 10px; font-weight: bold; font-size: 13px; }
-        .btn-ws { position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp); color: white; width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; border: 3px solid white; box-shadow: 0 8px 20px rgba(0,0,0,0.3); z-index: 1000; }
+        
+        /* BOTÓN WHATSAPP FLOTANTE */
+        .btn-ws { position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp); color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; border: 3px solid white; box-shadow: 0 8px 20px rgba(0,0,0,0.3); z-index: 1000; }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <div class="header-controls">
-        <div class="btn-circle" onclick="toggleDarkMode()" id="darkBtn">
-            <i class="fas fa-moon"></i>
-        </div>
-        <div class="btn-vision-trigger" onclick="toggleVision()">
-            <i class="fas fa-eye"></i> NUESTRA VISIÓN
-        </div>
-    </div>
+<div class="bokeh-overlay"></div>
+<div class="glitter-overlay"></div>
 
-    <div class="titulo-wrapper">
-        <h1 class="titulo-elefante">La Novia del Cordero</h1>
-        <a href="https://www.google.com/maps/search/Cofradía+Cortes+Honduras" target="_blank" class="btn-mapa">
-            <i class="fas fa-map-marker-alt"></i>
-        </a>
+<div class="header">
+    <h1 class="titulo-elefante">La Novia del Cordero</h1>
+    <p style="margin-top: 10px; font-weight: bold; color: white; letter-spacing: 1px; font-size: 14px;">VIDA NUEVA, SECTOR COFRADÍA</p>
+</div>
+
+<div class="toolbar-inicio">
+    <div class="btn-tool" onclick="toggleDarkMode()" id="darkBtn">
+        <i class="fas fa-moon"></i>
+        <span>Modo</span>
     </div>
-    <p style="margin-top: 15px; font-weight: bold; color: white; letter-spacing: 1px;">VIDA NUEVA, SECTOR COFRADÍA</p>
+    <a href="https://maps.google.com" target="_blank" class="btn-tool" style="text-decoration: none;">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Mapa</span>
+    </a>
+    <div class="btn-tool" onclick="toggleVision()">
+        <i class="fas fa-eye"></i>
+        <span>Visión</span>
+    </div>
 </div>
 
 <div id="sideVision" class="side-panel">
     <i class="fas fa-times close-panel" onclick="toggleVision()"></i>
     <div class="vision-text">
-        <h2 style="font-size: 24px; color: var(--oro);">Nuestra Visión</h2>
+        <h2 style="font-size: 24px; color: var(--oro); font-family: 'Playfair Display', serif;">Nuestra Visión</h2>
         <p><b>Asambleas de Dios</b></p>
         <p>Ser una iglesia viva, pentecostal y misionera, que bajo la unción del Espíritu Santo, alcance a las almas perdidas en Cofradía y el mundo entero.</p>
-        <p>¡Aquí hay un lugar para ti!</p>
+        <p>¡Aquí hay un lugar para ti! Ven y experimenta la gloria de Dios.</p>
+        <div style="text-align: center; margin-top: 40px; color: var(--oro);">
+            <i class="fas fa-dove" style="font-size: 50px;"></i>
+        </div>
     </div>
 </div>
 
 <div class="container">
     <div class="biblia-section">
-        <div class="biblia-btn" onclick="t('cita')"><i class="fas fa-book-open"></i> Apocalipsis 19:7-9</div>
-        <div id="cita" class="contenido" style="background:#fff8e1; border-radius: 15px; margin-top:10px;"><div class="detalle-txt" style="color:#5d4037; font-style:italic;">"Gocémonos y alegrémonos... porque han llegado las bodas del Cordero..."</div></div>
+        <div class="biblia-btn" onclick="t('cita')">
+            <i class="fas fa-book-open" style="margin-right: 10px; color: var(--rojo-sacro);"></i> Apocalipsis 19:7-9
+        </div>
+        <div id="cita" class="contenido" style="background:rgba(255, 248, 225, 0.9); border-radius: 15px; margin-top:10px;">
+            <div class="detalle-txt" style="color:#5d4037; font-style:italic;">
+                "Gocémonos y alegrémonos y démosle gloria; porque han llegado las bodas del Cordero..."
+            </div>
+        </div>
     </div>
 
     <div class="card-video">
@@ -151,12 +261,13 @@
         </div>
     </div>
 
+    <a href="https://wa.me/50400000000?text=Pedido%20de%20Oración" class="btn-oracion">
+        <i class="fas fa-hands-praying"></i> ¿Necesitas Oración? ¡Escríbenos!
+    </a>
+
     <span class="seccion-titulo">Orden del Culto</span>
     <button class="dia-btn" onclick="t('ma')">Martes (Adoración) <i class="fas fa-music"></i></button>
     <div id="ma" class="contenido"><div class="detalle-txt"><b>Dirección:</b> Pendiente <br> <a href="javascript:void(0)" style="color:var(--oro)" onclick="admin('Martes')">📝 Editar</a></div></div>
-
-    <button class="dia-btn" onclick="t('vi')">Viernes (Crecimiento) <i class="fas fa-seedling"></i></button>
-    <div id="vi" class="contenido"><div class="detalle-txt"><b>Actividad:</b> Grupos en hogares. <br> <a href="javascript:void(0)" style="color:var(--oro)" onclick="admin('Viernes')">📝 Editar</a></div></div>
 
     <button class="dia-btn" onclick="t('d')" style="background: var(--oro); color: #000;">Domingo (General) <i class="fas fa-church"></i></button>
     <div id="d" class="contenido"><div class="detalle-txt"><b>Escuela Dominical:</b> 9 AM | <b>Culto:</b> 11 AM</div></div>
@@ -164,9 +275,6 @@
     <span class="seccion-titulo">Eventos Especiales</span>
     <button class="evento-btn" onclick="t('campaña')">Campañas <i class="fas fa-bullhorn"></i></button>
     <div id="campaña" class="contenido"><div class="detalle-txt">Pendiente de agendar.</div></div>
-
-    <button class="evento-btn" onclick="t('semana')">Semana de Oración <i class="fas fa-pray"></i></button>
-    <div id="semana" class="contenido"><div class="detalle-txt">Próximamente.</div></div>
 
     <span class="seccion-titulo">Proyectos y Actividades</span>
     <button class="actividad-btn" onclick="t('venta')">Venta de Comida <i class="fas fa-utensils"></i></button>

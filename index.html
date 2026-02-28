@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>La Novia del Cordero - App</title>
+    <title>La Novia del Cordero</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Roboto:wght@400;700&display=swap');
@@ -13,27 +13,26 @@
             --oro-oscuro: #996515;
             --oro-brillante: #FFD700; 
             --oscuro-puro: #0a0a0a;
-            --whatsapp: #25d366; 
             --bg-page: #fdfaf1;
             --card-bg: rgba(255, 255, 255, 0.9);
         }
 
+        /* Fondo estilo imagen 1000084996 para modo oscuro */
         body.dark-mode {
             --bg-page: #000000;
             --card-bg: rgba(20, 20, 20, 0.95);
+            background-image: radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 40%);
         }
 
-        /* Bloqueo de scroll horizontal manual para que solo funcione el botón */
         html, body {
             margin: 0; padding: 0;
             width: 100%; height: 100%;
-            overflow: hidden; 
+            overflow: hidden; /* Bloquea el scroll horizontal manual */
             background: var(--bg-page);
             font-family: 'Segoe UI', sans-serif;
-            transition: background 0.5s;
         }
 
-        /* Contenedor de Deslizamiento */
+        /* Ajuste de Contenedor para eliminar espacios blancos laterales */
         .app-wrapper {
             display: flex;
             width: 200vw;
@@ -42,179 +41,157 @@
         }
 
         .page {
-            width: 100vw;
+            width: 100vw; /* Exactamente el ancho del teléfono */
             height: 100vh;
-            overflow-y: auto; /* Scroll vertical libre en cada página */
+            overflow-y: auto;
             position: relative;
             box-sizing: border-box;
         }
 
-        /* DISEÑO DE CABECERA (Imagen 1000085193) */
+        /* Portadas ajustadas al ancho total */
         .header { 
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1350&q=80'); 
+            width: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1350&q=80'); 
             background-size: cover; background-position: center; text-align: center; 
-            padding: 60px 20px 40px; border-radius: 0 0 50px 50px; border-bottom: 5px solid var(--oro);
+            padding: 50px 0 40px; border-radius: 0 0 40px 40px; border-bottom: 4px solid var(--oro);
         }
 
-        .titulo-elefante { font-family: 'Playfair Display', serif; color: var(--oro-brillante); text-transform: uppercase; margin: 0; font-size: 32px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .titulo-elefante { font-family: 'Playfair Display', serif; color: var(--oro-brillante); text-transform: uppercase; margin: 0; font-size: 28px; padding: 0 20px; }
 
-        /* CONTROLES Y SECCIONES (Ajuste de separación solicitado) */
-        .controles-mini { display: flex; justify-content: space-between; padding: 20px 30px; margin-bottom: 10px; }
-        
-        .btn-control-dark {
-            background: var(--oscuro-puro); color: var(--oro); border: 2px solid var(--oro-oscuro);
-            width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer;
+        /* Contenedor con márgenes laterales para que los botones respiren */
+        .main-content {
+            padding: 0 25px 100px; /* 25px de margen a los lados */
         }
 
-        /* CORRECCIÓN DE TÍTULOS PEGADOS */
         .seccion-titulo { 
-            text-align: center; 
-            color: var(--oro); 
-            font-family: 'Playfair Display', serif; 
-            font-size: 22px;
-            margin: 35px 0 15px; /* Más espacio arriba (35px) y abajo (15px) */
-            border-bottom: 2px solid var(--oro); 
-            display: inline-block; 
-            width: 80%; 
-            margin-left: 10%;
-            padding-bottom: 8px;
+            text-align: center; color: var(--oro); font-family: 'Playfair Display', serif; 
+            font-size: 20px; margin: 35px 0 15px; border-bottom: 2px solid var(--oro);
+            padding-bottom: 8px; width: 100%;
         }
 
-        .container { padding: 0 20px 100px; }
-
-        /* BOTONES (Inspirados en Imagen 1000085196) */
+        /* Estilo de Botones según imágenes 1000085193 y 1000085196 */
         .btn-item {
-            width: 100%; padding: 18px; margin-bottom: 12px; border-radius: 15px;
+            width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 12px;
             display: flex; justify-content: space-between; align-items: center;
-            font-weight: bold; font-size: 16px; border: 1.5px solid var(--oro-oscuro); cursor: pointer;
-            background: #2c2c2c; color: var(--oro); transition: 0.3s;
+            font-weight: bold; border: 1.5px solid var(--oro-oscuro); cursor: pointer;
+            background: #2c2c2c; color: var(--oro); box-sizing: border-box;
         }
+
+        .btn-evento { background: #4a148c; color: white; }
+        .btn-actividad { background: white; color: #1a3a5a; border-color: #1a3a5a; }
+
+        /* Menú desplegable de Agendar */
+        .contenido-desplegable { 
+            max-height: 0; overflow: hidden; transition: 0.4s ease-out; 
+            background: var(--card-bg); border-radius: 0 0 12px 12px; 
+            margin-top: -12px; margin-bottom: 12px; border: 1px solid var(--oro); border-top: none;
+        }
+        .detalle-agendar { padding: 15px; text-align: center; font-size: 14px; color: var(--oscuro-puro); }
+        .dark-mode .detalle-agendar { color: white; }
         
-        .btn-evento { background: #4a148c; color: white; } /* Púrpura */
-        .btn-actividad { background: white; color: #1a3a5a; border-color: #1a3a5a; } /* Blanco */
-
-        /* BOTÓN DE NAVEGACIÓN FLOTANTE (Círculo Negro con Flecha) */
-        .nav-button {
-            position: fixed; bottom: 30px; right: 25px;
-            background: var(--oscuro-puro); color: var(--oro);
-            width: 55px; height: 55px; border-radius: 50%;
-            border: 2px solid var(--oro); display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5); z-index: 1000; cursor: pointer;
+        .btn-agendar {
+            display: inline-block; margin-top: 8px; padding: 5px 15px;
+            background: var(--oscuro-puro); color: var(--oro); border: 1px solid var(--oro);
+            border-radius: 20px; text-decoration: none; font-size: 12px;
         }
 
+        /* Botón de navegación (Círculo negro con flecha) */
+        .nav-button {
+            position: fixed; bottom: 25px; right: 25px;
+            background: var(--oscuro-puro); color: var(--oro);
+            width: 50px; height: 50px; border-radius: 50%;
+            border: 2px solid var(--oro); display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 1000;
+        }
+
+        /* Botón atrás en Pag 2 */
         .btn-back {
-            position: absolute; top: 25px; left: 20px;
+            position: absolute; top: 20px; left: 20px;
             background: rgba(0,0,0,0.6); color: var(--oro);
-            width: 40px; height: 40px; border-radius: 50%;
+            width: 35px; height: 35px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center; border: 1px solid var(--oro);
             z-index: 10;
         }
-
-        /* PÁGINA 2: FORTALECIMIENTO (Imagen 1000085192) */
-        .portada-dos {
-            height: 250px; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1000&q=80');
-            background-size: cover; background-position: center;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            border-bottom: 5px solid var(--oro); text-align: center; color: white;
-        }
-
-        /* AGENDA (Acordeón) */
-        .contenido { max-height: 0; overflow: hidden; transition: 0.4s; background: var(--card-bg); border-radius: 0 0 15px 15px; margin-top: -12px; margin-bottom: 10px; border: 1px solid var(--oro); border-top: none; }
-        .detalle { padding: 20px; color: #333; font-size: 14px; }
-        .dark-mode .detalle { color: #eee; }
     </style>
 </head>
 <body>
 
 <div class="app-wrapper" id="mainWrapper">
     
-    <div class="page" id="page1">
+    <div class="page">
         <div class="header">
             <h1 class="titulo-elefante">La Novia del Cordero</h1>
-            <p style="color:white; font-size:11px; margin-top:8px;">VIDA NUEVA, SECTOR COFRADÍA</p>
+            <p style="color:white; font-size:10px; margin-top:5px;">VIDA NUEVA, SECTOR COFRADÍA</p>
         </div>
 
-        <div class="controles-mini">
-            <div class="btn-control-dark" onclick="toggleDarkMode()"><i class="fas fa-moon"></i></div>
-            <div class="btn-control-dark"><i class="fas fa-map-marker-alt"></i></div>
-        </div>
+        <div class="main-content">
+            <div style="display: flex; justify-content: space-between; padding: 20px 0;">
+                <div class="btn-item" onclick="toggleDarkMode()" style="width: 45px; height: 45px; border-radius: 50%; margin: 0; padding: 0; justify-content: center;"><i class="fas fa-moon"></i></div>
+                <div class="btn-item" style="width: 45px; height: 45px; border-radius: 50%; margin: 0; padding: 0; justify-content: center;"><i class="fas fa-map-marker-alt"></i></div>
+            </div>
 
-        <div style="text-align: center;">
-            <button class="btn-item" style="width: auto; display: inline-flex; padding: 10px 20px; border-radius: 50px; background: white; color: black; font-size: 14px;">
-                <i class="fas fa-book-open" style="margin-right: 10px;"></i> Apocalipsis 19:7-9
-            </button>
-        </div>
-
-        <div class="container">
             <span class="seccion-titulo">Cultos de la Semana</span>
-            <div class="btn-item" onclick="t('m')">Martes (Oración) <i class="fas fa-pray"></i></div>
-            <div id="m" class="contenido"><div class="detalle">🎤 Dir: Pendiente | 📖 Pre: Pendiente</div></div>
-            
-            <div class="btn-item" onclick="t('j')">Jueves (Damas) <i class="fas fa-venus"></i></div>
-            <div id="j" class="contenido"><div class="detalle">🎤 Dir: Pendiente | 📖 Pre: Pendiente</div></div>
-            
-            <div class="btn-item" onclick="t('v')">Viernes (Crecimiento) <i class="fas fa-seedling"></i></div>
-            
-            <div class="btn-item" onclick="t('s')">Sábado (Jóvenes) <i class="fas fa-users"></i></div>
-            <div id="s" class="contenido"><div class="detalle">🎤 Dir: Pendiente | 📖 Pre: Pendiente</div></div>
-            
+            <div class="btn-item" onclick="toggleAcc('m1')">Martes (Oración) <i class="fas fa-pray"></i></div>
+            <div id="m1" class="contenido-desplegable"><div class="detalle-agendar">🎤 Dir: Pendiente | 📖 Pre: Pendiente<br><a href="#" class="btn-agendar">Agendar</a></div></div>
+
+            <div class="btn-item" onclick="toggleAcc('j1')">Jueves (Damas) <i class="fas fa-venus"></i></div>
+            <div id="j1" class="contenido-desplegable"><div class="detalle-agendar">🎤 Dir: Pendiente | 📖 Pre: Pendiente<br><a href="#" class="btn-agendar">Agendar</a></div></div>
+
             <div class="btn-item" style="background:var(--oro); color:black;">Domingo (General) <i class="fas fa-church"></i></div>
 
             <span class="seccion-titulo">Eventos Especiales</span>
-            <div class="btn-item btn-evento">Campañas <i class="fas fa-bullhorn"></i></div>
             <div class="btn-item btn-evento">Vigilia <i class="fas fa-moon"></i></div>
-            <div class="btn-item btn-evento">Culto Unido <i class="fas fa-handshake"></i></div>
 
             <span class="seccion-titulo">Actividades</span>
             <div class="btn-item btn-actividad">Venta de Comida <i class="fas fa-utensils"></i></div>
-            <div class="btn-item btn-actividad">Sorteos y Boletos <i class="fas fa-ticket-alt"></i></div>
         </div>
 
-        <div class="nav-button" onclick="slidePage(2)">
+        <div class="nav-button" onclick="changePage(2)">
             <i class="fas fa-arrow-right"></i>
         </div>
     </div>
 
-    <div class="page" id="page2">
-        <div class="btn-back" onclick="slidePage(1)">
+    <div class="page">
+        <div class="btn-back" onclick="changePage(1)">
             <i class="fas fa-chevron-left"></i>
         </div>
         
-        <div class="portada-dos">
-            <h2 style="font-family: 'Playfair Display'; color: var(--oro-brillante); font-size: 28px; margin: 0;">Fortalecimiento Espiritual</h2>
-            <p style="font-style: italic; color: #ddd; margin-top: 5px;">"Buscad al Señor..."</p>
+        <div class="header" style="background-image: url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1000&q=80');">
+            <h1 class="titulo-elefante">Fortalecimiento Espiritual</h1>
+            <p style="color:#ddd; font-style: italic; font-size: 12px; margin-top: 5px;">"Buscad al Señor..."</p>
         </div>
 
-        <div class="container" style="margin-top: 30px;">
-            <div class="btn-item" style="background:white; color:#333;">Semana de Ayuno <i class="fas fa-fire"></i></div>
-            <div class="btn-item" style="background:white; color:#333;">Ayuno de Jóvenes <i class="fas fa-users"></i></div>
-            <div class="btn-item" style="background:white; color:#333;">Devocionales <i class="fas fa-sun"></i></div>
-            <div class="btn-item" style="background:white; color:#333;">Estudios Bíblicos <i class="fas fa-book-reader"></i></div>
+        <div class="main-content">
+            <span class="seccion-titulo">Recursos Espirituales</span>
+            
+            <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('ay1')">Semana de Ayuno <i class="fas fa-fire"></i></div>
+            <div id="ay1" class="contenido-desplegable"><div class="detalle-agendar">📅 Fecha: Pendiente | 🙏 Propósito: Pendiente<br><a href="#" class="btn-agendar">Agendar</a></div></div>
+
+            <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('aj1')">Ayuno de Jóvenes <i class="fas fa-users"></i></div>
+            <div id="aj1" class="contenido-desplegable"><div class="detalle-agendar">👥 Jóvenes en oración<br><a href="#" class="btn-agendar">Agendar</a></div></div>
+
+            <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('dv1')">Devocionales <i class="fas fa-sun"></i></div>
+            <div id="dv1" class="contenido-desplegable"><div class="detalle-agendar">📖 Lectura diaria<br><a href="#" class="btn-agendar">Ver Devocional</a></div></div>
         </div>
     </div>
-
 </div>
 
 <script>
-    // Función para deslizar páginas
-    function slidePage(num) {
+    function changePage(num) {
         const wrapper = document.getElementById('mainWrapper');
         wrapper.style.transform = (num === 2) ? 'translateX(-100vw)' : 'translateX(0)';
     }
 
-    // Modo Oscuro
     function toggleDarkMode() {
         document.body.classList.toggle('dark-mode');
     }
 
-    // Acordeón para Agenda
-    function t(id) {
-        let e = document.getElementById(id);
+    function toggleAcc(id) {
+        const e = document.getElementById(id);
         if (e.style.maxHeight) {
             e.style.maxHeight = null;
         } else {
-            document.querySelectorAll('.contenido').forEach(x => x.style.maxHeight = null);
+            document.querySelectorAll('.contenido-desplegable').forEach(x => x.style.maxHeight = null);
             e.style.maxHeight = e.scrollHeight + "px";
         }
     }

@@ -34,13 +34,18 @@
 
         body { 
             font-family: 'Segoe UI', sans-serif; 
-            margin: 0; padding-bottom: 100px; 
-            background: var(--bg-page); color: var(--texto-principal); transition: 0.5s;
+            margin: 0; padding: 0; 
+            background: var(--bg-page); color: var(--texto-principal); 
+            transition: 0.5s; overflow-x: hidden;
         }
 
         /* CAPAS MODO OSCURO */
         .bokeh-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.1) 0%, rgba(0,0,0,0) 20%), radial-gradient(circle at 70% 60%, rgba(255, 215, 0, 0.08) 0%, rgba(0,0,0,0) 25%); display: var(--display-bokeh); z-index: -2; pointer-events: none; }
         .glitter-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Ccircle fill='%3Cd4af37' fill-opacity='0.15' cx='1' cy='1' r='1'/%3E%3C/svg%3E"); display: var(--display-glitter); z-index: -1; pointer-events: none; opacity: 0.5; }
+
+        /* NAVEGACIÓN */
+        .app-wrapper { display: flex; width: 200vw; transition: transform 0.6s cubic-bezier(0.7, 0, 0.3, 1); }
+        .page { width: 100vw; min-height: 100vh; position: relative; padding-bottom: 100px; }
 
         /* PORTADA */
         .header { 
@@ -48,15 +53,8 @@
             background-size: cover; background-position: center; text-align: center; padding: 60px 20px 40px; border-radius: 0 0 50px 50px; border-bottom: 5px solid var(--oro); position: relative; 
         }
 
-        /* BOTONES CONTROL OSCUROS CON LETRAS DORADAS */
-        .btn-control-dark {
-            background: var(--oscuro-puro); color: var(--oro); 
-            border: 2px solid var(--oro-oscuro); font-weight: bold; cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center;
-            transition: 0.3s; text-decoration: none;
-        }
-        .btn-control-dark:hover { color: var(--oro-brillante); border-color: var(--oro-brillante); }
-
+        /* BOTONES CONTROL OSCUROS */
+        .btn-control-dark { background: var(--oscuro-puro); color: var(--oro); border: 2px solid var(--oro-oscuro); font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; transition: 0.3s; text-decoration: none; }
         .btn-vision-top { position: absolute; top: 20px; right: 20px; padding: 8px 15px; border-radius: 12px; font-size: 11px; z-index: 10; }
         .controles-mini { display: flex; justify-content: space-between; padding: 0 30px; margin-top: 12px; margin-bottom: 10px; }
         .btn-mini-round { width: 48px; height: 48px; border-radius: 50%; font-size: 20px; }
@@ -69,37 +67,28 @@
         .biblia-section { margin-top: 5px; text-align: center; margin-bottom: 20px; }
         .biblia-btn { background: #fff; border: 2px solid var(--oro-oscuro); border-radius: 50px; padding: 10px 20px; display: inline-block; font-weight: bold; color: #000; cursor: pointer; font-family: 'Playfair Display', serif; font-size: 14px; }
 
-        /* SECCIONES */
+        /* TITULOS Y BOTONES */
         .seccion-titulo { text-align: center; font-family: 'Playfair Display', serif; font-size: 20px; margin: 25px 0 12px; border-bottom: 2px solid var(--oro); display: block; padding-bottom: 5px; color: var(--oro); }
+        .dia-btn, .evento-btn, .actividad-btn { width: 100%; border-radius: 15px; padding: 16px; margin-bottom: 10px; text-align: left; font-size: 16px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border: 1.5px solid var(--oro-oscuro); }
         
-        .dia-btn, .evento-btn, .actividad-btn { width: 100%; border-radius: 15px; padding: 16px; margin-bottom: 10px; text-align: left; font-size: 16px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.3s; }
-        
-        .dia-btn { background: linear-gradient(135deg, #1a1a1a, #444); border: 1.5px solid var(--oro-oscuro); color: var(--oro); }
-        .evento-btn { background: var(--purpura-eventos); border: 1.5px solid var(--oro-oscuro); color: white; }
-        .actividad-btn { background: var(--card-bg); border: 1.5px solid var(--azul-proyectos); color: var(--azul-proyectos); }
+        .dia-btn { background: linear-gradient(135deg, #1a1a1a, #444); color: var(--oro); }
+        .evento-btn { background: var(--purpura-eventos); color: white; }
+        .actividad-btn { background: var(--card-bg); color: var(--azul-proyectos); border-color: var(--azul-proyectos); }
 
         .contenido { max-height: 0; overflow: hidden; transition: 0.5s ease-in-out; background: var(--card-bg); margin-top: -12px; margin-bottom: 15px; border-radius: 0 0 15px 15px; padding: 0 25px; border: 1px solid var(--oro); border-top: none; backdrop-filter: blur(5px); color: var(--texto-principal); }
         .detalle-txt { padding: 15px 0; font-size: 14px; line-height: 1.6; }
 
-        /* ESTILO PARA AGENDAR */
-        .agenda-info { background: rgba(212, 175, 55, 0.1); border-radius: 10px; padding: 10px; margin-top: 10px; border-left: 3px solid var(--oro); }
-        .btn-admin { font-size: 11px; color: var(--oro-oscuro); text-decoration: none; font-weight: bold; display: block; margin-top: 10px; }
+        .agenda-info { background: rgba(212, 175, 55, 0.1); border-radius: 10px; padding: 10px; margin-top: 5px; border-left: 3px solid var(--oro); }
+        .btn-admin { font-size: 11px; color: var(--oro-oscuro); text-decoration: none; font-weight: bold; display: block; margin-top: 8px; }
 
-        /* MENU COMIDA */
-        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .menu-item { background: #fff; border: 1px solid #ddd; padding: 8px; border-radius: 8px; font-size: 12px; text-align: center; color: #333; }
-        
-        .btn-action { background: var(--azul-proyectos); color: white; text-decoration: none; padding: 10px; border-radius: 8px; display: block; text-align: center; margin-top: 10px; font-weight: bold; font-size: 13px; }
+        .nav-next { position: fixed; bottom: 20px; right: 20px; background: var(--oscuro-puro); color: var(--oro); width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--oro); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 900; animation: bounceH 2s infinite; }
+        @keyframes bounceH { 0%, 100% {transform: translateX(0);} 50% {transform: translateX(8px);} }
 
-        .card-video { background: #000; border-radius: 20px; overflow: hidden; margin-bottom: 25px; border: 3px solid var(--oro-oscuro); }
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        /* PAGINA 2 */
+        .semi-portada { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1000&q=80'); height: 220px; background-size: cover; background-position: center; display: flex; flex-direction: column; align-items: center; justify-content: center; border-bottom: 4px solid var(--oro); text-align: center; color: white; }
+        .btn-back { position: absolute; top: 20px; left: 20px; background: rgba(0,0,0,0.6); color: var(--oro); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000; border: 1px solid var(--oro); }
 
-        .side-panel { position: fixed; top: 0; right: -100%; width: 85%; height: 100%; background: var(--oscuro-puro); color: white; z-index: 2000; transition: 0.5s; padding: 40px 25px; box-sizing: border-box; border-left: 4px solid var(--oro); }
-        .side-panel.active { right: 0; }
-        .close-panel { position: absolute; top: 20px; left: 20px; font-size: 25px; color: var(--oro); cursor: pointer; }
-
-        .btn-ws { position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; border: 3px solid var(--oro-oscuro); box-shadow: 0 8px 20px rgba(0,0,0,0.3); z-index: 1000; }
+        .btn-ws { position: fixed; bottom: 20px; left: 20px; background: var(--whatsapp); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; border: 2px solid var(--oro-oscuro); z-index: 1000; }
     </style>
 </head>
 <body>
@@ -107,134 +96,72 @@
 <div class="bokeh-overlay"></div>
 <div class="glitter-overlay"></div>
 
-<div class="header">
-    <div class="btn-control-dark btn-vision-top" onclick="toggleVision()">
-        <i class="fas fa-eye"></i> VISIÓN
-    </div>
-    <h1 class="titulo-elefante">La Novia del Cordero</h1>
-    <p style="color: white; font-size: 11px; margin-top: 8px; font-weight: bold;">VIDA NUEVA, SECTOR COFRADÍA</p>
-</div>
-
-<div class="controles-mini">
-    <div class="btn-control-dark btn-mini-round" onclick="toggleDarkMode()" id="darkBtn">
-        <i class="fas fa-moon"></i>
-    </div>
-    <a href="https://maps.google.com" target="_blank" class="btn-control-dark btn-mini-round">
-        <i class="fas fa-map-marker-alt"></i>
-    </a>
-</div>
-
-<div class="container">
-    <div class="biblia-section">
-        <div class="biblia-btn" onclick="t('cita')">
-            <i class="fas fa-book-open"></i> Apocalipsis 19:7-9
-        </div>
-        <div id="cita" class="contenido"><div class="detalle-txt">"Gocémonos y alegrémonos... porque han llegado las bodas del Cordero..."</div></div>
-    </div>
-
-    <div class="card-video">
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/k6Q3uF7V5Hs" allowfullscreen></iframe>
-        </div>
-    </div>
-
-    <span class="seccion-titulo">Cultos de la Semana</span>
-
-    <button class="dia-btn" onclick="t('m')">Martes (Oración) <i class="fas fa-pray"></i></button>
-    <div id="m" class="contenido">
-        <div class="detalle-txt">
-            <div class="agenda-info">
-                <b>🎤 Director:</b> <span id="dir-m">Pendiente</span><br>
-                <b>🎸 Coros:</b> <span id="cor-m">Pendiente</span><br>
-                <b>📖 Predicador:</b> <span id="pre-m">Pendiente</span>
+<div class="app-wrapper" id="appWrapper">
+    <div class="page" id="page1">
+        <div class="header">
+            <div class="btn-control-dark btn-vision-top" onclick="toggleVision()">
+                <i class="fas fa-eye"></i> VISIÓN
             </div>
-            <a href="javascript:void(0)" class="btn-admin" onclick="admin('Martes')">📝 Agendar Servidores</a>
+            <h1 class="titulo-elefante">La Novia del Cordero</h1>
+            <p style="color: white; font-size: 11px; margin-top: 8px; font-weight: bold;">VIDA NUEVA, SECTOR COFRADÍA</p>
         </div>
-    </div>
 
-    <button class="dia-btn" onclick="t('j')">Jueves (Damas) <i class="fas fa-venus"></i></button>
-    <div id="j" class="contenido">
-        <div class="detalle-txt">
-            <div class="agenda-info">
-                <b>🎤 Director:</b> <span id="dir-j">Pendiente</span><br>
-                <b>📖 Predicador:</b> <span id="pre-j">Pendiente</span>
+        <div class="controles-mini">
+            <div class="btn-control-dark btn-mini-round" onclick="toggleDarkMode()" id="darkBtn"><i class="fas fa-moon"></i></div>
+            <a href="https://maps.google.com" target="_blank" class="btn-control-dark btn-mini-round"><i class="fas fa-map-marker-alt"></i></a>
+        </div>
+
+        <div class="container">
+            <div class="biblia-section">
+                <div class="biblia-btn" onclick="t('cita')"><i class="fas fa-book-open"></i> Apocalipsis 19:7-9</div>
+                <div id="cita" class="contenido"><div class="detalle-txt">"Gocémonos y alegrémonos... porque han llegado las bodas del Cordero..."</div></div>
             </div>
-            <a href="javascript:void(0)" class="btn-admin" onclick="admin('Jueves')">📝 Agendar Servidores</a>
+
+            <span class="seccion-titulo">Cultos de la Semana</span>
+            <button class="dia-btn" onclick="t('m')">Martes (Oración) <i class="fas fa-pray"></i></button>
+            <div id="m" class="contenido"><div class="detalle-txt"><div class="agenda-info"><b>🎤 Dir:</b> <span id="dir-m">Pendiente</span> | <b>📖 Pre:</b> <span id="pre-m">Pendiente</span></div><a href="javascript:void(0)" class="btn-admin" onclick="admin('m')">📝 Agendar</a></div></div>
+            <button class="dia-btn" onclick="t('j')">Jueves (Damas) <i class="fas fa-venus"></i></button>
+            <div id="j" class="contenido"><div class="detalle-txt"><div class="agenda-info"><b>🎤 Dir:</b> <span id="dir-j">Pendiente</span> | <b>📖 Pre:</b> <span id="pre-j">Pendiente</span></div><a href="javascript:void(0)" class="btn-admin" onclick="admin('j')">📝 Agendar</a></div></div>
+            <button class="dia-btn" onclick="t('v')">Viernes (Crecimiento) <i class="fas fa-seedling"></i></button>
+            <div id="v" class="contenido"><div class="detalle-txt">Culto en hogares / Células.</div></div>
+            <button class="dia-btn" onclick="t('s')">Sábado (Jóvenes) <i class="fas fa-users"></i></button>
+            <div id="s" class="contenido"><div class="detalle-txt"><div class="agenda-info"><b>🎤 Dir:</b> <span id="dir-s">Pendiente</span> | <b>📖 Pre:</b> <span id="pre-s">Pendiente</span></div><a href="javascript:void(0)" class="btn-admin" onclick="admin('s')">📝 Agendar</a></div></div>
+            <button class="dia-btn" onclick="t('d')" style="background: var(--oro); color: #000;">Domingo (General) <i class="fas fa-church"></i></button>
+            <div id="d" class="contenido"><div class="detalle-txt">9:00 AM Escuela Dominical | 11:00 AM Culto General.</div></div>
+
+            <span class="seccion-titulo">Eventos Especiales</span>
+            <button class="evento-btn" onclick="t('camp')">Campañas <i class="fas fa-bullhorn"></i></button>
+            <div id="camp" class="contenido"><div class="detalle-txt">Próximamente campaña evangelística.</div></div>
+            <button class="evento-btn" onclick="t('vigi')">Vigilia <i class="fas fa-moon"></i></button>
+            <div id="vigi" class="contenido"><div class="detalle-txt">Noche de poder.</div></div>
+            <button class="evento-btn" onclick="t('unid')">Culto Unido <i class="fas fa-handshake"></i></button>
+            <div id="unid" class="contenido"><div class="detalle-txt">Confraternidad sectorial.</div></div>
+
+            <span class="seccion-titulo">Actividades</span>
+            <button class="actividad-btn" onclick="t('vta')">Venta de Comida <i class="fas fa-utensils"></i></button>
+            <div id="vta" class="contenido"><div class="detalle-txt"><b>Menú:</b> Pollo, Tajadas, Refrescos.<br><a href="https://wa.me/50400000000?text=Menu" class="btn-admin">🛍️ Ver Menú / Agendar</a></div></div>
+            <button class="actividad-btn" onclick="t('tkt')">Sorteos y Boletos <i class="fas fa-ticket-alt"></i></button>
+            <div id="tkt" class="contenido"><div class="detalle-txt">Apoya los proyectos comprando tus boletos.<br><a href="https://wa.me/50400000000?text=Boletos" class="btn-admin">🎟️ Comprar Boletos</a></div></div>
         </div>
+        <div class="nav-next" onclick="goToPage(2)"><i class="fas fa-arrow-right"></i></div>
     </div>
 
-    <button class="dia-btn" onclick="t('v')">Viernes (Crecimiento) <i class="fas fa-seedling"></i></button>
-    <div id="v" class="contenido">
-        <div class="detalle-txt">
-            <b>Actividad:</b> Grupos Familiares.<br>
-            <a href="javascript:void(0)" class="btn-admin" onclick="admin('Viernes')">📝 Agendar Lugar</a>
+    <div class="page" id="page2">
+        <div class="btn-back" onclick="goToPage(1)"><i class="fas fa-chevron-left"></i></div>
+        <div class="semi-portada">
+            <h2 style="font-family:'Playfair Display'; color:var(--oro-brillante); margin:0;">Fortalecimiento Espiritual</h2>
+            <p style="font-size:13px; font-style:italic;">"Buscad al Señor..."</p>
         </div>
-    </div>
-
-    <button class="dia-btn" onclick="t('s')">Sábado (Jóvenes) <i class="fas fa-users"></i></button>
-    <div id="s" class="contenido">
-        <div class="detalle-txt">
-            <div class="agenda-info">
-                <b>🎤 Director:</b> <span id="dir-s">Pendiente</span><br>
-                <b>📖 Predicador:</b> <span id="pre-s">Pendiente</span>
-            </div>
-            <a href="javascript:void(0)" class="btn-admin" onclick="admin('Sábado')">📝 Agendar Servidores</a>
+        <div class="container" style="margin-top:20px;">
+            <button class="actividad-btn" onclick="t('sa')">Semana de Ayuno <i class="fas fa-fire"></i></button>
+            <div id="sa" class="contenido"><div class="detalle-txt">Próximas fechas de ayuno congregacional.</div></div>
+            <button class="actividad-btn" onclick="t('aj')">Ayuno de Jóvenes <i class="fas fa-users"></i></button>
+            <div id="aj" class="contenido"><div class="detalle-txt">Sábados de búsqueda juvenil.</div></div>
+            <button class="actividad-btn" onclick="t('dv')">Devocionales <i class="fas fa-sun"></i></button>
+            <div id="dv" class="contenido"><div class="detalle-txt">Pan de vida para cada día.</div></div>
+            <button class="actividad-btn" onclick="t('eb')">Estudios Bíblicos <i class="fas fa-book-reader"></i></button>
+            <div id="eb" class="contenido"><div class="detalle-txt">Profundizando en la Palabra.</div></div>
         </div>
-    </div>
-
-    <button class="dia-btn" onclick="t('d')" style="background: var(--oro); color: #000;">Domingo (General) <i class="fas fa-church"></i></button>
-    <div id="d" class="contenido">
-        <div class="detalle-txt">
-            <b>9:00 AM:</b> Escuela Dominical<br>
-            <b>11:00 AM:</b> Culto Evangelístico
-            <div class="agenda-info">
-                <b>🎤 Director:</b> <span id="dir-d">Pendiente</span><br>
-                <b>📖 Predicador:</b> <span id="pre-d">Pendiente</span>
-            </div>
-            <a href="javascript:void(0)" class="btn-admin" onclick="admin('Domingo')">📝 Agendar Servidores</a>
-        </div>
-    </div>
-
-    <span class="seccion-titulo">Eventos Especiales</span>
-    <button class="evento-btn" onclick="t('camp')">Campañas <i class="fas fa-bullhorn"></i></button>
-    <div id="camp" class="contenido"><div class="detalle-txt">Próximamente.</div></div>
-
-    <button class="evento-btn" onclick="t('sem')">Semana de Oración <i class="fas fa-fire"></i></button>
-    <div id="sem" class="contenido"><div class="detalle-txt">7 Días de Clamor.</div></div>
-
-    <button class="evento-btn" onclick="t('unid')">Culto Unido <i class="fas fa-handshake"></i></button>
-    <div id="unid" class="contenido"><div class="detalle-txt">Confraternidad Sectorial.</div></div>
-
-    <span class="seccion-titulo">Proyectos y Actividades</span>
-    
-    <button class="actividad-btn" onclick="t('venta')">Venta de Comida <i class="fas fa-utensils"></i></button>
-    <div id="venta" class="contenido">
-        <div class="detalle-txt">
-            <b>Menú Disponible:</b>
-            <div class="menu-grid">
-                <div class="menu-item">🍗 Pollo Frito</div>
-                <div class="menu-item">🌮 Tajadas</div>
-                <div class="menu-item">🥤 Refrescos</div>
-                <div class="menu-item">🍰 Postres</div>
-            </div>
-            <a href="https://wa.me/50400000000?text=Hola,%20quisiera%20agendar%20mi%20pedido%20de%20comida" class="btn-action">🛍️ Agendar Pedido / Ver Menú</a>
-        </div>
-    </div>
-
-    <button class="actividad-btn" onclick="t('sorteo')">Sorteos y Boletos <i class="fas fa-ticket-alt"></i></button>
-    <div id="sorteo" class="contenido">
-        <div class="detalle-txt">
-            ¡Participa en nuestras actividades pro-fondos!
-            <a href="https://wa.me/50400000000?text=Hola,%20deseo%20comprar%20boletos%20para%20la%20actividad" class="btn-action">🎟️ Comprar Boletos por WhatsApp</a>
-        </div>
-    </div>
-</div>
-
-<div id="sideVision" class="side-panel">
-    <i class="fas fa-times close-panel" onclick="toggleVision()"></i>
-    <div class="vision-text">
-        <h2 style="color: var(--oro); font-family: 'Playfair Display', serif;">Nuestra Visión</h2>
-        <p>Ser una iglesia viva, pentecostal y misionera, alcanzando almas para el Reino de Dios.</p>
     </div>
 </div>
 
@@ -243,34 +170,23 @@
 <script>
     function toggleDarkMode() {
         document.body.classList.toggle('dark-mode');
-        const icon = document.querySelector('#darkBtn i');
-        icon.className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon';
+        document.querySelector('#darkBtn i').className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon';
     }
-    
-    function toggleVision() { document.getElementById('sideVision').classList.toggle('active'); }
-    
+    function goToPage(n) { document.getElementById('appWrapper').style.transform = (n===2) ? 'translateX(-100vw)' : 'translateX(0)'; }
     function t(id) {
         var e = document.getElementById(id);
         if (e.style.maxHeight) { e.style.maxHeight = null; } 
-        else { 
-            document.querySelectorAll('.contenido').forEach(x => x.style.maxHeight = null);
-            e.style.maxHeight = e.scrollHeight + "px"; 
-        }
+        else { document.querySelectorAll('.contenido').forEach(x => x.style.maxHeight = null); e.style.maxHeight = e.scrollHeight + "px"; }
     }
-
-    function admin(dia) {
-        let clave = prompt("Clave de Administrador:");
-        if (clave === "1234") {
-            let dir = prompt("Nombre del Director:");
-            let pre = prompt("Nombre del Predicador:");
-            if(dir) document.getElementById('dir-' + dia.charAt(0).toLowerCase()).innerText = dir;
-            if(pre) document.getElementById('pre-' + dia.charAt(0).toLowerCase()).innerText = pre;
-            alert("Agenda actualizada para el " + dia);
-        } else {
-            alert("Clave incorrecta.");
+    function toggleVision() { alert("Visión: Ser una iglesia viva, pentecostal y misionera."); }
+    function admin(id) {
+        let c = prompt("Clave:");
+        if (c === "1234") {
+            let d = prompt("Director:"), p = prompt("Predicador:");
+            if(d) document.getElementById('dir-'+id).innerText = d;
+            if(p) document.getElementById('pre-'+id).innerText = p;
         }
     }
 </script>
-
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>La Novia del Cordero - App Oficial</title>
+    <title>La Novia del Cordero</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Roboto:wght@400;700&display=swap');
@@ -18,145 +18,112 @@
             --card-bg: rgba(255, 255, 255, 0.98);
         }
 
-        body.dark-mode {
-            --bg-page: #000000;
-            --card-bg: rgba(35, 35, 35, 0.98);
-        }
+        body.dark-mode { --bg-page: #000000; --card-bg: rgba(35, 35, 35, 0.98); }
 
-        html, body {
-            margin: 0; padding: 0;
-            width: 100%; height: 100%;
-            overflow: hidden; 
-            background: var(--bg-page);
-            font-family: 'Segoe UI', sans-serif;
-        }
+        html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: var(--bg-page); font-family: 'Segoe UI', sans-serif; }
 
-        .app-wrapper {
-            display: flex;
-            width: 200vw;
-            height: 100vh;
-            transition: transform 0.6s cubic-bezier(0.7, 0, 0.3, 1);
-        }
+        .app-wrapper { display: flex; width: 200vw; height: 100vh; transition: transform 0.6s cubic-bezier(0.7, 0, 0.3, 1); }
+        .page { width: 100vw; height: 100vh; overflow-y: auto; position: relative; box-sizing: border-box; }
 
-        .page {
-            width: 100vw;
-            height: 100vh;
-            overflow-y: auto;
-            position: relative;
-            box-sizing: border-box;
-        }
-
-        /* CABECERA */
+        /* PORTADA CON BOTONES INTEGRADOS */
         .header { 
-            width: 100%;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1350&q=80'); 
+            width: 100%; position: relative;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1350&q=80'); 
             background-size: cover; background-position: center; text-align: center; 
-            padding: 50px 0 40px; border-radius: 0 0 40px 40px; border-bottom: 4px solid var(--oro);
+            padding: 60px 0 50px; border-radius: 0 0 40px 40px; border-bottom: 4px solid var(--oro);
+        }
+
+        /* Botón Visión Esquina Superior Derecha */
+        .btn-vision-top {
+            position: absolute; top: 15px; right: 15px;
+            background: #111; color: var(--oro); border: 1.5px solid var(--oro);
+            padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: bold;
+            text-transform: uppercase; z-index: 10; cursor: pointer;
+        }
+
+        /* Botón Apocalipsis Borde Interior Portada */
+        .btn-apoc-bottom {
+            position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%);
+            background: var(--oscuro-puro); color: var(--oro-brillante);
+            border: 1px solid var(--oro); padding: 8px 20px; border-radius: 20px;
+            font-size: 10px; width: 80%; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            font-style: italic; z-index: 5;
         }
 
         .titulo-elefante { font-family: 'Playfair Display', serif; color: var(--oro-brillante); text-transform: uppercase; margin: 0; font-size: 26px; }
-
         .main-content { padding: 0 20px 150px; }
 
-        /* MENSAJE BÍBLICO */
-        .texto-biblico {
-            background: var(--card-bg);
-            border: 1.5px solid var(--oro);
-            border-radius: 15px;
-            padding: 15px;
-            margin: 20px 0;
-            text-align: center;
-            font-style: italic;
-            font-size: 14px;
-            color: #555;
-            line-height: 1.5;
+        /* Botón Necesitas Oración */
+        .btn-oracion {
+            width: 100%; background: var(--oro); color: black;
+            padding: 14px; border-radius: 12px; text-align: center;
+            font-weight: 900; margin-top: 20px; text-decoration: none;
+            display: block; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            border: 2px solid black;
         }
-        .dark-mode .texto-biblico { color: #ccc; }
 
         .seccion-titulo { 
             text-align: center; color: var(--oro); font-family: 'Playfair Display', serif; 
-            font-size: 22px; margin: 55px 0 25px; border-bottom: 2.5px solid var(--oro);
-            padding-bottom: 12px; display: block;
+            font-size: 20px; margin: 45px 0 20px; border-bottom: 2px solid var(--oro);
+            padding-bottom: 8px; display: block;
         }
 
-        /* BOTONES */
+        /* DISEÑO DE BOTONES DE LISTA */
         .btn-item {
             width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 12px;
             display: flex; justify-content: space-between; align-items: center;
             font-weight: bold; border: 1.5px solid var(--oro-oscuro); cursor: pointer;
-            background: #2c2c2c; color: var(--oro); box-sizing: border-box;
+            background: #222; color: var(--oro); box-sizing: border-box;
         }
 
-        .btn-vision { background: #1a3a5a; color: white; border-color: var(--oro); }
-        .btn-domingo { background: var(--oro); color: black; border-color: #000; }
-        .btn-evento { background: #4a148c; color: white; border-color: var(--oro); }
-        .btn-actividad { background: white; color: #1a3a5a; border-color: #1a3a5a; }
-
-        /* DESPLEGABLES E ICONOS A COLOR */
         .contenido-desplegable { 
             max-height: 0; overflow: hidden; transition: 0.4s ease-in-out; 
             background: var(--card-bg); border-radius: 0 0 12px 12px; 
             margin-top: -12px; margin-bottom: 15px; border: 1.5px solid var(--oro); border-top: none;
         }
         
-        .info-grid { padding: 18px; color: #333; }
+        .info-grid { padding: 15px; color: #333; }
         .dark-mode .info-grid { color: #eee; }
-        
-        .info-item { display: flex; align-items: center; margin-bottom: 12px; font-size: 14px; border-bottom: 1px solid rgba(212, 175, 55, 0.1); padding-bottom: 5px; }
-        .info-item i { width: 35px; font-size: 18px; margin-right: 10px; text-align: center; }
+        .info-item { display: flex; align-items: center; margin-bottom: 10px; font-size: 13px; }
+        .info-item i { width: 30px; font-size: 16px; margin-right: 10px; text-align: center; }
 
         /* COLORES ICONOS */
-        .c-dir { color: #3498db; } .c-mus { color: #e74c3c; } .c-pre { color: #f1c40f; } .c-cal { color: #e67e22; } .c-chu { color: #9b59b6; }
+        .c-dir { color: #3498db; } .c-mus { color: #e74c3c; } .c-pre { color: #f1c40f; } .c-cal { color: #e67e22; }
 
         .btn-ws {
-            display: block; margin-top: 10px; padding: 12px;
+            display: block; margin-top: 10px; padding: 10px;
             background: var(--whatsapp); color: white; text-align: center;
-            border-radius: 8px; text-decoration: none; font-weight: bold;
+            border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 13px;
         }
 
-        /* NAVEGACIÓN Y FLOTANTES */
         .nav-master {
-            position: fixed; bottom: 30px; right: 25px;
-            background: var(--oscuro-puro); color: var(--oro);
-            width: 65px; height: 65px; border-radius: 50%;
-            border: 3px solid var(--oro); display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.7); z-index: 9999; cursor: pointer;
-        }
-
-        .btn-ws-float {
-            position: fixed; bottom: 30px; left: 25px;
-            background: var(--whatsapp); color: white;
-            width: 55px; height: 55px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 9999;
+            position: fixed; bottom: 30px; right: 25px; background: var(--oscuro-puro); 
+            color: var(--oro); width: 60px; height: 60px; border-radius: 50%;
+            border: 3px solid var(--oro); display: flex; align-items: center; justify-content: center; z-index: 9999;
         }
     </style>
 </head>
 <body>
 
-<a href="https://wa.me/50400000000" class="btn-ws-float"><i class="fab fa-whatsapp"></i></a>
 <div class="nav-master" onclick="movePage()"><i class="fas fa-exchange-alt"></i></div>
 
 <div class="app-wrapper" id="mainWrapper">
     
     <div class="page">
         <div class="header">
+            <div class="btn-vision-top" onclick="alert('Visión: Preparar una novia santa para el Cordero glorificando a Dios.')">Nuestra Visión</div>
             <h1 class="titulo-elefante">La Novia del Cordero</h1>
             <p style="color:white; font-size:10px; margin-top:5px;">VIDA NUEVA, SECTOR COFRADÍA</p>
+            <div class="btn-apoc-bottom">"Han llegado las bodas del Cordero" - Apoc. 19:7</div>
         </div>
 
         <div class="main-content">
-            <div style="display: flex; justify-content: space-between; padding: 25px 0 5px;">
-                <div class="btn-item" onclick="toggleDarkMode()" style="width: 55px; height: 55px; border-radius: 50%; margin: 0; justify-content: center;"><i class="fas fa-moon"></i></div>
-                <div class="btn-item" style="width: 55px; height: 55px; border-radius: 50%; margin: 0; justify-content: center;"><i class="fas fa-map-marker-alt" style="color:#e74c3c;"></i></div>
+            <div style="display: flex; justify-content: space-between; padding: 35px 0 10px;">
+                <div class="btn-item" onclick="toggleDarkMode()" style="width: 50px; height: 50px; border-radius: 50%; margin: 0; justify-content: center;"><i class="fas fa-moon"></i></div>
+                <div class="btn-item" style="width: 50px; height: 50px; border-radius: 50%; margin: 0; justify-content: center;"><i class="fas fa-map-marker-alt" style="color:#e74c3c;"></i></div>
             </div>
 
-            <div class="texto-biblico">
-                "Regocijémonos y alegrémonos y démosle gloria; porque han llegado las bodas del Cordero, y su esposa se ha preparado." <br> <b>Apocalipsis 19:7</b>
-            </div>
-
-            <div class="btn-item btn-vision" onclick="toggleAcc('vis')">Nuestra Visión <i class="fas fa-eye"></i></div>
-            <div id="vis" class="contenido-desplegable"><div class="info-grid">Ser una iglesia que glorifica a Dios a través de la adoración y el servicio a la comunidad, preparando una novia santa para el Cordero.</div></div>
+            <a href="https://wa.me/50400000000?text=Hola,%20necesito%20oración" class="btn-oracion">¿NECESITAS ORACIÓN? TOCAME 🙏</a>
 
             <span class="seccion-titulo">Cultos de la Semana</span>
             
@@ -166,7 +133,7 @@
                     <div class="info-item"><i class="fas fa-user-tie c-dir"></i> <b>Dirección:</b> Pendiente</div>
                     <div class="info-item"><i class="fas fa-music c-mus"></i> <b>Coros:</b> Pendiente</div>
                     <div class="info-item"><i class="fas fa-bible c-pre"></i> <b>Predicación:</b> Pendiente</div>
-                    <a href="https://wa.me/50400000000?text=Hola,%20quiero%20agendar%20el%20culto%20de%20Adoración" class="btn-ws">Agendar en WhatsApp</a>
+                    <a href="https://wa.me/50400000000?text=Info%20Martes" class="btn-ws">Agendar en WhatsApp</a>
                 </div>
             </div>
 
@@ -176,109 +143,63 @@
                     <div class="info-item"><i class="fas fa-user-tie c-dir"></i> <b>Dirección:</b> Pendiente</div>
                     <div class="info-item"><i class="fas fa-music c-mus"></i> <b>Coros:</b> Pendiente</div>
                     <div class="info-item"><i class="fas fa-bible c-pre"></i> <b>Predicación:</b> Pendiente</div>
-                    <a href="https://wa.me/50400000000?text=Hola,%20quiero%20agendar%20el%20culto%20de%20Damas" class="btn-ws">Agendar en WhatsApp</a>
+                    <a href="https://wa.me/50400000000?text=Info%20Jueves" class="btn-ws">Agendar en WhatsApp</a>
                 </div>
             </div>
 
-            <div class="btn-item" onclick="toggleAcc('v')">Viernes (Crecimiento) <i class="fas fa-seedling"></i></div>
-            <div id="v" class="contenido-desplegable">
-                <div class="info-grid">
-                    <div class="info-item"><i class="fas fa-chalkboard-teacher c-dir"></i> <b>Dirección:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-music c-mus"></i> <b>Coros:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-book-open c-pre"></i> <b>Predicación:</b> Pendiente</div>
-                    <a href="https://wa.me/50400000000?text=Hola,%20quiero%20agendar%20el%20culto%20de%20Crecimiento" class="btn-ws">Agendar en WhatsApp</a>
-                </div>
-            </div>
-
-            <div class="btn-item" onclick="toggleAcc('s')">Sábado (Jóvenes) <i class="fas fa-users"></i></div>
-            <div id="s" class="contenido-desplegable">
-                <div class="info-grid">
-                    <div class="info-item"><i class="fas fa-user-tie c-dir"></i> <b>Dirección:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-music c-mus"></i> <b>Coros:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-bible c-pre"></i> <b>Predicación:</b> Pendiente</div>
-                    <a href="https://wa.me/50400000000?text=Hola,%20quiero%20agendar%20el%20culto%20de%20Jóvenes" class="btn-ws">Agendar en WhatsApp</a>
-                </div>
-            </div>
-
-            <div class="btn-item btn-domingo" onclick="toggleAcc('d')">Domingo (General) <i class="fas fa-church"></i></div>
+            <div class="btn-item" style="background:var(--oro); color:black;" onclick="toggleAcc('d')">Domingo (General) <i class="fas fa-church"></i></div>
             <div id="d" class="contenido-desplegable">
                 <div class="info-grid">
                     <div class="info-item"><i class="fas fa-sun c-pre"></i> <b>9:00 AM:</b> Escuela Dominical</div>
                     <div class="info-item"><i class="fas fa-star c-pre"></i> <b>11:00 AM:</b> Culto General</div>
-                    <div class="info-item"><i class="fas fa-microphone c-dir"></i> <b>Dirección:</b> Pendiente</div>
-                    <a href="https://wa.me/50400000000?text=Hola,%20quiero%20agendar%20el%20Domingo" class="btn-ws">Agendar Domingo</a>
+                    <div class="info-item"><i class="fas fa-user-tie c-dir"></i> <b>Dirección:</b> Pendiente</div>
+                    <a href="https://wa.me/50400000000?text=Info%20Domingo" class="btn-ws">Agendar</a>
                 </div>
             </div>
 
             <span class="seccion-titulo">Eventos Especiales</span>
-            <div class="btn-item btn-evento" onclick="toggleAcc('vig')">Vigilia <i class="fas fa-moon"></i></div>
+            <div class="btn-item" style="background:#4a148c; color:white;" onclick="toggleAcc('vig')">Vigilia <i class="fas fa-moon"></i></div>
             <div id="vig" class="contenido-desplegable">
                 <div class="info-grid">
-                    <div class="info-item"><i class="fas fa-calendar-alt c-cal"></i> <b>Fecha:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-clock c-cal"></i> <b>Hora:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-bible c-pre"></i> <b>Predicación:</b> Pendiente</div>
-                    <a href="https://wa.me/50400000000?text=Info%20sobre%20la%20Vigilia" class="btn-ws">Agendar en WhatsApp</a>
+                    <div class="info-item"><i class="fas fa-calendar-alt c-cal"></i> <b>Fecha/Hora:</b> Pendiente</div>
+                    <a href="https://wa.me/50400000000?text=Info%20Vigilia" class="btn-ws">Agendar</a>
                 </div>
             </div>
 
-            <div class="btn-item btn-evento" onclick="toggleAcc('camp')">Campañas <i class="fas fa-bullhorn"></i></div>
-            <div id="camp" class="contenido-desplegable">
-                <div class="info-grid">
-                    <div class="info-item"><i class="fas fa-calendar-check c-cal"></i> <b>Fecha:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-map-marker-alt c-cal"></i> <b>Dirección:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-microphone-alt c-pre"></i> <b>Evangelista:</b> Pendiente</div>
-                    <a href="https://wa.me/50400000000?text=Info%20sobre%20Campaña" class="btn-ws">Agendar en WhatsApp</a>
-                </div>
-            </div>
-
-            <div class="btn-item btn-evento" onclick="toggleAcc('uni')">Culto Unido <i class="fas fa-handshake"></i></div>
+            <div class="btn-item" style="background:#4a148c; color:white;" onclick="toggleAcc('uni')">Culto Unido <i class="fas fa-handshake"></i></div>
             <div id="uni" class="contenido-desplegable">
                 <div class="info-grid">
-                    <div class="info-item"><i class="fas fa-church c-chu"></i> <b>Iglesias:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-map-signs c-chu"></i> <b>Dirección:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-clock c-cal"></i> <b>Hora:</b> Pendiente</div>
-                    <a href="https://wa.me/50400000000?text=Info%20sobre%20Culto%20Unido" class="btn-ws">Agendar en WhatsApp</a>
+                    <div class="info-item"><i class="fas fa-church c-dir"></i> <b>Iglesias y Dirección:</b> Pendiente</div>
+                    <a href="https://wa.me/50400000000?text=Info%20Culto%20Unido" class="btn-ws">Agendar</a>
                 </div>
             </div>
 
             <span class="seccion-titulo">Actividades</span>
-            <div class="btn-item btn-actividad" onclick="toggleAcc('food')">Venta de Comida <i class="fas fa-utensils"></i></div>
+            <div class="btn-item" style="background:white; color:#1a3a5a;" onclick="toggleAcc('food')">Venta de Comida <i class="fas fa-utensils"></i></div>
             <div id="food" class="contenido-desplegable">
                 <div class="info-grid">
-                    <b>Menú Disponible:</b>
-                    <div class="info-item"><i class="fas fa-drumstick-bite" style="color:#e67e22;"></i> Pollo Frito</div>
-                    <div class="info-item"><i class="fas fa-hamburger" style="color:#f39c12;"></i> Hamburguesas</div>
-                    <div class="info-item"><i class="fas fa-pepper-hot" style="color:#e74c3c;"></i> Tacos</div>
-                    <div class="info-item"><i class="fas fa-candy-cane" style="color:#9b59b6;"></i> Golosinas</div>
-                    <div class="info-item"><i class="fas fa-ice-cream" style="color:#3498db;"></i> Postres</div>
-                    <a href="https://wa.me/50400000000?text=Hola,%20quiero%20hacer%20un%20pedido%20de%20comida" class="btn-ws">Hacer Pedido</a>
+                    <b>Menú:</b>
+                    <div class="info-item"><i class="fas fa-drumstick-bite" style="color:#e67e22;"></i> Pollo | Hamburguesas</div>
+                    <div class="info-item"><i class="fas fa-pepper-hot" style="color:#e74c3c;"></i> Tacos | Golosinas</div>
+                    <a href="https://wa.me/50400000000?text=Pedido%20Comida" class="btn-ws">Hacer Pedido</a>
                 </div>
             </div>
 
-            <div class="btn-item btn-actividad" onclick="toggleAcc('tkt')">Sorteos y Boletos <i class="fas fa-ticket-alt"></i></div>
+            <div class="btn-item" style="background:white; color:#1a3a5a;" onclick="toggleAcc('tkt')">Sorteos y Boletos <i class="fas fa-ticket-alt"></i></div>
             <div id="tkt" class="contenido-desplegable">
-                <div class="info-grid">
-                    <div class="info-item"><i class="fas fa-star c-pre"></i> Adquiere boletos para apoyar proyectos.</div>
-                    <a href="https://wa.me/50400000000?text=Hola,%20quiero%20comprar%20boletos" class="btn-ws">Comprar Boletos</a>
-                </div>
+                <div class="info-grid">🎟️ Compra tus boletos aquí. <a href="https://wa.me/50400000000?text=Comprar%20Boletos" class="btn-ws">Comprar</a></div>
             </div>
         </div>
     </div>
 
     <div class="page">
         <div class="header" style="background-image: url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1000&q=80');">
-            <h1 class="titulo-elefante">Fortalecimiento</h1>
+            <h1 class="titulo-elefante">Recursos</h1>
         </div>
         <div class="main-content">
-            <span class="seccion-titulo">Recursos Espirituales</span>
+            <span class="seccion-titulo">Espiritual</span>
             <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('sa')">Semana de Ayuno <i class="fas fa-fire" style="color:#e74c3c;"></i></div>
-            <div id="sa" class="contenido-desplegable"><div class="info-grid">🙏 Búsqueda de la presencia de Dios. <a href="https://wa.me/50400000000?text=Info%20sobre%20Ayuno" class="btn-ws">Agendar</a></div></div>
-
-            <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('aj')">Ayuno de Jóvenes <i class="fas fa-users" style="color:#3498db;"></i></div>
-            <div id="aj" class="contenido-desplegable"><div class="info-grid">🔥 Jóvenes encendidos por su Espíritu. <a href="https://wa.me/50400000000?text=Info%20Ayuno%20Jóvenes" class="btn-ws">Agendar</a></div></div>
-
-            <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('dv')">Devocionales <i class="fas fa-sun" style="color:#f1c40f;"></i></div>
-            <div id="dv" class="contenido-desplegable"><div class="info-grid">📖 Alimento diario para el alma. <a href="#" class="btn-ws" style="background:var(--oscuro-puro)">Ver Hoy</a></div></div>
+            <div id="sa" class="contenido-desplegable"><div class="info-grid">🙏 Búsqueda de Dios. <a href="https://wa.me/50400000000?text=Info%20Ayuno" class="btn-ws">Agendar</a></div></div>
         </div>
     </div>
 </div>

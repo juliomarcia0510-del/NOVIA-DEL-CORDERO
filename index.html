@@ -6,220 +6,293 @@
     <title>La Novia del Cordero</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Roboto:wght@400;700&display=swap');
-        
         :root { 
             --oro: #D4AF37; 
             --oro-oscuro: #996515;
-            --oro-brillante: #FFD700; 
-            --oscuro-puro: #0a0a0a;
-            --whatsapp: #25d366;
-            --bg-page: #fdfaf1;
-            --card-bg: rgba(255, 255, 255, 0.98);
+            --bg-crema: #fdfaf1;
+            --oscuro: #1a1a1a;
+            --ws-verde: #25d366;
         }
 
-        body.dark-mode { --bg-page: #000000; --card-bg: rgba(35, 35, 35, 0.98); }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg-crema); overflow: hidden; }
 
-        html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: var(--bg-page); font-family: 'Segoe UI', sans-serif; }
+        /* Estructura de Navegación */
+        .app-container { display: flex; width: 200vw; height: 100vh; transition: transform 0.5s ease-in-out; }
+        .page { width: 100vw; height: 100vh; overflow-y: auto; padding-bottom: 100px; box-sizing: border-box; }
 
-        .app-wrapper { display: flex; width: 200vw; height: 100vh; transition: transform 0.6s cubic-bezier(0.7, 0, 0.3, 1); }
-        .page { width: 100vw; height: 100vh; overflow-y: auto; position: relative; box-sizing: border-box; }
-
-        /* PORTADA CON BOTONES INTEGRADOS */
+        /* Portada */
         .header { 
-            width: 100%; position: relative;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1350&q=80'); 
-            background-size: cover; background-position: center; text-align: center; 
-            padding: 60px 0 50px; border-radius: 0 0 40px 40px; border-bottom: 4px solid var(--oro);
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=800&q=80');
+            background-size: cover; background-position: center;
+            height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            border-radius: 0 0 40px 40px; border-bottom: 4px solid var(--oro); position: relative;
         }
 
-        /* Botón Visión Esquina Superior Derecha */
         .btn-vision-top {
-            position: absolute; top: 15px; right: 15px;
-            background: #111; color: var(--oro); border: 1.5px solid var(--oro);
-            padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: bold;
-            text-transform: uppercase; z-index: 10; cursor: pointer;
+            position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8);
+            color: var(--oro); border: 1px solid var(--oro); padding: 5px 12px;
+            border-radius: 8px; font-size: 10px; font-weight: bold; cursor: pointer;
         }
 
-        /* Botón Apocalipsis Borde Interior Portada */
-        .btn-apoc-bottom {
-            position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%);
-            background: var(--oscuro-puro); color: var(--oro-brillante);
-            border: 1px solid var(--oro); padding: 8px 20px; border-radius: 20px;
-            font-size: 10px; width: 80%; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            font-style: italic; z-index: 5;
+        .titulo-principal { color: var(--oro); font-size: 24px; text-transform: uppercase; margin: 0; text-align: center; font-weight: 900; }
+        .sub-titulo { color: white; font-size: 10px; letter-spacing: 1px; }
+
+        .btn-apoc {
+            position: absolute; bottom: -15px; background: white; border: 1.5px solid var(--oro);
+            padding: 8px 20px; border-radius: 20px; font-size: 11px; font-weight: bold;
+            display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .titulo-elefante { font-family: 'Playfair Display', serif; color: var(--oro-brillante); text-transform: uppercase; margin: 0; font-size: 26px; }
-        .main-content { padding: 0 20px 150px; }
+        /* Botones de Control */
+        .control-bar { display: flex; justify-content: space-between; padding: 40px 25px 10px; }
+        .circle-btn { width: 50px; height: 50px; border-radius: 50%; background: #222; color: var(--oro); display: flex; align-items: center; justify-content: center; border: 2px solid var(--oro); }
 
-        /* Botón Necesitas Oración */
-        .btn-oracion {
-            width: 100%; background: var(--oro); color: black;
-            padding: 14px; border-radius: 12px; text-align: center;
-            font-weight: 900; margin-top: 20px; text-decoration: none;
-            display: block; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-            border: 2px solid black;
+        /* Botón Oración Mejorado */
+        .btn-oracion-container { padding: 0 20px; margin-bottom: 20px; }
+        .btn-oracion { 
+            background: white; border: 2px solid var(--oro); border-radius: 15px; 
+            padding: 15px; display: flex; align-items: center; justify-content: center; 
+            gap: 15px; text-decoration: none; color: #333; font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
-        .seccion-titulo { 
-            text-align: center; color: var(--oro); font-family: 'Playfair Display', serif; 
-            font-size: 20px; margin: 45px 0 20px; border-bottom: 2px solid var(--oro);
-            padding-bottom: 8px; display: block;
-        }
-
-        /* DISEÑO DE BOTONES DE LISTA */
-        .btn-item {
-            width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 12px;
-            display: flex; justify-content: space-between; align-items: center;
-            font-weight: bold; border: 1.5px solid var(--oro-oscuro); cursor: pointer;
-            background: #222; color: var(--oro); box-sizing: border-box;
-        }
-
-        .contenido-desplegable { 
-            max-height: 0; overflow: hidden; transition: 0.4s ease-in-out; 
-            background: var(--card-bg); border-radius: 0 0 12px 12px; 
-            margin-top: -12px; margin-bottom: 15px; border: 1.5px solid var(--oro); border-top: none;
-        }
+        /* Secciones y Acordeones */
+        .seccion-label { text-align: center; color: var(--oro-oscuro); font-size: 18px; font-weight: bold; margin: 25px 0 15px; }
         
-        .info-grid { padding: 15px; color: #333; }
-        .dark-mode .info-grid { color: #eee; }
-        .info-item { display: flex; align-items: center; margin-bottom: 10px; font-size: 13px; }
-        .info-item i { width: 30px; font-size: 16px; margin-right: 10px; text-align: center; }
-
-        /* COLORES ICONOS */
-        .c-dir { color: #3498db; } .c-mus { color: #e74c3c; } .c-pre { color: #f1c40f; } .c-cal { color: #e67e22; }
-
-        .btn-ws {
-            display: block; margin-top: 10px; padding: 10px;
-            background: var(--whatsapp); color: white; text-align: center;
-            border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 13px;
+        .acordeon { margin: 0 20px 10px; }
+        .acordeon-header { 
+            background: #2a2a2a; color: var(--oro); padding: 15px; border-radius: 10px;
+            display: flex; justify-content: space-between; align-items: center; cursor: pointer;
+        }
+        .acordeon-header.domingo { background: var(--oro); color: black; }
+        .acordeon-header.evento { background: #4a148c; color: white; }
+        
+        .acordeon-body { 
+            max-height: 0; overflow: hidden; transition: 0.3s ease-out;
+            background: white; border: 1px solid #ddd; border-top: none; border-radius: 0 0 10px 10px;
         }
 
-        .nav-master {
-            position: fixed; bottom: 30px; right: 25px; background: var(--oscuro-puro); 
-            color: var(--oro); width: 60px; height: 60px; border-radius: 50%;
-            border: 3px solid var(--oro); display: flex; align-items: center; justify-content: center; z-index: 9999;
+        .info-content { padding: 15px; font-size: 14px; color: #444; }
+        .info-line { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .info-line i { width: 20px; text-align: center; }
+
+        .btn-agendar { 
+            background: var(--ws-verde); color: white; text-align: center; 
+            padding: 10px; border-radius: 8px; display: block; text-decoration: none; 
+            font-weight: bold; margin-top: 10px; font-size: 13px;
         }
+
+        /* Navegación Flotante */
+        .nav-float {
+            position: fixed; bottom: 20px; right: 20px; background: black;
+            width: 60px; height: 60px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; color: var(--oro);
+            border: 3px solid var(--oro); z-index: 1000; font-size: 24px;
+        }
+
+        .ws-float {
+            position: fixed; bottom: 20px; left: 20px; background: var(--ws-verde);
+            width: 50px; height: 50px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; color: white; font-size: 24px; z-index: 1000;
+        }
+
+        /* Colores Iconos */
+        .i-dir { color: #3498db; } .i-cor { color: #e74c3c; } .i-pre { color: #f1c40f; }
+        .i-cal { color: #e67e22; } .i-loc { color: #2ecc71; }
     </style>
 </head>
 <body>
 
-<div class="nav-master" onclick="movePage()"><i class="fas fa-exchange-alt"></i></div>
+    <a href="https://wa.me/50400000000" class="ws-float"><i class="fab fa-whatsapp"></i></a>
+    <div class="nav-float" onclick="togglePage()"><i class="fas fa-exchange-alt"></i></div>
 
-<div class="app-wrapper" id="mainWrapper">
-    
-    <div class="page">
-        <div class="header">
-            <div class="btn-vision-top" onclick="alert('Visión: Preparar una novia santa para el Cordero glorificando a Dios.')">Nuestra Visión</div>
-            <h1 class="titulo-elefante">La Novia del Cordero</h1>
-            <p style="color:white; font-size:10px; margin-top:5px;">VIDA NUEVA, SECTOR COFRADÍA</p>
-            <div class="btn-apoc-bottom">"Han llegado las bodas del Cordero" - Apoc. 19:7</div>
-        </div>
-
-        <div class="main-content">
-            <div style="display: flex; justify-content: space-between; padding: 35px 0 10px;">
-                <div class="btn-item" onclick="toggleDarkMode()" style="width: 50px; height: 50px; border-radius: 50%; margin: 0; justify-content: center;"><i class="fas fa-moon"></i></div>
-                <div class="btn-item" style="width: 50px; height: 50px; border-radius: 50%; margin: 0; justify-content: center;"><i class="fas fa-map-marker-alt" style="color:#e74c3c;"></i></div>
+    <div class="app-container" id="master">
+        
+        <div class="page">
+            <div class="header">
+                <div class="btn-vision-top" onclick="alert('Visión: Preparar una novia santa para el Cordero.')">NUESTRA VISIÓN</div>
+                <h1 class="titulo-principal">La Novia del Cordero</h1>
+                <span class="sub-titulo">VIDA NUEVA, SECTOR COFRADÍA</span>
+                <div class="btn-apoc"><i class="fas fa-book-open"></i> Apocalipsis 19:7-9</div>
             </div>
 
-            <a href="https://wa.me/50400000000?text=Hola,%20necesito%20oración" class="btn-oracion">¿NECESITAS ORACIÓN? TOCAME 🙏</a>
+            <div class="control-bar">
+                <div class="circle-btn"><i class="fas fa-moon"></i></div>
+                <div class="circle-btn"><i class="fas fa-map-marker-alt"></i></div>
+            </div>
 
-            <span class="seccion-titulo">Cultos de la Semana</span>
+            <div class="btn-oracion-container">
+                <a href="https://wa.me/50400000000?text=Hola,%20necesito%20oración" class="btn-oracion">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2906/2906206.png" width="30">
+                    ¿NECESITAS ORACIÓN? CONTÁCTANOS
+                </a>
+            </div>
+
+            <div class="seccion-label">Cultos de la Semana</div>
+
+            <script>
+                const cultos = [
+                    {id:'m', dia:'Martes (Oración)', icon:'fa-person-praying'},
+                    {id:'j', dia:'Jueves (Damas)', icon:'fa-venus'},
+                    {id:'v', dia:'Viernes (Crecimiento)', icon:'fa-seedling'},
+                    {id:'s', dia:'Sábado (Jóvenes)', icon:'fa-users'},
+                ];
+                
+                cultos.forEach(c => {
+                    document.write(`
+                        <div class="acordeon">
+                            <div class="acordeon-header" onclick="toggleAcc('${c.id}')">
+                                <span>${c.dia}</span> <i class="fas ${c.icon}"></i>
+                            </div>
+                            <div id="${c.id}" class="acordeon-body">
+                                <div class="info-content">
+                                    <div class="info-line"><i class="fas fa-user-tie i-dir"></i> <b>Dirección:</b> Pendiente</div>
+                                    <div class="info-line"><i class="fas fa-music i-cor"></i> <b>Coros:</b> Pendiente</div>
+                                    <div class="info-line"><i class="fas fa-bible i-pre"></i> <b>Predicación:</b> Pendiente</div>
+                                    <a href="#" class="btn-agendar">Agendar en WhatsApp</a>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+
+            <div class="acordeon">
+                <div class="acordeon-header domingo" onclick="toggleAcc('dom')">
+                    <span>Domingo (General)</span> <i class="fas fa-church"></i>
+                </div>
+                <div id="dom" class="acordeon-body">
+                    <div class="info-content">
+                        <div class="info-line"><i class="fas fa-sun i-pre"></i> <b>Mañana:</b> 9:00 AM (E. Dominical)</div>
+                        <div class="info-line"><i class="fas fa-star i-pre"></i> <b>General:</b> 11:00 AM</div>
+                        <div class="info-line"><i class="fas fa-user-tie i-dir"></i> <b>Dirección:</b> Pendiente</div>
+                        <a href="#" class="btn-agendar">Agendar Domingo</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="seccion-label">Eventos Especiales</div>
             
-            <div class="btn-item" onclick="toggleAcc('m')">Martes (Adoración) <i class="fas fa-music"></i></div>
-            <div id="m" class="contenido-desplegable">
-                <div class="info-grid">
-                    <div class="info-item"><i class="fas fa-user-tie c-dir"></i> <b>Dirección:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-music c-mus"></i> <b>Coros:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-bible c-pre"></i> <b>Predicación:</b> Pendiente</div>
-                    <a href="https://wa.me/50400000000?text=Info%20Martes" class="btn-ws">Agendar en WhatsApp</a>
+            <script>
+                const eventos = [
+                    {id:'vig', dia:'Vigilia', icon:'fa-moon'},
+                    {id:'cam', dia:'Campañas', icon:'fa-bullhorn'},
+                    {id:'uni', dia:'Culto Unido', icon:'fa-handshake'}
+                ];
+
+                eventos.forEach(e => {
+                    document.write(`
+                        <div class="acordeon">
+                            <div class="acordeon-header evento" onclick="toggleAcc('${e.id}')">
+                                <span>${e.dia}</span> <i class="fas ${e.icon}"></i>
+                            </div>
+                            <div id="${e.id}" class="acordeon-body">
+                                <div class="info-content">
+                                    <div class="info-line"><i class="fas fa-calendar-alt i-cal"></i> <b>Fecha:</b> Pendiente</div>
+                                    <div class="info-line"><i class="fas fa-clock i-cal"></i> <b>Hora:</b> Pendiente</div>
+                                    <div class="info-line"><i class="fas fa-map-marker-alt i-loc"></i> <b>Lugar:</b> Pendiente</div>
+                                    <a href="#" class="btn-agendar">Más Información</a>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+
+            <div class="seccion-label">Actividades</div>
+            
+            <div class="acordeon">
+                <div class="acordeon-header" style="background:white; color:#333; border:1px solid #ddd;" onclick="toggleAcc('food')">
+                    <span>Venta de Comida</span> <i class="fas fa-utensils" style="color:#e67e22;"></i>
+                </div>
+                <div id="food" class="acordeon-body">
+                    <div class="info-content">
+                        <b>Menú Disponible:</b><br><br>
+                        <div class="info-line"><i class="fas fa-drumstick-bite" style="color:#e67e22;"></i> Pollo Frito</div>
+                        <div class="info-line"><i class="fas fa-hamburger" style="color:#f39c12;"></i> Hamburguesas</div>
+                        <div class="info-line"><i class="fas fa-pepper-hot" style="color:#e74c3c;"></i> Tacos</div>
+                        <div class="info-line"><i class="fas fa-candy-cane" style="color:#9b59b6;"></i> Golosinas</div>
+                        <a href="https://wa.me/50400000000?text=Hola,%20quiero%20hacer%20un%20pedido" class="btn-agendar" style="background:#2ecc71;">Hacer Pedido</a>
+                    </div>
                 </div>
             </div>
 
-            <div class="btn-item" onclick="toggleAcc('j')">Jueves (Damas) <i class="fas fa-venus"></i></div>
-            <div id="j" class="contenido-desplegable">
-                <div class="info-grid">
-                    <div class="info-item"><i class="fas fa-user-tie c-dir"></i> <b>Dirección:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-music c-mus"></i> <b>Coros:</b> Pendiente</div>
-                    <div class="info-item"><i class="fas fa-bible c-pre"></i> <b>Predicación:</b> Pendiente</div>
-                    <a href="https://wa.me/50400000000?text=Info%20Jueves" class="btn-ws">Agendar en WhatsApp</a>
+            <div class="acordeon">
+                <div class="acordeon-header" style="background:white; color:#333; border:1px solid #ddd;" onclick="toggleAcc('ticket')">
+                    <span>Sorteos y Boletos</span> <i class="fas fa-ticket-alt" style="color:#3498db;"></i>
                 </div>
-            </div>
-
-            <div class="btn-item" style="background:var(--oro); color:black;" onclick="toggleAcc('d')">Domingo (General) <i class="fas fa-church"></i></div>
-            <div id="d" class="contenido-desplegable">
-                <div class="info-grid">
-                    <div class="info-item"><i class="fas fa-sun c-pre"></i> <b>9:00 AM:</b> Escuela Dominical</div>
-                    <div class="info-item"><i class="fas fa-star c-pre"></i> <b>11:00 AM:</b> Culto General</div>
-                    <div class="info-item"><i class="fas fa-user-tie c-dir"></i> <b>Dirección:</b> Pendiente</div>
-                    <a href="https://wa.me/50400000000?text=Info%20Domingo" class="btn-ws">Agendar</a>
+                <div id="ticket" class="acordeon-body">
+                    <div class="info-content">
+                        <p>Apoya los proyectos de la iglesia adquiriendo tus boletos.</p>
+                        <div style="display:flex; gap:10px;">
+                            <a href="#" class="btn-agendar" style="background:#34495e; flex:1;">Ver Actividad</a>
+                            <a href="#" class="btn-agendar" style="flex:1;">Comprar Boleto</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <span class="seccion-titulo">Eventos Especiales</span>
-            <div class="btn-item" style="background:#4a148c; color:white;" onclick="toggleAcc('vig')">Vigilia <i class="fas fa-moon"></i></div>
-            <div id="vig" class="contenido-desplegable">
-                <div class="info-grid">
-                    <div class="info-item"><i class="fas fa-calendar-alt c-cal"></i> <b>Fecha/Hora:</b> Pendiente</div>
-                    <a href="https://wa.me/50400000000?text=Info%20Vigilia" class="btn-ws">Agendar</a>
-                </div>
-            </div>
-
-            <div class="btn-item" style="background:#4a148c; color:white;" onclick="toggleAcc('uni')">Culto Unido <i class="fas fa-handshake"></i></div>
-            <div id="uni" class="contenido-desplegable">
-                <div class="info-grid">
-                    <div class="info-item"><i class="fas fa-church c-dir"></i> <b>Iglesias y Dirección:</b> Pendiente</div>
-                    <a href="https://wa.me/50400000000?text=Info%20Culto%20Unido" class="btn-ws">Agendar</a>
-                </div>
-            </div>
-
-            <span class="seccion-titulo">Actividades</span>
-            <div class="btn-item" style="background:white; color:#1a3a5a;" onclick="toggleAcc('food')">Venta de Comida <i class="fas fa-utensils"></i></div>
-            <div id="food" class="contenido-desplegable">
-                <div class="info-grid">
-                    <b>Menú:</b>
-                    <div class="info-item"><i class="fas fa-drumstick-bite" style="color:#e67e22;"></i> Pollo | Hamburguesas</div>
-                    <div class="info-item"><i class="fas fa-pepper-hot" style="color:#e74c3c;"></i> Tacos | Golosinas</div>
-                    <a href="https://wa.me/50400000000?text=Pedido%20Comida" class="btn-ws">Hacer Pedido</a>
-                </div>
-            </div>
-
-            <div class="btn-item" style="background:white; color:#1a3a5a;" onclick="toggleAcc('tkt')">Sorteos y Boletos <i class="fas fa-ticket-alt"></i></div>
-            <div id="tkt" class="contenido-desplegable">
-                <div class="info-grid">🎟️ Compra tus boletos aquí. <a href="https://wa.me/50400000000?text=Comprar%20Boletos" class="btn-ws">Comprar</a></div>
             </div>
         </div>
+
+        <div class="page">
+            <div class="header" style="background-image: url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=800&q=80');">
+                <h1 class="titulo-principal">Fortalecimiento</h1>
+                <span class="sub-titulo">"BUSCAD AL SEÑOR..."</span>
+            </div>
+
+            <div class="seccion-label">Recursos Espirituales</div>
+
+            <script>
+                const recursos = [
+                    {id:'ay1', tit:'Semana de Ayuno', ic:'fa-fire', col:'#e74c3c'},
+                    {id:'ay2', tit:'Ayuno de Jóvenes', ic:'fa-users', col:'#3498db'},
+                    {id:'dev', tit:'Devocionales', ic:'fa-sun', col:'#f1c40f'}
+                ];
+
+                recursos.forEach(r => {
+                    document.write(`
+                        <div class="acordeon">
+                            <div class="acordeon-header" style="background:white; color:#333; border:1px solid #ddd;" onclick="toggleAcc('${r.id}')">
+                                <span>${r.tit}</span> <i class="fas ${r.ic}" style="color:${r.col}"></i>
+                            </div>
+                            <div id="${r.id}" class="acordeon-body">
+                                <div class="info-content">
+                                    <div class="info-line"><i class="fas fa-calendar i-cal"></i> <b>Fecha:</b> Pendiente</div>
+                                    <div class="info-line"><i class="fas fa-clock i-cal"></i> <b>Hora:</b> Pendiente</div>
+                                    <a href="#" class="btn-agendar">Agendar Participación</a>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+        </div>
+
     </div>
 
-    <div class="page">
-        <div class="header" style="background-image: url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1000&q=80');">
-            <h1 class="titulo-elefante">Recursos</h1>
-        </div>
-        <div class="main-content">
-            <span class="seccion-titulo">Espiritual</span>
-            <div class="btn-item" style="background:white; color:#333;" onclick="toggleAcc('sa')">Semana de Ayuno <i class="fas fa-fire" style="color:#e74c3c;"></i></div>
-            <div id="sa" class="contenido-desplegable"><div class="info-grid">🙏 Búsqueda de Dios. <a href="https://wa.me/50400000000?text=Info%20Ayuno" class="btn-ws">Agendar</a></div></div>
-        </div>
-    </div>
-</div>
-
-<script>
-    let pos = 1;
-    function movePage() {
-        const w = document.getElementById('mainWrapper');
-        if(pos === 1) { w.style.transform = 'translateX(-100vw)'; pos = 2; }
-        else { w.style.transform = 'translateX(0)'; pos = 1; }
-    }
-    function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
-    function toggleAcc(id) {
-        let e = document.getElementById(id);
-        if (e.style.maxHeight) { e.style.maxHeight = null; } 
-        else { 
-            document.querySelectorAll('.contenido-desplegable').forEach(x => x.style.maxHeight = null);
-            e.style.maxHeight = e.scrollHeight + "px"; 
+    <script>
+        // Lógica de navegación
+        let onPage1 = true;
+        function togglePage() {
+            const master = document.getElementById('master');
+            master.style.transform = onPage1 ? 'translateX(-100vw)' : 'translateX(0)';
+            onPage1 = !onPage1;
         }
-    }
-</script>
+
+        // Lógica de Acordeón
+        function toggleAcc(id) {
+            const element = document.getElementById(id);
+            const all = document.querySelectorAll('.acordeon-body');
+            
+            all.forEach(item => {
+                if (item.id !== id) item.style.maxHeight = null;
+            });
+
+            if (element.style.maxHeight) {
+                element.style.maxHeight = null;
+            } else {
+                element.style.maxHeight = element.scrollHeight + "px";
+            }
+        }
+    </script>
 </body>
 </html>

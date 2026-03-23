@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Novia del Cordero - Oficial</title>
+    <title>La Novia del Cordero - App Oficial</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap');
@@ -11,23 +11,29 @@
         
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--crema); padding-bottom: 100px; }
         
-        /* ENCABEZADO */
+        /* ENCABEZADO ESTILO ELEFANTE */
         .header { 
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1350&q=80'); 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1350&q=80'); 
             background-size: cover; text-align: center; padding: 60px 20px; border-radius: 0 0 50px 50px; border-bottom: 5px solid var(--oro); 
         }
         .titulo-elefante { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 35px; color: var(--oro-brillante); text-shadow: 3px 3px 0px #000; text-transform: uppercase; margin: 0; }
-        .lema { color: white; font-style: italic; margin-top: 10px; font-size: 14px; }
+        .subtitulo { color: white; font-weight: bold; margin-top: 10px; letter-spacing: 1px; }
 
         .container { padding: 20px; max-width: 500px; margin: auto; }
         
-        /* SECCIÓN ACTIVIDADES */
+        /* VIDEO PRINCIPAL */
+        .card-video { background: var(--oscuro); border-radius: 25px; overflow: hidden; margin-top: -40px; margin-bottom: 25px; border: 3px solid var(--oro); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+        /* SECCIÓN ACTIVIDADES PRO-TEMPLO */
         .btn-actividades {
             width: 100%; background: linear-gradient(135deg, var(--oro), #b8860b);
             color: black; border: 2px solid #000; padding: 18px; border-radius: 15px;
-            font-size: 16px; font-weight: bold; cursor: pointer;
+            font-size: 17px; font-weight: bold; cursor: pointer;
             display: flex; justify-content: center; align-items: center; gap: 10px;
-            margin-top: -40px; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .panel-actividades {
@@ -37,55 +43,49 @@
         }
 
         .sorteo-card { padding: 20px; text-align: center; }
+        .btn-compra { background: var(--whatsapp); color: white; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px; border-radius: 12px; font-weight: bold; margin-bottom: 15px; font-size: 16px; }
+        .btn-fotos { background: #f0f0f0; color: #333; border: 1px solid #ccc; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; display: block; font-size: 15px; }
+
+        .galeria-grid { display: none; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 15px; margin-top: 15px; border-top: 1px solid #eee; background: #fafafa; }
+        .galeria-grid img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; border: 1px solid var(--oro); }
+
+        /* ESTILOS DE CULTOS SEMANALES */
+        .dia-btn { width: 100%; background: #1a1a1a; border: 1px solid var(--oro); padding: 18px; margin-bottom: 12px; border-radius: 15px; color: var(--oro); font-weight: bold; display: flex; justify-content: space-between; cursor: pointer; font-size: 18px; }
+        .contenido { max-height: 0; overflow: hidden; transition: 0.4s; background: white; margin-top: -12px; margin-bottom: 15px; padding: 0 25px; border-radius: 0 0 15px 15px; border: 1px solid var(--oro); border-top: none; }
+        .detalle-txt { padding: 20px 0; line-height: 1.8; font-size: 17px; }
         
-        .btn-compra {
-            background: var(--whatsapp); color: white; text-decoration: none;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            padding: 12px; border-radius: 10px; font-weight: bold; margin-bottom: 10px;
-        }
-        .btn-fotos {
-            background: #f0f0f0; color: #333; border: 1px solid #ccc;
-            padding: 10px; border-radius: 10px; font-weight: bold; cursor: pointer;
-            width: 100%; display: block;
-        }
+        /* COLORES DE ENCARGADOS (Originales) */
+        .c-dir { color: #3498db; font-weight: bold; } /* Azul */
+        .c-cor { color: #e74c3c; font-weight: bold; } /* Rojo */
+        .c-pre { color: #d4a017; font-weight: bold; } /* Amarillo/Oro */
 
-        .galeria-grid {
-            display: none; grid-template-columns: repeat(2, 1fr); gap: 10px;
-            padding-top: 15px; margin-top: 15px; border-top: 1px solid #eee;
-        }
-        .galeria-grid img { width: 100%; height: 120px; object-fit: cover; border-radius: 8px; border: 1px solid var(--oro); }
-
-        /* ESTILOS DE DÍAS Y CULTOS */
-        .dia-btn { width: 100%; background: #1a1a1a; border: 1px solid var(--oro); padding: 18px; margin-bottom: 10px; border-radius: 12px; color: var(--oro); font-weight: bold; display: flex; justify-content: space-between; cursor: pointer; text-transform: uppercase; }
-        .contenido { max-height: 0; overflow: hidden; transition: 0.4s; background: white; margin-top: -10px; margin-bottom: 10px; padding: 0 20px; border-radius: 0 0 12px 12px; border: 1px solid #ddd; }
-        .detalle-txt { padding: 15px 0; line-height: 1.8; font-size: 16px; }
-        
-        /* COLORES PERSONALIZADOS */
-        .c-dir { color: #3498db; font-weight: bold; } 
-        .c-cor { color: #e74c3c; font-weight: bold; } 
-        .c-pre { color: #d4a017; font-weight: bold; } 
-
-        .btn-ws-float { position: fixed; bottom: 25px; right: 25px; background: var(--whatsapp); color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; border: 3px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.3); text-decoration: none; z-index: 100; }
+        /* WHATSAPP FLOTANTE */
+        .btn-ws-float { position: fixed; bottom: 25px; right: 25px; background: var(--whatsapp); color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; border: 3px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.3); text-decoration: none; z-index: 1000; }
     </style>
 </head>
 <body>
 
 <div class="header">
     <h1 class="titulo-elefante">La Novia del Cordero</h1>
-    <p style="margin-top: 10px; color: white; font-weight: bold; letter-spacing: 1px;">VIDA NUEVA, SECTOR COFRADÍA</p>
-    <div class="lema">"Preparándonos para el encuentro con el Amado"</div>
+    <p class="subtitulo">VIDA NUEVA, SECTOR COFRADÍA</p>
 </div>
 
 <div class="container">
+    <div class="card-video">
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/k6Q3uF7V5Hs" allowfullscreen></iframe>
+        </div>
+    </div>
+
     <button class="btn-actividades" onclick="toggleMenu('menu-act')">
         <i class="fas fa-ticket-alt"></i> VER ACTIVIDADES PRO-TEMPLO
     </button>
 
     <div id="menu-act" class="panel-actividades">
         <div class="sorteo-card">
-            <span style="font-weight: bold; font-size: 18px; display: block; margin-bottom: 15px;">🎟️ SORTEO DE BIBLIA ESPECIAL</span>
+            <span style="font-weight: bold; font-size: 19px; display: block; margin-bottom: 15px; color: #1a1a1a;">🎟️ SORTEO DE BIBLIA ESPECIAL</span>
             
-            <a href="https://wa.me/50400000000?text=Hola!%20Deseo%20comprar%20un%20boleto%20para%20el%20Sorteo%20(L.20)" class="btn-compra">
+            <a href="https://wa.me/50400000000?text=¡Bendiciones!%20Deseo%20comprar%20un%20boleto%20para%20el%20Sorteo%20de%20Biblia%20(Valor%20L.20)" class="btn-compra">
                 <i class="fab fa-whatsapp"></i> Comprar Boleto - L. 20.00
             </a>
 
@@ -94,45 +94,47 @@
             </button>
 
             <div id="galeria-sorteo" class="galeria-grid">
-                <p style="grid-column: span 2; font-size: 12px; color: #888;">Cargando imágenes...</p>
+                <p style="grid-column: span 2; font-size: 13px; color: #888; text-align: center;">Cargando bendiciones...</p>
             </div>
         </div>
     </div>
 
-    <h3 style="text-align: center; color: #555; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;">Programación Semanal</h3>
+    <h2 style="text-align: center; font-family: 'Playfair Display', serif; color: #1a1a1a; margin-bottom: 20px;">Orden del Culto</h2>
 
-    <button class="dia-btn" onclick="t('ma')">Martes: Adoración <i class="fas fa-chevron-down"></i></button>
+    <button class="dia-btn" onclick="t('ma')">Martes (Adoración) <i class="fas fa-music"></i></button>
     <div id="ma" class="contenido">
         <div class="detalle-txt">
-            <span class="c-dir">Dirección:</span> Hermana Marta <br>
-            <span class="c-cor">Coros Alegres:</span> Hermano Pedro <br>
-            <span class="c-pre">Predicación:</span> Hermano Christopher
+            <i class="fas fa-user-tie"></i> <span class="c-dir">Dirección:</span> Hermana Marta <br>
+            <i class="fas fa-microphone"></i> <span class="c-cor">Coros Alegres:</span> Hermano Pedro <br>
+            <i class="fas fa-bible"></i> <span class="c-pre">Predicación:</span> Hermano Christopher
         </div>
     </div>
 
-    <button class="dia-btn" onclick="t('j')">Jueves: Sociedad de Damas <i class="fas fa-chevron-down"></i></button>
+    <button class="dia-btn" onclick="t('j')">Jueves (Damas) <i class="fas fa-venus"></i></button>
     <div id="j" class="contenido">
-        <div class="detalle-txt">Un tiempo especial dedicado a la mujer esforzada y valiente.</div>
+        <div class="detalle-txt">Sociedad de Damas: Un tiempo para renovar fuerzas en la presencia del Señor.</div>
     </div>
 
-    <button class="dia-btn" onclick="t('s')">Sábado: Jóvenes <i class="fas fa-chevron-down"></i></button>
+    <button class="dia-btn" onclick="t('s')">Sábado (Jóvenes) <i class="fas fa-fire"></i></button>
     <div id="s" class="contenido">
-        <div class="detalle-txt">¡Generación que marca la diferencia! Ven y gózate con nosotros.</div>
+        <div class="detalle-txt">¡Sociedad de Jóvenes! Ven y se parte de la generación que busca a Dios.</div>
     </div>
 
-    <button class="dia-btn" onclick="t('d')" style="background: var(--oro); color: black;">Domingo: Culto General <i class="fas fa-star"></i></button>
+    <button class="dia-btn" onclick="t('d')" style="background: var(--oro); color: black;">Domingo (General) <i class="fas fa-church"></i></button>
     <div id="d" class="contenido">
         <div class="detalle-txt">
             <b>Escuela Dominical:</b> 9:00 AM <br>
-            <b>Culto General:</b> 11:00 AM <br>
-            <i>¡Toda la familia reunida en la casa del Señor!</i>
+            <b>Culto General:</b> 11:00 AM
         </div>
     </div>
 </div>
 
-<a href="https://wa.me/50400000000" class="btn-ws-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<a href="https://wa.me/50400000000" class="btn-ws-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
 
 <script>
+    // Función para los cultos semanales
     function t(id) {
         var e = document.getElementById(id);
         var isOpen = e.style.maxHeight;
@@ -140,12 +142,14 @@
         if (!isOpen) e.style.maxHeight = e.scrollHeight + "px";
     }
 
+    // Función para el menú de actividades
     function toggleMenu(id) {
         var e = document.getElementById(id);
         if (e.style.maxHeight) { e.style.maxHeight = null; } 
-        else { e.style.maxHeight = "1000px"; }
+        else { e.style.maxHeight = "1500px"; }
     }
 
+    // Función para mostrar/ocultar la galería
     function toggleGaleria() {
         const galeria = document.getElementById('galeria-sorteo');
         if (galeria.style.display === 'none' || galeria.style.display === '') {
@@ -156,9 +160,9 @@
         }
     }
 
+    // CARGA DE IMÁGENES DESDE GOOGLE SHEETS
     function cargarFotos() {
-        // ID corregido basado en tu mensaje
-        const sheetID = 'mAee7Xp8Oen786WSXyLaR9Mc7tgBLI_XWdJNp9vGV4'; 
+        const sheetID = '1-mAee7Xp8Oen786WSXyLaR9Mc7tgBLI_XWdJNp9vGV4'; 
         const url = `https://opensheet.elk.sh/${sheetID}/1`;
 
         fetch(url)
@@ -166,17 +170,28 @@
             .then(data => {
                 const contenedor = document.getElementById('galeria-sorteo');
                 contenedor.innerHTML = '';
-                if(data.length === 0) {
-                    contenedor.innerHTML = '<p style="grid-column: span 2;">No hay fotos registradas.</p>';
+                
+                if(!data || data.length === 0) {
+                    contenedor.innerHTML = '<p style="grid-column: span 2;">No hay fotos en el Excel.</p>';
+                    return;
                 }
+
                 data.forEach(fila => {
-                    if(fila.Imagen) {
-                        contenedor.innerHTML += `<img src="${fila.Imagen}" alt="Sorteo">`;
-                    }
+                    // Busca enlaces en cualquier columna
+                    let valores = Object.values(fila);
+                    valores.forEach(val => {
+                        if(typeof val === 'string' && val.includes('http')) {
+                            // Limpia y asegura enlace directo de Postimages
+                            let imgUrl = val.trim().replace('postimg.cc', 'i.postimg.cc');
+                            if (!imgUrl.includes('.jpg') && !imgUrl.includes('.png')) imgUrl += '.jpg';
+                            
+                            contenedor.innerHTML += `<img src="${imgUrl}" onerror="this.src='${val}'">`;
+                        }
+                    });
                 });
             })
             .catch(err => {
-                document.getElementById('galeria-sorteo').innerHTML = 'Error de conexión. Verifica que el Excel sea público.';
+                document.getElementById('galeria-sorteo').innerHTML = 'Error: Verifica que el Excel sea PÚBLICO.';
             });
     }
 </script>

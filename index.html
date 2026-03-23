@@ -11,34 +11,33 @@
         
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--crema); padding-bottom: 100px; }
         
+        /* ENCABEZADO */
         .header { 
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1350&q=80'); 
             background-size: cover; text-align: center; padding: 60px 20px; border-radius: 0 0 50px 50px; border-bottom: 5px solid var(--oro); 
         }
         .titulo-elefante { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 35px; color: var(--oro-brillante); text-shadow: 3px 3px 0px #000; text-transform: uppercase; margin: 0; }
+        .lema { color: white; font-style: italic; margin-top: 10px; font-size: 14px; }
 
         .container { padding: 20px; max-width: 500px; margin: auto; }
         
-        /* BOTÓN PRINCIPAL ACTIVIDADES */
+        /* SECCIÓN ACTIVIDADES */
         .btn-actividades {
             width: 100%; background: linear-gradient(135deg, var(--oro), #b8860b);
-            color: black; border: none; padding: 18px; border-radius: 15px;
-            font-size: 18px; font-weight: bold; cursor: pointer;
+            color: black; border: 2px solid #000; padding: 18px; border-radius: 15px;
+            font-size: 16px; font-weight: bold; cursor: pointer;
             display: flex; justify-content: center; align-items: center; gap: 10px;
-            margin: -30px auto 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            margin-top: -40px; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
-        /* MENÚ DESPLEGABLE */
         .panel-actividades {
             max-height: 0; overflow: hidden; transition: 0.5s ease-in-out;
             background: white; border-radius: 20px; margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 1px solid var(--oro);
         }
 
-        .sorteo-card { padding: 20px; border: 1px solid #eee; text-align: center; }
-        .sorteo-titulo { font-weight: bold; font-size: 20px; color: var(--oscuro); margin-bottom: 15px; display: block; }
+        .sorteo-card { padding: 20px; text-align: center; }
         
-        /* BOTONES INTERNOS */
         .btn-compra {
             background: var(--whatsapp); color: white; text-decoration: none;
             display: flex; align-items: center; justify-content: center; gap: 10px;
@@ -50,43 +49,43 @@
             width: 100%; display: block;
         }
 
-        /* GALERÍA DINÁMICA */
         .galeria-grid {
             display: none; grid-template-columns: repeat(2, 1fr); gap: 10px;
             padding-top: 15px; margin-top: 15px; border-top: 1px solid #eee;
         }
         .galeria-grid img { width: 100%; height: 120px; object-fit: cover; border-radius: 8px; border: 1px solid var(--oro); }
 
-        /* ESTILOS DE DÍAS */
-        .dia-btn { width: 100%; background: #1a1a1a; border: 1px solid var(--oro); padding: 18px; margin-bottom: 10px; border-radius: 12px; color: var(--oro); font-weight: bold; display: flex; justify-content: space-between; cursor: pointer; }
+        /* ESTILOS DE DÍAS Y CULTOS */
+        .dia-btn { width: 100%; background: #1a1a1a; border: 1px solid var(--oro); padding: 18px; margin-bottom: 10px; border-radius: 12px; color: var(--oro); font-weight: bold; display: flex; justify-content: space-between; cursor: pointer; text-transform: uppercase; }
         .contenido { max-height: 0; overflow: hidden; transition: 0.4s; background: white; margin-top: -10px; margin-bottom: 10px; padding: 0 20px; border-radius: 0 0 12px 12px; border: 1px solid #ddd; }
-        .detalle-txt { padding: 15px 0; line-height: 1.6; }
+        .detalle-txt { padding: 15px 0; line-height: 1.8; font-size: 16px; }
         
-        /* COLORES QUE PEDISTE */
-        .c-dir { color: #3498db; font-weight: bold; } /* Azul */
-        .c-cor { color: #e74c3c; font-weight: bold; } /* Rojo */
-        .c-pre { color: #f1c40f; font-weight: bold; text-shadow: 1px 1px 1px #000; } /* Amarillo */
+        /* COLORES PERSONALIZADOS */
+        .c-dir { color: #3498db; font-weight: bold; } 
+        .c-cor { color: #e74c3c; font-weight: bold; } 
+        .c-pre { color: #d4a017; font-weight: bold; } 
 
-        .btn-ws-float { position: fixed; bottom: 25px; right: 25px; background: var(--whatsapp); color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; border: 3px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.3); text-decoration: none; }
+        .btn-ws-float { position: fixed; bottom: 25px; right: 25px; background: var(--whatsapp); color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; border: 3px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.3); text-decoration: none; z-index: 100; }
     </style>
 </head>
 <body>
 
 <div class="header">
     <h1 class="titulo-elefante">La Novia del Cordero</h1>
-    <p style="margin-top: 10px; color: white; font-weight: bold;">VIDA NUEVA, SECTOR COFRADÍA</p>
+    <p style="margin-top: 10px; color: white; font-weight: bold; letter-spacing: 1px;">VIDA NUEVA, SECTOR COFRADÍA</p>
+    <div class="lema">"Preparándonos para el encuentro con el Amado"</div>
 </div>
 
 <div class="container">
     <button class="btn-actividades" onclick="toggleMenu('menu-act')">
-        <i class="fas fa-star"></i> VER ACTIVIDADES PRO-TEMPLO
+        <i class="fas fa-ticket-alt"></i> VER ACTIVIDADES PRO-TEMPLO
     </button>
 
     <div id="menu-act" class="panel-actividades">
         <div class="sorteo-card">
-            <span class="sorteo-titulo">🎟️ SORTEO DE BIBLIA ESPECIAL</span>
+            <span style="font-weight: bold; font-size: 18px; display: block; margin-bottom: 15px;">🎟️ SORTEO DE BIBLIA ESPECIAL</span>
             
-            <a href="https://wa.me/50400000000?text=¡Bendiciones!%20Deseo%20comprar%20un%20boleto%20para%20el%20Sorteo%20de%20Biblia%20(Valor%20L.20)" class="btn-compra">
+            <a href="https://wa.me/50400000000?text=Hola!%20Deseo%20comprar%20un%20boleto%20para%20el%20Sorteo%20(L.20)" class="btn-compra">
                 <i class="fab fa-whatsapp"></i> Comprar Boleto - L. 20.00
             </a>
 
@@ -100,7 +99,9 @@
         </div>
     </div>
 
-    <button class="dia-btn" onclick="t('ma')">MARTES (Adoración) <i class="fas fa-chevron-down"></i></button>
+    <h3 style="text-align: center; color: #555; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;">Programación Semanal</h3>
+
+    <button class="dia-btn" onclick="t('ma')">Martes: Adoración <i class="fas fa-chevron-down"></i></button>
     <div id="ma" class="contenido">
         <div class="detalle-txt">
             <span class="c-dir">Dirección:</span> Hermana Marta <br>
@@ -109,15 +110,23 @@
         </div>
     </div>
 
-    <button class="dia-btn" onclick="t('j')">JUEVES (Damas) <i class="fas fa-chevron-down"></i></button>
-    <div id="j" class="contenido"><div class="detalle-txt">Culto especial de la sociedad de damas.</div></div>
+    <button class="dia-btn" onclick="t('j')">Jueves: Sociedad de Damas <i class="fas fa-chevron-down"></i></button>
+    <div id="j" class="contenido">
+        <div class="detalle-txt">Un tiempo especial dedicado a la mujer esforzada y valiente.</div>
+    </div>
 
-    <button class="dia-btn" onclick="t('s')">SÁBADO (Jóvenes) <i class="fas fa-chevron-down"></i></button>
-    <div id="s" class="contenido"><div class="detalle-txt">Culto de jóvenes "Generación de Fuego".</div></div>
+    <button class="dia-btn" onclick="t('s')">Sábado: Jóvenes <i class="fas fa-chevron-down"></i></button>
+    <div id="s" class="contenido">
+        <div class="detalle-txt">¡Generación que marca la diferencia! Ven y gózate con nosotros.</div>
+    </div>
 
-    <button class="dia-btn" onclick="t('d')" style="background: var(--oro); color: black;">DOMINGO (General) <i class="fas fa-crown"></i></button>
+    <button class="dia-btn" onclick="t('d')" style="background: var(--oro); color: black;">Domingo: Culto General <i class="fas fa-star"></i></button>
     <div id="d" class="contenido">
-        <div class="detalle-txt"><b>Escuela Dominical:</b> 9:00 AM <br> <b>Culto General:</b> 11:00 AM</div>
+        <div class="detalle-txt">
+            <b>Escuela Dominical:</b> 9:00 AM <br>
+            <b>Culto General:</b> 11:00 AM <br>
+            <i>¡Toda la familia reunida en la casa del Señor!</i>
+        </div>
     </div>
 </div>
 
@@ -126,8 +135,9 @@
 <script>
     function t(id) {
         var e = document.getElementById(id);
-        if (e.style.maxHeight) { e.style.maxHeight = null; } 
-        else { document.querySelectorAll('.contenido').forEach(x => x.style.maxHeight = null); e.style.maxHeight = e.scrollHeight + "px"; }
+        var isOpen = e.style.maxHeight;
+        document.querySelectorAll('.contenido').forEach(x => x.style.maxHeight = null);
+        if (!isOpen) e.style.maxHeight = e.scrollHeight + "px";
     }
 
     function toggleMenu(id) {
@@ -147,8 +157,8 @@
     }
 
     function cargarFotos() {
-        // !!! PEGA AQUÍ TU ID DE GOOGLE SHEETS !!!
-        const sheetID = 'mAee7Xp8Oen786WSXyLaR9Mc7tgBLI_XWdJNp9vGV4'; 
+        // ID corregido basado en tu mensaje
+        const sheetID = '1mAee7Xp8Oen786WSXyLaR9Mc7tgBLI_XWdJNp9vGV4'; 
         const url = `https://opensheet.elk.sh/${sheetID}/1`;
 
         fetch(url)
@@ -156,6 +166,9 @@
             .then(data => {
                 const contenedor = document.getElementById('galeria-sorteo');
                 contenedor.innerHTML = '';
+                if(data.length === 0) {
+                    contenedor.innerHTML = '<p style="grid-column: span 2;">No hay fotos registradas.</p>';
+                }
                 data.forEach(fila => {
                     if(fila.Imagen) {
                         contenedor.innerHTML += `<img src="${fila.Imagen}" alt="Sorteo">`;
@@ -163,7 +176,7 @@
                 });
             })
             .catch(err => {
-                document.getElementById('galeria-sorteo').innerHTML = 'Error al conectar con la base de datos.';
+                document.getElementById('galeria-sorteo').innerHTML = 'Error de conexión. Verifica que el Excel sea público.';
             });
     }
 </script>

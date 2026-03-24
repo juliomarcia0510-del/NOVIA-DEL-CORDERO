@@ -3,231 +3,278 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Novia del Cordero</title>
+    <title>La Novia del Cordero - App Profesional</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap');
+
         :root {
-            --fondo: #fcfbf7;
-            --tarjeta: #ffffff;
-            --texto: #444;
-            --oro-suave: #c5a059;
-            --purpura: #6a1b9a;
-            --azul: #2196f3;
-            --verde: #2ecc71;
-            --borde: #eee;
+            --oro-suave: #C5A059;
+            --texto-principal: #333;
+            --texto-secundario: #666;
+            --fondo-clarisimo: #FEFDFB; /* Fondo crema muy pálido */
+            --tarjeta-cristal: rgba(255, 255, 255, 0.9);
+            --borde-tarjeta: 1px solid rgba(197, 160, 89, 0.15);
+            --sombra-premium: 0 8px 32px 0 rgba(197, 160, 89, 0.08);
+            
+            /* Colores de Iconos */
+            --icon-martes: #3498db; /* Azul */
+            --icon-jueves: #e84393; /* Rosa */
+            --icon-viernes: #2ecc71; /* Verde */
+            --icon-sabado: #e67e22; /* Naranja */
+            --icon-domingo: #d4a017; /* Dorado */
         }
 
-        body { font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; background: var(--fondo); color: var(--texto); overflow-x: hidden; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            margin: 0; 
+            /* FONDO DE IMAGEN CLARO PROFESIONAL */
+            background-image: url('https://images.unsplash.com/photo-1621996200257-25e17f3eb3c7?q=80&w=1600&auto=format&fit=crop'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--texto-principal);
+            overflow-x: hidden;
+        }
 
-        /* NAVEGACIÓN DE PÁGINAS */
-        .page { display: none; padding: 20px; max-width: 500px; margin: auto; transition: 0.3s; }
-        .page.active { display: block; animation: fadeIn 0.5s; }
+        /* HEADER PREMIUM */
+        .header-premium {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 2px solid var(--oro-suave);
+            border-radius: 0 0 40px 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            margin-bottom: 30px;
+        }
+        .header-premium h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 28px; 
+            color: var(--oro-suave); 
+            text-transform: uppercase; 
+            margin: 0; 
+            letter-spacing: 1px;
+        }
+        .header-premium p { font-size: 13px; color: var(--texto-secundario); margin: 5px 0 0; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .container { padding: 20px; max-width: 480px; margin: auto; }
 
-        /* HEADER LIMPIO */
-        .header-app { text-align: center; padding: 40px 20px; background: white; border-radius: 0 0 30px 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 25px; border-bottom: 2px solid var(--borde); }
-        .header-app h1 { margin: 0; font-size: 24px; color: var(--oro-suave); text-transform: uppercase; letter-spacing: 1px; }
-        .header-app p { margin: 5px 0 0; font-size: 12px; color: #888; }
+        /* TÍTULOS DE SECCIÓN COLORIDOS */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 19px;
+            color: var(--oro-suave);
+            text-align: center;
+            margin: 30px 0 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .section-title i { font-size: 22px; }
 
-        /* TARJETAS ESTILO CLARO */
-        .seccion-titulo { font-size: 18px; color: var(--oro-suave); margin: 25px 0 15px; text-align: center; font-weight: 600; }
+        /* TARJETAS ACORDEÓN PREMIUM (Efecto Cristal) */
+        .acordeon {
+            background: var(--tarjeta-cristal);
+            border: var(--borde-tarjeta);
+            border-radius: 18px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            box-shadow: var(--sombra-premium);
+            transition: 0.3s ease;
+        }
+        .acordeon:hover { transform: translateY(-3px); }
+
+        .acordeon-header {
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .acordeon-header span { display: flex; align-items: center; gap: 15px; }
+        .acordeon-header i.chevron { color: #aaa; font-size: 12px; transition: 0.3s; }
         
-        .acordeon { background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 15px; margin-bottom: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
-        .acordeon-header { padding: 18px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 500; }
-        .acordeon-header i { color: #aaa; font-size: 14px; }
-        
-        .acordeon-body { max-height: 0; overflow: hidden; transition: 0.3s ease-out; background: #fafafa; }
-        .inner { padding: 20px; border-top: 1px solid var(--borde); }
+        .acordeon-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background: rgba(249, 247, 242, 0.5); /* Crema muy pálido translúcido */
+        }
+        .inner { padding: 25px; border-top: 1px solid rgba(197, 160, 89, 0.1); }
 
-        /* COLORES DE EVENTOS */
-        .especial { border-left: 5px solid var(--purpura); }
-        .especial .acordeon-header { color: var(--purpura); }
+        /* BOTONES PROFESIONALES */
+        .btn-accion {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 15px;
+            width: 100%;
+            cursor: pointer;
+            border: none;
+            transition: 0.2s;
+            margin-top: 15px;
+        }
+        .btn-verde { background: var(--verde); color: white; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2); }
+        .btn-verde:hover { opacity: 0.9; }
+        .btn-premium { background: white; border: 1px solid #ccc; color: #555; }
+        .btn-premium:hover { background: #f9f9f9; }
 
-        /* BOTONES */
-        .btn-accion { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: bold; margin-top: 10px; border: none; width: 100%; cursor: pointer; transition: 0.2s; }
-        .btn-verde { background: var(--verde); color: white; }
-        .btn-claro { background: white; border: 1px solid #ddd; color: #666; }
-
-        /* GALERÍA */
-        .galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .galeria img { width: 100%; height: 110px; object-fit: cover; border-radius: 10px; cursor: pointer; border: 1px solid #eee; }
+        /* GALERÍA DE FOTOS */
+        .galeria-rifa { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 18px; }
+        .galeria-rifa img { width: 100%; height: 130px; object-fit: cover; border-radius: 12px; cursor: pointer; border: 2px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 
         /* VISOR PANTALLA COMPLETA */
-        #visor { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; justify-content: center; align-items: center; }
-        #visor img { max-width: 90%; max-height: 80%; border-radius: 10px; }
-        #cerrar-visor { position: absolute; top: 30px; right: 30px; color: white; font-size: 30px; cursor: pointer; }
+        #visor-rifa { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; justify-content: center; align-items: center; }
+        #visor-rifa img { max-width: 90%; max-height: 85%; border-radius: 12px; }
+        #cerrar-visor { position: absolute; top: 30px; right: 30px; color: white; font-size: 35px; cursor: pointer; }
 
-        /* NAVEGACIÓN FLOTANTE (CAMBIO DE PÁGINA) */
-        .nav-toggle { position: fixed; bottom: 25px; right: 25px; background: var(--oro-suave); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 1000; border: 3px solid white; }
+        /* BOTÓN FLOTANTE WHATSAPP */
+        .ws-flotante {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--verde);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+            z-index: 1000;
+            border: 3px solid white;
+        }
+
+        /* DETALLES DE CULTOS */
+        .info-culto { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .info-culto i { width: 20px; font-size: 16px; color: var(--oro-suave); }
+        .nombre-encargado { font-weight: 600; color: var(--texto-principal); }
+
+        /* ESTILOS DEL DOMINGO */
+        .domingo-section { border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 15px; }
+        .domingo-section:last-child { border: none; padding-bottom: 0; margin-bottom: 0; }
+        .domingo-titulo { font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+
+        /* COLORES ICONOS DÍAS */
+        .i-martes { color: var(--icon-martes); }
+        .i-domingo { color: var(--icon-domingo); }
     </style>
 </head>
 <body>
 
-    <div id="page-home" class="page active">
-        <div class="header-app">
-            <h1>La Novia del Cordero</h1>
-            <p>VIDA NUEVA, SECTOR COFRADÍA</p>
-        </div>
+    <div class="header-premium">
+        <h1>La Novia del Cordero</h1>
+        <p>VIDA NUEVA, SECTOR COFRADÍA</p>
+    </div>
 
-        <h2 class="seccion-titulo">Cultos de la Semana</h2>
-
-        <div class="acordeon" onclick="toggleAcordeon(this)">
-            <div class="acordeon-header"><span>Martes (Adoración)</span> <i class="fas fa-chevron-down"></i></div>
-            <div class="acordeon-body">
-                <div class="inner">
-                    <p><b>Dirección:</b> Pendiente</p>
-                    <p><b>Coros:</b> Pendiente</p>
-                    <p><b>Predicación:</b> Pendiente</p>
-                    <button class="btn-accion btn-verde">Agendar en WhatsApp</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="acordeon" style="background: #fff9e6; border-color: var(--oro-suave);" onclick="toggleAcordeon(this)">
-            <div class="acordeon-header"><span>Domingo (General)</span> <i class="fas fa-star"></i></div>
-            <div class="acordeon-body">
-                <div class="inner">Escuela Dominical: 9:00 AM <br> Culto General: 11:00 AM</div>
-            </div>
-        </div>
-
-        <h2 class="seccion-titulo">Eventos Especiales</h2>
+    <div class="container">
         
-        <div class="acordeon especial" onclick="toggleAcordeon(this)">
-            <div class="acordeon-header"><span>Vigilia</span> <i class="fas fa-moon"></i></div>
-            <div class="acordeon-body"><div class="inner">Fecha y hora por confirmar.</div></div>
-        </div>
-
-        <div class="acordeon especial" onclick="toggleAcordeon(this)">
-            <div class="acordeon-header"><span>Campañas</span> <i class="fas fa-bullhorn"></i></div>
-            <div class="acordeon-body"><div class="inner">Próximamente campaña evangelística.</div></div>
-        </div>
-
-        <div class="acordeon especial" onclick="toggleAcordeon(this)">
-            <div class="acordeon-header"><span>Culto Unido</span> <i class="fas fa-handshake"></i></div>
-            <div class="acordeon-body"><div class="inner">Reunión con iglesias hermanas.</div></div>
-        </div>
-
-        <h2 class="seccion-titulo">Actividades</h2>
+        <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Cronograma de Cultos</h2>
 
         <div class="acordeon" onclick="toggleAcordeon(this)">
-            <div class="acordeon-header"><span>Venta de Comida</span> <i class="fas fa-utensils"></i></div>
+            <div class="acordeon-header">
+                <span><i class="fas fa-praying-hands i-martes"></i> Martes (Adoración)</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </div>
             <div class="acordeon-body">
                 <div class="inner">
-                    <p>Menú: Pollo, Tacos, Hamburguesas.</p>
-                    <button class="btn-accion btn-verde">Hacer Pedido</button>
+                    <div class="info-culto"><i class="fas fa-user-tie"></i> Dirección: <span class="nombre-encargado">Pendiente</span></div>
+                    <div class="info-culto"><i class="fas fa-microphone"></i> Coros: <span class="nombre-encargado">Pendiente</span></div>
+                    <div class="info-culto"><i class="fas fa-bible"></i> Predicación: <span class="nombre-encargado">Pendiente</span></div>
                 </div>
             </div>
         </div>
 
         <div class="acordeon" onclick="toggleAcordeon(this)">
-            <div class="acordeon-header"><span>Sorteos y Boletos</span> <i class="fas fa-ticket-alt"></i></div>
+            <div class="acordeon-header">
+                <span><i class="fas fa-female" style="color:var(--icon-jueves)"></i> Jueves (Damas)</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </div>
+            <div class="acordeon-body">
+                <div class="inner">Un tiempo especial de oración y fortaleza para las mujeres que buscan al Señor.</div>
+            </div>
+        </div>
+
+        <div class="acordeon" onclick="toggleAcordeon(this)">
+            <div class="acordeon-header">
+                <span><i class="fas fa-seedling" style="color:var(--icon-viernes)"></i> Viernes (Crecimiento)</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </div>
+            <div class="acordeon-body">
+                <div class="inner">Estudio profundo de la Palabra para crecer espiritualmente.</div>
+            </div>
+        </div>
+
+        <div class="acordeon" onclick="toggleAcordeon(this)">
+            <div class="acordeon-header">
+                <span><i class="fas fa-fire-alt" style="color:var(--icon-sabado)"></i> Sábado (Jóvenes)</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </div>
+            <div class="acordeon-body">
+                <div class="inner">¡Generación de impacto! Ven a alabar y a llenarte del Espíritu Santo.</div>
+            </div>
+        </div>
+
+        <div class="acordeon" style="background: rgba(212, 175, 55, 0.05);" onclick="toggleAcordeon(this)">
+            <div class="acordeon-header">
+                <span><i class="fas fa-church i-domingo"></i> Domingo (General)</span>
+                <i class="fas fa-star i-domingo"></i>
+            </div>
             <div class="acordeon-body">
                 <div class="inner">
-                    <p>Rifa de Biblia Especial - L. 20.00</p>
-                    <button class="btn-accion btn-verde">Comprar Boleto</button>
-                    <button class="btn-accion btn-claro" onclick="cargarFotos(event)">Ver Imágenes del Sorteo</button>
-                    <div id="galeria-fotos" class="galeria"></div>
+                    <div class="domingo-section">
+                        <div class="domingo-titulo"><i class="fas fa-apple-alt" style="color:#e67e22"></i> Escuela Dominical</div>
+                        <div class="info-culto"><i class="fas fa-clock"></i> Hora: <span class="nombre-encargado">9:00 AM</span></div>
+                        <div class="info-culto"><i class="fas fa-book-reader"></i> Temas: Pendientes</div>
+                    </div>
+                    <div class="domingo-section">
+                        <div class="domingo-titulo"><i class="fas fa-dove" style="color:#3498db"></i> Culto General</div>
+                        <div class="info-culto"><i class="fas fa-clock"></i> Hora: <span class="nombre-encargado">11:00 AM</span></div>
+                        <div class="info-culto"><i class="fas fa-bible"></i> Predicación: Pendiente</div>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 
-    <div id="page-spiritual" class="page">
-        <div class="header-app">
-            <h1>Fortalecimiento</h1>
-            <p>RECURSOS ESPIRITUALES</p>
-        </div>
-
-        <div class="acordeon" style="border-left: 5px solid #e74c3c;">
-            <div class="acordeon-header"><span>Semana de Ayuno</span> <i class="fas fa-fire" style="color:#e74c3c"></i></div>
-        </div>
-        <div class="acordeon" style="border-left: 5px solid #3498db;">
-            <div class="acordeon-header"><span>Ayuno de Jóvenes</span> <i class="fas fa-users" style="color:#3498db"></i></div>
-        </div>
-        <div class="acordeon" style="border-left: 5px solid #f1c40f;">
-            <div class="acordeon-header"><span>Devocionales</span> <i class="fas fa-sun" style="color:#f1c40f"></i></div>
-        </div>
-
-        <button class="btn-accion btn-claro" style="margin-top: 40px;" onclick="switchPage('home')">
-            <i class="fas fa-arrow-left"></i> Volver al Inicio
-        </button>
-    </div>
-
-    <div class="nav-toggle" id="btn-nav" onclick="handleNav()">
-        <i class="fas fa-exchange-alt"></i>
-    </div>
-
-    <div id="visor">
-        <span id="cerrar-visor" onclick="cerrarVisor()">&times;</span>
-        <img id="img-full" src="" alt="">
-    </div>
+    <a href="https://wa.me/50400000000" class="ws-flotante">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <script>
-        // NAVEGACIÓN ENTRE PÁGINAS
-        let currentPage = 'home';
-        function handleNav() {
-            if (currentPage === 'home') switchPage('spiritual');
-            else switchPage('home');
-        }
-
-        function switchPage(pageId) {
-            currentPage = pageId;
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-' + pageId).classList.add('active');
-            window.scrollTo(0,0);
-        }
-
-        // ACORDEONES
+        // Función para los acordeones
         function toggleAcordeon(element) {
             const body = element.querySelector('.acordeon-body');
+            const chevron = element.querySelector('.chevron');
             const isOpen = body.style.maxHeight;
             
-            document.querySelectorAll('.acordeon-body').forEach(b => b.style.maxHeight = null);
-            
-            if (!isOpen) {
-                body.style.maxHeight = body.scrollHeight + "px";
-            }
-        }
-
-        // CARGA DE GOOGLE SHEETS
-        function cargarFotos(e) {
-            e.stopPropagation();
-            const sheetID = '1-mAee7Xp8Oen786WSXyLaR9Mc7tgBLI_XWdJNp9vGV4';
-            const url = `https://opensheet.elk.sh/${sheetID}/1`;
-            const galeria = document.getElementById('galeria-fotos');
-
-            galeria.innerHTML = '<p style="grid-column:span 2; text-align:center; font-size:12px;">Cargando...</p>';
-
-            fetch(url).then(res => res.json()).then(data => {
-                galeria.innerHTML = '';
-                data.forEach(fila => {
-                    Object.values(fila).forEach(val => {
-                        if(typeof val === 'string' && val.includes('http')) {
-                            let imgUrl = val.trim().replace('postimg.cc', 'i.postimg.cc');
-                            if (!imgUrl.includes('.jpg') && !imgUrl.includes('.png')) imgUrl += '.jpg';
-                            
-                            const img = document.createElement('img');
-                            img.src = imgUrl;
-                            img.onclick = (e) => { e.stopPropagation(); abrirVisor(imgUrl); };
-                            galeria.appendChild(img);
-                        }
-                    });
-                });
-                // Expandir acordeón para mostrar fotos
-                const body = galeria.closest('.acordeon-body');
-                body.style.maxHeight = "1000px";
+            // Cerrar otros
+            document.querySelectorAll('.acordeon-body').forEach(b => {
+                if (b !== body) {
+                    b.style.maxHeight = null;
+                    b.parentElement.querySelector('.chevron').style.transform = "rotate(0deg)";
+                }
             });
-        }
-
-        // VISOR DE IMÁGENES
-        function abrirVisor(url) {
-            document.getElementById('img-full').src = url;
-            document.getElementById('visor').style.display = 'flex';
-        }
-
-        function cerrarVisor() {
-            document.getElementById('visor').style.display = 'none';
+            
+            // Abrir/Cerrar actual
+            if (isOpen) {
+                body.style.maxHeight = null;
+                chevron.style.transform = "rotate(0deg)";
+            } else {
+                body.style.maxHeight = body.scrollHeight + "px";
+                chevron.style.transform = "rotate(180deg)";
+            }
         }
     </script>
 </body>

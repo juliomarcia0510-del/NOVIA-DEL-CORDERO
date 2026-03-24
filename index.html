@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Novia del Cordero - App</title>
+    <title>La Novia del Cordero - App Oficial</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
@@ -12,62 +12,49 @@
             --oro: #C5A059;
             --fondo: #fcfbf7;
             --blanco: #ffffff;
-            --purpura: #6a1b9a;
-            --verde: #2ecc71;
-            --azul: #3498db;
+            --purpura: #8e44ad;
+            --verde: #27ae60;
+            --azul: #2980b9;
             --naranja: #e67e22;
-            --rosa: #e84393;
+            --rojo: #e74c3c;
         }
 
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            margin: 0; 
-            background: var(--fondo); 
-            color: #333;
-            overflow-x: hidden;
-            padding-bottom: 100px;
-        }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--fondo); color: #333; overflow-x: hidden; padding-bottom: 100px; }
 
-        /* HEADER DIAMANTE CRISTALIZADO */
+        /* HEADER DIAMANTE DINÁMICO */
         .header-diamond {
-            background: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)), 
-                        url('https://images.unsplash.com/photo-1523821741446-edb2b68bb7a0?q=80&w=1470&auto=format&fit=crop'); 
-            background-size: cover;
-            background-position: center;
-            height: 220px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-bottom: 4px solid var(--oro);
-            border-radius: 0 0 50px 50px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            text-align: center;
+            background: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), 
+                        url('https://www.transparenttextures.com/patterns/cubes.png'),
+                        url('https://images.unsplash.com/photo-1515462277126-2dd0c162007a?q=80&w=1588&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            height: 220px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            border-bottom: 4px solid var(--oro); border-radius: 0 0 50px 50px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1); text-align: center; transition: 0.5s;
         }
 
-        .header-diamond h1 { 
-            font-family: 'Playfair Display', serif; 
-            color: var(--oro); 
-            font-size: 26px; 
-            text-transform: uppercase; 
-            margin: 0;
-            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
-        }
+        .header-diamond h1 { font-family: 'Playfair Display', serif; color: var(--oro); font-size: 24px; text-transform: uppercase; margin: 0; text-shadow: 2px 2px 4px rgba(255,255,255,0.8); }
 
         /* VISTAS */
         .page { display: none; padding: 20px; max-width: 500px; margin: auto; }
-        .page.active { display: block; animation: fadeIn 0.4s ease forwards; }
+        .page.active { display: block; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* TARJETAS */
-        .section-title { font-family: 'Playfair Display', serif; color: var(--oro); text-align: center; margin: 30px 0 15px; font-size: 20px; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+        /* TITULOS */
+        .section-title { font-family: 'Playfair Display', serif; color: var(--oro); text-align: center; margin: 30px 0 15px; font-size: 20px; position: relative; }
+        .section-title::after { content: ''; display: block; width: 40px; height: 2px; background: var(--oro); margin: 5px auto; }
         
-        .card { background: var(--blanco); border-radius: 20px; margin-bottom: 12px; border: 1px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.02); overflow: hidden; }
+        /* TARJETAS */
+        .card { background: var(--blanco); border-radius: 20px; margin-bottom: 12px; border: 1px solid #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.03); overflow: hidden; }
         .card-header { padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; font-size: 15px; }
         .card-header span { display: flex; align-items: center; gap: 12px; }
+        .card-header i.chevron { font-size: 12px; color: #bbb; transition: 0.3s; }
         
-        .card-body { max-height: 0; overflow: hidden; transition: 0.3s ease; background: #fafafa; }
-        .inner { padding: 20px; border-top: 1px solid #f0f0f0; font-size: 14px; }
+        .card-body { max-height: 0; overflow: hidden; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); background: #fafafa; }
+        .inner { padding: 20px; border-top: 1px solid #f0f0f0; }
+
+        /* ICONOS DETALLE EVENTO */
+        .event-detail { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 14px; }
+        .event-detail i { width: 20px; font-size: 16px; }
 
         /* BOTONES */
         .btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 12px; font-weight: bold; text-decoration: none; border: none; width: 100%; margin-top: 10px; cursor: pointer; font-size: 14px; }
@@ -75,162 +62,120 @@
         .btn-img { background: white; border: 1px solid #ddd; color: #555; }
 
         /* GALERIA */
-        .galeria-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 15px; }
-        .galeria-grid img { width: 100%; height: 110px; object-fit: cover; border-radius: 12px; border: 1px solid #ddd; }
+        .galeria-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 15px; }
+        .galeria-grid img { width: 100%; height: 115px; object-fit: cover; border-radius: 12px; border: 2px solid white; box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
 
-        /* NAV FLOTANTE */
-        .nav-float { position: fixed; bottom: 25px; left: 25px; background: var(--oro); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); cursor: pointer; border: 3px solid white; z-index: 999; }
+        /* NAVEGACION FLOTANTE */
+        .nav-float { position: fixed; bottom: 25px; left: 25px; background: var(--oro); color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); cursor: pointer; border: 3px solid white; z-index: 1000; }
 
-        /* VISOR */
-        #visor { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:9999; justify-content:center; align-items:center; }
-        #visor img { max-width: 90%; max-height: 80%; border-radius: 10px; }
-        #cerrar { position: absolute; top: 30px; right: 30px; color: white; font-size: 35px; cursor: pointer; }
+        /* VISOR PANTALLA COMPLETA */
+        #visor { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); z-index: 9999; justify-content: center; align-items: center; }
+        #visor img { max-width: 95%; max-height: 85%; border-radius: 10px; }
+        #cerrar { position: absolute; top: 30px; right: 30px; color: white; font-size: 40px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <div class="header-diamond">
-        <h1>La Novia del Cordero</h1>
-        <p style="color:#555; font-size: 11px; font-weight: 600;">VIDA NUEVA, SECTOR COFRADÍA</p>
+    <div class="header-diamond" id="app-header">
+        <h1 id="header-title">La Novia del Cordero</h1>
+        <p id="header-subtitle" style="color:#555; font-size: 11px; font-weight: 600;">VIDA NUEVA, SECTOR COFRADÍA</p>
     </div>
 
     <div id="page1" class="page active">
-        <h2 class="section-title">Nuestros Cultos</h2>
-        
-        <div class="card" onclick="toggleCard(this)">
-            <div class="card-header"><span><i class="fas fa-pray" style="color:var(--azul)"></i> Martes (Adoración)</span><i class="fas fa-chevron-down"></i></div>
-            <div class="card-body"><div class="inner"><b>Dirección:</b> Hermana Marta<br><b>Coros:</b> Hermano Pedro<br><b>Predicación:</b> Hermano Christopher</div></div>
-        </div>
-
-        <div class="card" onclick="toggleCard(this)">
-            <div class="card-header"><span><i class="fas fa-venus" style="color:var(--rosa)"></i> Jueves (Damas)</span><i class="fas fa-chevron-down"></i></div>
-            <div class="card-body"><div class="inner">Reunión especial de la Sociedad de Damas.</div></div>
-        </div>
-
-        <div class="card" onclick="toggleCard(this)">
-            <div class="card-header"><span><i class="fas fa-book-open" style="color:var(--verde)"></i> Viernes (Crecimiento)</span><i class="fas fa-chevron-down"></i></div>
-            <div class="card-body"><div class="inner">Estudio profundo de las Sagradas Escrituras.</div></div>
-        </div>
-
-        <div class="card" onclick="toggleCard(this)">
-            <div class="card-header"><span><i class="fas fa-fire" style="color:var(--naranja)"></i> Sábado (Jóvenes)</span><i class="fas fa-chevron-down"></i></div>
-            <div class="card-body"><div class="inner">Sociedad de Jóvenes: "Generación de Impacto".</div></div>
-        </div>
-
-        <div class="card" onclick="toggleCard(this)" style="border: 2px solid var(--oro)">
-            <div class="card-header"><span><i class="fas fa-church" style="color:var(--oro)"></i> Domingo (General)</span><i class="fas fa-star" style="color:var(--oro)"></i></div>
-            <div class="card-body">
-                <div class="inner">
-                    <p><b><i class="fas fa-apple-alt" style="color:var(--naranja)"></i> Escuela Dominical:</b> 9:00 AM</p>
-                    <hr style="border:0; border-top:1px solid #eee">
-                    <p><b><i class="fas fa-dove" style="color:var(--azul)"></i> Culto General:</b> 11:00 AM</p>
-                </div>
-            </div>
-        </div>
+        <h2 class="section-title">Cultos Semanales</h2>
+        <div class="card" onclick="toggleCard(this)"><div class="card-header"><span><i class="fas fa-pray" style="color:var(--azul)"></i> Martes (Adoración)</span><i class="fas fa-chevron-down chevron"></i></div><div class="card-body"><div class="inner"><b>Predicación:</b> Hno. Christopher</div></div></div>
+        <div class="card" onclick="toggleCard(this)"><div class="card-header"><span><i class="fas fa-venus" style="color:var(--purpura)"></i> Jueves (Damas)</span><i class="fas fa-chevron-down chevron"></i></div><div class="card-body"><div class="inner">Unión Femenina: 6:30 PM</div></div></div>
+        <div class="card" onclick="toggleCard(this)"><div class="card-header"><span><i class="fas fa-book-open" style="color:var(--verde)"></i> Viernes (Crecimiento)</span><i class="fas fa-chevron-down chevron"></i></div><div class="card-body"><div class="inner">Estudio Bíblico Profundo.</div></div></div>
+        <div class="card" onclick="toggleCard(this)"><div class="card-header"><span><i class="fas fa-fire" style="color:var(--naranja)"></i> Sábado (Jóvenes)</span><i class="fas fa-chevron-down chevron"></i></div><div class="card-body"><div class="inner">Sociedad de Jóvenes.</div></div></div>
+        <div class="card" onclick="toggleCard(this)" style="border: 1px solid var(--oro)"><div class="card-header"><span><i class="fas fa-star" style="color:var(--oro)"></i> Domingo (General)</span><i class="fas fa-chevron-down chevron"></i></div><div class="card-body"><div class="inner">
+            <p><b><i class="fas fa-apple-alt" style="color:var(--naranja)"></i> Escuela Dominical:</b> 9:00 AM</p>
+            <p><b><i class="fas fa-dove" style="color:var(--azul)"></i> Culto General:</b> 11:00 AM</p>
+        </div></div></div>
 
         <h2 class="section-title">Eventos Especiales</h2>
-        <div class="card" onclick="toggleCard(this)">
-            <div class="card-header"><span><i class="fas fa-handshake" style="color:var(--purpura)"></i> Culto Unido</span><i class="fas fa-chevron-down"></i></div>
-            <div class="card-body"><div class="inner">Confraternidad con iglesias del sector Cofradía.</div></div>
-        </div>
-        <div class="card" onclick="toggleCard(this)">
-            <div class="card-header"><span><i class="fas fa-bullhorn" style="color:var(--purpura)"></i> Campaña</span><i class="fas fa-chevron-down"></i></div>
-            <div class="card-body"><div class="inner">Actividad de evangelismo y milagros.</div></div>
-        </div>
-        <div class="card" onclick="toggleCard(this)">
-            <div class="card-header"><span><i class="fas fa-moon" style="color:var(--purpura)"></i> Vigilia</span><i class="fas fa-chevron-down"></i></div>
-            <div class="card-body"><div class="inner">Búsqueda del Espíritu Santo en la noche.</div></div>
-        </div>
+        <div class="card" onclick="toggleCard(this)"><div class="card-header"><span><i class="fas fa-handshake" style="color:var(--azul)"></i> Culto Unido</span><i class="fas fa-chevron-down chevron"></i></div><div class="card-body"><div class="inner">
+            <div class="event-detail"><i class="fas fa-calendar-day" style="color:var(--azul)"></i> <b>Día:</b> Último Domingo</div>
+            <div class="event-detail"><i class="fas fa-clock" style="color:var(--naranja)"></i> <b>Hora:</b> 5:00 PM</div>
+            <div class="event-detail"><i class="fas fa-map-marker-alt" style="color:var(--rojo)"></i> <b>Fecha:</b> Mensual</div>
+        </div></div></div>
+        
+        <div class="card" onclick="toggleCard(this)"><div class="card-header"><span><i class="fas fa-bullhorn" style="color:var(--rojo)"></i> Campaña</span><i class="fas fa-chevron-down chevron"></i></div><div class="card-body"><div class="inner">
+            <div class="event-detail"><i class="fas fa-calendar-check" style="color:var(--verde)"></i> <b>Día:</b> Por anunciar</div>
+            <div class="event-detail"><i class="fas fa-clock" style="color:var(--naranja)"></i> <b>Hora:</b> 6:00 PM</div>
+        </div></div></div>
+
+        <h2 class="section-title">Actividades Pro-Construcción</h2>
+        <div class="card" onclick="toggleCard(this)"><div class="card-header"><span><i class="fas fa-utensils" style="color:var(--verde)"></i> Venta de Comida</span><i class="fas fa-chevron-down chevron"></i></div><div class="card-body"><div class="inner">
+            <p>Apoya el templo. Menú: Pollo, Tacos, Baleadas.</p>
+            <a href="https://wa.me/50400000000" class="btn btn-ws"><i class="fab fa-whatsapp"></i> Hacer Pedido</a>
+        </div></div></div>
+        <div class="card" onclick="toggleCard(this)"><div class="card-header"><span><i class="fas fa-ticket-alt" style="color:var(--naranja)"></i> Sorteos</span><i class="fas fa-chevron-down chevron"></i></div><div class="card-body"><div class="inner">
+            <p>Rifa de Biblia Especial (L.20.00)</p>
+            <a href="https://wa.me/50400000000" class="btn btn-ws"><i class="fab fa-whatsapp"></i> Comprar Boletos</a>
+            <button class="btn btn-img" onclick="cargarSheet(event)"><i class="fas fa-images"></i> Ver Imágenes del Sorteo</button>
+            <div id="galeria" class="galeria-grid"></div>
+        </div></div></div>
     </div>
 
     <div id="page2" class="page">
-        <h2 class="section-title">Pro-Construcción</h2>
-        <div class="card" onclick="toggleCard(this)">
-            <div class="card-header"><span><i class="fas fa-utensils" style="color:var(--verde)"></i> Venta de Comida</span><i class="fas fa-chevron-down"></i></div>
-            <div class="card-body">
-                <div class="inner">
-                    <p>Pollo frito, tacos y más. ¡Haz tu pedido!</p>
-                    <a href="https://wa.me/50400000000" class="btn btn-ws"><i class="fab fa-whatsapp"></i> Pedir Comida</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card" onclick="toggleCard(this)">
-            <div class="card-header"><span><i class="fas fa-ticket-alt" style="color:var(--naranja)"></i> Sorteos</span><i class="fas fa-chevron-down"></i></div>
-            <div class="card-body">
-                <div class="inner">
-                    <p>Rifa de Biblia Especial (Valor: L.20.00)</p>
-                    <a href="https://wa.me/50400000000" class="btn btn-ws"><i class="fab fa-whatsapp"></i> Comprar Boletos</a>
-                    <button class="btn btn-img" onclick="cargarGaleria(event)"><i class="fas fa-images"></i> Ver Imágenes del Sorteo</button>
-                    <div id="galeria-fotos" class="galeria-grid"></div>
-                </div>
-            </div>
-        </div>
-
-        <h2 class="section-title">Fortalecimiento</h2>
-        <div class="card" style="border-left: 5px solid #e74c3c;"><div class="card-header"><span><i class="fas fa-fire" style="color:#e74c3c"></i> Semana de Ayuno</span></div></div>
-        <div class="card" style="border-left: 5px solid #3498db;"><div class="card-header"><span><i class="fas fa-users" style="color:#3498db"></i> Ayuno de Jóvenes</span></div></div>
+        <h2 class="section-title">Recursos Espirituales</h2>
+        <div class="card" style="border-left: 5px solid var(--rojo)"><div class="card-header"><span><i class="fas fa-fire" style="color:var(--rojo)"></i> Semana de Ayuno</span></div></div>
+        <div class="card" style="border-left: 5px solid var(--azul)"><div class="card-header"><span><i class="fas fa-users" style="color:var(--azul)"></i> Ayuno de Jóvenes</span></div></div>
         <div class="card" style="border-left: 5px solid #f1c40f;"><div class="card-header"><span><i class="fas fa-sun" style="color:#f1c40f"></i> Devocionales</span></div></div>
     </div>
 
     <div class="nav-float" onclick="cambiarPagina()"><i class="fas fa-exchange-alt"></i></div>
 
-    <div id="visor">
-        <span id="cerrar" onclick="document.getElementById('visor').style.display='none'">&times;</span>
-        <img id="foto-full" src="">
-    </div>
+    <div id="visor"><span id="cerrar" onclick="document.getElementById('visor').style.display='none'">&times;</span><img id="f-full" src=""></div>
 
     <script>
-        // Función para abrir/cerrar tarjetas
         function toggleCard(el) {
             const body = el.querySelector('.card-body');
+            const chev = el.querySelector('.chevron');
             const isOpen = body.style.maxHeight;
             document.querySelectorAll('.card-body').forEach(b => b.style.maxHeight = null);
-            if (!isOpen) body.style.maxHeight = "600px";
+            document.querySelectorAll('.chevron').forEach(c => c && (c.style.transform = "rotate(0deg)"));
+            if (!isOpen) { body.style.maxHeight = "1000px"; chev.style.transform = "rotate(180deg)"; }
         }
 
-        // Navegación
         function cambiarPagina() {
             const p1 = document.getElementById('page1');
             const p2 = document.getElementById('page2');
+            const h1 = document.getElementById('header-title');
+            const sub = document.getElementById('header-subtitle');
             if (p1.classList.contains('active')) {
                 p1.classList.remove('active'); p2.classList.add('active');
+                h1.innerText = "Fortalecimiento"; sub.innerText = "ESPIRITUAL Y AYUNO";
             } else {
                 p2.classList.remove('active'); p1.classList.add('active');
+                h1.innerText = "La Novia del Cordero"; sub.innerText = "VIDA NUEVA, SECTOR COFRADÍA";
             }
             window.scrollTo(0,0);
         }
 
-        // Carga de Google Sheets
-        function cargarGaleria(ev) {
-            ev.stopPropagation();
-            const box = document.getElementById('galeria-fotos');
-            box.innerHTML = '<p style="font-size:12px; grid-column:span 2; text-align:center;">Cargando bendiciones...</p>';
-            
-            const sheetID = '1-mAee7Xp8Oen786WSXyLaR9Mc7tgBLI_XWdJNp9vGV4';
-            const url = `https://opensheet.elk.sh/${sheetID}/1`;
-
-            fetch(url).then(r => r.json()).then(data => {
+        async function cargarSheet(e) {
+            e.stopPropagation();
+            const box = document.getElementById('galeria');
+            box.innerHTML = '<p style="grid-column:span 2; font-size:12px; text-align:center;">Abriendo galería...</p>';
+            try {
+                const r = await fetch('https://opensheet.elk.sh/1-mAee7Xp8Oen786WSXyLaR9Mc7tgBLI_XWdJNp9vGV4/1');
+                const data = await r.json();
                 box.innerHTML = '';
-                data.forEach(fila => {
-                    Object.values(fila).forEach(val => {
-                        if(typeof val === 'string' && val.includes('http')) {
-                            let imgUrl = val.trim().replace('postimg.cc', 'i.postimg.cc');
-                            if(!imgUrl.includes('.jpg')) imgUrl += '.jpg';
+                data.forEach(row => {
+                    Object.values(row).forEach(v => {
+                        if(typeof v === 'string' && v.includes('http')) {
+                            // Limpiador de enlaces de postimg
+                            let cleanUrl = v.trim().replace('postimg.cc', 'i.postimg.cc');
+                            if(!cleanUrl.match(/\.(jpg|jpeg|png|gif)$/i)) cleanUrl += '.jpg';
                             const img = document.createElement('img');
-                            img.src = imgUrl;
-                            img.onclick = (e) => { 
-                                e.stopPropagation();
-                                document.getElementById('foto-full').src = imgUrl;
-                                document.getElementById('visor').style.display = 'flex';
-                            };
+                            img.src = cleanUrl;
+                            img.onclick = (ev) => { ev.stopPropagation(); document.getElementById('f-full').src = cleanUrl; document.getElementById('visor').style.display = 'flex'; };
                             box.appendChild(img);
                         }
                     });
                 });
-                // Ajustar altura del contenedor
-                box.closest('.card-body').style.maxHeight = "1000px";
-            }).catch(() => { box.innerHTML = 'Error al cargar fotos.'; });
+                box.closest('.card-body').style.maxHeight = "1500px";
+            } catch(e) { box.innerHTML = 'Error al cargar fotos.'; }
         }
     </script>
 </body>

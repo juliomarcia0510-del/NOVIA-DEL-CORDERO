@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Novia del Cordero - App</title>
+    <title>La Novia del Cordero - Gestión</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
@@ -13,240 +13,207 @@
             --fondo: #fcfbf7;
             --blanco: #ffffff;
             --texto: #333;
-            
-            /* Paleta Pastel Total */
             --rosa-bg: #FCE4EC;
             --verde-bg: #E8F5E9;
             --purpura-bg: #F3E5F5;
             --azul-bg: #E3F2FD;
-            
-            /* Colores de Acento */
             --purpura-text: #6a1b9a;
             --verde-text: #27ae60;
             --azul-text: #2980b9;
         }
 
-        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--fondo); color: var(--texto); overflow-x: hidden; padding-bottom: 100px; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--fondo); color: var(--texto); padding-bottom: 100px; }
 
-        /* HEADER CUADRADO PREMIUM */
+        /* HEADER CUADRADO */
         .header-box {
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), 
-                        url('https://images.unsplash.com/photo-1557682257-2f9c37a3a5f3?q=80&w=1470&auto=format&fit=crop'); /* Cielo Cristalizado Diamante */
-            background-size: cover;
-            background-position: center;
-            height: 200px;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1557682257-2f9c37a3a5f3?q=80&w=1470&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            height: 220px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            border-bottom: 4px solid var(--oro); text-align: center;
+        }
+
+        .header-box h1 { font-family: 'Playfair Display', serif; color: var(--oro); font-size: 24px; text-transform: uppercase; margin: 0; }
+        
+        /* BOTÓN PARA LÍDERES */
+        .btn-lideres {
+            margin-top: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--oro);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            border-bottom: 4px solid var(--oro);
-            /* Sin bordes redondeados */
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            gap: 8px;
+            transition: 0.3s;
         }
+        .btn-lideres:hover { background: var(--oro); }
 
-        .header-box h1 { 
-            font-family: 'Playfair Display', serif; 
-            color: var(--oro); 
-            font-size: 26px; 
-            text-transform: uppercase; 
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        /* VISTAS */
         .page { display: none; padding: 20px; max-width: 500px; margin: auto; }
-        .page.active { display: block; animation: fadeIn 0.5s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .page.active { display: block; }
 
-        /* TITULOS DE SECCIÓN */
-        .seccion-titulo { font-family: 'Playfair Display', serif; color: var(--oro); text-align: center; margin: 35px 0 15px; font-size: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .seccion-titulo { font-family: 'Playfair Display', serif; color: var(--oro); text-align: center; margin: 30px 0 15px; font-size: 18px; text-transform: uppercase; }
 
-        /* TARJETAS DE EXPOSICIÓN TOTAL (FONDO A COLOR) */
+        /* TARJETAS */
         .tarjeta-exposicion {
-            border-radius: 20px;
-            margin-bottom: 15px;
-            padding: 20px;
-            border: 1px solid rgba(0,0,0,0.05);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border-radius: 15px; margin-bottom: 15px; padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
         }
         
-        .tarjeta-titulo { font-weight: 600; font-size: 16px; display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
-        .tarjeta-titulo i { font-size: 18px; width: 20px; text-align: center; }
+        .tarjeta-titulo { font-weight: 600; font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .tarjeta-detalles { font-size: 14px; color: #444; line-height: 1.6; }
 
-        .tarjeta-detalles { font-size: 14px; color: #555; line-height: 1.7; }
-        .detalle-linea { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-        .detalle-linea i { font-size: 14px; width: 16px; color: #888; }
-
-        /* COLORES DE TARJETAS */
         .bg-rosa { background-color: var(--rosa-bg); }
         .bg-verde { background-color: var(--verde-bg); }
         .bg-purpura { background-color: var(--purpura-bg); }
         .bg-azul { background-color: var(--azul-bg); }
 
-        /* BOTONES */
-        .btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; border-radius: 12px; font-weight: bold; text-decoration: none; border: none; width: 100%; margin-top: 15px; cursor: pointer; font-size: 15px; }
-        .btn-ws { background: #2ecc71; color: white; }
+        /* SLIDER IMÁGENES */
+        .slider-box { 
+            overflow: hidden; border-radius: 12px; background: #eee; 
+            margin-top: 15px; height: 250px; position: relative;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .slider-track { display: flex; transition: 0.5s ease; width: 100%; height: 100%; }
+        .slider-track img { width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; }
 
-        /* GALERIA AUTOMÁTICA */
-        .slider-box { overflow: hidden; border-radius: 15px; background: white; margin-top: 15px; border: 2px solid white; box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
-        .slider-track { display: flex; transition: 0.5s ease; }
-        .slider-track img { width: 100%; height: 220px; object-fit: cover; flex-shrink: 0; }
+        .btn-ws { background: #2ecc71; color: white; padding: 12px; border-radius: 10px; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 15px; font-weight: 600; }
 
-        /* NAVEGACION FLOTANTE */
-        .nav-float { position: fixed; bottom: 25px; left: 25px; background: var(--oro); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); cursor: pointer; border: 3px solid white; z-index: 1000; }
+        .nav-float { position: fixed; bottom: 25px; right: 25px; background: var(--oro); color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer; z-index: 1000; border: 2px solid white; }
     </style>
 </head>
 <body>
 
-    <div class="header-box" id="app-header">
-        <h1 id="header-title">La Novia del Cordero</h1>
-        <p id="header-subtitle" style="color:#eee; font-size: 11px;">VIDA NUEVA, SECTOR COFRADÍA</p>
+    <div class="header-box">
+        <h1>La Novia del Cordero</h1>
+        <p style="color:#ddd; font-size: 10px; letter-spacing: 1px;">VIDA NUEVA, SECTOR COFRADÍA</p>
+        <a href="https://wa.me/50400000000?text=Hola,%20necesito%20actualizar%20la%20organización%20de%20los%20líderes" class="btn-lideres">
+            <i class="fas fa-user-shield"></i> Espacio para Líderes
+        </a>
     </div>
 
     <div id="page1" class="page active">
-        
-        <h2 class="seccion-titulo">Cultos Semanales</h2>
+        <h2 class="seccion-titulo">Cultos de la Semana</h2>
         
         <div class="tarjeta-exposicion bg-azul">
-            <div class="tarjeta-titulo"><span><i class="fas fa-pray" style="color:var(--azul-text)"></i> Martes (Adoración)</span></div>
-            <div class="tarjeta-detalles">
-                <div class="detalle-linea"><i class="fas fa-user-tie"></i> Dirección: Hna. Marta</div>
-                <div class="detalle-linea"><i class="fas fa-microphone"></i> Coros: Hno. Pedro</div>
-                <div class="detalle-linea"><i class="fas fa-bible"></i> Predicación: Hno. Christopher</div>
-            </div>
+            <div class="tarjeta-titulo"><i class="fas fa-pray" style="color:var(--azul-text)"></i> Martes (Oración)</div>
+            <div class="tarjeta-detalles">Dirección: Pendiente<br>Coros: Pendiente<br>Mensaje: Hno. Christopher</div>
         </div>
 
         <div class="tarjeta-exposicion bg-purpura">
-            <div class="tarjeta-titulo"><span><i class="fas fa-venus" style="color:var(--purpura-text)"></i> Jueves (Damas)</span></div>
+            <div class="tarjeta-titulo"><i class="fas fa-venus" style="color:var(--purpura-text)"></i> Jueves (Damas)</div>
             <div class="tarjeta-detalles">Culto especial de la Sociedad de Damas. Hora: 6:30 PM.</div>
         </div>
 
         <div class="tarjeta-exposicion bg-verde">
-            <div class="tarjeta-titulo"><span><i class="fas fa-book-open" style="color:var(--verde-text)"></i> Viernes (Crecimiento)</span></div>
-            <div class="tarjeta-detalles">Estudio profundo de las Sagradas Escrituras para edificación.</div>
+            <div class="tarjeta-titulo"><i class="fas fa-seedling" style="color:var(--verde-text)"></i> Viernes (Crecimiento)</div>
+            <div class="tarjeta-detalles">Estudio bíblico profundo para toda la familia.</div>
         </div>
 
         <div class="tarjeta-exposicion bg-rosa">
-            <div class="tarjeta-titulo"><span><i class="fas fa-fire" style="color:#e74c3c"></i> Sábado (Jóvenes)</span></div>
-            <div class="tarjeta-detalles">Sociedad de Jóvenes "Generación de Impacto". Hora: 6:00 PM.</div>
+            <div class="tarjeta-titulo"><i class="fas fa-users" style="color:#e74c3c"></i> Sábado (Jóvenes)</div>
+            <div class="tarjeta-detalles">Reunión juvenil "Generación de Impacto". Hora: 6:00 PM.</div>
         </div>
 
         <div class="tarjeta-exposicion bg-azul" style="border: 2px solid var(--oro)">
-            <div class="tarjeta-titulo"><span><i class="fas fa-church" style="color:var(--oro)"></i> Domingo (General)</span></div>
+            <div class="tarjeta-titulo"><i class="fas fa-church" style="color:var(--oro)"></i> Domingo (General)</div>
             <div class="tarjeta-detalles">
-                <p style="margin:0 0 10px 0;"><b><i class="fas fa-apple-alt" style="color:#e67e22"></i> Escuela Dominical:</b> 9:00 AM</p>
-                <p style="margin:0;"><b><i class="fas fa-dove" style="color:var(--azul-text)"></i> Culto General:</b> 11:00 AM</p>
+                <b>Escuela Dominical:</b> 9:00 AM<br>
+                <b>Culto General:</b> 11:00 AM
             </div>
         </div>
 
-        <h2 class="seccion-titulo">Eventos Especiales</h2>
-        
-        <div class="tarjeta-exposicion bg-purpura">
-            <div class="tarjeta-titulo"><span><i class="fas fa-handshake" style="color:var(--purpura-text)"></i> Culto Unido</span></div>
-            <div class="tarjeta-detalles">
-                <div class="detalle-linea"><i class="fas fa-calendar-day"></i> Día: Último Domingo</div>
-                <div class="detalle-linea"><i class="fas fa-clock"></i> Hora: 5:00 PM</div>
-            </div>
-        </div>
-
-        <div class="tarjeta-exposicion bg-rosa">
-            <div class="tarjeta-titulo"><span><i class="fas fa-bullhorn" style="color:#e74c3c"></i> Campaña Evangelística</span></div>
-            <div class="tarjeta-detalles">Días de gloria y milagros. Revisa las fechas próximamente.</div>
-        </div>
-
-        <div class="tarjeta-exposicion bg-azul">
-            <div class="tarjeta-titulo"><span><i class="fas fa-moon" style="color:var(--azul-text)"></i> Vigilia</span></div>
-            <div class="tarjeta-detalles">Tiempo de búsqueda y oración nocturna.</div>
-        </div>
-
-        <h2 class="seccion-titulo">Actividades Pro-Construcción</h2>
-
-        <div class="tarjeta-exposicion bg-verde">
-            <div class="tarjeta-titulo"><span><i class="fas fa-utensils" style="color:var(--verde-text)"></i> Venta de Comida</span></div>
-            <div class="tarjeta-detalles">
-                <p>Menú: Pollo Frito, Tacos, Hamburguesas. ¡Apoya!</p>
-                <a href="https://wa.me/50400000000" class="btn btn-ws"><i class="fab fa-whatsapp"></i> Hacer Pedido</a>
-            </div>
-        </div>
+        <h2 class="seccion-titulo">Actividades Especiales</h2>
 
         <div class="tarjeta-exposicion bg-purpura">
-            <div class="tarjeta-titulo"><span><i class="fas fa-ticket-alt" style="color:var(--purpura-text)"></i> Sorteo Pro-Construcción</span></div>
+            <div class="tarjeta-titulo"><i class="fas fa-ticket-alt" style="color:var(--purpura-text)"></i> Sorteo Pro-Construcción</div>
             <div class="tarjeta-detalles">
-                <p>Rifa de Biblia Especial (Valor: L.20.00)</p>
+                Rifa de Biblia Especial - L. 20.00 por boleto.
                 <div class="slider-box">
                     <div class="slider-track" id="slider-rifa">
-                        <p style="text-align:center; padding:20px; font-size:12px;">Cargando imágenes...</p>
+                        <p style="font-size:12px; color:#888;">Verificando imágenes...</p>
                     </div>
                 </div>
-                <a href="https://wa.me/50400000000" class="btn btn-ws"><i class="fab fa-whatsapp"></i> Comprar Boletos</a>
+                <a href="https://wa.me/50400000000" class="btn-ws"><i class="fab fa-whatsapp"></i> Comprar Boletos</a>
             </div>
         </div>
 
+        <div class="tarjeta-exposicion bg-verde">
+            <div class="tarjeta-titulo"><i class="fas fa-utensils" style="color:var(--verde-text)"></i> Venta de Comida</div>
+            <div class="tarjeta-detalles">
+                Apoya nuestra construcción. Menú variado cada fin de semana.
+                <a href="https://wa.me/50400000000" class="btn-ws" style="background:#3498db;"><i class="fas fa-info-circle"></i> Ver Menú</a>
+            </div>
+        </div>
     </div>
 
     <div id="page2" class="page">
-        <h2 class="seccion-titulo">Recursos Espirituales</h2>
-        <div class="tarjeta-exposicion bg-rosa" style="border-left: 5px solid #e74c3c;"><div class="tarjeta-titulo"><span><i class="fas fa-fire" style="color:#e74c3c"></i> Semana de Ayuno</span></div><div class="tarjeta-detalles">Primera semana de cada mes. Templo Central.</div></div>
-        <div class="tarjeta-exposicion bg-azul" style="border-left: 5px solid var(--azul-text)"><div class="tarjeta-titulo"><span><i class="fas fa-users" style="color:var(--azul-text)"></i> Ayuno de Jóvenes</span></div><div class="tarjeta-detalles">Sábados 9:00 AM. Salón de Jóvenes.</div></div>
-        <div class="tarjeta-exposicion bg-verde" style="border-left: 5px solid #f1c40f;"><div class="tarjeta-titulo"><span><i class="fas fa-sun" style="color:#f1c40f"></i> Devocionales</span></div><div class="tarjeta-detalles">Tema: Fortaleza para el día. Grupo de WhatsApp.</div></div>
+        <h2 class="seccion-titulo">Fortalecimiento</h2>
+        <div class="tarjeta-exposicion bg-rosa">
+            <div class="tarjeta-titulo"><i class="fas fa-fire"></i> Semana de Ayuno</div>
+            <div class="tarjeta-detalles">Primera semana del mes. Templo Central.</div>
+        </div>
     </div>
 
-    <div class="nav-float" onclick="cambiarPagina()"><i class="fas fa-exchange-alt"></i></div>
+    <div class="nav-float" onclick="cambiarPagina()"><i class="fas fa-sync-alt"></i></div>
 
     <script>
-        // Cambiar entre página 1 y 2
         function cambiarPagina() {
             const p1 = document.getElementById('page1');
             const p2 = document.getElementById('page2');
-            const tit = document.getElementById('header-title');
-            const sub = document.getElementById('header-subtitle');
-
-            if (p1.classList.contains('active')) {
-                p1.classList.remove('active'); p2.classList.add('active');
-                tit.innerText = "Fortalecimiento"; sub.innerText = "ESPIRITUAL Y AYUNO";
-            } else {
-                p2.classList.remove('active'); p1.classList.add('active');
-                tit.innerText = "La Novia del Cordero"; sub.innerText = "VIDA NUEVA, SECTOR COFRADÍA";
-            }
+            p1.classList.toggle('active');
+            p2.classList.toggle('active');
             window.scrollTo(0,0);
         }
 
-        // CARGA AUTOMÁTICA DE GOOGLE SHEETS PARA EL SLIDER
+        // CARGA DE IMÁGENES DESDE GOOGLE SHEETS
         window.onload = function() {
             const sheetID = '1-mAee7Xp8Oen786WSXyLaR9Mc7tgBLI_XWdJNp9vGV4';
-            const url = `https://opensheet.elk.sh/${sheetID}/1`;
+            const url = `https://opensheet.elk.sh/${sheetID}/Hoja1`; // Usamos "Hoja1" exacto como en tu imagen
             const track = document.getElementById('slider-rifa');
 
-            fetch(url).then(res => res.json()).then(data => {
-                track.innerHTML = ''; // Limpiar mensaje de carga
-                let count = 0;
+            fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                track.innerHTML = ''; 
+                let loadedImages = 0;
+
                 data.forEach(fila => {
+                    // Buscamos en cualquier columna de la fila por si acaso
                     Object.values(fila).forEach(val => {
-                        if(typeof val === 'string' && val.includes('http')) {
-                            // Limpiador/Corractor de enlaces Postimages
-                            let cleanUrl = val.trim().replace('postimg.cc', 'i.postimg.cc');
-                            if(!cleanUrl.match(/\.(jpg|jpeg|png|gif)$/i)) cleanUrl += '.jpg';
+                        if(val && val.toString().includes('http')) {
+                            let urlLimpia = val.trim();
+                            
+                            // Forzar i.postimg.cc y asegurar que termine en .jpg si falta
+                            if(urlLimpia.includes('postimg.cc') && !urlLimpia.includes('i.postimg.cc')) {
+                                urlLimpia = urlLimpia.replace('postimg.cc', 'i.postimg.cc');
+                            }
                             
                             const img = document.createElement('img');
-                            img.src = cleanUrl;
+                            img.src = urlLimpia;
+                            img.onerror = () => img.style.display = 'none'; // Si falla, que no se vea el cuadro roto
                             track.appendChild(img);
-                            count++;
+                            loadedImages++;
                         }
                     });
                 });
 
-                if (count > 1) {
-                    // Iniciar slider automático si hay más de 1 imagen
-                    let current = 0;
+                if(loadedImages > 1) {
+                    let idx = 0;
                     setInterval(() => {
-                        current++;
-                        if (current >= count) current = 0;
-                        track.style.transform = `translateX(-${current * 100}%)`;
-                    }, 3000); // Cambia cada 3 segundos
-                } else if (count === 0) {
-                    track.innerHTML = '<p style="text-align:center; padding:20px; font-size:12px;">No hay imágenes disponibles.</p>';
+                        idx = (idx + 1) % loadedImages;
+                        track.style.transform = `translateX(-${idx * 100}%)`;
+                    }, 4000);
+                } else if(loadedImages === 0) {
+                    track.innerHTML = '<p style="padding:20px; font-size:12px; color:#888;">No se encontraron imágenes en la Hoja 1.</p>';
                 }
+            })
+            .catch(err => {
+                track.innerHTML = '<p style="color:red; font-size:10px;">Error al conectar con la hoja.</p>';
             });
         };
     </script>

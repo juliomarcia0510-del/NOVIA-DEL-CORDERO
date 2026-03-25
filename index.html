@@ -3,274 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Novia del Cordero - Inicio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>La Novia del Cordero</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --rosa-pastel: #FCE4EC;
-            --azul-pastel: #E3F2FD;
-            --purpura-pastel: #F3E5F5;
-            --naranja-pastel: #FFF3E0;
-            --verde-pastel: #E8F5E9;
-            --oro: #C5A059;
-            --vino: #4a0404;
+            --rosa: #FCE4EC; --azul: #E3F2FD; --purpura: #F3E5F5;
+            --naranja: #FFF3E0; --oro: #C5A059; --vino: #4a0404;
         }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            background-color: #fcfbf7;
-            color: #333;
+        /* Deslizamiento de página completa */
+        html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background: #faf9f6; }
+
+        section { 
+            height: 100vh; 
+            scroll-snap-align: start; 
+            overflow-y: auto; 
+            padding-bottom: 50px;
         }
 
-        /* PORTADA SEGÚN EL DISEÑO */
+        /* Portada Elegante y Simple */
         .hero {
-            background: linear-gradient(rgba(74, 4, 4, 0.7), rgba(74, 4, 4, 0.8)), 
-                        url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?q=80&w=1000&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            height: 250px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            border-bottom: 5px solid var(--oro);
+            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), 
+                        url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+            height: 200px; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; border-bottom: 2px solid var(--oro);
         }
+        .hero h1 { font-family: 'Playfair Display', serif; color: var(--vino); font-size: 26px; margin: 0; }
+        .hero p { color: var(--oro); font-size: 12px; letter-spacing: 3px; }
 
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: 28px; margin: 0; color: var(--oro); }
-        .hero p { font-size: 12px; letter-spacing: 2px; margin-top: 5px; }
-
-        /* BOTÓN LÍDERES */
         .btn-lideres {
-            display: block;
-            width: 80%;
-            margin: 20px auto;
-            background: white;
-            color: var(--vino);
-            text-align: center;
-            padding: 12px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            border: 1px solid var(--oro);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            display: block; width: 70%; margin: 15px auto; padding: 10px;
+            background: white; border: 1px solid var(--oro); border-radius: 20px;
+            text-align: center; color: var(--vino); text-decoration: none; font-size: 13px;
         }
 
-        /* CONTENEDOR DE CUADROS DE CULTOS (GRID) */
-        .cultos-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            padding: 20px;
+        .section-title { text-align: center; color: var(--oro); font-family: 'Playfair Display', serif; margin: 25px 0; }
+
+        /* Cuadrícula de Cultos */
+        .grid-cultos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 15px; }
+        .card { padding: 12px; border-radius: 12px; font-size: 11px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+
+        /* Gráfico de Eventos Hexagonales Esparcidos */
+        .eventos-container { position: relative; height: 180px; margin: 20px; }
+        .hex {
+            position: absolute; width: 80px; height: 90px;
+            background: var(--oro); color: white;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; font-size: 10px; font-weight: 600; padding: 5px;
         }
+        .hex-1 { top: 0; left: 10%; }
+        .hex-2 { top: 40px; left: 45%; scale: 0.85; background: var(--vino); }
+        .hex-3 { top: 80px; left: 70%; }
 
-        .card-culto {
-            padding: 15px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-        }
+        /* Sliders de Biblia y Comida */
+        .slider-box { margin: 15px; background: white; border-radius: 15px; overflow: hidden; border: 1px solid #eee; }
+        .track { display: flex; transition: 0.5s; height: 220px; }
+        .track img { width: 100%; object-fit: contain; flex-shrink: 0; }
+        .info-box { padding: 15px; text-align: center; font-size: 13px; }
 
-        .card-culto h3 { margin: 0 0 10px 0; font-size: 14px; color: var(--vino); border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 5px; }
-        .card-culto p { font-size: 11px; margin: 4px 0; line-height: 1.4; }
-
-        .bg-rosa { background-color: var(--rosa-pastel); }
-        .bg-azul { background-color: var(--azul-pastel); }
-        .bg-purpura { background-color: var(--purpura-pastel); }
-        .bg-naranja { background-color: var(--naranja-pastel); }
-        .bg-verde { background-color: var(--verde-pastel); }
-
-        .section-title {
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-            color: var(--oro);
-            margin: 30px 0 15px;
-            font-size: 20px;
-            text-transform: uppercase;
-        }
-
-        /* SLIDERS ANIMADOS */
-        .slider-wrapper {
-            margin: 0 20px 20px;
-            border-radius: 20px;
-            overflow: hidden;
-            background: white;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        }
-
-        .slider-container {
-            display: flex;
-            transition: transform 0.6s ease-in-out;
-            height: 250px;
-        }
-
-        .slider-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            flex-shrink: 0;
-            background: white;
-        }
-
-        .slider-info {
-            padding: 15px;
-            text-align: center;
-            background: white;
-        }
-
-        .btn-ws {
-            background: #25D366;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 10px;
-            font-weight: 600;
-        }
-
-        /* NAVEGACIÓN FLOTANTE */
-        .nav-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--oro);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            cursor: pointer;
-            z-index: 1000;
-        }
-
-        .page { display: none; }
-        .active { display: block; }
+        .footer-hint { text-align: center; color: #aaa; font-size: 11px; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-    <div id="inicio" class="page active">
+    <section id="main">
         <div class="hero">
             <h1>La Novia del Cordero</h1>
-            <p>⛪ SECTOR COFRADÍA, CORTÉS</p>
-            <i style="font-size: 10px; margin-top: 10px;">"Preparada como una novia ataviada para su marido"</i>
+            <p>COFRADÍA, CORTÉS</p>
         </div>
 
-        <a href="#" class="btn-lideres">⚙️ Espacio para Líderes</a>
+        <a href="#" class="btn-lideres">Espacio para Líderes</a>
 
-        <div class="cultos-grid">
-            <div class="card-culto bg-azul">
-                <h3>🙏 Martes</h3>
-                <p><b>Adoración</b><br>Dir: Pendiente<br>Coros: Hnas. Paz<br>Pre: Hno. Omar</p>
+        <div class="grid-cultos">
+            <div class="card" style="background: var(--azul);"><b>Martes</b><br>Oración y Coros</div>
+            <div class="card" style="background: var(--rosa);"><b>Jueves</b><br>Sociedad de Damas</div>
+            <div class="card" style="background: var(--verde);"><b>Viernes</b><br>Crecimiento</div>
+            <div class="card" style="background: var(--purpura);"><b>Sábado</b><br>Jóvenes</div>
+        </div>
+
+        <h3 class="section-title">Rifa Especial</h3>
+        <div class="slider-box">
+            <div class="track" id="t1">
+                <img src="https://i.postimg.cc/mD4H54mN/image-15.png" alt="Biblia Cuero">
+                <img src="https://i.postimg.cc/85z550Xf/image-16.png" alt="Biblia Interior">
+                <img src="https://i.postimg.cc/vB0wRkK4/image-18.png" alt="Temas Colores">
             </div>
-            <div class="card-culto bg-rosa">
-                <h3>♀️ Jueves</h3>
-                <p><b>Soc. Damas</b><br>Dir: Hna. María<br>Coros: Coro Local<br>Pre: Invitado</p>
-            </div>
-            <div class="card-culto bg-verde">
-                <h3>🌱 Viernes</h3>
-                <p><b>Crecimiento</b><br>Dir: Liderazgo<br>Estudio Palabra</p>
-            </div>
-            <div class="card-culto bg-purpura">
-                <h3>🔥 Sábado</h3>
-                <p><b>Jóvenes</b><br>Dir: Soc. Jóvenes<br>Coros: Generación<br>Pre: Juvenil</p>
-            </div>
-            <div class="card-culto bg-naranja" style="grid-column: span 2;">
-                <h3>🏠 Domingo</h3>
-                <p><b>Culto General</b><br>Escuela Dominical: 9:00 AM<br>Culto de Gloria: 11:00 AM</p>
+            <div class="info-box">
+                <b>Biblia de Estudio Arcoíris</b><br>Sistema de 12 colores, forro de cuero.<br>L. 20.00 el boleto.
             </div>
         </div>
 
-        <h2 class="section-title">✨ Eventos Especiales</h2>
-        <div class="card-culto bg-azul" style="margin: 0 20px 20px; padding: 20px;">
-            <p>🤝 <b>Cultos Unidos:</b> Próximo 15 de Abril</p>
-            <p>🕯️ <b>Vigilia:</b> Viernes de Gloria 9:00 PM</p>
+        <h3 class="section-title">Eventos Especiales</h3>
+        <div class="eventos-container">
+            <div class="hex hex-1">Culto<br>Unido</div>
+            <div class="hex hex-2">Vigilia</div>
+            <div class="hex hex-3">Campaña</div>
         </div>
 
-        <h2 class="section-title">🍗 Actividades</h2>
-        <div class="slider-wrapper">
-            <div class="slider-container" id="sliderComida">
-                <img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=500" alt="Hamburguesa">
-                <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=500" alt="Pollo Frito">
-                <img src="https://images.unsplash.com/photo-1534353473418-4cfa6c56fd38?w=500" alt="Horchata">
-                <img src="https://images.unsplash.com/photo-1512152272829-e3139592d56f?w=500" alt="Tacos">
+        <h3 class="section-title">Venta de Comida</h3>
+        <div class="slider-box">
+            <div class="track" id="t2">
+                <img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=400" alt="Hamburguesa">
+                <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400" alt="Pollo">
             </div>
-            <div class="slider-info">
-                <p><b>¡Venta de Comida Pro-Construcción!</b><br>Hamburguesas, Pollo, Tacos y más.</p>
-                <a href="https://wa.me/50400000000" class="btn-ws">Hacer Pedido</a>
-            </div>
+            <div class="info-box">Apoya la construcción con tu compra.</div>
+        </div>
+        
+        <div class="footer-hint">↓ Desliza para Fortalecimiento ↓</div>
+    </section>
+
+    <section id="spirit" style="background: white; border-top: 2px solid var(--oro);">
+        <h2 class="section-title" style="margin-top: 50px;">Fortalecimiento Espiritual</h2>
+        
+        <div class="card" style="background: var(--rosa); margin: 20px; padding: 25px; border-radius: 20px;">
+            <h4 style="margin:0">🔥 Semana de Ayuno</h4>
+            <p>Primera semana de cada mes en el Templo Central.</p>
         </div>
 
-        <h2 class="section-title">🎟️ Sorteo Especial</h2>
-        <div class="slider-wrapper">
-            <div class="slider-container" id="sliderBiblia">
-                <img src="https://m.media-amazon.com/images/I/81S7qXg0x6L._SL1500_.jpg" alt="Biblia Frontal">
-                <img src="https://m.media-amazon.com/images/I/81e6L8zLhML._SL1500_.jpg" alt="Biblia Abierta">
-                <img src="https://m.media-amazon.com/images/I/71YyP4R0rOL._SL1500_.jpg" alt="Detalle Cuero">
-            </div>
-            <div class="slider-info">
-                <p><b>Rifa Biblia de Estudio Arcoíris</b><br>Forro de piel genuina, versión RVR1960.<br>L. 20.00 por boleto.</p>
-                <a href="https://wa.me/50400000000" class="btn-ws">Comprar Boleto</a>
-            </div>
-        </div>
-    </div>
-
-    <div id="fortalecimiento" class="page">
-        <div class="hero">
-            <h1>Fortalecimiento</h1>
-            <p>RECURSOS ESPIRITUALES</p>
+        <div class="card" style="background: var(--azul); margin: 20px; padding: 25px; border-radius: 20px;">
+            <h4 style="margin:0">☀️ Devocionales Diarios</h4>
+            <p>6:00 AM vía WhatsApp Oficial.</p>
         </div>
 
-        <div style="padding: 20px;">
-            <div class="card-culto bg-rosa" style="margin-bottom: 20px;">
-                <h3>🔥 Semana de Ayuno</h3>
-                <p>Primera semana de cada mes.<br>Lugar: Templo Central.</p>
-            </div>
-            <div class="card-culto bg-azul" style="margin-bottom: 20px;">
-                <h3>👥 Ayuno de Jóvenes</h3>
-                <p>Sábados 9:00 AM.<br>Salón de Jóvenes.</p>
-            </div>
-            <div class="card-culto bg-naranja">
-                <h3>☀️ Devocionales Diarios</h3>
-                <p>6:00 AM vía WhatsApp.<br>"Fortaleza para el día".</p>
-            </div>
+        <div class="card" style="background: var(--naranja); margin: 20px; padding: 25px; border-radius: 20px;">
+            <h4 style="margin:0">👥 Ayuno de Jóvenes</h4>
+            <p>Sábados a las 9:00 AM.</p>
         </div>
-    </div>
-
-    <div class="nav-float" onclick="togglePaginas()">
-        <i class="fas fa-sync-alt"></i>
-    </div>
+    </section>
 
     <script>
-        function togglePaginas() {
-            const inicio = document.getElementById('inicio');
-            const fort = document.getElementById('fortalecimiento');
-            inicio.classList.toggle('active');
-            fort.classList.toggle('active');
-            window.scrollTo(0,0);
-        }
-
-        function startSlider(id, count) {
-            const container = document.getElementById(id);
-            let index = 0;
+        function runSlider(id, count) {
+            let i = 0;
             setInterval(() => {
-                index = (index + 1) % count;
-                container.style.transform = `translateX(-${index * 100}%)`;
-            }, 3000);
+                i = (i + 1) % count;
+                document.getElementById(id).style.transform = `translateX(-${i * 100}%)`;
+            }, 3500);
         }
-
         window.onload = () => {
-            startSlider('sliderComida', 4);
-            startSlider('sliderBiblia', 3);
+            runSlider('t1', 3);
+            runSlider('t2', 2);
         };
     </script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </body>
 </html>

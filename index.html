@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Novia del Cordero - App</title>
+    <title>La Novia del Cordero</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,204 +11,171 @@
             --verde-p: #E8F5E9; --naranja-p: #FFF3E0; --oro: #C5A059; --vino: #4a0404;
         }
 
-        /* Navegación Horizontal por Deslizamiento */
-        html, body { margin: 0; padding: 0; overflow: hidden; height: 100%; background-color: var(--rosa-p); }
-        .main-container {
-            display: flex;
-            width: 200vw; /* Dos secciones de ancho completo */
-            height: 100vh;
-            scroll-snap-type: x mandatory;
-            overflow-x: scroll;
-            scroll-behavior: smooth;
-        }
-        section { 
-            width: 100vw; 
-            height: 100vh; 
-            scroll-snap-align: start; 
-            overflow-y: auto; 
-            flex-shrink: 0;
-            position: relative;
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            margin: 0; 
+            background-color: var(--rosa-p); 
+            color: #333;
+            overflow-x: hidden;
         }
 
-        /* Detalle del Vestido Elegante */
-        .vestido-bg {
-            position: fixed; bottom: -20px; right: -20px; width: 250px; height: 350px;
-            background: white; clip-path: polygon(100% 0, 100% 100%, 0% 100%, 45% 75%, 25% 45%);
-            z-index: -1; opacity: 0.5; filter: blur(0.5px);
+        /* Detalle Elegante Vestido */
+        .vestido-decoration {
+            position: fixed; bottom: -30px; right: -30px; width: 280px; height: 380px;
+            background: white; clip-path: polygon(100% 0, 100% 100%, 0% 100%, 50% 80%, 30% 50%);
+            z-index: -1; opacity: 0.4; filter: blur(1px);
         }
 
-        .hero { padding: 30px 20px; text-align: center; background: white; border-bottom: 3px solid var(--oro); }
-        .hero h1 { font-family: 'Playfair Display', serif; color: var(--vino); font-size: 26px; margin: 0; }
-        .hero p { color: var(--oro); font-size: 10px; letter-spacing: 2px; font-weight: 600; margin: 5px 0 0; }
+        .container { max-width: 500px; margin: auto; padding-bottom: 100px; }
+
+        .hero { padding: 40px 20px; text-align: center; background: white; border-bottom: 3px solid var(--oro); }
+        .hero h1 { font-family: 'Playfair Display', serif; color: var(--vino); font-size: 28px; margin: 0; }
+        .hero p { color: var(--oro); font-size: 11px; letter-spacing: 3px; font-weight: 600; }
 
         .btn-lideres {
-            display: block; width: 70%; margin: 15px auto; padding: 10px;
-            background: white; border: 1px solid var(--oro); border-radius: 20px;
-            text-align: center; color: var(--vino); text-decoration: none; font-size: 12px; font-weight: 600;
+            display: block; width: 75%; margin: 20px auto; padding: 12px;
+            background: white; border: 1.5px solid var(--oro); border-radius: 25px;
+            text-align: center; color: var(--vino); text-decoration: none; font-size: 13px; font-weight: 600;
         }
 
-        .section-title { text-align: center; color: var(--oro); font-family: 'Playfair Display', serif; font-size: 20px; margin: 25px 0 15px; }
+        .section-title { text-align: center; color: var(--oro); font-family: 'Playfair Display', serif; font-size: 22px; margin: 35px 0 20px; }
 
-        /* Cuadros de Cultos (Igual al anterior) */
-        .cultos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 15px; }
-        .card-dia { padding: 12px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
-        .card-dia h4 { margin: 0; font-size: 14px; color: var(--vino); }
-        .card-dia p { margin: 3px 0 0; font-size: 10px; }
+        /* Cuadrícula de Cultos */
+        .cultos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 15px; }
+        .card-dia { padding: 15px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .card-dia h4 { margin: 0 0 5px; font-size: 15px; color: var(--vino); }
+        .card-dia p { margin: 0; font-size: 11px; line-height: 1.4; }
 
-        /* Hexágonos con Detalles de Ingeniería (Hora/Lugar) */
-        .event-path { position: relative; height: 280px; margin: 20px; }
+        /* Sliders con Imágenes de Respaldo */
+        .slider-box { margin: 20px; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
+        .track { display: flex; transition: 0.8s ease-in-out; height: 280px; }
+        .track img { width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; background: #fff; }
+
+        /* Eventos Hexagonales Mejorados */
+        .event-path { position: relative; height: 320px; margin: 20px; }
         .hex {
-            position: absolute; width: 110px; height: 120px;
+            position: absolute; width: 110px; height: 125px;
             background: white; color: var(--vino);
             clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-align: center; border: 1px solid var(--oro); box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center; border: 1px solid var(--oro); box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            padding: 10px;
         }
-        .hex b { font-size: 11px; }
-        .hex span { font-size: 8px; color: #666; line-height: 1.1; margin-top: 2px; }
-        .hex-1 { top: 0; left: 5%; }
-        .hex-2 { top: 70px; left: 38%; }
-        .hex-3 { top: 140px; left: 65%; }
+        .hex b { font-size: 11px; margin-bottom: 4px; }
+        .hex span { font-size: 8px; line-height: 1.2; color: #555; }
+        .hex-1 { top: 0; left: 5%; border: 1.5px solid var(--rosa-p); }
+        .hex-2 { top: 80px; left: 40%; border: 1.5px solid var(--azul-p); }
+        .hex-3 { top: 160px; left: 60%; border: 1.5px solid var(--purpura-p); }
 
-        /* Sliders Conectados a Google Sheets */
-        .slider-box { margin: 15px; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .track { display: flex; transition: 0.8s ease-in-out; height: 240px; }
-        .track img { width: 100%; object-fit: contain; flex-shrink: 0; }
-        .info-panel { padding: 12px; text-align: center; font-size: 12px; }
-
-        .hint-swipe { position: fixed; bottom: 20px; width: 100%; text-align: center; font-size: 10px; color: var(--oro); pointer-events: none; }
+        /* Pestañas de Navegación */
+        .page { display: none; }
+        .page.active { display: block; }
+        
+        .nav-tabs { 
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: white; padding: 10px 20px; border-radius: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15); display: flex; gap: 20px; z-index: 100;
+        }
+        .nav-btn { background: none; border: none; font-size: 20px; cursor: pointer; color: #ccc; }
+        .nav-btn.active { color: var(--oro); }
     </style>
 </head>
 <body>
 
-    <div class="vestido-bg"></div>
+    <div class="vestido-decoration"></div>
 
-    <div class="main-container">
-        <section id="inicio">
+    <div class="container">
+        <div id="p1" class="page active">
             <div class="hero">
                 <h1>La Novia del Cordero</h1>
-                <p>COFRADÍA, CORTÉS</p>
+                <p>S.P.S. HONDURAS</p>
             </div>
 
             <a href="#" class="btn-lideres">⚙️ Espacio para Líderes</a>
 
             <div class="cultos-grid">
-                <div class="card-dia" style="background: var(--azul-p);"><h4>Martes</h4><p>Adoración y Alabanza</p></div>
-                <div class="card-dia" style="background: var(--rosa-p);"><h4>Jueves</h4><p>Sociedad de Damas</p></div>
-                <div class="card-dia" style="background: var(--verde-p);"><h4>Viernes</h4><p>Crecimiento Bíblico</p></div>
-                <div class="card-dia" style="background: var(--purpura-p);"><h4>Sábado</h4><p>Jóvenes - 7:00 PM</p></div>
-                <div class="card-dia" style="background: var(--naranja-p); grid-column: span 2; text-align: center;">
-                    <h4>Domingo</h4><p>Dominical 9AM | General 11AM</p>
-                </div>
+                <div class="card-dia" style="background: var(--azul-p);"><h4>🙏 Martes</h4><p>Adoración y Alabanza</p></div>
+                <div class="card-dia" style="background: var(--rosa-p);"><h4>♀️ Jueves</h4><p>Sociedad de Damas</p></div>
+                <div class="card-dia" style="background: var(--verde-p);"><h4>🌱 Viernes</h4><p>Crecimiento Bíblico</p></div>
+                <div class="card-dia" style="background: var(--purpura-p);"><h4>🔥 Sábado</h4><p>Sociedad de Jóvenes</p></div>
+                <div class="card-dia" style="background: var(--naranja-p); grid-column: span 2; text-align: center;"><h4>🏠 Domingo</h4><p>Dominical 9AM | General 11AM</p></div>
             </div>
 
-            <h2 class="section-title">🎟️ Sorteo de Biblia</h2>
+            <h2 class="section-title">🎟️ Sorteo Especial</h2>
             <div class="slider-box">
-                <div class="track" id="sheet-biblia">
-                    <div style="width:100%; display:flex; align-items:center; justify-content:center; font-size:10px;">Cargando Biblia...</div>
+                <div class="track" id="t-biblia">
+                    <img src="https://m.media-amazon.com/images/I/919Nnre1ZXL.jpg" alt="Biblia 1">
+                    <img src="https://m.media-amazon.com/images/I/81S7qXg0x6L.jpg" alt="Biblia 2">
                 </div>
-                <div class="info-panel">
-                    <b>Biblia Arcoíris - Forro Café</b><br>
-                    <span style="color:var(--vino)">L. 20.00 el boleto</span>
+                <div style="padding:15px; text-align:center;">
+                    <b style="font-size:14px;">Biblia Arcoíris (Cuero Café)</b><br>
+                    <span style="color:var(--vino); font-weight:bold;">L. 20.00 el boleto</span>
                 </div>
             </div>
 
             <h2 class="section-title">✨ Eventos Especiales</h2>
             <div class="event-path">
-                <div class="hex hex-1"><b>Culto Unido</b><span>Fecha: 28 Marzo<br>Hora: 6:30 PM<br>Lugar: Templo</span></div>
+                <div class="hex hex-1"><b>Culto Unido</b><span>Fecha: 25 Marzo<br>Hora: 6:00 PM<br>Lugar: Templo Central</span></div>
                 <div class="hex hex-2"><b>Vigilia</b><span>Fecha: 04 Abril<br>Hora: 9:00 PM<br>Lugar: Anexo</span></div>
-                <div class="hex hex-3"><b>Campaña</b><span>Fecha: 15 Mayo<br>Hora: 7:00 PM<br>Lugar: Campo</span></div>
+                <div class="hex hex-3"><b>Campaña</b><span>Fecha: 15 Mayo<br>Hora: 7:00 PM<br>Lugar: Campo Sur</span></div>
             </div>
 
-            <h2 class="section-title">🍽️ Venta de Comida</h2>
+            <h2 class="section-title">🍰 Venta de Comida</h2>
             <div class="slider-box">
-                <div class="track" id="sheet-comida">
-                    <div style="width:100%; display:flex; align-items:center; justify-content:center; font-size:10px;">Cargando Menú...</div>
+                <div class="track" id="t-comida">
+                    <img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?w=500" alt="Postres">
+                    <img src="https://images.unsplash.com/photo-1512152272829-e3139592d56f?w=500" alt="Tacos">
+                    <img src="https://images.unsplash.com/photo-1534353473418-4cfa6c56fd38?w=500" alt="Horchata">
                 </div>
-                <div class="info-panel">Postres caseros, horchata y platillos típicos.</div>
+                <div style="padding:10px; text-align:center; font-size:12px;">Comida casera y postres típicos.</div>
             </div>
-            
-            <div class="hint-swipe">Desliza a la derecha para fortalecerte →</div>
-        </section>
+        </div>
 
-        <section id="fortaleza" style="background: rgba(255,255,255,0.7);">
+        <div id="p2" class="page">
             <h2 class="section-title" style="margin-top: 50px;">🛡️ Fortalecimiento Espiritual</h2>
-            
-            <div class="card-dia" style="background: var(--rosa-p); margin: 20px; padding: 20px;">
+            <div class="card-dia" style="background: var(--rosa-p); margin: 20px; padding: 25px;">
                 <h3 style="margin:0; color:var(--vino);">🔥 Semana de Ayuno</h3>
-                <p>Primera semana del mes | Templo Central</p>
+                <p>Primera semana de cada mes.</p>
             </div>
-
-            <div class="card-dia" style="background: var(--azul-p); margin: 20px; padding: 20px;">
+            <div class="card-dia" style="background: var(--azul-p); margin: 20px; padding: 25px;">
                 <h3 style="margin:0; color:var(--vino);">📱 Devocionales</h3>
-                <p>6:00 AM vía WhatsApp | "Fortaleza para el día"</p>
+                <p>Diarios 6:00 AM vía WhatsApp.</p>
             </div>
-
-            <div class="card-dia" style="background: var(--naranja-p); margin: 20px; padding: 20px;">
+            <div class="card-dia" style="background: var(--naranja-p); margin: 20px; padding: 25px;">
                 <h3 style="margin:0; color:var(--vino);">👥 Ayuno Juvenil</h3>
-                <p>Sábados 9:00 AM | Salón de Jóvenes</p>
+                <p>Sábados 9:00 AM.</p>
             </div>
-            
-            <div class="hint-swipe">← Desliza a la izquierda para volver</div>
-        </section>
+        </div>
+    </div>
+
+    <div class="nav-tabs">
+        <button class="nav-btn active" onclick="showPage('p1', this)">🏠</button>
+        <button class="nav-btn" onclick="showPage('p2', this)">🛡️</button>
     </div>
 
     <script>
-        // CONFIGURACIÓN DE GOOGLE SHEETS
-        const SHEET_ID = 'TU_ID_DE_GOOGLE_SHEETS_AQUI'; 
-        const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
-
-        async function cargarDatos() {
-            try {
-                const res = await fetch(URL);
-                const texto = await res.text();
-                const json = JSON.parse(texto.substr(47).slice(0, -2));
-                const filas = json.table.rows;
-
-                const contenedorBiblia = document.getElementById('sheet-biblia');
-                const contenedorComida = document.getElementById('sheet-comida');
-
-                contenedorBiblia.innerHTML = '';
-                contenedorComida.innerHTML = '';
-
-                filas.forEach((fila, index) => {
-                    const imgUrl = fila.c[0] ? fila.c[0].v : ''; // Columna A: Imagen
-                    const tipo = fila.c[1] ? fila.c[1].v : '';   // Columna B: Tipo (Biblia o Comida)
-
-                    if(imgUrl) {
-                        const img = document.createElement('img');
-                        img.src = imgUrl;
-                        if(tipo.toLowerCase().includes('biblia')) {
-                            contenedorBiblia.appendChild(img);
-                        } else {
-                            contenedorComida.appendChild(img);
-                        }
-                    }
-                });
-
-                iniciarSliders();
-            } catch (e) {
-                console.error("Error cargando Google Sheets:", e);
-            }
+        function showPage(id, btn) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            btn.classList.add('active');
+            window.scrollTo(0,0);
         }
 
-        function iniciarSliders() {
-            const setup = (id) => {
-                let i = 0;
-                const el = document.getElementById(id);
-                const slides = el.children.length;
-                if(slides > 1) {
-                    setInterval(() => {
-                        i = (i + 1) % slides;
-                        el.style.transform = `translateX(-${i * 100}%)`;
-                    }, 4000);
-                }
-            };
-            setup('sheet-biblia');
-            setup('sheet-comida');
+        function runSlider(id, count) {
+            let i = 0;
+            const track = document.getElementById(id);
+            if (!track) return;
+            setInterval(() => {
+                i = (i + 1) % count;
+                track.style.transform = `translateX(-${i * 100}%)`;
+            }, 3500);
         }
 
-        window.onload = cargarDatos;
+        window.onload = () => {
+            runSlider('t-biblia', 2);
+            runSlider('t-comida', 3);
+        }
     </script>
 </body>
 </html>

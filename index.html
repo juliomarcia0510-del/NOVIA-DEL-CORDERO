@@ -4,178 +4,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Novia del Cordero</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@300;400;600&display=swap');
+
         :root {
-            --rosa-p: #FFF0F5; --azul-p: #E3F2FD; --purpura-p: #F3E5F5;
-            --verde-p: #E8F5E9; --naranja-p: #FFF3E0; --oro: #C5A059; --vino: #4a0404;
+            /* Paleta Pastel Inspirada en image_12.png */
+            --oro: #C5A059;
+            --vino: #4a0404;
+            --rosa-pastel: #FCE4EC;
+            --azul-pastel: #E3F2FD;
+            --purpura-pastel: #F3E5F5;
+            --verde-pastel: #E8F5E9;
+            --naranja-pastel: #FFF3E0;
+            --fondo: #fcfbf7;
+            --texto-oscuro: #333;
         }
 
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            margin: 0; 
-            background-color: var(--rosa-p); 
-            color: #333;
-            overflow-x: hidden;
+        body { font-family: 'Poppins', sans-serif; margin: 0; background-color: var(--fondo); color: var(--texto-oscuro); overflow-x: hidden; padding-bottom: 80px; }
+
+        /* HEADER PREMIUM */
+        .app-header {
+            background-color: white;
+            background-image: url('https://www.transparenttextures.com/patterns/dust.png'); /* Textura sutil */
+            padding: 40px 20px; text-align: center;
+            border-bottom: 3px solid var(--oro);
+            border-radius: 0 0 40px 40px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.05);
         }
+        .app-header h1 { font-family: 'Playfair Display', serif; color: var(--vino); font-size: 28px; margin: 0; }
+        .app-header p { color: var(--oro); font-size: 11px; letter-spacing: 2px; font-weight: 600; margin: 5px 0 0; }
 
-        /* Detalle Elegante Vestido */
-        .vestido-decoration {
-            position: fixed; bottom: -30px; right: -30px; width: 280px; height: 380px;
-            background: white; clip-path: polygon(100% 0, 100% 100%, 0% 100%, 50% 80%, 30% 50%);
-            z-index: -1; opacity: 0.4; filter: blur(1px);
-        }
+        /* VISTAS */
+        .page-view { display: none; }
+        .page-view.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .container { max-width: 500px; margin: auto; padding-bottom: 100px; }
+        /* CONTENEDOR GENERAL */
+        .main-container { padding: 20px; max-width: 500px; margin: auto; }
 
-        .hero { padding: 40px 20px; text-align: center; background: white; border-bottom: 3px solid var(--oro); }
-        .hero h1 { font-family: 'Playfair Display', serif; color: var(--vino); font-size: 28px; margin: 0; }
-        .hero p { color: var(--oro); font-size: 11px; letter-spacing: 3px; font-weight: 600; }
+        /* TARJETAS PREMIUM */
+        .seccion-titulo { text-align: center; color: var(--oro); font-family: 'Playfair Display', serif; font-size: 22px; margin: 35px 0 20px; }
+        
+        .premium-card { background: white; border-radius: 20px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 4px 15px rgba(0,0,0,0.02); overflow: hidden; }
+        .premium-card-header { padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; font-size: 14px; }
+        .chevron { font-size: 11px; color: #ccc; transition: 0.3s; }
+        
+        .premium-card-body { max-height: 0; overflow: hidden; transition: 0.4s ease-out; background-color: #fafafa; }
+        .card-inner { padding: 20px; border-top: 1px solid #f0f0f0; font-size: 13px; color: #555; }
 
-        .btn-lideres {
-            display: block; width: 75%; margin: 20px auto; padding: 12px;
-            background: white; border: 1.5px solid var(--oro); border-radius: 25px;
-            text-align: center; color: var(--vino); text-decoration: none; font-size: 13px; font-weight: 600;
-        }
+        /* CULTOS GRID (image_12.png style) */
+        .cultos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .card-dia { padding: 15px; border-radius: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+        .card-dia h4 { margin: 0; font-size: 15px; color: var(--vino); }
+        .card-dia p { margin: 3px 0 0; font-size: 11px; color: #666; }
 
-        .section-title { text-align: center; color: var(--oro); font-family: 'Playfair Display', serif; font-size: 22px; margin: 35px 0 20px; }
-
-        /* Cuadrícula de Cultos */
-        .cultos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 15px; }
-        .card-dia { padding: 15px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
-        .card-dia h4 { margin: 0 0 5px; font-size: 15px; color: var(--vino); }
-        .card-dia p { margin: 0; font-size: 11px; line-height: 1.4; }
-
-        /* Sliders con Imágenes de Respaldo */
-        .slider-box { margin: 20px; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
-        .track { display: flex; transition: 0.8s ease-in-out; height: 280px; }
-        .track img { width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; background: #fff; }
-
-        /* Eventos Hexagonales Mejorados */
-        .event-path { position: relative; height: 320px; margin: 20px; }
+        /* EVENTOS HEXAGONAL PATH */
+        .event-path { position: relative; height: 260px; margin: 20px; }
         .hex {
-            position: absolute; width: 110px; height: 125px;
+            position: absolute; width: 100px; height: 110px;
             background: white; color: var(--vino);
             clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-align: center; border: 1px solid var(--oro); box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            padding: 10px;
+            text-align: center; border: 1px solid var(--oro); box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        .hex b { font-size: 11px; margin-bottom: 4px; }
-        .hex span { font-size: 8px; line-height: 1.2; color: #555; }
-        .hex-1 { top: 0; left: 5%; border: 1.5px solid var(--rosa-p); }
-        .hex-2 { top: 80px; left: 40%; border: 1.5px solid var(--azul-p); }
-        .hex-3 { top: 160px; left: 60%; border: 1.5px solid var(--purpura-p); }
+        .hex b { font-size: 12px; margin-bottom: 3px; }
+        .hex span { font-size: 9px; color: #666; line-height: 1.1; }
+        .hex-1 { top: 0; left: 5%; }
+        .hex-2 { top: 70px; left: 38%; }
+        .hex-3 { top: 140px; left: 65%; }
 
-        /* Pestañas de Navegación */
-        .page { display: none; }
-        .page.active { display: block; }
-        
-        .nav-tabs { 
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: white; padding: 10px 20px; border-radius: 40px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15); display: flex; gap: 20px; z-index: 100;
-        }
-        .nav-btn { background: none; border: none; font-size: 20px; cursor: pointer; color: #ccc; }
-        .nav-btn.active { color: var(--oro); }
+        /* SLIDERS (Blindados contra error de imagen) */
+        .slider-box { margin: 20px; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.05); }
+        .track { display: flex; transition: 0.8s ease-in-out; height: 280px; }
+        .track img { width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; background: #fff; }
+        .info-panel { padding: 15px; text-align: center; background: #fff; border-top: 1px solid #f0f0f0; font-size: 12px; }
+
+        /* BOTONES WS */
+        .btn-ws { display: block; width: 100%; padding: 12px; border-radius: 12px; background-color: #2ecc71; color: white; text-align: center; text-decoration: none; font-weight: 600; margin-top: 15px; border: none; font-size: 13px; }
+
+        /* NAVEGACIÓN FLOTANTE */
+        .nav-float { position: fixed; bottom: 20px; left: 20px; background: var(--oro); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 6px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 1000; border: 3px solid white; }
     </style>
 </head>
 <body>
 
-    <div class="vestido-decoration"></div>
+    <div class="app-header">
+        <h1>La Novia del Cordero</h1>
+        <p>COLONIA VIDA NUEVA, SECTOR COFRADÍA</p>
+    </div>
 
-    <div class="container">
-        <div id="p1" class="page active">
-            <div class="hero">
-                <h1>La Novia del Cordero</h1>
-                <p>S.P.S. HONDURAS</p>
-            </div>
-
-            <a href="#" class="btn-lideres">⚙️ Espacio para Líderes</a>
+    <div id="inicio" class="page-view active">
+        <div class="main-container">
+            
+            <a href="https://wa.me/50400000000" class="btn-ws" style="background-color: var(--vino); margin-bottom: 20px; font-size: 11px;">⚙️ Espacio para Líderes</a>
 
             <div class="cultos-grid">
-                <div class="card-dia" style="background: var(--azul-p);"><h4>🙏 Martes</h4><p>Adoración y Alabanza</p></div>
-                <div class="card-dia" style="background: var(--rosa-p);"><h4>♀️ Jueves</h4><p>Sociedad de Damas</p></div>
-                <div class="card-dia" style="background: var(--verde-p);"><h4>🌱 Viernes</h4><p>Crecimiento Bíblico</p></div>
-                <div class="card-dia" style="background: var(--purpura-p);"><h4>🔥 Sábado</h4><p>Sociedad de Jóvenes</p></div>
-                <div class="card-dia" style="background: var(--naranja-p); grid-column: span 2; text-align: center;"><h4>🏠 Domingo</h4><p>Dominical 9AM | General 11AM</p></div>
+                <div class="card-dia" style="background: var(--azul-pastel);"><h4>🙏 Martes</h4><p>Adoración y Alabanza</p></div>
+                <div class="card-dia" style="background: var(--rosa-pastel);"><h4>♀️ Jueves</h4><p>Sociedad de Damas</p></div>
+                <div class="card-dia" style="background: var(--verde-pastel);"><h4>🌱 Viernes</h4><p>Crecimiento Bíblico</p></div>
+                <div class="card-dia" style="background: var(--purpura-pastel);"><h4>🔥 Sábado</h4><p>Jóvenes - 7:00 PM</p></div>
+                <div class="card-dia" style="background: var(--naranja-pastel); grid-column: span 2; text-align: center;">
+                    <h4>🏠 Domingo</h4><p>Dominical 9AM | General 11AM</p>
+                </div>
             </div>
 
-            <h2 class="section-title">🎟️ Sorteo Especial</h2>
+            <h2 class="seccion-titulo">🎟️ Sorteo Especial</h2>
             <div class="slider-box">
-                <div class="track" id="t-biblia">
-                    <img src="https://m.media-amazon.com/images/I/919Nnre1ZXL.jpg" alt="Biblia 1">
-                    <img src="https://m.media-amazon.com/images/I/81S7qXg0x6L.jpg" alt="Biblia 2">
+                <div class="track" id="slider-biblia">
+                    <img src="https://i.postimg.cc/mD4H54mN/image-15.png" alt="Biblia Arcoiris Cuero">
+                    <img src="https://i.postimg.cc/85z550Xf/image-16.png" alt="Biblia Arcoiris Interior">
+                    <img src="https://i.postimg.cc/vB0wRkK4/image-18.png" alt="Biblia Arcoiris Temas">
                 </div>
-                <div style="padding:15px; text-align:center;">
-                    <b style="font-size:14px;">Biblia Arcoíris (Cuero Café)</b><br>
-                    <span style="color:var(--vino); font-weight:bold;">L. 20.00 el boleto</span>
+                <div class="info-panel">
+                    <p style="margin:0; font-weight:600; font-size: 14px;">Biblia de Estudio Arcoíris</p>
+                    <p style="margin:5px 0; color:var(--vino); font-weight:bold;">L. 20.00 el boleto</p>
+                    <a href="https://wa.me/50400000000" class="btn-ws">Comprar Boleto</a>
                 </div>
             </div>
 
-            <h2 class="section-title">✨ Eventos Especiales</h2>
+            <h2 class="seccion-titulo">✨ Eventos Especiales</h2>
             <div class="event-path">
-                <div class="hex hex-1"><b>Culto Unido</b><span>Fecha: 25 Marzo<br>Hora: 6:00 PM<br>Lugar: Templo Central</span></div>
-                <div class="hex hex-2"><b>Vigilia</b><span>Fecha: 04 Abril<br>Hora: 9:00 PM<br>Lugar: Anexo</span></div>
-                <div class="hex hex-3"><b>Campaña</b><span>Fecha: 15 Mayo<br>Hora: 7:00 PM<br>Lugar: Campo Sur</span></div>
+                <div class="hex hex-1"><b>🤝 Culto Unido</b><span>Fecha: Por definir<br>Hora: 6:30 PM<br>Lugar: Templo</span></div>
+                <div class="hex hex-2"><b>🕯️ Vigilia</b><span>Fecha: Por definir<br>Hora: 9:00 PM<br>Lugar: Anexo</span></div>
+                <div class="hex hex-3"><b>テント Campaña</b><span>Fecha: Por definir<br>Hora: 7:00 PM<br>Lugar: Campo</span></div>
             </div>
 
-            <h2 class="section-title">🍰 Venta de Comida</h2>
+            <h2 class="seccion-titulo"> Venta de Comida</h2>
             <div class="slider-box">
-                <div class="track" id="t-comida">
-                    <img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?w=500" alt="Postres">
-                    <img src="https://images.unsplash.com/photo-1512152272829-e3139592d56f?w=500" alt="Tacos">
-                    <img src="https://images.unsplash.com/photo-1534353473418-4cfa6c56fd38?w=500" alt="Horchata">
-                </div>
-                <div style="padding:10px; text-align:center; font-size:12px;">Comida casera y postres típicos.</div>
-            </div>
-        </div>
-
-        <div id="p2" class="page">
-            <h2 class="section-title" style="margin-top: 50px;">🛡️ Fortalecimiento Espiritual</h2>
-            <div class="card-dia" style="background: var(--rosa-p); margin: 20px; padding: 25px;">
-                <h3 style="margin:0; color:var(--vino);">🔥 Semana de Ayuno</h3>
-                <p>Primera semana de cada mes.</p>
-            </div>
-            <div class="card-dia" style="background: var(--azul-p); margin: 20px; padding: 25px;">
-                <h3 style="margin:0; color:var(--vino);">📱 Devocionales</h3>
-                <p>Diarios 6:00 AM vía WhatsApp.</p>
-            </div>
-            <div class="card-dia" style="background: var(--naranja-p); margin: 20px; padding: 25px;">
-                <h3 style="margin:0; color:var(--vino);">👥 Ayuno Juvenil</h3>
-                <p>Sábados 9:00 AM.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="nav-tabs">
-        <button class="nav-btn active" onclick="showPage('p1', this)">🏠</button>
-        <button class="nav-btn" onclick="showPage('p2', this)">🛡️</button>
-    </div>
-
-    <script>
-        function showPage(id, btn) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            btn.classList.add('active');
-            window.scrollTo(0,0);
-        }
-
-        function runSlider(id, count) {
-            let i = 0;
-            const track = document.getElementById(id);
-            if (!track) return;
-            setInterval(() => {
-                i = (i + 1) % count;
-                track.style.transform = `translateX(-${i * 100}%)`;
-            }, 3500);
-        }
-
-        window.onload = () => {
-            runSlider('t-biblia', 2);
-            runSlider('t-comida', 3);
-        }
-    </script>
-</body>
-</html>
+                <div class="track" id="slider-comida">
+                    <img src="

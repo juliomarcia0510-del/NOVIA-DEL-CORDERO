@@ -11,168 +11,204 @@
             --verde-p: #E8F5E9; --naranja-p: #FFF3E0; --oro: #C5A059; --vino: #4a0404;
         }
 
-        /* Deslizamiento de página */
-        html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            margin: 0; 
-            background-color: var(--rosa-p); 
-            color: #333;
-            overflow-x: hidden;
+        /* Navegación Horizontal por Deslizamiento */
+        html, body { margin: 0; padding: 0; overflow: hidden; height: 100%; background-color: var(--rosa-p); }
+        .main-container {
+            display: flex;
+            width: 200vw; /* Dos secciones de ancho completo */
+            height: 100vh;
+            scroll-snap-type: x mandatory;
+            overflow-x: scroll;
+            scroll-behavior: smooth;
+        }
+        section { 
+            width: 100vw; 
+            height: 100vh; 
+            scroll-snap-align: start; 
+            overflow-y: auto; 
+            flex-shrink: 0;
+            position: relative;
         }
 
-        /* Efecto Vestido de Novia en la esquina */
-        body::after {
-            content: "";
-            position: fixed;
-            bottom: -50px;
-            right: -50px;
-            width: 300px;
-            height: 400px;
-            background: url('https://www.transparenttextures.com/patterns/p6-dark.png'), 
-                        linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 100%);
-            background-color: white;
-            clip-path: polygon(100% 0, 100% 100%, 0% 100%, 40% 70%, 20% 40%);
-            z-index: -1;
-            opacity: 0.6;
-            filter: blur(1px);
+        /* Detalle del Vestido Elegante */
+        .vestido-bg {
+            position: fixed; bottom: -20px; right: -20px; width: 250px; height: 350px;
+            background: white; clip-path: polygon(100% 0, 100% 100%, 0% 100%, 45% 75%, 25% 45%);
+            z-index: -1; opacity: 0.5; filter: blur(0.5px);
         }
 
-        section { height: 100vh; scroll-snap-align: start; overflow-y: auto; padding-bottom: 60px; }
-
-        .hero {
-            padding: 40px 20px;
-            text-align: center;
-            background: white;
-            border-bottom: 3px solid var(--oro);
-            margin-bottom: 20px;
-        }
-        .hero h1 { font-family: 'Playfair Display', serif; color: var(--vino); font-size: 28px; margin: 0; }
-        .hero p { color: var(--oro); font-size: 11px; letter-spacing: 3px; font-weight: 600; }
+        .hero { padding: 30px 20px; text-align: center; background: white; border-bottom: 3px solid var(--oro); }
+        .hero h1 { font-family: 'Playfair Display', serif; color: var(--vino); font-size: 26px; margin: 0; }
+        .hero p { color: var(--oro); font-size: 10px; letter-spacing: 2px; font-weight: 600; margin: 5px 0 0; }
 
         .btn-lideres {
-            display: block; width: 75%; margin: 10px auto; padding: 12px;
-            background: white; border: 1.5px solid var(--oro); border-radius: 25px;
-            text-align: center; color: var(--vino); text-decoration: none; font-size: 13px; font-weight: 600;
+            display: block; width: 70%; margin: 15px auto; padding: 10px;
+            background: white; border: 1px solid var(--oro); border-radius: 20px;
+            text-align: center; color: var(--vino); text-decoration: none; font-size: 12px; font-weight: 600;
         }
 
-        .section-title { text-align: center; color: var(--oro); font-family: 'Playfair Display', serif; font-size: 22px; margin: 30px 0 15px; }
+        .section-title { text-align: center; color: var(--oro); font-family: 'Playfair Display', serif; font-size: 20px; margin: 25px 0 15px; }
 
-        /* Cuadros de Cultos */
-        .cultos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 15px; }
-        .card-dia { padding: 15px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border: 1px solid rgba(255,255,255,0.5); }
-        .card-dia h4 { margin: 0 0 5px; font-size: 15px; color: var(--vino); }
-        .card-dia p { margin: 0; font-size: 11px; line-height: 1.4; }
+        /* Cuadros de Cultos (Igual al anterior) */
+        .cultos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 15px; }
+        .card-dia { padding: 12px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+        .card-dia h4 { margin: 0; font-size: 14px; color: var(--vino); }
+        .card-dia p { margin: 3px 0 0; font-size: 10px; }
 
-        /* Eventos Hexagonales Esparcidos */
-        .event-path { position: relative; height: 220px; margin: 20px; }
+        /* Hexágonos con Detalles de Ingeniería (Hora/Lugar) */
+        .event-path { position: relative; height: 280px; margin: 20px; }
         .hex {
-            position: absolute; width: 90px; height: 100px;
+            position: absolute; width: 110px; height: 120px;
             background: white; color: var(--vino);
             clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-            display: flex; align-items: center; justify-content: center;
-            text-align: center; font-size: 11px; font-weight: 600; 
-            border: 2px solid var(--oro); box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; border: 1px solid var(--oro); box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        .hex-1 { top: 0; left: 5%; border: 2px solid #FFB6C1; }
-        .hex-2 { top: 60px; left: 40%; border: 2px solid #87CEFA; }
-        .hex-3 { top: 120px; left: 65%; border: 2px solid #DDA0DD; }
+        .hex b { font-size: 11px; }
+        .hex span { font-size: 8px; color: #666; line-height: 1.1; margin-top: 2px; }
+        .hex-1 { top: 0; left: 5%; }
+        .hex-2 { top: 70px; left: 38%; }
+        .hex-3 { top: 140px; left: 65%; }
 
-        /* Sliders */
-        .slider-box { margin: 20px; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
-        .track { display: flex; transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1); height: 260px; }
-        .track img { width: 100%; object-fit: contain; flex-shrink: 0; padding: 10px; }
-        .info-panel { padding: 15px; text-align: center; background: #fff; border-top: 1px solid #f0f0f0; }
+        /* Sliders Conectados a Google Sheets */
+        .slider-box { margin: 15px; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .track { display: flex; transition: 0.8s ease-in-out; height: 240px; }
+        .track img { width: 100%; object-fit: contain; flex-shrink: 0; }
+        .info-panel { padding: 12px; text-align: center; font-size: 12px; }
 
-        .hint { text-align: center; font-size: 10px; color: #999; margin-top: 30px; animation: bounce 2s infinite; }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-5px);} 60% {transform: translateY(-3px);} }
+        .hint-swipe { position: fixed; bottom: 20px; width: 100%; text-align: center; font-size: 10px; color: var(--oro); pointer-events: none; }
     </style>
 </head>
 <body>
 
-    <section id="inicio">
-        <div class="hero">
-            <h1>La Novia del Cordero</h1>
-            <p>S.P.S. HONDURAS</p>
-        </div>
+    <div class="vestido-bg"></div>
 
-        <a href="#" class="btn-lideres">⚙️ Espacio para Líderes</a>
-
-        <div class="cultos-grid">
-            <div class="card-dia" style="background: var(--azul-p);"><h4>🙏 Martes</h4><p>Adoración y Alabanza<br>Pre: Hno. Miguel</p></div>
-            <div class="card-dia" style="background: var(--rosa-p);"><h4>♀️ Jueves</h4><p>Sociedad de Damas<br>Dir: Directiva</p></div>
-            <div class="card-dia" style="background: var(--verde-p);"><h4>🌱 Viernes</h4><p>Crecimiento Espiritual<br>Estudio Bíblico</p></div>
-            <div class="card-dia" style="background: var(--purpura-p);"><h4>🔥 Sábado</h4><p>Sociedad de Jóvenes<br>Hora: 7:00 PM</p></div>
-            <div class="card-dia" style="background: var(--naranja-p); grid-column: span 2; text-align: center;"><h4>🏠 Domingo</h4><p>Escuela Dominical 9:00 AM | Culto General 11:00 AM</p></div>
-        </div>
-
-        <h2 class="section-title">🎟️ Sorteo Especial</h2>
-        <div class="slider-box">
-            <div class="track" id="t-biblia">
-                <img src="https://m.media-amazon.com/images/I/919Nnre1ZXL._SL1500_.jpg" alt="Biblia Arcoiris Café">
-                <img src="https://m.media-amazon.com/images/I/81S7qXg0x6L._SL1500_.jpg" alt="Biblia Arcoiris Detalle">
-                <img src="https://m.media-amazon.com/images/I/81e6L8zLhML._SL1500_.jpg" alt="Interior Colores">
+    <div class="main-container">
+        <section id="inicio">
+            <div class="hero">
+                <h1>La Novia del Cordero</h1>
+                <p>COFRADÍA, CORTÉS</p>
             </div>
-            <div class="info-panel">
-                <p style="margin:0; font-weight:600;">Biblia de Estudio Arcoíris</p>
-                <p style="margin:5px 0; font-size:12px;">Forro de piel italiana café. Sistema de 12 colores por temas.</p>
-                <span style="color:var(--vino); font-weight:bold;">L. 20.00 el boleto</span>
+
+            <a href="#" class="btn-lideres">⚙️ Espacio para Líderes</a>
+
+            <div class="cultos-grid">
+                <div class="card-dia" style="background: var(--azul-p);"><h4>Martes</h4><p>Adoración y Alabanza</p></div>
+                <div class="card-dia" style="background: var(--rosa-p);"><h4>Jueves</h4><p>Sociedad de Damas</p></div>
+                <div class="card-dia" style="background: var(--verde-p);"><h4>Viernes</h4><p>Crecimiento Bíblico</p></div>
+                <div class="card-dia" style="background: var(--purpura-p);"><h4>Sábado</h4><p>Jóvenes - 7:00 PM</p></div>
+                <div class="card-dia" style="background: var(--naranja-p); grid-column: span 2; text-align: center;">
+                    <h4>Domingo</h4><p>Dominical 9AM | General 11AM</p>
+                </div>
             </div>
-        </div>
 
-        <h2 class="section-title">✨ Eventos Especiales</h2>
-        <div class="event-path">
-            <div class="hex hex-1">🤝<br>Culto Unido</div>
-            <div class="hex hex-2">🕯️<br>Vigilia</div>
-            <div class="hex hex-3">⛺<br>Campaña</div>
-        </div>
-
-        <h2 class="section-title">🍗 Venta de Comida</h2>
-        <div class="slider-box">
-            <div class="track" id="t-comida">
-                <img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=500" alt="Hamburguesa">
-                <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=500" alt="Pollo Frito">
-                <img src="https://images.unsplash.com/photo-1512152272829-e3139592d56f?w=500" alt="Tacos">
+            <h2 class="section-title">🎟️ Sorteo de Biblia</h2>
+            <div class="slider-box">
+                <div class="track" id="sheet-biblia">
+                    <div style="width:100%; display:flex; align-items:center; justify-content:center; font-size:10px;">Cargando Biblia...</div>
+                </div>
+                <div class="info-panel">
+                    <b>Biblia Arcoíris - Forro Café</b><br>
+                    <span style="color:var(--vino)">L. 20.00 el boleto</span>
+                </div>
             </div>
-            <div class="info-panel">
-                <p style="margin:0; font-size:12px;">Apoya la construcción de nuestro templo.</p>
+
+            <h2 class="section-title">✨ Eventos Especiales</h2>
+            <div class="event-path">
+                <div class="hex hex-1"><b>Culto Unido</b><span>Fecha: 28 Marzo<br>Hora: 6:30 PM<br>Lugar: Templo</span></div>
+                <div class="hex hex-2"><b>Vigilia</b><span>Fecha: 04 Abril<br>Hora: 9:00 PM<br>Lugar: Anexo</span></div>
+                <div class="hex hex-3"><b>Campaña</b><span>Fecha: 15 Mayo<br>Hora: 7:00 PM<br>Lugar: Campo</span></div>
             </div>
-        </div>
-        
-        <p class="hint">Desliza para ver más ↓</p>
-    </section>
 
-    <section id="fortaleza">
-        <h2 class="section-title" style="margin-top: 60px;">🛡️ Fortalecimiento Espiritual</h2>
-        
-        <div class="card-dia" style="background: var(--rosa-p); margin: 20px; padding: 25px;">
-            <h3 style="margin:0; color:var(--vino);">🔥 Semana de Ayuno</h3>
-            <p style="font-size:13px; margin-top:10px;">Buscando la presencia del Señor la primera semana de cada mes.</p>
-        </div>
+            <h2 class="section-title">🍽️ Venta de Comida</h2>
+            <div class="slider-box">
+                <div class="track" id="sheet-comida">
+                    <div style="width:100%; display:flex; align-items:center; justify-content:center; font-size:10px;">Cargando Menú...</div>
+                </div>
+                <div class="info-panel">Postres caseros, horchata y platillos típicos.</div>
+            </div>
+            
+            <div class="hint-swipe">Desliza a la derecha para fortalecerte →</div>
+        </section>
 
-        <div class="card-dia" style="background: var(--azul-p); margin: 20px; padding: 25px;">
-            <h3 style="margin:0; color:var(--vino);">📱 Devocionales</h3>
-            <p style="font-size:13px; margin-top:10px;">Palabra de Dios diaria a las 6:00 AM por nuestro grupo.</p>
-        </div>
+        <section id="fortaleza" style="background: rgba(255,255,255,0.7);">
+            <h2 class="section-title" style="margin-top: 50px;">🛡️ Fortalecimiento Espiritual</h2>
+            
+            <div class="card-dia" style="background: var(--rosa-p); margin: 20px; padding: 20px;">
+                <h3 style="margin:0; color:var(--vino);">🔥 Semana de Ayuno</h3>
+                <p>Primera semana del mes | Templo Central</p>
+            </div>
 
-        <div class="card-dia" style="background: var(--naranja-p); margin: 20px; padding: 25px;">
-            <h3 style="margin:0; color:var(--vino);">👥 Ayuno de Jóvenes</h3>
-            <p style="font-size:13px; margin-top:10px;">Todos los sábados a las 9:00 AM en el salón anexo.</p>
-        </div>
-    </section>
+            <div class="card-dia" style="background: var(--azul-p); margin: 20px; padding: 20px;">
+                <h3 style="margin:0; color:var(--vino);">📱 Devocionales</h3>
+                <p>6:00 AM vía WhatsApp | "Fortaleza para el día"</p>
+            </div>
+
+            <div class="card-dia" style="background: var(--naranja-p); margin: 20px; padding: 20px;">
+                <h3 style="margin:0; color:var(--vino);">👥 Ayuno Juvenil</h3>
+                <p>Sábados 9:00 AM | Salón de Jóvenes</p>
+            </div>
+            
+            <div class="hint-swipe">← Desliza a la izquierda para volver</div>
+        </section>
+    </div>
 
     <script>
-        function animar(id, slides) {
-            let i = 0;
-            setInterval(() => {
-                i = (i + 1) % slides;
-                document.getElementById(id).style.transform = `translateX(-${i * 100}%)`;
-            }, 3500);
+        // CONFIGURACIÓN DE GOOGLE SHEETS
+        const SHEET_ID = 'TU_ID_DE_GOOGLE_SHEETS_AQUI'; 
+        const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+
+        async function cargarDatos() {
+            try {
+                const res = await fetch(URL);
+                const texto = await res.text();
+                const json = JSON.parse(texto.substr(47).slice(0, -2));
+                const filas = json.table.rows;
+
+                const contenedorBiblia = document.getElementById('sheet-biblia');
+                const contenedorComida = document.getElementById('sheet-comida');
+
+                contenedorBiblia.innerHTML = '';
+                contenedorComida.innerHTML = '';
+
+                filas.forEach((fila, index) => {
+                    const imgUrl = fila.c[0] ? fila.c[0].v : ''; // Columna A: Imagen
+                    const tipo = fila.c[1] ? fila.c[1].v : '';   // Columna B: Tipo (Biblia o Comida)
+
+                    if(imgUrl) {
+                        const img = document.createElement('img');
+                        img.src = imgUrl;
+                        if(tipo.toLowerCase().includes('biblia')) {
+                            contenedorBiblia.appendChild(img);
+                        } else {
+                            contenedorComida.appendChild(img);
+                        }
+                    }
+                });
+
+                iniciarSliders();
+            } catch (e) {
+                console.error("Error cargando Google Sheets:", e);
+            }
         }
-        window.onload = () => {
-            animar('t-biblia', 3);
-            animar('t-comida', 3);
+
+        function iniciarSliders() {
+            const setup = (id) => {
+                let i = 0;
+                const el = document.getElementById(id);
+                const slides = el.children.length;
+                if(slides > 1) {
+                    setInterval(() => {
+                        i = (i + 1) % slides;
+                        el.style.transform = `translateX(-${i * 100}%)`;
+                    }, 4000);
+                }
+            };
+            setup('sheet-biblia');
+            setup('sheet-comida');
         }
+
+        window.onload = cargarDatos;
     </script>
 </body>
 </html>

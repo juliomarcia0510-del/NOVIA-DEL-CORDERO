@@ -10,7 +10,7 @@
 
         :root {
             --oro: #C5A059;
-            --vino-profundo: #4a0404;
+            --vino: #4a0404;
             --fondo: #fcfbf7;
             --rosa-bg: #FCE4EC;
             --verde-bg: #E8F5E9;
@@ -21,21 +21,20 @@
 
         body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--fondo); color: var(--texto); padding-bottom: 120px; }
 
-        /* PORTADA COLOR VINO ELEGANTE */
+        /* PORTADA VINO RUBÍ */
         .header-box {
             background: linear-gradient(rgba(74, 4, 4, 0.8), rgba(74, 4, 4, 0.9)), 
                         url('https://images.unsplash.com/photo-1543160216-258f1a21f78f?q=80&w=1500&auto=format&fit=crop');
             background-size: cover; background-position: center;
-            height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            height: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center;
             border-bottom: 4px solid var(--oro); text-align: center;
         }
+        .header-box h1 { font-family: 'Playfair Display', serif; color: var(--oro); font-size: 24px; margin: 0; text-transform: uppercase; }
 
-        .header-box h1 { font-family: 'Playfair Display', serif; color: var(--oro); font-size: 26px; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* BOTÓN LÍDERES ABAJO DE PORTADA */
-        .btn-lideres-top {
+        /* BOTÓN LÍDERES TOP */
+        .btn-lideres {
             display: flex; align-items: center; justify-content: center; gap: 10px;
-            background: white; color: var(--vino-profundo); padding: 12px;
+            background: white; color: var(--vino); padding: 12px;
             margin: 15px 20px; border-radius: 12px; text-decoration: none;
             font-weight: 600; font-size: 14px; border: 1px solid var(--oro);
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
@@ -45,24 +44,26 @@
         .page.active { display: block; animation: fadeIn 0.4s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .seccion-titulo { font-family: 'Playfair Display', serif; color: var(--oro); text-align: center; margin: 25px 0 15px; font-size: 19px; text-transform: uppercase; }
+        .seccion-titulo { font-family: 'Playfair Display', serif; color: var(--oro); text-align: center; margin: 30px 0 15px; font-size: 19px; text-transform: uppercase; }
 
-        /* TARJETAS */
-        .tarjeta { border-radius: 15px; margin-bottom: 12px; padding: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
-        .tarjeta-titulo { font-weight: 600; font-size: 15px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-        .tarjeta-info { font-size: 13.5px; line-height: 1.6; color: #444; }
+        /* TARJETAS EXPUESTAS (SISTEMA DE COLORES PASTEL) */
+        .tarjeta { border-radius: 15px; margin-bottom: 15px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .tarjeta-titulo { font-weight: 600; font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 8px; }
+        .tarjeta-info { font-size: 14px; line-height: 1.6; color: #444; }
+        .detalle-linea { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
+        .detalle-linea i { width: 18px; text-align: center; }
 
         .bg-rosa { background: var(--rosa-bg); }
         .bg-verde { background: var(--verde-bg); }
         .bg-purpura { background: var(--purpura-bg); }
         .bg-azul { background: var(--azul-bg); }
 
-        /* SLIDER IMÁGENES */
-        .slider-container { width: 100%; height: 230px; background: #eee; border-radius: 15px; overflow: hidden; margin-top: 12px; position: relative; border: 2px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .slider-track { display: flex; height: 100%; transition: transform 0.6s ease-in-out; }
+        /* SLIDERS */
+        .slider-container { width: 100%; height: 230px; background: #eee; border-radius: 15px; overflow: hidden; margin-top: 15px; position: relative; border: 2px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .slider-track { display: flex; height: 100%; transition: transform 0.6s ease; }
         .slider-track img { width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; }
 
-        .btn-ws { background: #2ecc71; color: white; padding: 12px; border-radius: 10px; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 15px; font-weight: 600; font-size: 14px; }
+        .btn-ws { background: #2ecc71; color: white; padding: 12px; border-radius: 10px; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 15px; font-weight: 600; }
 
         .nav-float { position: fixed; bottom: 25px; left: 25px; background: var(--oro); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 1000; border: 3px solid white; }
     </style>
@@ -71,53 +72,96 @@
 
     <div class="header-box">
         <h1>La Novia del Cordero</h1>
-        <p style="color:var(--oro); font-size: 10px; opacity: 0.9; letter-spacing: 1px;">VIDA NUEVA, SECTOR COFRADÍA</p>
+        <p style="color:var(--oro); font-size: 10px; letter-spacing: 1px;">VIDA NUEVA, SECTOR COFRADÍA</p>
     </div>
 
-    <a href="https://wa.me/50400000000?text=Hola,%20necesito%20actualizar%20datos%20de%20organización" class="btn-lideres-top">
+    <a href="https://wa.me/50400000000" class="btn-lideres">
         <i class="fas fa-users-cog"></i> Espacio para Líderes y Organización
     </a>
 
     <div id="page1" class="page active">
-        <h2 class="seccion-titulo">Cultos Semanales</h2>
+        <h2 class="seccion-titulo">Cultos de la Semana</h2>
         
         <div class="tarjeta bg-azul">
             <div class="tarjeta-titulo"><i class="fas fa-pray" style="color:#2980b9"></i> Martes (Oración)</div>
-            <div class="tarjeta-info">Culto de intercesión. Hora: 6:30 PM.</div>
+            <div class="tarjeta-info">
+                <div class="detalle-linea"><i class="fas fa-user"></i> Dirección: Pendiente</div>
+                <div class="detalle-linea"><i class="fas fa-music"></i> Coros: Pendiente</div>
+                <div class="detalle-linea"><i class="fas fa-bible"></i> Predicación: Pendiente</div>
+            </div>
         </div>
 
         <div class="tarjeta bg-purpura">
             <div class="tarjeta-titulo"><i class="fas fa-venus" style="color:#8e44ad"></i> Jueves (Damas)</div>
-            <div class="tarjeta-info">Sociedad de Damas en bendición.</div>
+            <div class="tarjeta-info">
+                <div class="detalle-linea"><i class="fas fa-user"></i> Dirección: Pendiente</div>
+                <div class="detalle-linea"><i class="fas fa-music"></i> Coros: Pendiente</div>
+                <div class="detalle-linea"><i class="fas fa-bible"></i> Predicación: Pendiente</div>
+            </div>
         </div>
 
         <div class="tarjeta bg-verde">
             <div class="tarjeta-titulo"><i class="fas fa-book-open" style="color:#27ae60"></i> Viernes (Crecimiento)</div>
-            <div class="tarjeta-info">Estudio de la palabra para toda la familia.</div>
+            <div class="tarjeta-info">
+                <div class="detalle-linea"><i class="fas fa-user"></i> Dirección: Pendiente</div>
+                <div class="detalle-linea"><i class="fas fa-music"></i> Coros: Pendiente</div>
+                <div class="detalle-linea"><i class="fas fa-bible"></i> Predicación: Pendiente</div>
+            </div>
         </div>
 
         <div class="tarjeta bg-rosa">
             <div class="tarjeta-titulo"><i class="fas fa-fire" style="color:#c0392b"></i> Sábado (Jóvenes)</div>
-            <div class="tarjeta-info">Reunión de jóvenes "Generación de Impacto".</div>
-        </div>
-
-        <div class="tarjeta bg-azul" style="border: 2px solid var(--oro);">
-            <div class="tarjeta-titulo"><i class="fas fa-church" style="color:var(--oro)"></i> Domingo (General)</div>
             <div class="tarjeta-info">
-                <b>Escuela Dominical:</b> 9:00 AM<br>
-                <b>Culto General:</b> 11:00 AM
+                <div class="detalle-linea"><i class="fas fa-user"></i> Dirección: Pendiente</div>
+                <div class="detalle-linea"><i class="fas fa-music"></i> Coros: Pendiente</div>
+                <div class="detalle-linea"><i class="fas fa-bible"></i> Predicación: Pendiente</div>
             </div>
         </div>
 
-        <h2 class="seccion-titulo">Actividades Pro-Construcción</h2>
+        <div class="tarjeta bg-azul" style="border: 2px solid var(--oro)">
+            <div class="tarjeta-titulo"><i class="fas fa-church" style="color:var(--oro)"></i> Domingo (General)</div>
+            <div class="tarjeta-info">
+                <p><b>Escuela Dominical:</b> 9:00 AM</p>
+                <p><b>Culto General:</b> 11:00 AM</p>
+            </div>
+        </div>
+
+        <h2 class="seccion-titulo">Eventos Especiales</h2>
 
         <div class="tarjeta bg-purpura">
-            <div class="tarjeta-titulo"><i class="fas fa-ticket-alt" style="color:#8e44ad"></i> Sorteo de Biblia</div>
+            <div class="tarjeta-titulo"><i class="fas fa-moon" style="color:#8e44ad"></i> Vigilia</div>
             <div class="tarjeta-info">
-                Valor del boleto: L. 20.00.
+                <div class="detalle-linea"><i class="fas fa-calendar"></i> Fecha: Por definir</div>
+                <div class="detalle-linea"><i class="fas fa-clock"></i> Hora: 9:00 PM</div>
+                <div class="detalle-linea"><i class="fas fa-map-marker-alt"></i> Lugar: Templo Central</div>
+            </div>
+        </div>
+
+        <div class="tarjeta bg-rosa">
+            <div class="tarjeta-titulo"><i class="fas fa-bullhorn" style="color:#c0392b"></i> Campaña Evangelística</div>
+            <div class="tarjeta-info">
+                <div class="detalle-linea"><i class="fas fa-calendar"></i> Fecha: Próximamente</div>
+                <div class="detalle-linea"><i class="fas fa-map-marker-alt"></i> Lugar: Sector Cofradía</div>
+            </div>
+        </div>
+
+        <div class="tarjeta bg-verde">
+            <div class="tarjeta-titulo"><i class="fas fa-handshake" style="color:#27ae60"></i> Cultos Unidos</div>
+            <div class="tarjeta-info">
+                <div class="detalle-linea"><i class="fas fa-calendar"></i> Fecha: Mensual</div>
+                <div class="detalle-linea"><i class="fas fa-map-marker-alt"></i> Lugar: Iglesia Local</div>
+            </div>
+        </div>
+
+        <h2 class="seccion-titulo">Ventas y Sorteos</h2>
+
+        <div class="tarjeta bg-purpura">
+            <div class="tarjeta-titulo"><i class="fas fa-ticket-alt" style="color:#8e44ad"></i> Rifa de Biblia Especial</div>
+            <div class="tarjeta-info">
+                L. 20.00 por boleto.
                 <div class="slider-container">
                     <div class="slider-track" id="slider-rifa">
-                        <p style="text-align:center; padding:40px; font-size:12px; color:#999;">Cargando bendiciones...</p>
+                        <p style="text-align:center; padding:50px; font-size:12px;">Sincronizando con Google Sheets...</p>
                     </div>
                 </div>
                 <a href="https://wa.me/50400000000" class="btn-ws"><i class="fab fa-whatsapp"></i> Comprar Boleto</a>
@@ -126,35 +170,29 @@
 
         <div class="tarjeta bg-verde">
             <div class="tarjeta-titulo"><i class="fas fa-utensils" style="color:#27ae60"></i> Venta de Comida</div>
-            <div class="tarjeta-info">Apoya la obra del Señor con tu compra.</div>
+            <div class="tarjeta-info">
+                ¡Delicias para apoyar la construcción!
+                <div class="slider-container">
+                    <div class="slider-track" id="slider-comida">
+                        <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=500" alt="Pollo Frito">
+                        <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?q=80&w=500" alt="Tacos">
+                        <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=500" alt="Hamburguesas">
+                        <img src="https://images.unsplash.com/photo-1534353473418-4cfa6c56fd38?q=80&w=500" alt="Horchata">
+                    </div>
+                </div>
+                <p style="text-align:center; font-weight:bold; margin-top:10px;">Pollo frito, Hamburguesas, Horchatas y Postres.</p>
+            </div>
         </div>
     </div>
 
     <div id="page2" class="page">
         <h2 class="seccion-titulo">Fortalecimiento Espiritual</h2>
-        
-        <div class="tarjeta bg-rosa">
-            <div class="tarjeta-titulo"><i class="fas fa-fire-alt" style="color:#c0392b"></i> Semana de Ayuno</div>
-            <div class="tarjeta-info">Primera semana de cada mes.</div>
-        </div>
-
-        <div class="tarjeta bg-azul">
-            <div class="tarjeta-titulo"><i class="fas fa-sun" style="color:#2980b9"></i> Devocionales Diarios</div>
-            <div class="tarjeta-info">6:00 AM vía WhatsApp oficial.</div>
-        </div>
-
-        <div class="tarjeta bg-verde">
-            <div class="tarjeta-titulo"><i class="fas fa-users" style="color:#27ae60"></i> Ayuno de Jóvenes</div>
-            <div class="tarjeta-info">Sábados de 8:00 AM a 12:00 MD.</div>
-        </div>
-
-        <div class="tarjeta bg-purpura">
-            <div class="tarjeta-titulo"><i class="fas fa-calendar-star" style="color:#8e44ad"></i> Eventos Especiales</div>
-            <div class="tarjeta-info">Cultos Unidos, Campañas y Vigilias mensuales.</div>
-        </div>
+        <div class="tarjeta bg-rosa"><div class="tarjeta-titulo"><i class="fas fa-fire-alt"></i> Semana de Ayuno</div><div class="tarjeta-info">Primera semana de cada mes.</div></div>
+        <div class="tarjeta bg-azul"><div class="tarjeta-titulo"><i class="fas fa-sun"></i> Devocionales</div><div class="tarjeta-info">Diarios 6:00 AM vía WhatsApp.</div></div>
+        <div class="tarjeta bg-verde"><div class="tarjeta-titulo"><i class="fas fa-users"></i> Ayuno de Jóvenes</div><div class="tarjeta-info">Sábados 9:00 AM en el templo.</div></div>
     </div>
 
-    <div class="nav-float" onclick="cambiarPagina()"><i class="fas fa-exchange-alt"></i></div>
+    <div class="nav-float" onclick="cambiarPagina()"><i class="fas fa-retweet"></i></div>
 
     <script>
         function cambiarPagina() {
@@ -163,50 +201,47 @@
             window.scrollTo(0,0);
         }
 
-        // CARGA INTELIGENTE DE IMÁGENES
         async function cargarImagenes() {
             const sheetID = '1-mAee7Xp8Oen786WSXyLaR9Mc7tgBLI_XWdJNp9vGV4';
-            const track = document.getElementById('slider-rifa');
-            const pestañas = ['1', 'Hoja1', 'Sheet1']; // Intenta varios nombres
-            let imgsFound = [];
+            const trackRifa = document.getElementById('slider-rifa');
+            const trackComida = document.getElementById('slider-comida');
+            
+            // 1. Cargar Rifa desde Google Sheets
+            try {
+                const res = await fetch(`https://opensheet.elk.sh/${sheetID}/1`);
+                const data = await res.json();
+                let imgsFound = [];
 
-            for (let p of pestañas) {
-                try {
-                    const res = await fetch(`https://opensheet.elk.sh/${sheetID}/${p}`);
-                    const data = await res.json();
-                    
-                    if (data && data.length > 0) {
-                        data.forEach(row => {
-                            Object.values(row).forEach(val => {
-                                let s = String(val).trim();
-                                if (s.includes('http')) {
-                                    let clean = s.replace('postimg.cc', 'i.postimg.cc');
-                                    if (!clean.match(/\.(jpg|jpeg|png|gif)$/i)) clean += '.jpg';
-                                    imgsFound.push(clean);
-                                }
-                            });
-                        });
-                        if (imgsFound.length > 0) break; // Si ya encontramos fotos, no sigas buscando
-                    }
-                } catch (e) { console.log(`Error en pestaña ${p}`); }
-            }
-
-            if (imgsFound.length > 0) {
-                track.innerHTML = '';
-                imgsFound.forEach(src => {
-                    const img = document.createElement('img');
-                    img.src = src;
-                    track.appendChild(img);
+                data.forEach(row => {
+                    Object.values(row).forEach(val => {
+                        let s = String(val).trim();
+                        if (s.startsWith('http')) {
+                            let clean = s.replace('postimg.cc', 'i.postimg.cc');
+                            if (!clean.match(/\.(jpg|jpeg|png|gif)$/i)) clean += '.jpg';
+                            imgsFound.push(clean);
+                        }
+                    });
                 });
 
-                let step = 0;
-                setInterval(() => {
-                    step = (step + 1) % imgsFound.length;
-                    track.style.transform = `translateX(-${step * 100}%)`;
-                }, 4000);
-            } else {
-                track.innerHTML = '<p style="padding:40px; font-size:12px; text-align:center;">Asegúrate de que la hoja de Google sea pública y tenga enlaces.</p>';
-            }
+                if (imgsFound.length > 0) {
+                    trackRifa.innerHTML = imgsFound.map(src => `<img src="${src}" onerror="this.src='https://via.placeholder.com/500x300?text=Imagen+No+Disponible'">`).join('');
+                    iniciarSlider(trackRifa, imgsFound.length);
+                } else {
+                    trackRifa.innerHTML = '<p style="padding:40px; text-align:center;">No hay imágenes de rifa.</p>';
+                }
+            } catch (e) { trackRifa.innerHTML = '<p style="padding:40px; text-align:center;">Error de conexión con Sheets.</p>'; }
+
+            // 2. Iniciar Slider de Comida (Estático de Google)
+            iniciarSlider(trackComida, 4);
+        }
+
+        function iniciarSlider(track, count) {
+            if (count <= 1) return;
+            let index = 0;
+            setInterval(() => {
+                index = (index + 1) % count;
+                track.style.transform = `translateX(-${index * 100}%)`;
+            }, 3500);
         }
 
         window.onload = cargarImagenes;

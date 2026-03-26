@@ -8,277 +8,237 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
 
-        :root {
-            --oro: #D4AF37; --vino: #5D0E0E;
-            --rosa: #FFF0F5; --azul: #E3F2FD; --verde: #E8F5E9; --purpura: #F3E5F5; --naranja: #FFF3E0;
-        }
-
+        :root { --oro: #D4AF37; --vino: #5D0E0E; }
+        
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
         body { 
             margin: 0; font-family: 'Poppins', sans-serif; background-color: #fdfcf9;
-            /* Fondo estilo "Vestido de Novia" (Encaje/Sutil) */
             background-image: url('https://www.transparenttextures.com/patterns/cream-pixels.png');
             overflow-x: hidden;
         }
 
-        /* CONTENEDOR DESLIZABLE (PÁGINAS) */
-        .viewport { display: flex; width: 200vw; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        .page { width: 100vw; min-height: 100vh; padding-bottom: 80px; }
+        /* NAVEGACIÓN DE PÁGINAS */
+        .master-container { display: flex; width: 200vw; transition: transform 0.5s ease-out; }
+        .page { width: 100vw; min-height: 100vh; padding-bottom: 100px; }
 
         /* PORTADA DIAMANTADA */
         .header {
-            background: white; padding: 60px 20px; text-align: center;
-            border-bottom: 3px solid var(--oro);
-            /* Diamantes Reales (Efecto brillo) */
+            background: white; padding: 60px 20px; text-align: center; border-bottom: 3px solid var(--oro);
             background-image: url('https://www.transparenttextures.com/patterns/diamond-upholstery.png');
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
-        .header h1 { font-family: 'Playfair Display', serif; color: var(--vino); font-size: 32px; margin: 0; }
-        .header p { color: #888; font-size: 12px; margin: 5px 0; letter-spacing: 1px; }
-
+        .header h1 { font-family: 'Playfair Display', serif; color: var(--vino); font-size: 30px; margin: 0; }
         .btn-lideres {
-            display: inline-block; margin-top: 15px; padding: 8px 25px;
-            border: 1px solid var(--oro); border-radius: 20px;
-            color: var(--oro); text-decoration: none; font-size: 11px;
-            font-weight: 600; text-transform: uppercase;
+            display: inline-block; margin-top: 15px; padding: 7px 20px; border: 1px solid var(--oro);
+            border-radius: 20px; color: var(--oro); text-decoration: none; font-size: 10px; font-weight: 600;
         }
 
-        /* CUADRÍCULA DE CULTOS (5 Segmentos) */
-        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 20px; }
-        .culto-box { padding: 15px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
-        .culto-box h4 { margin: 0 0 10px; color: var(--vino); font-size: 15px; border-bottom: 1px solid rgba(0,0,0,0.1); }
-        .info-row { font-size: 10px; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
-        .info-row i { width: 15px; text-align: center; }
-        .full-width { grid-column: span 2; text-align: center; }
+        /* CUADRICULA CULTOS */
+        .grid-cultos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
+        .c-box { padding: 12px; border-radius: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .c-box h4 { margin: 0 0 8px; font-size: 14px; color: var(--vino); border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .info-p { font-size: 10px; margin: 4px 0; display: flex; align-items: center; gap: 5px; }
 
         /* HEXAGONALES */
-        .hex-wrap { display: flex; justify-content: center; gap: 10px; margin: 20px 0; padding: 0 10px; }
+        .hex-row { display: flex; justify-content: center; gap: 8px; margin: 20px 0; }
         .hex {
-            width: 100px; height: 110px; background: white; border: 1.5px solid var(--oro);
+            width: 95px; height: 105px; background: white; border: 1px solid var(--oro);
             clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-align: center; font-size: 9px; padding: 5px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-size: 8px;
         }
-        .hex i { color: var(--oro); margin-bottom: 5px; font-size: 14px; }
 
-        /* SLIDERS (SORTEO Y COMIDA) */
-        .section-title { text-align: center; color: var(--vino); font-family: 'Playfair Display'; margin: 30px 0 15px; }
-        .slider-card { 
-            background: white; margin: 0 20px; border-radius: 25px; overflow: hidden; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee;
-        }
-        .engine { display: flex; height: 300px; transition: transform 0.6s ease; cursor: zoom-in; }
-        .engine img { width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; padding: 15px; }
+        /* SLIDERS ELEGANTES */
+        .section-t { text-align: center; font-family: 'Playfair Display'; color: var(--vino); margin: 25px 0 10px; }
+        .card-slider { background: white; margin: 0 15px; border-radius: 25px; overflow: hidden; border: 1px solid #eee; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .track { display: flex; height: 320px; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .track img { width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; padding: 10px; }
 
-        /* MENÚ DE COMIDA */
-        .menu-list { display: none; padding: 20px; background: #fafafa; border-top: 1px solid #eee; }
-        .menu-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #ccc; font-size: 13px; }
+        /* MENÚ DINÁMICO */
+        .menu-hidden { max-height: 0; overflow: hidden; transition: 0.5s ease; background: #f9f9f9; }
+        .menu-hidden.open { max-height: 600px; padding: 15px; }
+        .m-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #ddd; font-size: 13px; }
 
         /* BOTONES */
-        .btn-action {
-            display: block; width: 85%; margin: 15px auto; padding: 14px;
-            border-radius: 15px; text-align: center; text-decoration: none;
-            font-weight: 600; font-size: 14px; transition: 0.3s;
-        }
+        .btn { display: block; width: 85%; margin: 12px auto; padding: 14px; border-radius: 15px; text-align: center; text-decoration: none; font-weight: 600; font-size: 14px; }
         .btn-wa { background: #25D366; color: white; }
-        .btn-gold { background: var(--oro); color: white; border: none; }
+        .btn-menu { background: var(--oro); color: white; border: none; cursor: pointer; }
 
-        /* FULLSCREEN */
-        #fs-overlay {
-            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95);
-            z-index: 9999; justify-content: center; align-items: center;
-        }
-        #fs-overlay img { max-width: 95%; max-height: 85%; border-radius: 10px; }
+        /* VISOR FULLSCREEN CON SWIPE */
+        #fs-visor { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 10000; flex-direction: column; justify-content: center; align-items: center; }
+        #fs-track { display: flex; width: 100%; transition: transform 0.3s ease; }
+        #fs-track img { width: 100vw; max-height: 80vh; object-fit: contain; }
 
-        /* NAVEGACIÓN INFERIOR */
-        .nav-bar {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: white; padding: 10px 30px; border-radius: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: flex; gap: 40px; z-index: 1000;
-        }
-        .nav-item { color: #ccc; font-size: 20px; cursor: pointer; transition: 0.3s; }
-        .nav-item.active { color: var(--oro); }
+        .nav-dots { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); background: white; padding: 8px 25px; border-radius: 20px; display: flex; gap: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .dot { font-size: 18px; color: #ddd; transition: 0.3s; }
+        .dot.active { color: var(--oro); }
     </style>
 </head>
-<body id="body-swipe">
+<body>
 
-<div class="viewport" id="master-view">
-    
+<div class="master-container" id="master">
     <div class="page">
         <div class="header">
             <h1>La Novia del Cordero</h1>
             <p>COLONIA VIDA NUEVA, SECTOR COFRADÍA</p>
-            <a href="#" class="btn-lideres">✨ Espacio para Líderes</a>
+            <a href="#" class="btn-lideres">ESPACIO PARA LÍDERES</a>
         </div>
 
-        <div class="grid-container">
-            <div class="culto-box" style="background: var(--azul);">
-                <h4>Martes</h4>
-                <div class="info-row"><i class="fas fa-pray" style="color:#2196F3"></i> Oración</div>
-                <div class="info-row"><i class="fas fa-microphone"></i> Hno. Miguel</div>
-            </div>
-            <div class="culto-box" style="background: var(--rosa);">
-                <h4>Jueves</h4>
-                <div class="info-row"><i class="fas fa-female" style="color:#E91E63"></i> Damas</div>
-                <div class="info-row"><i class="fas fa-music"></i> Coro Local</div>
-            </div>
-            <div class="culto-box" style="background: var(--verde);">
-                <h4>Viernes</h4>
-                <div class="info-row"><i class="fas fa-book-open" style="color:#4CAF50"></i> Crecimiento</div>
-                <div class="info-row"><i class="fas fa-users"></i> General</div>
-            </div>
-            <div class="culto-box" style="background: var(--purpura);">
-                <h4>Sábado</h4>
-                <div class="info-row"><i class="fas fa-fire" style="color:#9C27B0"></i> Jóvenes</div>
-                <div class="info-row"><i class="fas fa-clock"></i> 7:00 PM</div>
-            </div>
-            <div class="culto-box full-width" style="background: var(--naranja);">
-                <h4>Domingo</h4>
-                <div class="info-row" style="justify-content:center;"><i class="fas fa-church" style="color:#FF9800"></i> Escuela Dominical 9:00 AM | Culto General 6:30 PM</div>
-            </div>
+        <div class="grid-cultos">
+            <div class="c-box" style="background:#E3F2FD"><h4>Martes</h4><p class="info-p"><i class="fas fa-pray"></i> Oración</p></div>
+            <div class="c-box" style="background:#FCE4EC"><h4>Jueves</h4><p class="info-p"><i class="fas fa-female"></i> Damas</p></div>
+            <div class="c-box" style="background:#E8F5E9"><h4>Viernes</h4><p class="info-p"><i class="fas fa-book"></i> Crecimiento</p></div>
+            <div class="c-box" style="background:#F3E5F5"><h4>Sábado</h4><p class="info-p"><i class="fas fa-fire"></i> Jóvenes</p></div>
+            <div class="c-box" style="background:#FFF3E0; grid-column:span 2; text-align:center"><h4>Domingo</h4><p class="info-p" style="justify-content:center"><i class="fas fa-church"></i> 9:00 AM y 6:30 PM</p></div>
         </div>
 
-        <div class="hex-wrap">
-            <div class="hex"><i class="fas fa-tent"></i><b>Campaña</b><span>15 Abr<br>Campo Central</span></div>
-            <div class="hex"><i class="fas fa-moon"></i><b>Vigilia</b><span>27 Mar<br>9:00 PM</span></div>
-            <div class="hex"><i class="fas fa-hands-helping"></i><b>Unidos</b><span>02 May<br>Templo</span></div>
+        <div class="hex-row">
+            <div class="hex"><i class="fas fa-bullhorn" style="color:var(--oro)"></i><b>Campaña</b><span>Abril</span></div>
+            <div class="hex"><i class="fas fa-cloud-moon" style="color:var(--oro)"></i><b>Vigilia</b><span>Marzo</span></div>
+            <div class="hex"><i class="fas fa-users" style="color:var(--oro)"></i><b>Unidos</b><span>Mayo</span></div>
         </div>
 
-        <h3 class="section-title">🎟️ Sorteo Especial Arcoíris</h3>
-        <div class="slider-card">
-            <div class="engine" id="slider-biblia">
+        <h3 class="section-t">🎟️ Sorteo de Biblia Arcoíris</h3>
+        <div class="card-slider">
+            <div class="track" id="track-biblia">
                 <img src="https://m.media-amazon.com/images/I/919Nnre1ZXL.jpg">
             </div>
-            <a href="https://wa.me/50433221100?text=Boletos Biblia" class="btn-action btn-wa">Comprar Boletos L.20</a>
+            <a href="https://wa.me/50433221100" class="btn btn-wa">Comprar Boleto L.20</a>
         </div>
 
-        <h3 class="section-title">🍗 Venta de Comida</h3>
-        <div class="slider-card">
-            <div class="engine" id="slider-comida">
-                <img src="https://images.unsplash.com/photo-1562967914-6cbb241c293c?w=500">
-                <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=500">
+        <h3 class="section-t">🍽️ Actividad de Comida</h3>
+        <div class="card-slider">
+            <div class="track" id="track-comida">
+                <img src="https://images.unsplash.com/photo-1562967914-6cbb241c293c?w=500" alt="Pollo Frito">
+                <img src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?w=500" alt="Tacos">
+                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500" alt="Tajadas">
             </div>
-            <button class="btn-action btn-gold" onclick="toggleMenu()">🍽️ Ver Menú de Hoy</button>
-            <div class="menu-list" id="menu-comida">
-                <div class="menu-item"><span>Pollo Frito con Tajadas</span><b>L. 120</b></div>
-                <div class="menu-item"><span>Tacos Hondureños</span><b>L. 70</b></div>
-                <div class="menu-item"><span>Hamburguesa Clásica</span><b>L. 85</b></div>
-                <div class="menu-item"><span>Horchata Casera</span><b>L. 25</b></div>
-                <div class="menu-item"><span>Jugo de Nance / Melón</span><b>L. 25</b></div>
+            <button class="btn btn-menu" onclick="toggleM()">Ver Menú Dinámico</button>
+            <div class="menu-hidden" id="menu-div">
+                <div class="m-item"><span>🍗 Pollo Frito con Tajadas</span><b>L. 120</b></div>
+                <div class="m-item"><span>🌮 Tacos Hondureños</span><b>L. 70</b></div>
+                <div class="m-item"><span>🍔 Hamburguesa Especial</span><b>L. 85</b></div>
+                <div class="m-item"><span>🥤 Horchata Fría</span><b>L. 25</b></div>
+                <div class="m-item"><span>🍈 Jugo de Nance/Melón</span><b>L. 25</b></div>
             </div>
-            <a href="https://wa.me/50433221100?text=Pedido Comida" class="btn-action btn-wa">Hacer Pedido</a>
+            <a href="https://wa.me/50433221100" class="btn btn-wa">Ordenar por WhatsApp</a>
         </div>
     </div>
 
-    <div class="page" style="background: rgba(255,255,255,0.7);">
-        <h2 class="section-title" style="margin-top:50px;">🛡️ Fortalecimiento Espiritual</h2>
-        
-        <div style="padding:20px;">
-            <div style="background:white; padding:25px; border-radius:20px; margin-bottom:15px; border-left:5px solid var(--oro); box-shadow:0 10px 20px rgba(0,0,0,0.03);">
-                <h4 style="margin:0; color:var(--vino);"><i class="fas fa-cloud-sun"></i> Devocionales</h4>
-                <p style="font-size:12px; color:#666;">Palabra diaria a las 6:00 AM vía grupo oficial.</p>
+    <div class="page" style="background:rgba(255,255,255,0.6)">
+        <h2 class="section-t" style="margin-top:60px">🛡️ Fortalecimiento</h2>
+        <div style="padding:20px">
+            <div style="background:white; padding:20px; border-radius:20px; border-left:5px solid var(--oro); margin-bottom:15px">
+                <h4>Devocionales</h4><p style="font-size:12px">6:00 AM vía WhatsApp.</p>
             </div>
-            <div style="background:white; padding:25px; border-radius:20px; margin-bottom:15px; border-left:5px solid #E91E63; box-shadow:0 10px 20px rgba(0,0,0,0.03);">
-                <h4 style="margin:0; color:var(--vino);"><i class="fas fa-water"></i> Semana de Ayuno</h4>
-                <p style="font-size:12px; color:#666;">Buscando el rostro del Señor la primera semana de cada mes.</p>
-            </div>
-            <div style="background:white; padding:25px; border-radius:20px; border-left:5px solid #2196F3; box-shadow:0 10px 20px rgba(0,0,0,0.03);">
-                <h4 style="margin:0; color:var(--vino);"><i class="fas fa-users"></i> Ayuno de Jóvenes</h4>
-                <p style="font-size:12px; color:#666;">Todos los sábados a las 9:00 AM en el salón anexo.</p>
+            <div style="background:white; padding:20px; border-radius:20px; border-left:5px solid #E91E63; margin-bottom:15px">
+                <h4>Semana de Ayuno</h4><p style="font-size:12px">Buscando a Dios cada inicio de mes.</p>
             </div>
         </div>
     </div>
 </div>
 
-<div class="nav-bar">
-    <div class="nav-item active" id="btn-p1" onclick="goPage(0)"><i class="fas fa-home"></i></div>
-    <div class="nav-item" id="btn-p2" onclick="goPage(1)"><i class="fas fa-shield-alt"></i></div>
+<div class="nav-dots">
+    <div class="dot active" onclick="moveP(0)"><i class="fas fa-home"></i></div>
+    <div class="dot" onclick="moveP(1)"><i class="fas fa-pray"></i></div>
 </div>
 
-<div id="fs-overlay" onclick="this.style.display='none'">
-    <img id="fs-img" src="">
+<div id="fs-visor">
+    <span onclick="closeV()" style="position:absolute; top:30px; right:30px; color:white; font-size:40px; z-index:11000">&times;</span>
+    <div id="fs-track"></div>
+    <p style="color:var(--oro); font-size:12px; position:absolute; bottom:40px">Desliza para ver más</p>
 </div>
 
 <script>
     const SHEET_ID = '1-mAee7Xp8Oen786WSXyLaR9Mc7tgBLI_XWdJNp9vGV4';
     const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
-    async function loadImages() {
+    let bibliaImages = [];
+
+    async function fetchData() {
         try {
             const res = await fetch(URL);
             const text = await res.text();
             const json = JSON.parse(text.substring(47, text.length - 2));
             const rows = json.table.rows;
             
-            const bTrack = document.getElementById('slider-biblia');
-            const cTrack = document.getElementById('slider-comida');
+            const bTrack = document.getElementById('track-biblia');
+            const cTrack = document.getElementById('track-comida');
             
-            const bImgs = [], cImgs = [];
+            let bibliaContent = "", comidaContent = "";
+            bibliaImages = [];
 
             rows.forEach(r => {
                 if(r.c[0] && r.c[0].v) {
                     const url = r.c[0].v;
-                    const type = (r.c[1] && r.c[1].v) ? r.c[1].v.toLowerCase() : '';
-                    if(type.includes('biblia')) bImgs.push(url);
-                    else cImgs.push(url);
+                    const type = (r.c[1] && r.c[1].v) ? r.c[1].v.toLowerCase() : "";
+                    
+                    if(type.includes("biblia")) {
+                        bibliaImages.push(url);
+                        bibliaContent += `<img src="${url}" onclick="openV()">`;
+                    } else if(type.includes("comida")) {
+                        comidaContent += `<img src="${url}">`;
+                    }
                 }
             });
 
-            if(bImgs.length > 0) renderSlider(bTrack, bImgs);
-            if(cImgs.length > 0) renderSlider(cTrack, cImgs);
+            if(bibliaContent) bTrack.innerHTML = bibliaContent;
+            if(comidaContent) cTrack.innerHTML = comidaContent;
             
-        } catch(e) { console.error("Error cargando Sheets"); }
+            initSlider(bTrack, bibliaImages.length);
+            initSlider(cTrack, rows.length - bibliaImages.length);
+        } catch(e) { console.error("Error Sheets"); }
     }
 
-    function renderSlider(track, list) {
-        track.innerHTML = '';
-        list.forEach(url => {
-            const img = document.createElement('img');
-            img.src = url;
-            img.onclick = (e) => {
-                e.stopPropagation();
-                document.getElementById('fs-img').src = url;
-                document.getElementById('fs-overlay').style.display = 'flex';
-            };
-            track.appendChild(img);
-        });
-        startAutoScroll(track, list.length);
-    }
-
-    function startAutoScroll(track, total) {
-        let current = 0;
-        if(total <= 1) return;
+    function initSlider(el, len) {
+        if(len <= 1) return;
+        let i = 0;
         setInterval(() => {
-            current = (current + 1) % total;
-            track.style.transform = `translateX(-${current * 100}%)`;
+            i = (i + 1) % len;
+            el.style.transform = `translateX(-${i * 100}%)`;
         }, 4000);
     }
 
-    function toggleMenu() {
-        const m = document.getElementById('menu-comida');
-        m.style.display = (m.style.display === 'block') ? 'none' : 'block';
+    // VISOR FULLSCREEN CON DESLIZAMIENTO
+    let fsIndex = 0;
+    function openV() {
+        const visor = document.getElementById('fs-visor');
+        const track = document.getElementById('fs-track');
+        track.innerHTML = bibliaImages.map(u => `<img src="${u}">`).join('');
+        visor.style.display = 'flex';
+        fsIndex = 0;
+        moveFS();
     }
 
-    // NAVEGACIÓN DESLIZABLE
-    let startX = 0;
-    function goPage(idx) {
-        document.getElementById('master-view').style.transform = `translateX(-${idx * 100}vw)`;
-        document.getElementById('btn-p1').classList.toggle('active', idx === 0);
-        document.getElementById('btn-p2').classList.toggle('active', idx === 1);
-        window.scrollTo(0,0);
+    function moveFS() {
+        document.getElementById('fs-track').style.transform = `translateX(-${fsIndex * 100}vw)`;
     }
 
-    document.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+    function closeV() { document.getElementById('fs-visor').style.display = 'none'; }
+
+    // GESTIÓN DE SWIPE (PÁGINAS Y VISOR)
+    let sX = 0;
+    document.addEventListener('touchstart', e => sX = e.touches[0].clientX);
     document.addEventListener('touchend', e => {
-        let diff = startX - e.changedTouches[0].clientX;
-        if(Math.abs(diff) > 100) {
-            if(diff > 0) goPage(1); else goPage(0);
+        let diff = sX - e.changedTouches[0].clientX;
+        if(Math.abs(diff) < 50) return;
+
+        if(document.getElementById('fs-visor').style.display === 'flex') {
+            if(diff > 0 && fsIndex < bibliaImages.length - 1) fsIndex++;
+            else if(diff < 0 && fsIndex > 0) fsIndex--;
+            moveFS();
+        } else {
+            if(diff > 0) moveP(1); else moveP(0);
         }
     });
 
-    window.onload = loadImages;
-</script>
+    function moveP(idx) {
+        document.getElementById('master').style.transform = `translateX(-${idx * 100}vw)`;
+        document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+        window.scrollTo(0,0);
+    }
 
+    function toggleM() { document.getElementById('menu-div').classList.toggle('open'); }
+
+    window.onload = fetchData;
+</script>
 </body>
 </html>

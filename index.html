@@ -1,98 +1,107 @@
-<div id="segmento-sorteo" style="max-width: 450px; margin: 20px auto; font-family: 'Poppins', sans-serif; position: relative;">
+<div id="segmento-sorteo" style="background-color: #f4f4f4; padding: 30px 15px; border-radius: 30px; max-width: 480px; margin: 20px auto; font-family: 'Poppins', sans-serif;">
     
-    <h3 style="text-align: center; color: #D4AF37; font-family: 'Playfair Display', serif; margin-bottom: 15px;">
-        🎟️ Sorteo Especial de Biblia
-    </h3>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <span style="background: #D4AF37; color: white; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: bold; letter-spacing: 1px;">PREMIUM</span>
+        <h3 style="color: #333; font-family: 'Playfair Display', serif; font-size: 24px; margin: 10px 0 5px;">Rifa de Biblia Arcoiris</h3>
+        <p style="color: #888; font-size: 12px; margin: 0;">L. 20.00 por boleto. ¡Toca la foto para ampliarla!</p>
+    </div>
 
-    <div style="position: relative; background: #fff; border-radius: 25px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid #f0f0f0;">
+    <div style="position: relative; background: #ffffff; border-radius: 25px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.08); border: 1px solid #e0e0e0;">
         
-        <div id="engine-biblia" style="display: flex; transition: transform 0.6s ease-in-out; height: 350px; cursor: zoom-in;">
-            <div style="width: 100%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: #f9f9f9;">
-                <p style="font-size: 12px; color: #999;">Conectando con galería...</p>
+        <div id="engine-biblia" style="display: flex; transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1); height: 380px; cursor: zoom-in;">
+            <div style="width: 100%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: #fff;">
+                <div style="text-align: center;">
+                    <i class="fas fa-spinner fa-spin" style="color: #D4AF37; font-size: 24px;"></i>
+                    <p style="font-size: 11px; color: #aaa; margin-top: 10px;">Sincronizando galería...</p>
+                </div>
             </div>
         </div>
 
-        <div id="status-count" style="position: absolute; top: 15px; right: 15px; background: rgba(212, 175, 55, 0.8); color: white; font-size: 10px; padding: 4px 10px; border-radius: 12px; font-weight: bold;">
-            0/0
-        </div>
+        <div id="status-dots" style="position: absolute; bottom: 15px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px;"></div>
     </div>
 
-    <div style="text-align: center; margin-top: 15px;">
-        <p style="font-size: 13px; color: #5D0E0E; font-weight: 600;">Biblia Arcoíris - L. 20.00</p>
-        <a href="https://wa.me/50433221100?text=Hola César, quiero boletos para la Biblia" 
-           style="display: block; background: #25D366; color: white; text-decoration: none; padding: 14px; border-radius: 15px; font-weight: bold; box-shadow: 0 4px 12px rgba(37,211,102,0.3);">
-           Comprar vía WhatsApp
+    <div style="text-align: center; margin-top: 25px;">
+        <a href="https://wa.me/50433221100?text=Hola César, quiero participar en la rifa de la Biblia" 
+           style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: #25D366; color: white; text-decoration: none; padding: 15px 35px; border-radius: 50px; font-weight: 600; font-size: 15px; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25); transition: 0.3s;">
+           <i class="fab fa-whatsapp"></i> Comprar Boleto L.20
         </a>
     </div>
 
-    <div id="fullscreen-viewer" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center;">
-        <span onclick="closeFull()" style="position: absolute; top: 20px; right: 25px; color: white; font-size: 40px; cursor: pointer;">&times;</span>
-        <img id="full-img" src="" style="max-width: 95%; max-height: 85%; border-radius: 10px; box-shadow: 0 0 20px rgba(255,255,255,0.2);">
-        <p style="position: absolute; bottom: 30px; color: #D4AF37; font-size: 14px;">Toca la "X" para volver</p>
+    <div id="full-view" style="display: none; position: fixed; inset: 0; background: rgba(18, 18, 18, 0.98); z-index: 10000; flex-direction: column; align-items: center; justify-content: center;" onclick="closeImg()">
+        <button style="position: absolute; top: 30px; right: 30px; background: none; border: none; color: white; font-size: 35px;">&times;</button>
+        <img id="img-target" src="" style="max-width: 90%; max-height: 80%; object-fit: contain; border-radius: 8px;">
+        <p style="color: #D4AF37; margin-top: 20px; font-size: 13px; letter-spacing: 1px;">TOQUE PARA CERRAR</p>
     </div>
 </div>
 
 <script>
-    // Configuración César
-    const SHEET_ID_BIBLIA = '1-mAee7Xp8Oen786WSXyLaR9Mc7tgBLI_XWdJNp9vGV4';
-    // Usamos el formato alternativo /gviz/tq para evitar bloqueos
-    const URL_DATA = `https://docs.google.com/spreadsheets/d/${SHEET_ID_BIBLIA}/gviz/tq?tqx=out:json`;
+    const SHEET_ID = '1-mAee7Xp8Oen786WSXyLaR9Mc7tgBLI_XWdJNp9vGV4';
+    // Cambiamos la técnica de lectura para evitar el error de conexión
+    const DATA_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
-    async function startSorteo() {
+    async function loadGallery() {
         const engine = document.getElementById('engine-biblia');
-        const status = document.getElementById('status-count');
+        const dots = document.getElementById('status-dots');
         
         try {
-            const response = await fetch(URL_DATA);
-            const text = await response.text();
-            // Limpieza del JSON de Google
+            const resp = await fetch(DATA_URL);
+            const text = await resp.text();
             const json = JSON.parse(text.substring(47, text.length - 2));
             const rows = json.table.rows;
             
-            // Filtro dinámico: Columna A (Imagen), Columna B (Categoría)
-            const fotos = rows.filter(r => 
+            // FILTRO INTELIGENTE: Si la Columna B está vacía o dice Biblia, la aceptamos
+            const images = rows.filter(r => 
                 r.c[0] && r.c[0].v && 
-                r.c[1] && r.c[1].v.toLowerCase().includes('biblia')
+                (!r.c[1] || !r.c[1].v || r.c[1].v.toLowerCase().includes('biblia'))
             ).map(r => r.c[0].v);
 
-            if (fotos.length > 0) {
+            if (images.length > 0) {
                 engine.innerHTML = '';
-                fotos.forEach((url, i) => {
+                dots.innerHTML = '';
+                
+                images.forEach((url, i) => {
                     const img = document.createElement('img');
                     img.src = url;
-                    img.style.cssText = "width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; padding: 10px;";
-                    // Evento para pantalla completa
-                    img.onclick = () => openFull(url);
+                    img.style.cssText = "width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; padding: 20px;";
+                    img.onclick = () => {
+                        document.getElementById('img-target').src = url;
+                        document.getElementById('full-view').style.display = 'flex';
+                    };
                     engine.appendChild(img);
+
+                    const dot = document.createElement('div');
+                    dot.style.cssText = "width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,0.1); transition: 0.3s;";
+                    dot.id = `dot-${i}`;
+                    dots.appendChild(dot);
                 });
 
-                status.innerText = `1 / ${fotos.length}`;
-                initAutoSlider(engine, fotos.length, status);
+                startLoop(engine, images.length);
             }
-        } catch (e) {
-            engine.innerHTML = '<p style="padding:20px; text-align:center; color:red;">Error de carga. Revisa que el Sheet sea Público.</p>';
+        } catch (err) {
+            engine.innerHTML = '<p style="padding:40px; color:#e74c3c; font-size:12px; text-align:center;">Error de sincronización.<br>Verifica la privacidad del Sheet.</p>';
         }
     }
 
-    function initAutoSlider(track, total, statusLabel) {
-        let current = 0;
+    function startLoop(track, total) {
+        let i = 0;
+        const updateDots = (idx) => {
+            for(let d=0; d<total; d++) {
+                document.getElementById(`dot-${d}`).style.background = (d === idx) ? '#D4AF37' : 'rgba(0,0,0,0.1)';
+                document.getElementById(`dot-${d}`).style.transform = (d === idx) ? 'scale(1.5)' : 'scale(1)';
+            }
+        };
+
+        updateDots(0);
         setInterval(() => {
-            current = (current + 1) % total;
-            track.style.transform = `translateX(-${current * 100}%)`;
-            statusLabel.innerText = `${current + 1} / ${total}`;
-        }, 3500); // 3.5 segundos por foto
+            i = (i + 1) % total;
+            track.style.transform = `translateX(-${i * 100}%)`;
+            updateDots(i);
+        }, 4000);
     }
 
-    function openFull(url) {
-        const viewer = document.getElementById('fullscreen-viewer');
-        const fullImg = document.getElementById('full-img');
-        fullImg.src = url;
-        viewer.style.display = 'flex';
+    function closeImg() {
+        document.getElementById('full-view').style.display = 'none';
     }
 
-    function closeFull() {
-        document.getElementById('fullscreen-viewer').style.display = 'none';
-    }
-
-    window.onload = startSorteo;
+    loadGallery();
 </script>

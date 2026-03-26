@@ -1,107 +1,284 @@
-<div id="segmento-sorteo" style="background-color: #f4f4f4; padding: 30px 15px; border-radius: 30px; max-width: 480px; margin: 20px auto; font-family: 'Poppins', sans-serif;">
-    
-    <div style="text-align: center; margin-bottom: 20px;">
-        <span style="background: #D4AF37; color: white; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: bold; letter-spacing: 1px;">PREMIUM</span>
-        <h3 style="color: #333; font-family: 'Playfair Display', serif; font-size: 24px; margin: 10px 0 5px;">Rifa de Biblia Arcoiris</h3>
-        <p style="color: #888; font-size: 12px; margin: 0;">L. 20.00 por boleto. ¡Toca la foto para ampliarla!</p>
-    </div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>La Novia del Cordero</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
 
-    <div style="position: relative; background: #ffffff; border-radius: 25px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.08); border: 1px solid #e0e0e0;">
-        
-        <div id="engine-biblia" style="display: flex; transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1); height: 380px; cursor: zoom-in;">
-            <div style="width: 100%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: #fff;">
-                <div style="text-align: center;">
-                    <i class="fas fa-spinner fa-spin" style="color: #D4AF37; font-size: 24px;"></i>
-                    <p style="font-size: 11px; color: #aaa; margin-top: 10px;">Sincronizando galería...</p>
-                </div>
+        :root {
+            --oro: #D4AF37; --vino: #5D0E0E;
+            --rosa: #FFF0F5; --azul: #E3F2FD; --verde: #E8F5E9; --purpura: #F3E5F5; --naranja: #FFF3E0;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body { 
+            margin: 0; font-family: 'Poppins', sans-serif; background-color: #fdfcf9;
+            /* Fondo estilo "Vestido de Novia" (Encaje/Sutil) */
+            background-image: url('https://www.transparenttextures.com/patterns/cream-pixels.png');
+            overflow-x: hidden;
+        }
+
+        /* CONTENEDOR DESLIZABLE (PÁGINAS) */
+        .viewport { display: flex; width: 200vw; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .page { width: 100vw; min-height: 100vh; padding-bottom: 80px; }
+
+        /* PORTADA DIAMANTADA */
+        .header {
+            background: white; padding: 60px 20px; text-align: center;
+            border-bottom: 3px solid var(--oro);
+            /* Diamantes Reales (Efecto brillo) */
+            background-image: url('https://www.transparenttextures.com/patterns/diamond-upholstery.png');
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .header h1 { font-family: 'Playfair Display', serif; color: var(--vino); font-size: 32px; margin: 0; }
+        .header p { color: #888; font-size: 12px; margin: 5px 0; letter-spacing: 1px; }
+
+        .btn-lideres {
+            display: inline-block; margin-top: 15px; padding: 8px 25px;
+            border: 1px solid var(--oro); border-radius: 20px;
+            color: var(--oro); text-decoration: none; font-size: 11px;
+            font-weight: 600; text-transform: uppercase;
+        }
+
+        /* CUADRÍCULA DE CULTOS (5 Segmentos) */
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 20px; }
+        .culto-box { padding: 15px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+        .culto-box h4 { margin: 0 0 10px; color: var(--vino); font-size: 15px; border-bottom: 1px solid rgba(0,0,0,0.1); }
+        .info-row { font-size: 10px; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .info-row i { width: 15px; text-align: center; }
+        .full-width { grid-column: span 2; text-align: center; }
+
+        /* HEXAGONALES */
+        .hex-wrap { display: flex; justify-content: center; gap: 10px; margin: 20px 0; padding: 0 10px; }
+        .hex {
+            width: 100px; height: 110px; background: white; border: 1.5px solid var(--oro);
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; font-size: 9px; padding: 5px;
+        }
+        .hex i { color: var(--oro); margin-bottom: 5px; font-size: 14px; }
+
+        /* SLIDERS (SORTEO Y COMIDA) */
+        .section-title { text-align: center; color: var(--vino); font-family: 'Playfair Display'; margin: 30px 0 15px; }
+        .slider-card { 
+            background: white; margin: 0 20px; border-radius: 25px; overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee;
+        }
+        .engine { display: flex; height: 300px; transition: transform 0.6s ease; cursor: zoom-in; }
+        .engine img { width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; padding: 15px; }
+
+        /* MENÚ DE COMIDA */
+        .menu-list { display: none; padding: 20px; background: #fafafa; border-top: 1px solid #eee; }
+        .menu-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #ccc; font-size: 13px; }
+
+        /* BOTONES */
+        .btn-action {
+            display: block; width: 85%; margin: 15px auto; padding: 14px;
+            border-radius: 15px; text-align: center; text-decoration: none;
+            font-weight: 600; font-size: 14px; transition: 0.3s;
+        }
+        .btn-wa { background: #25D366; color: white; }
+        .btn-gold { background: var(--oro); color: white; border: none; }
+
+        /* FULLSCREEN */
+        #fs-overlay {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+            z-index: 9999; justify-content: center; align-items: center;
+        }
+        #fs-overlay img { max-width: 95%; max-height: 85%; border-radius: 10px; }
+
+        /* NAVEGACIÓN INFERIOR */
+        .nav-bar {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: white; padding: 10px 30px; border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: flex; gap: 40px; z-index: 1000;
+        }
+        .nav-item { color: #ccc; font-size: 20px; cursor: pointer; transition: 0.3s; }
+        .nav-item.active { color: var(--oro); }
+    </style>
+</head>
+<body id="body-swipe">
+
+<div class="viewport" id="master-view">
+    
+    <div class="page">
+        <div class="header">
+            <h1>La Novia del Cordero</h1>
+            <p>COLONIA VIDA NUEVA, SECTOR COFRADÍA</p>
+            <a href="#" class="btn-lideres">✨ Espacio para Líderes</a>
+        </div>
+
+        <div class="grid-container">
+            <div class="culto-box" style="background: var(--azul);">
+                <h4>Martes</h4>
+                <div class="info-row"><i class="fas fa-pray" style="color:#2196F3"></i> Oración</div>
+                <div class="info-row"><i class="fas fa-microphone"></i> Hno. Miguel</div>
+            </div>
+            <div class="culto-box" style="background: var(--rosa);">
+                <h4>Jueves</h4>
+                <div class="info-row"><i class="fas fa-female" style="color:#E91E63"></i> Damas</div>
+                <div class="info-row"><i class="fas fa-music"></i> Coro Local</div>
+            </div>
+            <div class="culto-box" style="background: var(--verde);">
+                <h4>Viernes</h4>
+                <div class="info-row"><i class="fas fa-book-open" style="color:#4CAF50"></i> Crecimiento</div>
+                <div class="info-row"><i class="fas fa-users"></i> General</div>
+            </div>
+            <div class="culto-box" style="background: var(--purpura);">
+                <h4>Sábado</h4>
+                <div class="info-row"><i class="fas fa-fire" style="color:#9C27B0"></i> Jóvenes</div>
+                <div class="info-row"><i class="fas fa-clock"></i> 7:00 PM</div>
+            </div>
+            <div class="culto-box full-width" style="background: var(--naranja);">
+                <h4>Domingo</h4>
+                <div class="info-row" style="justify-content:center;"><i class="fas fa-church" style="color:#FF9800"></i> Escuela Dominical 9:00 AM | Culto General 6:30 PM</div>
             </div>
         </div>
 
-        <div id="status-dots" style="position: absolute; bottom: 15px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px;"></div>
+        <div class="hex-wrap">
+            <div class="hex"><i class="fas fa-tent"></i><b>Campaña</b><span>15 Abr<br>Campo Central</span></div>
+            <div class="hex"><i class="fas fa-moon"></i><b>Vigilia</b><span>27 Mar<br>9:00 PM</span></div>
+            <div class="hex"><i class="fas fa-hands-helping"></i><b>Unidos</b><span>02 May<br>Templo</span></div>
+        </div>
+
+        <h3 class="section-title">🎟️ Sorteo Especial Arcoíris</h3>
+        <div class="slider-card">
+            <div class="engine" id="slider-biblia">
+                <img src="https://m.media-amazon.com/images/I/919Nnre1ZXL.jpg">
+            </div>
+            <a href="https://wa.me/50433221100?text=Boletos Biblia" class="btn-action btn-wa">Comprar Boletos L.20</a>
+        </div>
+
+        <h3 class="section-title">🍗 Venta de Comida</h3>
+        <div class="slider-card">
+            <div class="engine" id="slider-comida">
+                <img src="https://images.unsplash.com/photo-1562967914-6cbb241c293c?w=500">
+                <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=500">
+            </div>
+            <button class="btn-action btn-gold" onclick="toggleMenu()">🍽️ Ver Menú de Hoy</button>
+            <div class="menu-list" id="menu-comida">
+                <div class="menu-item"><span>Pollo Frito con Tajadas</span><b>L. 120</b></div>
+                <div class="menu-item"><span>Tacos Hondureños</span><b>L. 70</b></div>
+                <div class="menu-item"><span>Hamburguesa Clásica</span><b>L. 85</b></div>
+                <div class="menu-item"><span>Horchata Casera</span><b>L. 25</b></div>
+                <div class="menu-item"><span>Jugo de Nance / Melón</span><b>L. 25</b></div>
+            </div>
+            <a href="https://wa.me/50433221100?text=Pedido Comida" class="btn-action btn-wa">Hacer Pedido</a>
+        </div>
     </div>
 
-    <div style="text-align: center; margin-top: 25px;">
-        <a href="https://wa.me/50433221100?text=Hola César, quiero participar en la rifa de la Biblia" 
-           style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: #25D366; color: white; text-decoration: none; padding: 15px 35px; border-radius: 50px; font-weight: 600; font-size: 15px; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25); transition: 0.3s;">
-           <i class="fab fa-whatsapp"></i> Comprar Boleto L.20
-        </a>
+    <div class="page" style="background: rgba(255,255,255,0.7);">
+        <h2 class="section-title" style="margin-top:50px;">🛡️ Fortalecimiento Espiritual</h2>
+        
+        <div style="padding:20px;">
+            <div style="background:white; padding:25px; border-radius:20px; margin-bottom:15px; border-left:5px solid var(--oro); box-shadow:0 10px 20px rgba(0,0,0,0.03);">
+                <h4 style="margin:0; color:var(--vino);"><i class="fas fa-cloud-sun"></i> Devocionales</h4>
+                <p style="font-size:12px; color:#666;">Palabra diaria a las 6:00 AM vía grupo oficial.</p>
+            </div>
+            <div style="background:white; padding:25px; border-radius:20px; margin-bottom:15px; border-left:5px solid #E91E63; box-shadow:0 10px 20px rgba(0,0,0,0.03);">
+                <h4 style="margin:0; color:var(--vino);"><i class="fas fa-water"></i> Semana de Ayuno</h4>
+                <p style="font-size:12px; color:#666;">Buscando el rostro del Señor la primera semana de cada mes.</p>
+            </div>
+            <div style="background:white; padding:25px; border-radius:20px; border-left:5px solid #2196F3; box-shadow:0 10px 20px rgba(0,0,0,0.03);">
+                <h4 style="margin:0; color:var(--vino);"><i class="fas fa-users"></i> Ayuno de Jóvenes</h4>
+                <p style="font-size:12px; color:#666;">Todos los sábados a las 9:00 AM en el salón anexo.</p>
+            </div>
+        </div>
     </div>
+</div>
 
-    <div id="full-view" style="display: none; position: fixed; inset: 0; background: rgba(18, 18, 18, 0.98); z-index: 10000; flex-direction: column; align-items: center; justify-content: center;" onclick="closeImg()">
-        <button style="position: absolute; top: 30px; right: 30px; background: none; border: none; color: white; font-size: 35px;">&times;</button>
-        <img id="img-target" src="" style="max-width: 90%; max-height: 80%; object-fit: contain; border-radius: 8px;">
-        <p style="color: #D4AF37; margin-top: 20px; font-size: 13px; letter-spacing: 1px;">TOQUE PARA CERRAR</p>
-    </div>
+<div class="nav-bar">
+    <div class="nav-item active" id="btn-p1" onclick="goPage(0)"><i class="fas fa-home"></i></div>
+    <div class="nav-item" id="btn-p2" onclick="goPage(1)"><i class="fas fa-shield-alt"></i></div>
+</div>
+
+<div id="fs-overlay" onclick="this.style.display='none'">
+    <img id="fs-img" src="">
 </div>
 
 <script>
     const SHEET_ID = '1-mAee7Xp8Oen786WSXyLaR9Mc7tgBLI_XWdJNp9vGV4';
-    // Cambiamos la técnica de lectura para evitar el error de conexión
-    const DATA_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+    const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
-    async function loadGallery() {
-        const engine = document.getElementById('engine-biblia');
-        const dots = document.getElementById('status-dots');
-        
+    async function loadImages() {
         try {
-            const resp = await fetch(DATA_URL);
-            const text = await resp.text();
+            const res = await fetch(URL);
+            const text = await res.text();
             const json = JSON.parse(text.substring(47, text.length - 2));
             const rows = json.table.rows;
             
-            // FILTRO INTELIGENTE: Si la Columna B está vacía o dice Biblia, la aceptamos
-            const images = rows.filter(r => 
-                r.c[0] && r.c[0].v && 
-                (!r.c[1] || !r.c[1].v || r.c[1].v.toLowerCase().includes('biblia'))
-            ).map(r => r.c[0].v);
+            const bTrack = document.getElementById('slider-biblia');
+            const cTrack = document.getElementById('slider-comida');
+            
+            const bImgs = [], cImgs = [];
 
-            if (images.length > 0) {
-                engine.innerHTML = '';
-                dots.innerHTML = '';
-                
-                images.forEach((url, i) => {
-                    const img = document.createElement('img');
-                    img.src = url;
-                    img.style.cssText = "width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; padding: 20px;";
-                    img.onclick = () => {
-                        document.getElementById('img-target').src = url;
-                        document.getElementById('full-view').style.display = 'flex';
-                    };
-                    engine.appendChild(img);
+            rows.forEach(r => {
+                if(r.c[0] && r.c[0].v) {
+                    const url = r.c[0].v;
+                    const type = (r.c[1] && r.c[1].v) ? r.c[1].v.toLowerCase() : '';
+                    if(type.includes('biblia')) bImgs.push(url);
+                    else cImgs.push(url);
+                }
+            });
 
-                    const dot = document.createElement('div');
-                    dot.style.cssText = "width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,0.1); transition: 0.3s;";
-                    dot.id = `dot-${i}`;
-                    dots.appendChild(dot);
-                });
-
-                startLoop(engine, images.length);
-            }
-        } catch (err) {
-            engine.innerHTML = '<p style="padding:40px; color:#e74c3c; font-size:12px; text-align:center;">Error de sincronización.<br>Verifica la privacidad del Sheet.</p>';
-        }
+            if(bImgs.length > 0) renderSlider(bTrack, bImgs);
+            if(cImgs.length > 0) renderSlider(cTrack, cImgs);
+            
+        } catch(e) { console.error("Error cargando Sheets"); }
     }
 
-    function startLoop(track, total) {
-        let i = 0;
-        const updateDots = (idx) => {
-            for(let d=0; d<total; d++) {
-                document.getElementById(`dot-${d}`).style.background = (d === idx) ? '#D4AF37' : 'rgba(0,0,0,0.1)';
-                document.getElementById(`dot-${d}`).style.transform = (d === idx) ? 'scale(1.5)' : 'scale(1)';
-            }
-        };
+    function renderSlider(track, list) {
+        track.innerHTML = '';
+        list.forEach(url => {
+            const img = document.createElement('img');
+            img.src = url;
+            img.onclick = (e) => {
+                e.stopPropagation();
+                document.getElementById('fs-img').src = url;
+                document.getElementById('fs-overlay').style.display = 'flex';
+            };
+            track.appendChild(img);
+        });
+        startAutoScroll(track, list.length);
+    }
 
-        updateDots(0);
+    function startAutoScroll(track, total) {
+        let current = 0;
+        if(total <= 1) return;
         setInterval(() => {
-            i = (i + 1) % total;
-            track.style.transform = `translateX(-${i * 100}%)`;
-            updateDots(i);
+            current = (current + 1) % total;
+            track.style.transform = `translateX(-${current * 100}%)`;
         }, 4000);
     }
 
-    function closeImg() {
-        document.getElementById('full-view').style.display = 'none';
+    function toggleMenu() {
+        const m = document.getElementById('menu-comida');
+        m.style.display = (m.style.display === 'block') ? 'none' : 'block';
     }
 
-    loadGallery();
+    // NAVEGACIÓN DESLIZABLE
+    let startX = 0;
+    function goPage(idx) {
+        document.getElementById('master-view').style.transform = `translateX(-${idx * 100}vw)`;
+        document.getElementById('btn-p1').classList.toggle('active', idx === 0);
+        document.getElementById('btn-p2').classList.toggle('active', idx === 1);
+        window.scrollTo(0,0);
+    }
+
+    document.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+    document.addEventListener('touchend', e => {
+        let diff = startX - e.changedTouches[0].clientX;
+        if(Math.abs(diff) > 100) {
+            if(diff > 0) goPage(1); else goPage(0);
+        }
+    });
+
+    window.onload = loadImages;
 </script>
+
+</body>
+</html>

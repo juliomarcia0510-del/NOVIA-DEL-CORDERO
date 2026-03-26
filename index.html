@@ -1,101 +1,98 @@
-<div id="segmento-sorteo" style="max-width: 450px; margin: 20px auto; font-family: 'Poppins', sans-serif;">
+<div id="segmento-sorteo" style="max-width: 450px; margin: 20px auto; font-family: 'Poppins', sans-serif; position: relative;">
     
     <h3 style="text-align: center; color: #D4AF37; font-family: 'Playfair Display', serif; margin-bottom: 15px;">
         🎟️ Sorteo Especial de Biblia
     </h3>
 
-    <div style="position: relative; background: #fff; border-radius: 25px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #f0f0f0;">
+    <div style="position: relative; background: #fff; border-radius: 25px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid #f0f0f0;">
         
-        <div id="engine-biblia" style="display: flex; transition: transform 0.7s cubic-bezier(0.45, 0, 0.55, 1); height: 320px; cursor: pointer;">
-            <img src="https://m.media-amazon.com/images/I/919Nnre1ZXL.jpg" style="width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; padding: 15px;">
+        <div id="engine-biblia" style="display: flex; transition: transform 0.6s ease-in-out; height: 350px; cursor: zoom-in;">
+            <div style="width: 100%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: #f9f9f9;">
+                <p style="font-size: 12px; color: #999;">Conectando con galería...</p>
+            </div>
         </div>
 
-        <div id="status-biblia" style="position: absolute; bottom: 10px; right: 15px; background: rgba(0,0,0,0.5); color: white; font-size: 9px; padding: 3px 8px; border-radius: 10px; opacity: 0.7;">
-            Cargando imágenes...
+        <div id="status-count" style="position: absolute; top: 15px; right: 15px; background: rgba(212, 175, 55, 0.8); color: white; font-size: 10px; padding: 4px 10px; border-radius: 12px; font-weight: bold;">
+            0/0
         </div>
     </div>
 
     <div style="text-align: center; margin-top: 15px;">
-        <p style="font-size: 13px; color: #5D0E0E; margin-bottom: 10px; font-weight: 600;">
-            Biblia Arcoíris - Cuero Café <br>
-            <span style="color: #D4AF37;">L. 20.00 por boleto</span>
-        </p>
-        <a href="https://wa.me/50433221100?text=Hola César, deseo comprar boletos para el sorteo de la Biblia" 
-           style="display: block; background: #25D366; color: white; text-decoration: none; padding: 12px; border-radius: 15px; font-weight: bold; font-size: 14px; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);">
-           <i class="fab fa-whatsapp"></i> Comprar Boletos vía WhatsApp
+        <p style="font-size: 13px; color: #5D0E0E; font-weight: 600;">Biblia Arcoíris - L. 20.00</p>
+        <a href="https://wa.me/50433221100?text=Hola César, quiero boletos para la Biblia" 
+           style="display: block; background: #25D366; color: white; text-decoration: none; padding: 14px; border-radius: 15px; font-weight: bold; box-shadow: 0 4px 12px rgba(37,211,102,0.3);">
+           Comprar vía WhatsApp
         </a>
+    </div>
+
+    <div id="fullscreen-viewer" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center;">
+        <span onclick="closeFull()" style="position: absolute; top: 20px; right: 25px; color: white; font-size: 40px; cursor: pointer;">&times;</span>
+        <img id="full-img" src="" style="max-width: 95%; max-height: 85%; border-radius: 10px; box-shadow: 0 0 20px rgba(255,255,255,0.2);">
+        <p style="position: absolute; bottom: 30px; color: #D4AF37; font-size: 14px;">Toca la "X" para volver</p>
     </div>
 </div>
 
 <script>
-    // Configuración Directa César
-    const SHEET_ID_SORTEO = '1-mAee7Xp8Oen786WSXyLaR9Mc7tgBLI_XWdJNp9vGV4';
-    const URL_SORTEO = `https://docs.google.com/spreadsheets/d/${SHEET_ID_SORTEO}/gviz/tq?tqx=out:json`;
+    // Configuración César
+    const SHEET_ID_BIBLIA = '1-mAee7Xp8Oen786WSXyLaR9Mc7tgBLI_XWdJNp9vGV4';
+    // Usamos el formato alternativo /gviz/tq para evitar bloqueos
+    const URL_DATA = `https://docs.google.com/spreadsheets/d/${SHEET_ID_BIBLIA}/gviz/tq?tqx=out:json`;
 
-    async function initSorteoSlider() {
+    async function startSorteo() {
         const engine = document.getElementById('engine-biblia');
-        const status = document.getElementById('status-biblia');
+        const status = document.getElementById('status-count');
         
         try {
-            const response = await fetch(URL_SORTEO);
+            const response = await fetch(URL_DATA);
             const text = await response.text();
-            // Limpiamos el JSON que manda Google
-            const json = JSON.parse(text.substr(47).slice(0, -2));
+            // Limpieza del JSON de Google
+            const json = JSON.parse(text.substring(47, text.length - 2));
             const rows = json.table.rows;
             
-            // Filtramos solo las que dicen "Biblia" en la columna B (r.c[1])
-            const imagenesValidas = rows.filter(r => 
+            // Filtro dinámico: Columna A (Imagen), Columna B (Categoría)
+            const fotos = rows.filter(r => 
                 r.c[0] && r.c[0].v && 
                 r.c[1] && r.c[1].v.toLowerCase().includes('biblia')
-            );
+            ).map(r => r.c[0].v);
 
-            if (imagenesValidas.length > 0) {
-                engine.innerHTML = ''; // Limpiamos la imagen de carga
-                
-                imagenesValidas.forEach((r, index) => {
+            if (fotos.length > 0) {
+                engine.innerHTML = '';
+                fotos.forEach((url, i) => {
                     const img = document.createElement('img');
-                    img.src = r.c[0].v; // Columna A
-                    img.style.cssText = "width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; padding: 15px;";
-                    img.onerror = () => img.remove(); // Si el link está roto, se elimina la imagen para no trabar el slider
+                    img.src = url;
+                    img.style.cssText = "width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; padding: 10px;";
+                    // Evento para pantalla completa
+                    img.onclick = () => openFull(url);
                     engine.appendChild(img);
                 });
-                
-                status.innerText = `${imagenesValidas.length} Fotos disponibles`;
-                startAutoCycle(engine, imagenesValidas.length);
-            } else {
-                status.innerText = "Usando imágenes locales";
-                startAutoCycle(engine, 1);
+
+                status.innerText = `1 / ${fotos.length}`;
+                initAutoSlider(engine, fotos.length, status);
             }
-        } catch (error) {
-            console.error("Error cargando sorteo:", error);
-            status.innerText = "Error de conexión";
-            startAutoCycle(engine, 1);
+        } catch (e) {
+            engine.innerHTML = '<p style="padding:20px; text-align:center; color:red;">Error de carga. Revisa que el Sheet sea Público.</p>';
         }
     }
 
-    function startAutoCycle(track, count) {
-        if (count <= 1) return;
-        
-        let currentIndex = 0;
-        let isPaused = false;
-
-        // Ciclo automático
-        const interval = setInterval(() => {
-            if (!isPaused) {
-                currentIndex = (currentIndex + 1) % count;
-                track.style.transform = `translateX(-${currentIndex * 100}%)`;
-            }
-        }, 4000); // Cambia cada 4 segundos
-
-        // Pausar al tocar (para ver detalles)
-        track.addEventListener('touchstart', () => isPaused = true);
-        track.addEventListener('mousedown', () => isPaused = true);
-        
-        // Reanudar después de 8 segundos de inactividad
-        track.addEventListener('touchend', () => setTimeout(() => isPaused = false, 8000));
-        track.addEventListener('mouseup', () => setTimeout(() => isPaused = false, 8000));
+    function initAutoSlider(track, total, statusLabel) {
+        let current = 0;
+        setInterval(() => {
+            current = (current + 1) % total;
+            track.style.transform = `translateX(-${current * 100}%)`;
+            statusLabel.innerText = `${current + 1} / ${total}`;
+        }, 3500); // 3.5 segundos por foto
     }
 
-    // Ejecutar al cargar
-    initSorteoSlider();
+    function openFull(url) {
+        const viewer = document.getElementById('fullscreen-viewer');
+        const fullImg = document.getElementById('full-img');
+        fullImg.src = url;
+        viewer.style.display = 'flex';
+    }
+
+    function closeFull() {
+        document.getElementById('fullscreen-viewer').style.display = 'none';
+    }
+
+    window.onload = startSorteo;
 </script>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>La Novia del Cordero</title>
+    <title>Sorteo Especial - La Novia del Cordero</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
@@ -18,58 +18,68 @@
         }
 
         /* NAVEGACIÓN DE PÁGINAS */
-        .master-container { display: flex; width: 200vw; transition: transform 0.5s ease-out; }
+        .master-container { display: flex; width: 200vw; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .page { width: 100vw; min-height: 100vh; padding-bottom: 100px; }
 
         /* PORTADA DIAMANTADA */
         .header {
             background: white; padding: 60px 20px; text-align: center; border-bottom: 3px solid var(--oro);
             background-image: url('https://www.transparenttextures.com/patterns/diamond-upholstery.png');
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
         .header h1 { font-family: 'Playfair Display', serif; color: var(--vino); font-size: 30px; margin: 0; }
+        .header p { color: #888; font-size: 11px; margin-top: 5px; letter-spacing: 1px; }
+
         .btn-lideres {
-            display: inline-block; margin-top: 15px; padding: 7px 20px; border: 1px solid var(--oro);
+            display: inline-block; margin-top: 15px; padding: 7px 20px; border: 1.5px solid var(--oro);
             border-radius: 20px; color: var(--oro); text-decoration: none; font-size: 10px; font-weight: 600;
         }
 
         /* CUADRICULA CULTOS */
         .grid-cultos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
-        .c-box { padding: 12px; border-radius: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .c-box { padding: 15px; border-radius: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
         .c-box h4 { margin: 0 0 8px; font-size: 14px; color: var(--vino); border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .info-p { font-size: 10px; margin: 4px 0; display: flex; align-items: center; gap: 5px; }
+        .info-p { font-size: 10px; margin: 4px 0; display: flex; align-items: center; gap: 8px; }
 
         /* HEXAGONALES */
-        .hex-row { display: flex; justify-content: center; gap: 8px; margin: 20px 0; }
+        .hex-row { display: flex; justify-content: center; gap: 10px; margin: 25px 0; }
         .hex {
             width: 95px; height: 105px; background: white; border: 1px solid var(--oro);
             clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-            display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-size: 8px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-size: 8px; padding: 5px;
         }
 
-        /* SLIDERS ELEGANTES */
-        .section-t { text-align: center; font-family: 'Playfair Display'; color: var(--vino); margin: 25px 0 10px; }
-        .card-slider { background: white; margin: 0 15px; border-radius: 25px; overflow: hidden; border: 1px solid #eee; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        .track { display: flex; height: 320px; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .track img { width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; padding: 10px; }
+        /* SECCIÓN SORTEO BIBLIA (CENTRO DE ATENCIÓN) */
+        .section-t { text-align: center; font-family: 'Playfair Display'; color: var(--vino); margin: 30px 0 10px; font-size: 22px; }
+        .card-slider { 
+            background: white; margin: 0 20px; border-radius: 30px; overflow: hidden; 
+            border: 1px solid #eee; box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            position: relative;
+        }
+        .track { display: flex; height: 380px; transition: transform 0.8s cubic-bezier(0.6, 0, 0.4, 1); cursor: zoom-in; }
+        .track img { width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; padding: 20px; }
 
-        /* MENÚ DINÁMICO */
-        .menu-hidden { max-height: 0; overflow: hidden; transition: 0.5s ease; background: #f9f9f9; }
-        .menu-hidden.open { max-height: 600px; padding: 15px; }
-        .m-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #ddd; font-size: 13px; }
+        .price-badge {
+            position: absolute; top: 20px; right: 20px; background: var(--oro); color: white;
+            padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 14px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
 
-        /* BOTONES */
-        .btn { display: block; width: 85%; margin: 12px auto; padding: 14px; border-radius: 15px; text-align: center; text-decoration: none; font-weight: 600; font-size: 14px; }
-        .btn-wa { background: #25D366; color: white; }
-        .btn-menu { background: var(--oro); color: white; border: none; cursor: pointer; }
+        /* BOTÓN WHATSAPP */
+        .btn-wa { 
+            display: block; width: 85%; margin: 25px auto; padding: 16px; background: #25D366; 
+            color: white; text-align: center; border-radius: 18px; text-decoration: none; 
+            font-weight: 600; font-size: 16px; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+        }
 
         /* VISOR FULLSCREEN CON SWIPE */
-        #fs-visor { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 10000; flex-direction: column; justify-content: center; align-items: center; }
-        #fs-track { display: flex; width: 100%; transition: transform 0.3s ease; }
-        #fs-track img { width: 100vw; max-height: 80vh; object-fit: contain; }
+        #fs-visor { display: none; position: fixed; inset: 0; background: rgba(18, 18, 18, 0.98); z-index: 10000; flex-direction: column; justify-content: center; align-items: center; }
+        #fs-track { display: flex; width: 100%; transition: transform 0.4s ease-out; }
+        #fs-track img { width: 100vw; max-height: 85vh; object-fit: contain; }
 
-        .nav-dots { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); background: white; padding: 8px 25px; border-radius: 20px; display: flex; gap: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .dot { font-size: 18px; color: #ddd; transition: 0.3s; }
-        .dot.active { color: var(--oro); }
+        /* NAVEGACIÓN INFERIOR */
+        .nav-dots { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); background: white; padding: 10px 30px; border-radius: 30px; display: flex; gap: 40px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); z-index: 1000; }
+        .dot { font-size: 22px; color: #ddd; transition: 0.3s; cursor: pointer; }
+        .dot.active { color: var(--oro); transform: scale(1.2); }
     </style>
 </head>
 <body>
@@ -83,162 +93,149 @@
         </div>
 
         <div class="grid-cultos">
-            <div class="c-box" style="background:#E3F2FD"><h4>Martes</h4><p class="info-p"><i class="fas fa-pray"></i> Oración</p></div>
-            <div class="c-box" style="background:#FCE4EC"><h4>Jueves</h4><p class="info-p"><i class="fas fa-female"></i> Damas</p></div>
-            <div class="c-box" style="background:#E8F5E9"><h4>Viernes</h4><p class="info-p"><i class="fas fa-book"></i> Crecimiento</p></div>
-            <div class="c-box" style="background:#F3E5F5"><h4>Sábado</h4><p class="info-p"><i class="fas fa-fire"></i> Jóvenes</p></div>
-            <div class="c-box" style="background:#FFF3E0; grid-column:span 2; text-align:center"><h4>Domingo</h4><p class="info-p" style="justify-content:center"><i class="fas fa-church"></i> 9:00 AM y 6:30 PM</p></div>
+            <div class="c-box" style="background:#E3F2FD"><h4>Martes</h4><p class="info-p"><i class="fas fa-pray" style="color:#2196F3"></i> Oración</p></div>
+            <div class="c-box" style="background:#FCE4EC"><h4>Jueves</h4><p class="info-p"><i class="fas fa-female" style="color:#E91E63"></i> Damas</p></div>
+            <div class="c-box" style="background:#E8F5E9"><h4>Viernes</h4><p class="info-p"><i class="fas fa-book-open" style="color:#4CAF50"></i> Crecimiento</p></div>
+            <div class="c-box" style="background:#F3E5F5"><h4>Sábado</h4><p class="info-p"><i class="fas fa-fire" style="color:#9C27B0"></i> Jóvenes</p></div>
+            <div class="c-box" style="background:#FFF3E0; grid-column:span 2; text-align:center"><h4>Domingo</h4><p class="info-p" style="justify-content:center"><i class="fas fa-church" style="color:#FF9800"></i> Escuela Dominical 9:00 AM | Culto General 6:30 PM</p></div>
         </div>
 
         <div class="hex-row">
             <div class="hex"><i class="fas fa-bullhorn" style="color:var(--oro)"></i><b>Campaña</b><span>Abril</span></div>
-            <div class="hex"><i class="fas fa-cloud-moon" style="color:var(--oro)"></i><b>Vigilia</b><span>Marzo</span></div>
+            <div class="hex"><i class="fas fa-moon" style="color:var(--oro)"></i><b>Vigilia</b><span>Marzo</span></div>
             <div class="hex"><i class="fas fa-users" style="color:var(--oro)"></i><b>Unidos</b><span>Mayo</span></div>
         </div>
 
-        <h3 class="section-t">🎟️ Sorteo de Biblia Arcoíris</h3>
+        <h3 class="section-t">🎟️ Gran Sorteo de Biblia</h3>
         <div class="card-slider">
+            <div class="price-badge">L. 40.00</div>
             <div class="track" id="track-biblia">
                 <img src="https://m.media-amazon.com/images/I/919Nnre1ZXL.jpg">
             </div>
-            <a href="https://wa.me/50433221100" class="btn btn-wa">Comprar Boleto L.20</a>
         </div>
-
-        <h3 class="section-t">🍽️ Actividad de Comida</h3>
-        <div class="card-slider">
-            <div class="track" id="track-comida">
-                <img src="https://images.unsplash.com/photo-1562967914-6cbb241c293c?w=500" alt="Pollo Frito">
-                <img src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?w=500" alt="Tacos">
-                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500" alt="Tajadas">
-            </div>
-            <button class="btn btn-menu" onclick="toggleM()">Ver Menú Dinámico</button>
-            <div class="menu-hidden" id="menu-div">
-                <div class="m-item"><span>🍗 Pollo Frito con Tajadas</span><b>L. 120</b></div>
-                <div class="m-item"><span>🌮 Tacos Hondureños</span><b>L. 70</b></div>
-                <div class="m-item"><span>🍔 Hamburguesa Especial</span><b>L. 85</b></div>
-                <div class="m-item"><span>🥤 Horchata Fría</span><b>L. 25</b></div>
-                <div class="m-item"><span>🍈 Jugo de Nance/Melón</span><b>L. 25</b></div>
-            </div>
-            <a href="https://wa.me/50433221100" class="btn btn-wa">Ordenar por WhatsApp</a>
-        </div>
+        
+        <p style="text-align:center; font-size:12px; color:#888; margin-top:10px;">Toca las imágenes para ver detalles</p>
+        <a href="https://wa.me/50433221100?text=Hola César, quiero comprar boletos para la Biblia (L.40)" class="btn-wa">
+            <i class="fab fa-whatsapp"></i> Comprar Boleto vía WhatsApp
+        </a>
     </div>
 
-    <div class="page" style="background:rgba(255,255,255,0.6)">
-        <h2 class="section-t" style="margin-top:60px">🛡️ Fortalecimiento</h2>
-        <div style="padding:20px">
-            <div style="background:white; padding:20px; border-radius:20px; border-left:5px solid var(--oro); margin-bottom:15px">
-                <h4>Devocionales</h4><p style="font-size:12px">6:00 AM vía WhatsApp.</p>
+    <div class="page" style="background:rgba(255,255,255,0.7)">
+        <h2 class="section-t" style="margin-top:70px">🛡️ Fortalecimiento Espiritual</h2>
+        <div style="padding:25px">
+            <div style="background:white; padding:20px; border-radius:20px; border-left:6px solid var(--oro); margin-bottom:15px; box-shadow:0 8px 20px rgba(0,0,0,0.03)">
+                <h4 style="margin:0; color:var(--vino)">Devocionales</h4>
+                <p style="font-size:12px; color:#666; margin-top:5px">Sintoniza nuestra palabra diaria a las 6:00 AM.</p>
             </div>
-            <div style="background:white; padding:20px; border-radius:20px; border-left:5px solid #E91E63; margin-bottom:15px">
-                <h4>Semana de Ayuno</h4><p style="font-size:12px">Buscando a Dios cada inicio de mes.</p>
+            <div style="background:white; padding:20px; border-radius:20px; border-left:6px solid #E91E63; margin-bottom:15px; box-shadow:0 8px 20px rgba(0,0,0,0.03)">
+                <h4 style="margin:0; color:var(--vino)">Semana de Ayuno</h4>
+                <p style="font-size:12px; color:#666; margin-top:5px">Primera semana del mes para buscar al Señor.</p>
             </div>
         </div>
     </div>
 </div>
 
 <div class="nav-dots">
-    <div class="dot active" onclick="moveP(0)"><i class="fas fa-home"></i></div>
-    <div class="dot" onclick="moveP(1)"><i class="fas fa-pray"></i></div>
+    <div class="dot active" onclick="movePage(0)"><i class="fas fa-home"></i></div>
+    <div class="dot" onclick="movePage(1)"><i class="fas fa-scroll"></i></div>
 </div>
 
 <div id="fs-visor">
-    <span onclick="closeV()" style="position:absolute; top:30px; right:30px; color:white; font-size:40px; z-index:11000">&times;</span>
+    <button onclick="closeVisor()" style="position:absolute; top:30px; right:30px; background:none; border:none; color:white; font-size:45px; z-index:11000">&times;</button>
     <div id="fs-track"></div>
-    <p style="color:var(--oro); font-size:12px; position:absolute; bottom:40px">Desliza para ver más</p>
+    <div id="fs-counter" style="position:absolute; bottom:50px; color:var(--oro); font-weight:600; letter-spacing:2px;">1 / 1</div>
 </div>
 
 <script>
     const SHEET_ID = '1-mAee7Xp8Oen786WSXyLaR9Mc7tgBLI_XWdJNp9vGV4';
-    const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+    const URL_SHEETS = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
-    let bibliaImages = [];
+    let bibleImages = [];
+    let currentFSIndex = 0;
 
-    async function fetchData() {
+    async function loadData() {
         try {
-            const res = await fetch(URL);
+            const res = await fetch(URL_SHEETS);
             const text = await res.text();
             const json = JSON.parse(text.substring(47, text.length - 2));
             const rows = json.table.rows;
             
-            const bTrack = document.getElementById('track-biblia');
-            const cTrack = document.getElementById('track-comida');
-            
-            let bibliaContent = "", comidaContent = "";
-            bibliaImages = [];
+            const track = document.getElementById('track-biblia');
+            bibleImages = [];
+            let htmlContent = "";
 
             rows.forEach(r => {
                 if(r.c[0] && r.c[0].v) {
                     const url = r.c[0].v;
-                    const type = (r.c[1] && r.c[1].v) ? r.c[1].v.toLowerCase() : "";
+                    const tag = (r.c[1] && r.c[1].v) ? r.c[1].v.toLowerCase() : "";
                     
-                    if(type.includes("biblia")) {
-                        bibliaImages.push(url);
-                        bibliaContent += `<img src="${url}" onclick="openV()">`;
-                    } else if(type.includes("comida")) {
-                        comidaContent += `<img src="${url}">`;
+                    // Solo cargamos si es categoría Biblia
+                    if(tag.includes("biblia")) {
+                        bibleImages.push(url);
+                        htmlContent += `<img src="${url}" onclick="openVisor()">`;
                     }
                 }
             });
 
-            if(bibliaContent) bTrack.innerHTML = bibliaContent;
-            if(comidaContent) cTrack.innerHTML = comidaContent;
-            
-            initSlider(bTrack, bibliaImages.length);
-            initSlider(cTrack, rows.length - bibliaImages.length);
-        } catch(e) { console.error("Error Sheets"); }
+            if(bibleImages.length > 0) {
+                track.innerHTML = htmlContent;
+                initAutoSlider(track, bibleImages.length);
+            }
+        } catch(e) { console.error("Error cargando Google Sheets"); }
     }
 
-    function initSlider(el, len) {
+    function initAutoSlider(el, len) {
         if(len <= 1) return;
         let i = 0;
         setInterval(() => {
             i = (i + 1) % len;
             el.style.transform = `translateX(-${i * 100}%)`;
-        }, 4000);
+        }, 4500);
     }
 
-    // VISOR FULLSCREEN CON DESLIZAMIENTO
-    let fsIndex = 0;
-    function openV() {
+    // VISOR FULLSCREEN LÓGICA
+    function openVisor() {
         const visor = document.getElementById('fs-visor');
-        const track = document.getElementById('fs-track');
-        track.innerHTML = bibliaImages.map(u => `<img src="${u}">`).join('');
+        const fsTrack = document.getElementById('fs-track');
+        fsTrack.innerHTML = bibleImages.map(url => `<img src="${url}">`).join('');
         visor.style.display = 'flex';
-        fsIndex = 0;
-        moveFS();
+        currentFSIndex = 0;
+        updateFS();
     }
 
-    function moveFS() {
-        document.getElementById('fs-track').style.transform = `translateX(-${fsIndex * 100}vw)`;
+    function updateFS() {
+        document.getElementById('fs-track').style.transform = `translateX(-${currentFSIndex * 100}vw)`;
+        document.getElementById('fs-counter').innerText = `${currentFSIndex + 1} / ${bibleImages.length}`;
     }
 
-    function closeV() { document.getElementById('fs-visor').style.display = 'none'; }
+    function closeVisor() { document.getElementById('fs-visor').style.display = 'none'; }
 
-    // GESTIÓN DE SWIPE (PÁGINAS Y VISOR)
-    let sX = 0;
-    document.addEventListener('touchstart', e => sX = e.touches[0].clientX);
+    // GESTIÓN DE SWIPE (GENERAL Y VISOR)
+    let touchStartX = 0;
+    document.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
     document.addEventListener('touchend', e => {
-        let diff = sX - e.changedTouches[0].clientX;
-        if(Math.abs(diff) < 50) return;
+        let diff = touchStartX - e.changedTouches[0].clientX;
+        if(Math.abs(diff) < 60) return;
 
+        // Si el visor está abierto, deslizamos fotos
         if(document.getElementById('fs-visor').style.display === 'flex') {
-            if(diff > 0 && fsIndex < bibliaImages.length - 1) fsIndex++;
-            else if(diff < 0 && fsIndex > 0) fsIndex--;
-            moveFS();
-        } else {
-            if(diff > 0) moveP(1); else moveP(0);
+            if(diff > 0 && currentFSIndex < bibleImages.length - 1) currentFSIndex++;
+            else if(diff < 0 && currentFSIndex > 0) currentFSIndex--;
+            updateFS();
+        } 
+        // Si no, deslizamos páginas
+        else {
+            if(diff > 0) movePage(1); else movePage(0);
         }
     });
 
-    function moveP(idx) {
+    function movePage(idx) {
         document.getElementById('master').style.transform = `translateX(-${idx * 100}vw)`;
         document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === idx));
         window.scrollTo(0,0);
     }
 
-    function toggleM() { document.getElementById('menu-div').classList.toggle('open'); }
-
-    window.onload = fetchData;
+    window.onload = loadData;
 </script>
 </body>
 </html>
